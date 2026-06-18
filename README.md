@@ -9,7 +9,7 @@
 - [Стратегия редизайна](docs/strategy/2026-06-18-redesign-strategy.md)
 - [Семантическое ядро + карта URL](docs/strategy/semantic-core.md)
 - [План Фазы 0–1](docs/plans/2026-06-18-phase-0-1.md)
-- [Бриф заказчику](docs/client/client-brief.md) · [Быстрая анкета](docs/client/client-quick-survey.md)
+- [Единый бриф заказчику](docs/client/client-brief.md) — один файл для отправки
 
 ## Статус
 Фаза 0–1 (фундамент + IA/дизайн-система). Дорожная карта — в стратегии.
