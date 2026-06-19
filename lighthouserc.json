@@ -1,13 +1,8 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "npm run start -w web",
-      "startServerReadyPattern": "Local:",
-      "url": [
-        "http://localhost:3000/",
-        "http://localhost:3000/karaoke/dlya-bara",
-        "http://localhost:3000/product/ast-250"
-      ],
+      "staticDistDir": "apps/web/out",
+      "url": ["/index.html", "/karaoke/dlya-bara.html", "/product/ast-250.html"],
       "numberOfRuns": 1
     },
     "assert": {
