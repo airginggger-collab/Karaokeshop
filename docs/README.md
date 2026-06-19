@@ -45,7 +45,8 @@
 | 9. UI-кит (Button + Vitest + Storybook) | ✅ собрано |
 | 10. Роутинг по URL-карте | ✅ полное дерево (24 URL): сценарии, комплекты, бренды, товары |
 | 11. Контент-модель в CMS | ⏸ ждёт решения по CMS (резидентность) |
-| 12. Экраны в Figma | 🔜 |
+| 12. Экраны в Figma | 🔜 (но 7 прототипов уже собраны в React-компоненты) |
+| +. Экраны из компонентов | ✅ Header/Hero/ProductCard/FilterRail/AreaCalculator/ServiceSteps + Badge |
 | 13. SEO-каркас (JSON-LD, sitemap, robots) | ✅ 3 теста зелёные |
 | 14. Lighthouse CI + GitHub Actions | ✅ бюджет CWV в `lighthouserc.json` |
 
