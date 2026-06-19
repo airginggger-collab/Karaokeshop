@@ -33,6 +33,40 @@
   --color-accent-soft: #10241b;
 }
 
+/* Настроение страницы: тёплое (для дома) — переопределяет токены в области */
+.mood-warm {
+  color-scheme: light;
+  --color-bg: #fff7ed;
+  --color-fg: #2a1606;
+  --color-surface: #fff1de;
+  --color-muted: #fbe7d1;
+  --color-muted-fg: #8a6a4c;
+  --color-border: #f0dcc4;
+  --color-primary: #ea580c;
+  --color-primary-fg: #fff7ed;
+  --color-primary-soft: #ffe7ce;
+  --color-accent: #ea580c;
+  --color-accent-fg: #7c2d12;
+  --color-accent-soft: #ffedd5;
+}
+
+/* Настроение страницы: деловое ночное (для заведений) */
+.mood-night {
+  color-scheme: dark;
+  --color-bg: #0b1220;
+  --color-fg: #e7eef8;
+  --color-surface: #0f1a2b;
+  --color-muted: #14243a;
+  --color-muted-fg: #9fb3cc;
+  --color-border: #1e2e44;
+  --color-primary: #2dd4bf;
+  --color-primary-fg: #04241e;
+  --color-primary-soft: #11302c;
+  --color-accent: #2dd4bf;
+  --color-accent-fg: #99f6e4;
+  --color-accent-soft: #102a2a;
+}
+
 html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

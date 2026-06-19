@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { Mood } from "@/components/Mood";
 import { ServiceSteps } from "@/components/ServiceSteps";
 import { AreaCalculator } from "@/components/AreaCalculator";
 import { podKlyuchMeta } from "@/lib/site";
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
+    <Mood variant="night">
     <Container className="py-12">
       <Badge tone="primary">B2B · для заведений</Badge>
       <h1 className="mt-3 text-2xl font-medium">{podKlyuchMeta.h1}</h1>
@@ -33,5 +35,6 @@ export default function Page() {
         </p>
       </div>
     </Container>
+    </Mood>
   );
 }

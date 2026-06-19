@@ -10,6 +10,8 @@ import {
   CalendarClock,
   Wrench,
   Sparkles,
+  UserCheck,
+  GitCompare,
 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { products, priceFmt, installmentMonthly } from "@/lib/site";
@@ -43,7 +45,7 @@ export default function HomePage() {
             Караоке, которое заводит зал
           </h1>
           <p className="mt-4 max-w-md text-base" style={{ color: "var(--night-muted)" }}>
-            От тёплого вечера дома до клуба под ключ. AST и Studio Evolution, монтаж и рассрочка Kaspi.
+            От тёплого вечера дома до клуба под ключ. AST и Studio Evolution — сравните оба бренда и подберём индивидуально, с монтажом и рассрочкой Kaspi.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -171,6 +173,32 @@ export default function HomePage() {
           </p>
         </div>
       </div>
+
+      <section className="mt-12">
+        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Почему karaokeshop</h2>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-2xl border border-border bg-background p-5">
+            <UserCheck className="h-5 w-5 text-primary" />
+            <p className="mt-3 font-medium">Индивидуальный подход</p>
+            <p className="mt-1 text-sm text-muted-foreground">Подберём систему и комплект под вашу задачу, площадь и бюджет.</p>
+          </div>
+          <div className="rounded-2xl border border-border bg-background p-5">
+            <GitCompare className="h-5 w-5 text-primary" />
+            <p className="mt-3 font-medium">AST и Evolution в одном месте</p>
+            <p className="mt-1 text-sm text-muted-foreground">Сравните оба бренда и купите там же — без переплат и беготни.</p>
+          </div>
+          <div className="rounded-2xl border border-border bg-background p-5">
+            <Wrench className="h-5 w-5 text-primary" />
+            <p className="mt-3 font-medium">Под ключ</p>
+            <p className="mt-1 text-sm text-muted-foreground">Проект звука под помещение, монтаж, настройка и обучение.</p>
+          </div>
+          <div className="rounded-2xl border border-border bg-background p-5">
+            <CreditCard className="h-5 w-5 text-primary" />
+            <p className="mt-3 font-medium">Рассрочка Kaspi</p>
+            <p className="mt-1 text-sm text-muted-foreground">0-0-12 без переплаты, одобрение в приложении за минуту.</p>
+          </div>
+        </div>
+      </section>
     </Container>
   );
 }
