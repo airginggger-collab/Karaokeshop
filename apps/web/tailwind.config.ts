@@ -16,6 +16,10 @@ export default {
         "muted-foreground": "var(--color-muted-fg)",
         border: "var(--color-border)",
         accent: "var(--color-accent)",
+        "accent-fg": "var(--color-accent-fg)",
+        "primary-soft": "var(--color-primary-soft)",
+        "accent-soft": "var(--color-accent-soft)",
+        surface: "var(--color-surface)",
       },
       borderRadius: {
         sm: "var(--radius-sm)",

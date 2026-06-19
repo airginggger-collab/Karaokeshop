@@ -10,7 +10,11 @@
   --color-muted: #F1F5F9;
   --color-muted-fg: #64748B;
   --color-border: #E2E8F0;
-  --color-accent: #59E26D;
+  --color-accent: #1FA86F;
+  --color-accent-fg: #0B5B3B;
+  --color-primary-soft: #E3F3F0;
+  --color-accent-soft: #E4F7EC;
+  --color-surface: #F8FAFC;
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 12px;

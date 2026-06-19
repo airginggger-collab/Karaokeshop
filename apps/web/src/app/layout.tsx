@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "@kk/tokens/tokens.css";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -19,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <body>{children}</body>
+      <body className="min-h-screen">
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

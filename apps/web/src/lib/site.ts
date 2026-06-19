@@ -32,12 +32,48 @@ export const brands: Brand[] = [
   { slug: "studio-evolution", name: "Studio Evolution", h1: "Караоке Studio Evolution", title: "Караоке Studio Evolution / Evobox — купить", description: "Системы Studio Evolution: Evobox, Evobox Plus, Pro2. Для дома, баров и клубов." },
 ];
 
-export type Product = { slug: string; model: string; brand: string; scenario: string; areaMax: number; price: number; inStock: boolean };
+export type Product = {
+  slug: string;
+  model: string;
+  brand: string;
+  scenario: string;
+  scenarioLabel: string;
+  areaMax: number;
+  price: number;
+  priceOld?: number;
+  songsCount: number;
+  kit: string[];
+  rating: number;
+  reviewsCount: number;
+  inStock: boolean;
+  featured?: boolean;
+};
+
 export const products: Product[] = [
-  { slug: "ast-250", model: "AST-250", brand: "AST", scenario: "bar", areaMax: 80, price: 1500000, inStock: true },
-  { slug: "ast-mini", model: "AST Mini", brand: "AST", scenario: "dom", areaMax: 30, price: 720000, inStock: true },
-  { slug: "evobox", model: "Evolution Evobox", brand: "Studio Evolution", scenario: "dom", areaMax: 30, price: 749000, inStock: true },
-  { slug: "evobox-plus", model: "Evobox Plus", brand: "Studio Evolution", scenario: "klub", areaMax: 100, price: 1390000, inStock: true },
+  {
+    slug: "ast-250", model: "AST-250", brand: "AST", scenario: "bar", scenarioLabel: "бар / клуб",
+    areaMax: 80, price: 1500000, priceOld: 2664000, songsCount: 60000,
+    kit: ["Сенсорный пульт-моноблок", "2 беспроводных микрофона", "Усилитель", "Акустика (пара)", "Сабвуфер", "Микшер", "ИБП", "Кабельная обвязка"],
+    rating: 4.9, reviewsCount: 23, inStock: true, featured: true,
+  },
+  {
+    slug: "ast-mini", model: "AST Mini", brand: "AST", scenario: "dom", scenarioLabel: "дом / кафе",
+    areaMax: 30, price: 720000, songsCount: 60000,
+    kit: ["Пульт-моноблок", "2 микрофона", "Активная акустика", "Кабели"],
+    rating: 4.8, reviewsCount: 14, inStock: true, featured: true,
+  },
+  {
+    slug: "evobox", model: "Evolution Evobox", brand: "Studio Evolution", scenario: "dom", scenarioLabel: "для дома",
+    areaMax: 30, price: 749000, songsCount: 50000,
+    kit: ["Медиаплеер Evobox", "2 микрофона", "Пульт управления"],
+    rating: 4.7, reviewsCount: 31, inStock: true, featured: true,
+  },
+  {
+    slug: "evobox-plus", model: "Evobox Plus", brand: "Studio Evolution", scenario: "klub", scenarioLabel: "бар / клуб",
+    areaMax: 100, price: 1390000, songsCount: 60000,
+    kit: ["Evobox Plus", "4 радиомикрофона", "Акустика + сабвуфер", "Микшер", "Свет"],
+    rating: 4.8, reviewsCount: 9, inStock: true,
+  },
 ];
 
 // Одиночные страницы доверия/сервиса
@@ -71,6 +107,15 @@ export const komplektyIndexMeta: Landing = {
 
 export function priceFmt(n: number): string {
   return new Intl.NumberFormat("ru-RU").format(n) + " ₸";
+}
+
+export function installmentMonthly(price: number): number {
+  return Math.round(price / 12);
+}
+
+export function discountPct(price: number, priceOld?: number): number | null {
+  if (!priceOld || priceOld <= price) return null;
+  return Math.round((1 - price / priceOld) * 100);
 }
 
 export function allPaths(): string[] {
