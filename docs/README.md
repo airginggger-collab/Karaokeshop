@@ -23,7 +23,7 @@
 - 💰 [Бюджет проекта](strategy/budget.md) — что бесплатно сейчас, что подключить потом, оплата/Kaspi.
 - 🧩 [Модель данных](context/data-model.md).
 - 🏛️ ADR: [0001 CMS](adr/0001-cms.md) · [0002 Хостинг](adr/0002-hosting.md).
-- 🚀 [Деплой на Cloudflare Pages](deploy.md) — настройки сборки + подключение.
+- 🚀 [Деплой на Cloudflare](deploy.md) — **🟢 live: https://karaokeshop.airg-inggger.workers.dev/**
 - 🗺️ [План Фазы 0–1](plans/2026-06-18-phase-0-1.md).
 - 📋 [Единый бриф заказчику](client/client-brief.md) — один файл: критичный минимум + полный бриф + данные каталога + доступы.
 

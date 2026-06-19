@@ -1,6 +1,8 @@
-# Деплой — Cloudflare Pages (₸0)
+# Деплой — Cloudflare (₸0)
 
-> Вариант A — статический экспорт ([ADR-0002](adr/0002-hosting.md)). Сайт полностью SSG → `output: "export"` собирает чистую статику в `apps/web/out`. Cloudflare Pages раздаёт её бесплатно (коммерция разрешена, безлимит-трафик) и авто-деплоит на каждый push.
+> **🟢 Live:** https://karaokeshop.airg-inggger.workers.dev/ — авто-деплой на каждый push в `main`.
+>
+> Вариант A — статический экспорт ([ADR-0002](adr/0002-hosting.md)). Сайт полностью SSG → `output: "export"` собирает чистую статику в `apps/web/out`. Cloudflare деплоит её как **assets-only Worker** (`wrangler.toml`) — бесплатно, коммерция разрешена, безлимит-трафик, авто-деплой на каждый push. Чистые URL (без `.html`) и 404 → `404.html` Cloudflare разруливает сам.
 
 ## Подключение (один раз, через дашборд Cloudflare)
 

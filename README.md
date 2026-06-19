@@ -1,5 +1,7 @@
 # karaokeshop.kz — редизайн
 
+> **🟢 Live:** https://karaokeshop.airg-inggger.workers.dev/
+
 Полный ребилд интернет-магазина караоке-оборудования (Алматы; бренды AST и Studio Evolution). Local-first документация и контекст проекта.
 
 > 📚 **Вся документация и контекст — в [`docs/`](docs/README.md).** Это единый источник правды. Начинай оттуда.
