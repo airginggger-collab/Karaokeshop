@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Speaker } from "lucide-react";
 import { Badge } from "@kk/ui";
+import { CompareToggle } from "./CompareToggle";
 import { priceFmt, installmentMonthly, discountPct, type Product } from "@/lib/site";
 
 export function ProductCard({ p }: { p: Product }) {
@@ -17,6 +18,9 @@ export function ProductCard({ p }: { p: Product }) {
             −{pct}%
           </span>
         ) : null}
+        <div className="absolute right-2 top-2">
+          <CompareToggle slug={p.slug} />
+        </div>
       </div>
       <div className="flex flex-1 flex-col p-3.5">
         <Badge tone="primary">{p.scenarioLabel}</Badge>

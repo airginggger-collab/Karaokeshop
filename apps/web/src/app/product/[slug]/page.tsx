@@ -4,6 +4,7 @@ import { Speaker, Star, ShieldCheck, Wrench, Music, CreditCard } from "lucide-re
 import { Badge, Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { AddToCart } from "@/components/AddToCart";
+import { CompareToggle } from "@/components/CompareToggle";
 import { products, priceFmt, installmentMonthly, discountPct, siteConfig } from "@/lib/site";
 import { productJsonLd } from "@/lib/seo";
 
@@ -70,6 +71,7 @@ export default async function Page({
 
           <div className="mt-4 flex flex-wrap gap-2">
             <AddToCart item={{ id: p.slug, name: p.model, price: p.price, meta: p.scenarioLabel }} />
+            <CompareToggle slug={p.slug} variant="button" />
             <Button variant="ghost">Нужна консультация</Button>
           </div>
 

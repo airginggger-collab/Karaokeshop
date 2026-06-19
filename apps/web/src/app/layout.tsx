@@ -6,6 +6,7 @@ import { siteConfig } from "@/lib/site";
 import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { CompareBar } from "@/components/CompareBar";
 
 const sans = Manrope({
   subsets: ["latin", "cyrillic"],
@@ -44,6 +45,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <CompareBar />
         </Providers>
       </body>
     </html>
