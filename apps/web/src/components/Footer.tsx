@@ -4,6 +4,7 @@ import { siteConfig } from "@/lib/site";
 
 const links = [
   { href: "/pod-klyuch", label: "Оснащение под ключ" },
+  { href: "/sravnenie", label: "AST или Evolution" },
   { href: "/keysy", label: "Кейсы" },
   { href: "/blog", label: "Блог" },
   { href: "/servis", label: "Сервис и гарантия" },

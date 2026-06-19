@@ -4,6 +4,9 @@ export const siteConfig = {
   city: "Алматы",
   phone: "+7 707 579-99-95",
   whatsapp: "77075799995",
+  address: "Алматы, ул. Муканова, офис 8",
+  hours: "Пн–Сб · 10:00–19:00",
+  email: "karaokeshop2015@gmail.com",
   defaultTitle: "Караоке под ключ в Казахстане — для дома и заведений",
   defaultDescription:
     "Караоке-системы AST и Studio Evolution. Продажа, монтаж, рассрочка Kaspi. Оснащение баров и клубов под ключ. Алматы, с 2012.",
@@ -78,12 +81,31 @@ export const products: Product[] = [
   },
 ];
 
-// Одиночные страницы доверия/сервиса
+// Одиночные generic-страницы (рендерятся через (pages)/[page])
 export const staticPages: Landing[] = [
-  { slug: "o-nas", h1: "О компании", title: "О компании — эксперты по караоке с 2012", description: "Поставка, монтаж и обслуживание караоке-оборудования в Алматы с 2012 года." },
-  { slug: "kontakty", h1: "Контакты", title: "Контакты — Алматы, шоурум и сервис-центр", description: "Адрес, телефоны и режим работы. Шоурум и сервис-центр в Алматы." },
   { slug: "servis", h1: "Сервис и гарантия", title: "Сервис, настройка и ремонт караоке", description: "Подключение, настройка под помещение, гарантия и ремонт караоке-систем." },
 ];
+
+export const oNasMeta: Landing = {
+  slug: "o-nas",
+  h1: "О компании",
+  title: "О компании — эксперты по караоке с 2012",
+  description: "Поставка, монтаж и обслуживание караоке (AST и Studio Evolution) в Алматы с 2012 года. Индивидуальный подход и сервис под ключ.",
+};
+
+export const kontaktyMeta: Landing = {
+  slug: "kontakty",
+  h1: "Контакты",
+  title: "Контакты — Алматы, шоурум и сервис-центр",
+  description: "Адрес, телефоны, WhatsApp и карта. Шоурум и сервис-центр караоке в Алматы.",
+};
+
+export const sravnenieMeta: Landing = {
+  slug: "sravnenie",
+  h1: "AST или Studio Evolution",
+  title: "AST или Studio Evolution — сравнение брендов караоке",
+  description: "Сравнение двух ведущих брендов караоке: модели, сценарии, цены и сильные стороны. Поможем выбрать и подберём индивидуально.",
+};
 
 export const catalogMeta: Landing = {
   slug: "catalog",
@@ -248,6 +270,9 @@ export function allPaths(): string[] {
     "/keysy",
     "/blog",
     "/kalkulyator",
+    "/sravnenie",
+    "/o-nas",
+    "/kontakty",
     ...scenarios.map((s) => `/karaoke/${s.slug}`),
     ...bundles.map((b) => `/komplekty/${b.slug}`),
     ...brands.map((b) => `/brand/${b.slug}`),

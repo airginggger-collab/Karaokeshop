@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Building2, MapPin, Quote } from "lucide-react";
+import { MapPin, Quote } from "lucide-react";
 import { Badge } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { keysyMeta, cases } from "@/lib/site";
@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/keysy" },
 };
 
+const photos = [
+  "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=70&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=70&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=70&auto=format&fit=crop",
+];
+
 export default function Page() {
   return (
     <Container className="py-10">
@@ -17,13 +23,17 @@ export default function Page() {
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{keysyMeta.description}</p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {cases.map((c) => (
+        {cases.map((c, i) => (
           <article key={c.slug} className="overflow-hidden rounded-2xl border border-border bg-background shadow-sm">
-            <div className="flex h-32 items-center justify-center bg-gradient-to-br from-surface to-muted">
-              <Building2 className="h-9 w-9 text-muted-foreground" />
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={photos[i % photos.length]}
+              alt={`${c.venue}, ${c.city}`}
+              loading="lazy"
+              className="h-36 w-full object-cover"
+            />
             <div className="p-5">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-2">
                 <p className="font-medium">{c.venue}</p>
                 <Badge tone="primary">{c.system}</Badge>
               </div>

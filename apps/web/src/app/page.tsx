@@ -182,11 +182,14 @@ export default function HomePage() {
             <p className="mt-3 font-medium">Индивидуальный подход</p>
             <p className="mt-1 text-sm text-muted-foreground">Подберём систему и комплект под вашу задачу, площадь и бюджет.</p>
           </div>
-          <div className="rounded-2xl border border-border bg-background p-5">
+          <Link href="/sravnenie" className="group rounded-2xl border border-border bg-background p-5 transition hover:border-primary">
             <GitCompare className="h-5 w-5 text-primary" />
             <p className="mt-3 font-medium">AST и Evolution в одном месте</p>
             <p className="mt-1 text-sm text-muted-foreground">Сравните оба бренда и купите там же — без переплат и беготни.</p>
-          </div>
+            <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">
+              Сравнить <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+            </span>
+          </Link>
           <div className="rounded-2xl border border-border bg-background p-5">
             <Wrench className="h-5 w-5 text-primary" />
             <p className="mt-3 font-medium">Под ключ</p>
