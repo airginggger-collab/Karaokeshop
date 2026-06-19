@@ -4,6 +4,17 @@
 
 :root {
   color-scheme: light;
+  /* Фиксированные «настроения» для бенто (не зависят от светлой/тёмной темы) */
+  --warm-bg: #fff7ed;
+  --warm-fg: #2a1606;
+  --warm-muted: #7c5b3f;
+  --warm-accent: #f97316;
+  --warm-soft: #ffe7ce;
+  --night-bg: #0b1220;
+  --night-fg: #e7eef8;
+  --night-muted: #9fb3cc;
+  --night-accent: #2dd4bf;
+  --night-soft: #14243a;
 }
 
 .dark {
@@ -41,7 +52,7 @@ h3 {
 @keyframes kkFadeUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -50,7 +61,7 @@ h3 {
 }
 
 .animate-fade-up {
-  animation: kkFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: kkFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {

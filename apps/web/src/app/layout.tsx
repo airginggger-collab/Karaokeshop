@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Unbounded } from "next/font/google";
 import "@kk/tokens/tokens.css";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
@@ -10,6 +10,13 @@ import { Footer } from "@/components/Footer";
 const sans = Manrope({
   subsets: ["latin", "cyrillic"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const display = Unbounded({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-display",
+  weight: ["600", "700"],
   display: "swap",
 });
 
@@ -30,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" className={sans.variable}>
+    <html lang="ru" className={`${sans.variable} ${display.variable}`}>
       <body className="min-h-screen font-sans antialiased">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <Providers>
