@@ -5,3 +5,8 @@ dist/
 .env.local
 .DS_Store
 *.log
+
+# build / tooling
+.next/
+.turbo/
+next-env.d.ts
