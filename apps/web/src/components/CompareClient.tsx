@@ -5,16 +5,18 @@ import { X, ShoppingCart, Speaker } from "lucide-react";
 import { Button, Badge } from "@kk/ui";
 import { useCompare } from "@/lib/compare";
 import { useCart } from "@/lib/cart";
-import { products, priceFmt, installmentMonthly, type Product } from "@/lib/site";
+import { products, priceFmt, installmentMonthly, typeLabels, type Product } from "@/lib/site";
 
 const rows: { label: string; render: (p: Product) => string }[] = [
   { label: "Цена", render: (p) => priceFmt(p.price) },
   { label: "Рассрочка", render: (p) => `от ${priceFmt(installmentMonthly(p.price))}/мес` },
   { label: "Бренд", render: (p) => p.brand },
-  { label: "Сценарий", render: (p) => p.scenarioLabel },
-  { label: "Площадь", render: (p) => `до ${p.areaMax} м²` },
-  { label: "Песен", render: (p) => new Intl.NumberFormat("ru-RU").format(p.songsCount) + "+" },
-  { label: "Рейтинг", render: (p) => `${p.rating} · ${p.reviewsCount} отз.` },
+  { label: "Тип", render: (p) => typeLabels[p.type] },
+  { label: "Сценарий", render: (p) => p.scenarioLabel ?? "—" },
+  { label: "Площадь", render: (p) => (p.areaMax ? `до ${p.areaMax} м²` : "—") },
+  { label: "Мощность", render: (p) => p.power ?? "—" },
+  { label: "Песен", render: (p) => (p.songsCount ? new Intl.NumberFormat("ru-RU").format(p.songsCount) + "+" : "—") },
+  { label: "Рейтинг", render: (p) => (p.rating ? `${p.rating} · ${p.reviewsCount} отз.` : "—") },
 ];
 
 export function CompareClient() {
@@ -32,7 +34,7 @@ export function CompareClient() {
       <div className="mt-8 rounded-2xl border border-border p-8 text-center">
         <h2 className="text-lg font-medium">Нет товаров для сравнения</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Отметьте системы «к сравнению» в каталоге или на карточке товара.
+          Отметьте товары «к сравнению» в каталоге или на карточке товара.
         </p>
         <Link href="/catalog" className="mt-4 inline-block">
           <Button>Перейти в каталог</Button>
@@ -85,11 +87,11 @@ export function CompareClient() {
               <td className="pt-3" />
               {items.map((p) => (
                 <td key={p.slug} className="border-t border-border px-3 pt-3 align-top">
-                  <Badge tone="primary">{p.scenarioLabel}</Badge>
+                  <Badge tone="primary">{p.scenarioLabel ?? typeLabels[p.type]}</Badge>
                   <div className="mt-2">
                     <Button
                       size="sm"
-                      onClick={() => add({ id: p.slug, name: p.model, price: p.price, meta: p.scenarioLabel })}
+                      onClick={() => add({ id: p.slug, name: p.model, price: p.price, meta: p.scenarioLabel ?? typeLabels[p.type] })}
                     >
                       <ShoppingCart className="h-4 w-4" /> В корзину
                     </Button>

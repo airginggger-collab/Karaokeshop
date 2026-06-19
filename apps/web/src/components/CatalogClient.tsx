@@ -3,13 +3,7 @@
 import * as React from "react";
 import { Search } from "lucide-react";
 import { ProductGrid } from "./ProductGrid";
-import type { Product } from "@/lib/site";
-
-const scenarioGroups = [
-  { label: "Для дома", test: (p: Product) => p.scenario === "dom" },
-  { label: "Для бара / клуба", test: (p: Product) => p.scenario === "bar" || p.scenario === "klub" },
-];
-const brandOpts = ["AST", "Studio Evolution"];
+import { typeLabels, type Product, type ProductType } from "@/lib/site";
 
 function toggle(set: Set<string>, v: string): Set<string> {
   const next = new Set(set);
@@ -18,13 +12,17 @@ function toggle(set: Set<string>, v: string): Set<string> {
   return next;
 }
 
+const typeOpts = Object.entries(typeLabels) as [ProductType, string][];
+
 export function CatalogClient({ items }: { items: Product[] }) {
-  const [scen, setScen] = React.useState<Set<string>>(new Set());
+  const [types, setTypes] = React.useState<Set<string>>(new Set());
   const [brands, setBrands] = React.useState<Set<string>>(new Set());
   const [q, setQ] = React.useState("");
 
+  const brandOpts = Array.from(new Set(items.map((i) => i.brand)));
+
   const filtered = items.filter((p) => {
-    if (scen.size && !scenarioGroups.some((g) => scen.has(g.label) && g.test(p))) return false;
+    if (types.size && !types.has(p.type)) return false;
     if (brands.size && !brands.has(p.brand)) return false;
     if (q.trim() && !p.model.toLowerCase().includes(q.trim().toLowerCase())) return false;
     return true;
@@ -43,25 +41,25 @@ export function CatalogClient({ items }: { items: Product[] }) {
           />
         </div>
 
-        <p className="mb-2 font-medium">Сценарий</p>
-        {scenarioGroups.map((g) => (
-          <label key={g.label} className="mb-1.5 flex items-center gap-2 text-muted-foreground">
-            <input type="checkbox" checked={scen.has(g.label)} onChange={() => setScen((s) => toggle(s, g.label))} className="h-4 w-4" />
-            {g.label}
+        <p className="mb-2 font-medium">Тип</p>
+        {typeOpts.map(([key, label]) => (
+          <label key={key} className="mb-1.5 flex items-center gap-2 text-muted-foreground">
+            <input type="checkbox" checked={types.has(key)} onChange={() => setTypes((s) => toggle(s, key))} className="h-4 w-4 accent-primary" />
+            {label}
           </label>
         ))}
 
         <p className="mb-2 mt-4 font-medium">Бренд</p>
         {brandOpts.map((b) => (
           <label key={b} className="mb-1.5 flex items-center gap-2 text-muted-foreground">
-            <input type="checkbox" checked={brands.has(b)} onChange={() => setBrands((s) => toggle(s, b))} className="h-4 w-4" />
+            <input type="checkbox" checked={brands.has(b)} onChange={() => setBrands((s) => toggle(s, b))} className="h-4 w-4 accent-primary" />
             {b}
           </label>
         ))}
       </aside>
 
       <div>
-        <p className="mb-3 text-sm text-muted-foreground">{filtered.length} систем</p>
+        <p className="mb-3 text-sm text-muted-foreground">{filtered.length} товаров</p>
         {filtered.length ? (
           <ProductGrid items={filtered} />
         ) : (
