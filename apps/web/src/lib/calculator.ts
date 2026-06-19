@@ -1,4 +1,4 @@
-import { baseSystems, comps, type BaseSystem } from "./components";
+import { baseSystems, acoustics, comps, type BaseSystem, type Acoustic } from "./components";
 
 export type CalcInput = {
   area: number;
@@ -15,10 +15,14 @@ export function pickBase(area: number): BaseSystem {
   return baseSystems.find((b) => area <= b.maxArea) ?? baseSystems[baseSystems.length - 1];
 }
 
+export function pickAcoustic(area: number): Acoustic {
+  return acoustics.find((a) => area <= a.maxArea) ?? acoustics[acoustics.length - 1];
+}
+
 export function configure(input: CalcInput): Calc {
   const area = Math.max(10, Math.round(input.area));
   const base = pickBase(area);
-  const speakerUnits = Math.max(1, Math.ceil(area / 40)) * 2;
+  const ac = pickAcoustic(area);
   const mics = Math.max(2, Math.min(6, Math.round(input.mics)));
 
   const lines: Line[] = [];
@@ -27,9 +31,8 @@ export function configure(input: CalcInput): Calc {
   };
 
   add(base.name, 1, base.price);
-  add(comps.speaker.name, speakerUnits, comps.speaker.price);
+  add(`${ac.name} · ${ac.power}`, 1, ac.price);
   add(comps.sub.name, input.sub ? 1 : 0, comps.sub.price);
-  add(comps.amp.name, 1, comps.amp.price);
   add(comps.mixer.name, 1, comps.mixer.price);
   add(comps.mic.name, mics, comps.mic.price);
   add(comps.light.name, input.light ? 2 : 0, comps.light.price);

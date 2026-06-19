@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { configure, configureByBudget, pickBase } from "./calculator";
+import { configure, configureByBudget, pickBase, pickAcoustic } from "./calculator";
 
 describe("pickBase", () => {
   it("выбирает систему по площади", () => {
@@ -9,14 +9,22 @@ describe("pickBase", () => {
   });
 });
 
+describe("pickAcoustic", () => {
+  it("выбирает акустику по площади", () => {
+    expect(pickAcoustic(25).id).toBe("achat-mini");
+    expect(pickAcoustic(70).id).toBe("cl110");
+    expect(pickAcoustic(200).id).toBe("rcf-evox");
+  });
+});
+
 describe("configure", () => {
-  it("положительный итог и колонки по площади (2 пары на 80 м²)", () => {
+  it("включает акустику, микрофоны и положительный итог", () => {
     const c = configure({ area: 80, venueType: "bar", mics: 4, light: true, sub: true });
     expect(c.total).toBeGreaterThan(0);
-    const sp = c.lines.find((l) => l.name.includes("Акустическая"));
-    expect(sp?.qty).toBe(4);
-    const mic = c.lines.find((l) => l.name.includes("микрофон") || l.name.includes("Радиомикрофон"));
+    expect(c.lines.some((l) => l.name.includes("Акустика"))).toBe(true);
+    const mic = c.lines.find((l) => l.name.includes("Радиомикрофон"));
     expect(mic?.qty).toBe(4);
+    expect(c.lines.some((l) => l.name.includes("Сабвуфер"))).toBe(true);
   });
 
   it("без света и саба — позиций нет", () => {

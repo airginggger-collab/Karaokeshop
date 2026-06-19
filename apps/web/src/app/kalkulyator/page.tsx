@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { CalculatorClient } from "@/components/CalculatorClient";
 import { kalkulyatorMeta } from "@/lib/site";
+import { supplierBrands } from "@/lib/components";
 
 export const metadata: Metadata = {
   title: kalkulyatorMeta.title,
@@ -17,6 +18,9 @@ export default function Page() {
       <div className="mt-6">
         <CalculatorClient />
       </div>
+      <p className="mt-6 text-xs text-muted-foreground">
+        В сметах — проф-оборудование брендов: {supplierBrands.join(" · ")}. Итоговые цены подтверждаем по счёту.
+      </p>
     </Container>
   );
 }
