@@ -1,0 +1,9 @@
+# Cloudflare deploy (static assets only). Папку out собирает `next build`
+# (output: export). Воркер-код не нужен — отдаём чистую статику.
+name = "karaokeshop"
+compatibility_date = "2025-06-01"
+
+[assets]
+directory = "./apps/web/out"
+# Неизвестные пути → наш статический 404.html (SEO-friendly).
+not_found_handling = "404-page"
