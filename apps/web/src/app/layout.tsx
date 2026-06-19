@@ -13,6 +13,8 @@ const sans = Manrope({
   display: "swap",
 });
 
+const themeScript = `try{var t=localStorage.getItem('kk-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -30,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className={sans.variable}>
       <body className="min-h-screen font-sans antialiased">
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <Providers>
           <Header />
           {children}

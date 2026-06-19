@@ -3,6 +3,7 @@ import { Mic2, Search, CreditCard } from "lucide-react";
 import { Container } from "./Container";
 import { MobileNav } from "./MobileNav";
 import { CartButton } from "./CartButton";
+import { ThemeToggle } from "./ThemeToggle";
 import { mainNav } from "@/lib/site";
 
 export function Header() {
@@ -22,6 +23,7 @@ export function Header() {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-3">
+          <ThemeToggle />
           <button aria-label="Поиск" className="text-muted-foreground hover:text-foreground">
             <Search className="h-[18px] w-[18px]" />
           </button>

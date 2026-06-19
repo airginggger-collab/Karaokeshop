@@ -6,6 +6,22 @@
   color-scheme: light;
 }
 
+.dark {
+  color-scheme: dark;
+  --color-bg: #0b0f14;
+  --color-fg: #e6eaf1;
+  --color-muted: #1a222e;
+  --color-muted-fg: #94a3b8;
+  --color-border: #273141;
+  --color-surface: #11161e;
+  --color-primary: #34d3b5;
+  --color-primary-fg: #04241e;
+  --color-primary-soft: #112a28;
+  --color-accent: #34d399;
+  --color-accent-fg: #bbf7d0;
+  --color-accent-soft: #10241b;
+}
+
 html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -20,4 +36,25 @@ h1,
 h2,
 h3 {
   letter-spacing: -0.01em;
+}
+
+@keyframes kkFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-fade-up {
+  animation: kkFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
+  }
 }

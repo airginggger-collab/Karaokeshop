@@ -10,14 +10,14 @@ export function Hero() {
           <Sparkles className="h-3.5 w-3.5" />
           Эксперты по караоке с 2012 года
         </span>
-        <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="animate-fade-up mt-4 max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl">
           Караоке под ключ в Казахстане
         </h1>
         <p className="mt-3 max-w-2xl text-lg text-muted-foreground">
           От системы домой до оснащения клуба. Бренды AST и Studio Evolution, монтаж и рассрочка Kaspi.
         </p>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="animate-fade-up mt-8 grid gap-4 sm:grid-cols-2" style={{ animationDelay: "0.08s" }}>
           <Link
             href="/karaoke/dlya-doma"
             className="group rounded-2xl border border-border bg-background p-6 shadow-sm transition hover:shadow-md"
