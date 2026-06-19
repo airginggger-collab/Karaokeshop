@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Badge } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { ServiceSteps } from "@/components/ServiceSteps";
@@ -24,6 +25,12 @@ export default function Page() {
 
       <div className="mt-8 max-w-2xl">
         <AreaCalculator />
+        <p className="mt-3 text-sm text-muted-foreground">
+          Нужна детальная смета по компонентам?{" "}
+          <Link href="/kalkulyator" className="font-medium text-primary hover:underline">
+            Открыть калькулятор →
+          </Link>
+        </p>
       </div>
     </Container>
   );

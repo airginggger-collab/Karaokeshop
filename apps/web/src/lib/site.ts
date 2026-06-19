@@ -122,11 +122,18 @@ export function discountPct(price: number, priceOld?: number): number | null {
 // Главная навигация (Header + мобильное меню)
 export const mainNav = [
   { href: "/catalog", label: "Каталог" },
-  { href: "/komplekty", label: "Готовые комплекты" },
+  { href: "/komplekty", label: "Комплекты" },
+  { href: "/kalkulyator", label: "Калькулятор" },
   { href: "/pod-klyuch", label: "Под ключ" },
   { href: "/pesni", label: "Песни" },
-  { href: "/servis", label: "Сервис" },
 ];
+
+export const kalkulyatorMeta: Landing = {
+  slug: "kalkulyator",
+  h1: "Онлайн-калькулятор караоке",
+  title: "Калькулятор караоке — смета под ключ онлайн",
+  description: "Соберите смету на оснащение караоке под ключ: по параметрам зала или по бюджету. Итог, рассрочка Kaspi, заявка в один клик.",
+};
 
 export const pesniMeta: Landing = {
   slug: "pesni",
@@ -240,6 +247,7 @@ export function allPaths(): string[] {
     "/pesni",
     "/keysy",
     "/blog",
+    "/kalkulyator",
     ...scenarios.map((s) => `/karaoke/${s.slug}`),
     ...bundles.map((b) => `/komplekty/${b.slug}`),
     ...brands.map((b) => `/brand/${b.slug}`),

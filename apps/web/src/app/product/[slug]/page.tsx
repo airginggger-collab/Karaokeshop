@@ -69,7 +69,7 @@ export default async function Page({
           </p>
 
           <div className="mt-4 flex flex-wrap gap-2">
-            <AddToCart slug={p.slug} />
+            <AddToCart item={{ id: p.slug, name: p.model, price: p.price, meta: p.scenarioLabel }} />
             <Button variant="ghost">Нужна консультация</Button>
           </div>
 

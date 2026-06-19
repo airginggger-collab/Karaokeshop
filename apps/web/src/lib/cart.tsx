@@ -1,16 +1,16 @@
 "use client";
 
 import * as React from "react";
-import { products, type Product } from "./site";
 
-type CartItem = { slug: string; qty: number };
+export type CartItem = { id: string; name: string; price: number; meta?: string; qty: number };
+export type CartInput = { id: string; name: string; price: number; meta?: string };
 
 type CartCtx = {
-  add: (slug: string, qty?: number) => void;
-  remove: (slug: string) => void;
+  add: (item: CartInput, qty?: number) => void;
+  remove: (id: string) => void;
   clear: () => void;
   count: number;
-  lines: { product: Product; qty: number }[];
+  items: CartItem[];
   total: number;
   ready: boolean;
 };
@@ -41,28 +41,25 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [items, ready]);
 
-  const add = React.useCallback((slug: string, qty = 1) => {
+  const add = React.useCallback((item: CartInput, qty = 1) => {
     setItems((prev) => {
-      const ex = prev.find((i) => i.slug === slug);
-      if (ex) return prev.map((i) => (i.slug === slug ? { ...i, qty: i.qty + qty } : i));
-      return [...prev, { slug, qty }];
+      const ex = prev.find((i) => i.id === item.id);
+      if (ex) return prev.map((i) => (i.id === item.id ? { ...i, qty: i.qty + qty } : i));
+      return [...prev, { ...item, qty }];
     });
   }, []);
 
-  const remove = React.useCallback((slug: string) => {
-    setItems((prev) => prev.filter((i) => i.slug !== slug));
+  const remove = React.useCallback((id: string) => {
+    setItems((prev) => prev.filter((i) => i.id !== id));
   }, []);
 
   const clear = React.useCallback(() => setItems([]), []);
 
-  const lines = items
-    .map((i) => ({ product: products.find((p) => p.slug === i.slug), qty: i.qty }))
-    .filter((l): l is { product: Product; qty: number } => Boolean(l.product));
   const count = items.reduce((s, i) => s + i.qty, 0);
-  const total = lines.reduce((s, l) => s + l.product.price * l.qty, 0);
+  const total = items.reduce((s, i) => s + i.price * i.qty, 0);
 
   return (
-    <Ctx.Provider value={{ add, remove, clear, count, lines, total, ready }}>
+    <Ctx.Provider value={{ add, remove, clear, count, items, total, ready }}>
       {children}
     </Ctx.Provider>
   );

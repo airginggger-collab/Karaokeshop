@@ -3,16 +3,16 @@
 import * as React from "react";
 import { Check, ShoppingCart } from "lucide-react";
 import { Button } from "@kk/ui";
-import { useCart } from "@/lib/cart";
+import { useCart, type CartInput } from "@/lib/cart";
 
-export function AddToCart({ slug }: { slug: string }) {
+export function AddToCart({ item }: { item: CartInput }) {
   const { add } = useCart();
   const [added, setAdded] = React.useState(false);
 
   return (
     <Button
       onClick={() => {
-        add(slug);
+        add(item);
         setAdded(true);
         window.setTimeout(() => setAdded(false), 1500);
       }}
