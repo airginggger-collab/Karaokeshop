@@ -27,6 +27,9 @@ export default {
         lg: "var(--radius-lg)",
         xl: "var(--radius-xl)",
       },
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+      },
     },
   },
   plugins: [],

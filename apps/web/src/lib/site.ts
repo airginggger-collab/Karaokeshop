@@ -81,7 +81,6 @@ export const staticPages: Landing[] = [
   { slug: "o-nas", h1: "О компании", title: "О компании — эксперты по караоке с 2012", description: "Поставка, монтаж и обслуживание караоке-оборудования в Алматы с 2012 года." },
   { slug: "kontakty", h1: "Контакты", title: "Контакты — Алматы, шоурум и сервис-центр", description: "Адрес, телефоны и режим работы. Шоурум и сервис-центр в Алматы." },
   { slug: "servis", h1: "Сервис и гарантия", title: "Сервис, настройка и ремонт караоке", description: "Подключение, настройка под помещение, гарантия и ремонт караоке-систем." },
-  { slug: "pesni", h1: "Каталог песен", title: "Каталог песен и обновление репертуара", description: "База из 60 000+ песен и регулярное обновление репертуара." },
 ];
 
 export const catalogMeta: Landing = {
@@ -118,12 +117,43 @@ export function discountPct(price: number, priceOld?: number): number | null {
   return Math.round((1 - price / priceOld) * 100);
 }
 
+// Главная навигация (Header + мобильное меню)
+export const mainNav = [
+  { href: "/catalog", label: "Каталог" },
+  { href: "/komplekty", label: "Готовые комплекты" },
+  { href: "/pod-klyuch", label: "Под ключ" },
+  { href: "/pesni", label: "Песни" },
+  { href: "/servis", label: "Сервис" },
+];
+
+export const pesniMeta: Landing = {
+  slug: "pesni",
+  h1: "Каталог песен",
+  title: "Каталог песен и обновление репертуара",
+  description: "База из 60 000+ песен на разных языках. Регулярное обновление репертуара по договору.",
+};
+
+export const songsTotal = 60000;
+
+export type Song = { title: string; artist: string; lang: string };
+export const songsSample: Song[] = [
+  { title: "Көзімнің қарасы", artist: "Абай", lang: "KZ" },
+  { title: "Атамекен", artist: "Қайрат Нұртас", lang: "KZ" },
+  { title: "Любимая моя", artist: "Юрий Антонов", lang: "RU" },
+  { title: "Зурбаган", artist: "Forum", lang: "RU" },
+  { title: "Hello", artist: "Adele", lang: "EN" },
+  { title: "Despacito", artist: "Luis Fonsi", lang: "ES" },
+  { title: "Кукушка", artist: "Кино", lang: "RU" },
+  { title: "Su Asqan", artist: "Ninety One", lang: "KZ" },
+];
+
 export function allPaths(): string[] {
   return [
     "/",
     "/" + catalogMeta.slug,
     "/" + podKlyuchMeta.slug,
     "/" + komplektyIndexMeta.slug,
+    "/pesni",
     ...scenarios.map((s) => `/karaoke/${s.slug}`),
     ...bundles.map((b) => `/komplekty/${b.slug}`),
     ...brands.map((b) => `/brand/${b.slug}`),
