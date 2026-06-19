@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Mic2, Search, ShoppingCart, CreditCard } from "lucide-react";
+import { Mic2, Search, CreditCard } from "lucide-react";
 import { Container } from "./Container";
 import { MobileNav } from "./MobileNav";
+import { CartButton } from "./CartButton";
 import { mainNav } from "@/lib/site";
 
 export function Header() {
@@ -24,9 +25,7 @@ export function Header() {
           <button aria-label="Поиск" className="text-muted-foreground hover:text-foreground">
             <Search className="h-[18px] w-[18px]" />
           </button>
-          <Link href="/checkout" aria-label="Корзина" className="text-muted-foreground hover:text-foreground">
-            <ShoppingCart className="h-[18px] w-[18px]" />
-          </Link>
+          <CartButton />
           <span className="hidden items-center gap-1 rounded-md bg-accent-soft px-2 py-1 text-[11px] font-medium text-accent-fg sm:inline-flex">
             <CreditCard className="h-3.5 w-3.5" />
             рассрочка 0-0-12

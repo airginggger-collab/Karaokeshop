@@ -2,6 +2,8 @@ export const siteConfig = {
   name: "karaokeshop",
   url: "https://www.karaokeshop.kz",
   city: "Алматы",
+  phone: "+7 707 579-99-95",
+  whatsapp: "77075799995",
   defaultTitle: "Караоке под ключ в Казахстане — для дома и заведений",
   defaultDescription:
     "Караоке-системы AST и Studio Evolution. Продажа, монтаж, рассрочка Kaspi. Оснащение баров и клубов под ключ. Алматы, с 2012.",

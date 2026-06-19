@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 import "@kk/tokens/tokens.css";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
+import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -29,9 +30,11 @@ export default function RootLayout({
   return (
     <html lang="ru" className={sans.variable}>
       <body className="min-h-screen font-sans antialiased">
-        <Header />
-        {children}
-        <Footer />
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

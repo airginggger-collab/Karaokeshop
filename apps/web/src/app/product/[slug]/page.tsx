@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Speaker, Star, ShieldCheck, Wrench, Music, CreditCard } from "lucide-react";
 import { Badge, Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { AddToCart } from "@/components/AddToCart";
 import { products, priceFmt, installmentMonthly, discountPct, siteConfig } from "@/lib/site";
 import { productJsonLd } from "@/lib/seo";
 
@@ -43,21 +44,21 @@ export default async function Page({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
 
       <div className="grid gap-8 md:grid-cols-2">
-        <div className="flex h-72 items-center justify-center rounded-xl bg-surface">
-          <Speaker className="h-14 w-14 text-muted-foreground" />
+        <div className="flex h-72 items-center justify-center rounded-2xl bg-gradient-to-br from-surface to-muted">
+          <Speaker className="h-16 w-16 text-muted-foreground" />
         </div>
 
         <div>
           <Badge tone="primary">
             {p.scenarioLabel} · {p.brand}
           </Badge>
-          <h1 className="mt-2 text-2xl font-medium">{p.model}</h1>
+          <h1 className="mt-2 text-2xl font-semibold tracking-tight">{p.model}</h1>
           <p className="mt-1 flex items-center gap-1 text-sm text-accent-fg">
             <Star className="h-4 w-4" /> {p.rating} · {p.reviewsCount} отзыва · {p.inStock ? "в наличии" : "под заказ"}
           </p>
 
           <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-2xl font-medium">{priceFmt(p.price)}</span>
+            <span className="text-2xl font-semibold">{priceFmt(p.price)}</span>
             {p.priceOld ? (
               <span className="text-sm text-muted-foreground line-through">{priceFmt(p.priceOld)}</span>
             ) : null}
@@ -68,7 +69,7 @@ export default async function Page({
           </p>
 
           <div className="mt-4 flex flex-wrap gap-2">
-            <Button>В корзину</Button>
+            <AddToCart slug={p.slug} />
             <Button variant="ghost">Нужна консультация</Button>
           </div>
 
