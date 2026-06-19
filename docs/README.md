@@ -42,14 +42,15 @@
 |---|---|
 | 7. Монорепо (Turborepo + npm workspaces) | ✅ собрано |
 | 8. Дизайн-токены (Style Dictionary) | ✅ `packages/tokens` |
-| 9. UI-кит (Button + Vitest) | ✅ 2 теста зелёные (Storybook 🔜) |
-| 10. Роутинг по URL-карте | ✅ главная + 4 лендинга, мета из `lib/site` |
+| 9. UI-кит (Button + Vitest + Storybook) | ✅ собрано |
+| 10. Роутинг по URL-карте | ✅ полное дерево (24 URL): сценарии, комплекты, бренды, товары |
 | 11. Контент-модель в CMS | ⏸ ждёт решения по CMS (резидентность) |
 | 12. Экраны в Figma | 🔜 |
 | 13. SEO-каркас (JSON-LD, sitemap, robots) | ✅ 3 теста зелёные |
-| 14. Lighthouse CI | 🔜 |
+| 14. Lighthouse CI + GitHub Actions | ✅ бюджет CWV в `lighthouserc.json` |
 
-> Стек: Next.js 15 + React 19 + Tailwind (на токенах). Сборка: 10 статических роутов, тесты 5/5. Запуск: `npm run dev` (Cloudflare-адаптер добавим перед деплоем).
+> Стек: Next.js 15 + React 19 + Tailwind (на токенах) + Storybook. Сборка: 28 статических URL, тесты 5/5.
+> Запуск: `npm run dev` · Storybook: `npm run storybook -w @kk/ui` (Cloudflare-адаптер добавим перед деплоем).
 
 ## Решения по стоимости (кратко)
 - **Хостинг ₸0** — Cloudflare Pages (коммерция OK, безлимит-трафик), переносимо на Vercel Pro при необходимости.
