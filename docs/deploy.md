@@ -2,14 +2,30 @@
 
 > **🟢 Live:** https://karaokeshop.airg-inggger.workers.dev/ — авто-деплой на каждый push в `main`.
 >
-> Вариант A — статический экспорт ([ADR-0002](adr/0002-hosting.md)). Сайт полностью SSG → `output: "export"` собирает чистую статику в `apps/web/out`. Cloudflare деплоит её как **assets-only Worker** (`wrangler.toml`) — бесплатно, коммерция разрешена, безлимит-трафик, авто-деплой на каждый push. Чистые URL (без `.html`) и 404 → `404.html` Cloudflare разруливает сам.
+> Вариант A — статический экспорт ([ADR-0002](adr/0002-hosting.md)). Сайт полностью SSG → `output: "export"` собирает чистую статику в `apps/web/out`. Cloudflare отдаёт её как **assets-only Worker** (`wrangler.toml`) — бесплатно, коммерция разрешена, безлимит-трафик, авто-деплой на каждый push в `main`. Чистые URL (без `.html`); неизвестные пути → `404.html` (`not_found_handling = "404-page"`).
 
-## Подключение (один раз, через дашборд Cloudflare)
+## Что реально настроено (assets-only Worker)
 
-1. Зарегистрируйся на [dash.cloudflare.com](https://dash.cloudflare.com) (бесплатно).
-2. **Workers & Pages → Create → Pages → Connect to Git**.
-3. Авторизуй GitHub, выбери репозиторий **`airginggger-collab/Karaokeshop`**.
-4. Настройки сборки:
+Конфиг — `wrangler.toml` в корне:
+
+```toml
+name = "karaokeshop"
+compatibility_date = "2025-06-01"
+
+[assets]
+directory = "./apps/web/out"
+not_found_handling = "404-page"
+```
+
+- **Live:** `https://karaokeshop.airg-inggger.workers.dev/` (домен `*.workers.dev`, не `*.pages.dev`).
+- Билд для деплоя: `npm run build -w @kk/tokens && npm run build -w web` → артефакт в `apps/web/out`.
+- Деплой авто на каждый push в `main` (Cloudflare-интеграция с GitHub), ~1–2 мин.
+
+> Историческая заметка: раньше этот файл описывал **Cloudflare Pages** (Connect-to-Git). Фактически проект захостен как **Worker** через `wrangler.toml`. Источник истины по деплою — `wrangler.toml`, не дашборд Pages.
+
+## Альтернатива: Cloudflare Pages (Connect-to-Git)
+
+Если переходить на Pages вместо Worker — те же настройки сборки в дашборде:
 
 | Параметр | Значение |
 |---|---|
@@ -18,20 +34,16 @@
 | Build command | `npm run build -w @kk/tokens && npm run build -w web` |
 | Build output directory | `apps/web/out` |
 | Root directory | `/` (корень репо) |
-
-5. **Environment variables** → добавь `NODE_VERSION` = `20`.
-6. **Save and Deploy**.
-
-Через ~1–2 минуты получишь ссылку вида `https://karaokeshop.pages.dev`. Дальше каждый push в `main` авто-деплоится; PR'ы получают preview-ссылки.
+| Env var | `NODE_VERSION = 20` |
 
 ## Локальная проверка экспорта
 ```bash
-npm run build -w web        # → apps/web/out (24 статических страницы + sitemap.xml/robots.txt/404.html)
+npm run build -w web        # → apps/web/out (47 статических страниц + sitemap.xml/robots.txt/404.html)
 npx serve apps/web/out      # посмотреть локально
 ```
 
 ## Кастомный домен (позже)
-Cloudflare Pages → проект → **Custom domains** → добавить `karaokeshop.kz` → перенести NS/DNS на Cloudflare (или CNAME). Бесплатный SSL автоматически.
+Cloudflare → Workers & Pages → проект `karaokeshop` → **Custom domains/Routes** → добавить `karaokeshop.kz` → перенести NS/DNS на Cloudflare (или CNAME). Бесплатный SSL автоматически. (В `siteConfig.url` продакшен-canonical уже задан как `https://www.karaokeshop.kz` — привязать домен и сверить.)
 
 ## Когда переключаться на вариант B
 Как только добавим **CMS / SSR / ISR** (серверный рендеринг), статического экспорта не хватит. Тогда:

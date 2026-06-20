@@ -18,6 +18,7 @@
 
 ## Ключевые документы
 - 🧭 [HANDOFF — снимок состояния](HANDOFF.md) — быстрый вход для новой сессии (где мы, что live, что дальше).
+- 🤖 [CLAUDE.md](../CLAUDE.md) — каноничные правила для AI-ассистентов (структура монорепо, команды, git, ловушки).
 - 🎯 [Стратегия редизайна](strategy/2026-06-18-redesign-strategy.md) — рынок, позиционирование, IA, стек, дорожная карта.
 - 🔍 [Семантическое ядро](strategy/semantic-core.md) · 🗺️ [Карта URL + мета](strategy/url-map.md) — SEO-фундамент.
 - 🥊 [Конкурентный SEO-аудит](research/competitor-seo.md) — свободные кластеры.
@@ -46,15 +47,15 @@
 | 7. Монорепо (Turborepo + npm workspaces) | ✅ собрано |
 | 8. Дизайн-токены (Style Dictionary) | ✅ `packages/tokens` |
 | 9. UI-кит (Button + Vitest + Storybook) | ✅ собрано |
-| 10. Роутинг по URL-карте | ✅ полное дерево (24 URL): сценарии, комплекты, бренды, товары |
-| 11. Контент-модель в CMS | ⏸ ждёт решения по CMS (резидентность) |
-| 12. Экраны в Figma | 🔜 (но 7 прототипов уже собраны в React-компоненты) |
-| +. Экраны из компонентов | ✅ Header/Hero/ProductCard/FilterRail/AreaCalculator/ServiceSteps + Badge |
-| 13. SEO-каркас (JSON-LD, sitemap, robots) | ✅ 3 теста зелёные |
+| 10. Роутинг по URL-карте | ✅ полное дерево: сценарии, комплекты, бренды, товары (18 карточек) |
+| 11. Контент-модель в CMS | ⏸ ждёт решения по CMS (резидентность). Сейчас контент — в `apps/web/src/lib/site.ts` |
+| 12. Экраны в Figma | 🔜 (но прототипы уже реализованы в React-компонентах) |
+| +. Экраны из компонентов | ✅ Header/Hero/ProductCard/FilterRail/AreaCalculator/ServiceSteps + Badge и др. |
+| 13. SEO-каркас (JSON-LD, sitemap, robots) | ✅ тесты зелёные |
 | 14. Lighthouse CI + GitHub Actions | ✅ бюджет CWV в `lighthouserc.json` |
 
-> Стек: Next.js 15 + React 19 + Tailwind (на токенах) + Storybook. Сборка: 28 статических URL, тесты 5/5.
-> Запуск: `npm run dev` · Storybook: `npm run storybook -w @kk/ui` (Cloudflare-адаптер добавим перед деплоем).
+> Стек: Next.js 15 + React 19 + Tailwind (на токенах) + Storybook. Сборка: **47 статических страниц** в `apps/web/out`, тесты — web 10 + ui 2.
+> Запуск: `npm run dev` · Storybook: `npm run storybook -w @kk/ui`. **Уже задеплоено** на Cloudflare (assets-only Worker, `wrangler.toml`) — 🟢 live, авто на каждый push в `main`.
 
 ## Решения по стоимости (кратко)
 - **Хостинг ₸0** — Cloudflare Pages (коммерция OK, безлимит-трафик), переносимо на Vercel Pro при необходимости.
@@ -62,7 +63,7 @@
 - **Оплата поэтапно:** старт — заявка + Kaspi/WhatsApp (свой эквайринг не нужен); позже — card-checkout. Требует ИП.
 
 ## Проект в одном абзаце
-Полный ребилд интернет-магазина караоке-оборудования (Алматы; AST и Studio Evolution). Цели: B2C-продажи + B2B-лиды + бренд + **SEO-приоритет**. Архитектура — единая витрина + B2B-трек «под ключ» (модель B). Стек — Next.js (SSR/SSG) + Headless CMS. i18n-ready (RU → KZ).
+Полный ребилд интернет-магазина караоке-оборудования (Алматы; AST и Studio Evolution). Цели: B2C-продажи + B2B-лиды + бренд + **SEO-приоритет**. Архитектура — единая витрина + B2B-трек «под ключ» (модель B). Сейчас собран статикой (Next.js `output: "export"`), захостен на Cloudflare. CMS (Sanity/Strapi) — план Фазы 2, пока контент в `apps/web/src/lib/site.ts`. i18n-ready (RU → KZ, hreflang-структура заложена).
 
 ## Правила
 1. **Один дом.** Всё — в `docs/`. Новый артефакт → в папку + ссылка в эту карту.

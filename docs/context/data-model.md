@@ -19,7 +19,7 @@
 | `kit` | string[] | что в комплекте |
 | `songsCount` | number | песен в базе |
 | `specs` | {key,value}[] | характеристики |
-| `images` | asset[] | фото |
+| `images` | asset[] | фото. **Сейчас:** поле `image: string` — Unsplash URL (временное демо). Заменить на `/products/<slug>.jpg` |
 | `videoUrl` | string? | демо |
 | `rating` / `reviewsCount` | number | для AggregateRating |
 | `seo` | SEO | см. ниже |

@@ -1,6 +1,8 @@
 # HANDOFF — снимок состояния (для новой сессии)
 
-> Краткий контекст проекта karaokeshop.kz, чтобы быстро войти в курс. Полная карта — [docs/README.md](README.md).
+> Краткий контекст проекта karaokeshop.kz, чтобы быстро войти в курс. Полная карта — [docs/README.md](README.md) · правила для AI — [/CLAUDE.md](../CLAUDE.md).
+>
+> **Обновлено: 2026-06-20.** Ветка `main`, working tree чистый, всё запушено.
 
 ## Что это
 Полный ребилд интернет-магазина караоке-оборудования (Алматы; бренды AST + Studio Evolution + проф-оборудование). Цели: B2C-продажи + B2B-лиды (оснащение под ключ) + бренд + **SEO-приоритет**.
@@ -13,7 +15,7 @@
 - **Деплой:** Cloudflare assets-only Worker (`wrangler.toml` → `apps/web/out`), **авто на каждый push в main**. Превью-MCP привязан к medlog — проверять надо `build` + `curl` живого URL.
 
 ## Стек
-Next.js 15 (App Router, `output: "export"` — статика) · Turborepo (npm workspaces) · Tailwind на дизайн-токенах (Style Dictionary) · Storybook · lucide-react · шрифты Manrope + Unbounded. ~51 статическая страница. Тесты Vitest (web 10 + ui 2).
+Next.js 15 (App Router, `output: "export"` — статика) · Turborepo (npm workspaces) · Tailwind на дизайн-токенах (Style Dictionary) · Storybook · lucide-react · шрифты Manrope + Unbounded. **47 статических страниц** в `apps/web/out` (из них 18 карточек товаров). Тесты Vitest: web 10 (calculator 7 + seo 3) + ui 2.
 
 ## Сборка / проверка
 ```
@@ -28,20 +30,27 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-20)
+- **Уборка репо:** случайно закоммиченный в корень скриншот `screencapture-docs-busy-app-2026-06-19-18_59_58.png` (~1 МБ) снят с трекинга (`git rm --cached`), перенесён в **gitignored** `_local-assets/` (на диске остался). `.gitignore` дополнен блокировкой stray-бинарников в корне: `_local-assets/`, `/*.png`, `/*.jpg`, `/*.jpeg`, `/*.pdf`. Коммит `b59d283`.
+- Документация (README/CLAUDE/docs) приведена к текущей реальности: добавлен корневой `CLAUDE.md`, README переписан под собранный сайт, счётчики страниц/тестов выверены по `apps/web/out`.
+
 ## Что готово (live)
 Бенто-главная (2 настроения: тёплое «для дома» / деловое ночное «для заведений») · e-commerce с корзиной · B2B-воронка «под ключ» · **онлайн-калькулятор сметы** (2 режима, реальные модели поставщика) · каталог 18 товаров (системы + акустика/микрофоны/сабвуфер/микшер) с фильтрами по типу/бренду · **сравнение оборудования** (`/sravnit`) и **сравнение брендов** (`/sravnenie`) · блог с FAQ-разметкой · кейсы · о компании · контакты с картой · песни · тёмная тема · мобильное меню · SEO (JSON-LD, sitemap, hreflang-структура).
 
 ## Что дальше / открытые хвосты
 1. **Цены — оценочные.** Поставщик (show-service) **скрывает цены** в каталоге. Числа в `components.ts`/товарах привязаны к подтверждённым «готовым решениям» (551 800 / 611 800 ₸). Заменить по счёту поставщика.
-2. **Фото товаров — демо (Unsplash).** Заменить на реальные: `public/products/<slug>.jpg` + поле `image`.
+2. **Фото товаров — демо (Unsplash).** Заменить на реальные: `public/products/<slug>.jpg` + поле `image` в `site.ts`.
 3. **CMS** (Sanity vs Strapi) — ждёт ответ заказчика про резидентность данных (ADR-0001). Сейчас контент захардкожен в `site.ts`.
 4. **Бриф заказчика** — частоты Wordstat (семантическое ядро), аналитика, доступы. См. [docs/client/client-brief.md](client/client-brief.md).
 5. **Кастомный домен** `new.karaokeshop.kz` — ждёт доступ владельца к DNS (потом 2 клика в Cloudflare).
+6. **`/sravnit` не в sitemap** — страница сравнения оборудования есть как роут (`apps/web/src/app/sravnit/page.tsx`), но не добавлена в `allPaths()` в `site.ts` → Google её не видит. Фикс: добавить `"/sravnit"` в `allPaths()`.
 
 ## Подводные камни
 - ⚠️ Это **не medlog** — коммить через `git -C ~/Desktop/karaokeshop` (был случай ошибочного коммита в medlog).
 - **show-service — поставщик, на сайте НЕ упоминается** (использован как справочник номенклатуры).
 - Цены — оценочные; демо-фото — временные.
+- **`_local-assets/` — gitignored локальная свалка**, не ре-трекать. Корневые `*.png/*.jpg/*.jpeg/*.pdf` тоже игнорятся — не клади бинарники в корень.
+- **`deploy.md` исторически описывал Cloudflare Pages (Connect-to-Git)**, но реальный продакшен — assets-only **Worker** (`wrangler.toml`, URL `*.workers.dev`). Источник истины по деплою — `wrangler.toml`.
 
 ## Документация
-[docs/README.md](README.md) (индекс) · [strategy/](strategy/) (стратегия, ядро, бюджет, URL-карта) · [plans/](plans/) · [deploy.md](deploy.md) · [adr/](adr/) · [redaktirovanie-sajta.md](redaktirovanie-sajta.md) (правка владельцем).
+[docs/README.md](README.md) (индекс) · [/CLAUDE.md](../CLAUDE.md) (правила для AI) · [strategy/](strategy/) (стратегия, ядро, бюджет, URL-карта) · [plans/](plans/) · [deploy.md](deploy.md) · [adr/](adr/) · [redaktirovanie-sajta.md](redaktirovanie-sajta.md) (правка владельцем).

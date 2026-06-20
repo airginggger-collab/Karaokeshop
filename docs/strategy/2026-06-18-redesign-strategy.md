@@ -192,7 +192,7 @@
 
 ## 13. Инфраструктура и handoff-готовность
 
-**Монорепо (Turborepo):**
+**Монорепо (Turborepo) — план:**
 ```
 apps/web            — Next.js фронт
 packages/ui         — компоненты + Storybook
@@ -201,6 +201,7 @@ packages/cms-schema — модель контента как код
 packages/config     — eslint/ts/tailwind общие
 docs/               — контекст-пак
 ```
+> Реализовано на сегодня: `apps/web`, `packages/tokens` (`@kk/tokens`), `packages/ui` (`@kk/ui`), `docs/`. Пакеты `cms-schema` и `config` — отложены до подключения CMS (Фаза 2).
 
 **Контекст-пак `/docs/` (отдаётся разработчикам):** `data-model.md`, `api-contracts/` (OpenAPI), `content-model.md`, `design-system.md` + Storybook + Figma Code Connect, `adr/`, `seo-spec.md`, `env.example`, CI-конфиги.
 

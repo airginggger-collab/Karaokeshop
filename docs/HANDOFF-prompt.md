@@ -10,8 +10,9 @@
 стартовать из каталога medlog — не перепутай).
 
 Прежде чем что-либо делать:
-1. Прочитай ~/Desktop/karaokeshop/docs/HANDOFF.md (снимок состояния) и
-   docs/README.md (индекс). В них всё: что готово, что live, что дальше.
+1. Прочитай ~/Desktop/karaokeshop/CLAUDE.md (правила для AI),
+   docs/HANDOFF.md (снимок состояния) и docs/README.md (индекс).
+   В них всё: что готово, что live, что дальше.
 
 Правила работы с git (строго):
 - Коммить только через: git -C ~/Desktop/karaokeshop ...
