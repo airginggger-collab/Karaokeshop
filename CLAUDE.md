@@ -75,7 +75,7 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 3. **`docs/deploy.md` исторически писался под Cloudflare Pages (Connect-to-Git).** Реальный продакшен — assets-only **Worker** через `wrangler.toml`, URL `*.workers.dev`. Опирайся на `wrangler.toml`, не на «вариант Pages-дашборда».
 4. **show-service — поставщик, на сайте НЕ упоминается** (использован как справочник номенклатуры). Цены оценочные (поставщик их скрывает); фото товаров — демо (Unsplash), временные. Заменить по счёту/реальным фото.
 5. **`_local-assets/` — gitignored локальная свалка** (скриншоты и т.п.). Не ре-трекай. `.gitignore` также блокирует stray-бинарники в корне (`/*.png`, `/*.jpg`, `/*.jpeg`, `/*.pdf`).
-6. **`packages/ui/storybook-static/` — собранный артефакт** (попадает в дерево). Не правь руками; пересобирается `build-storybook`.
+6. **`packages/ui/storybook-static/` — gitignored** (`packages/ui/.gitignore`). В git не попадает; пересобирается `npm run build-storybook -w @kk/ui`.
 
 ## Чеклист перед коммитом
 
