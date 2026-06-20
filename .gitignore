@@ -13,3 +13,10 @@ next-env.d.ts
 storybook-static/
 out/
 .wrangler/
+
+# local scratch assets
+_local-assets/
+/*.png
+/*.jpg
+/*.jpeg
+/*.pdf
