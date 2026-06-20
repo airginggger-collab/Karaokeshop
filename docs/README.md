@@ -23,7 +23,9 @@
 - 🔍 [Семантическое ядро](strategy/semantic-core.md) · 🗺️ [Карта URL + мета](strategy/url-map.md) — SEO-фундамент.
 - 🥊 [Конкурентный SEO-аудит](research/competitor-seo.md) — свободные кластеры.
 - 💰 [Бюджет проекта](strategy/budget.md) — что бесплатно сейчас, что подключить потом, оплата/Kaspi.
-- 🧩 [Модель данных](context/data-model.md).
+- 🧩 [Контент-модель текущая](context/content-model.md) (факты из `site.ts`) · [Плановая CMS-схема](context/data-model.md) (для Sanity, Фаза 2).
+- 🔄 [Миграция site.ts → Sanity](context/data-migration.md) · 📡 [API-контракт лидов](context/api-contracts/leads.md).
+- 🛠 [Dev How-To](dev-howto.md) — как добавить роут, товар, пост; git; деплой.
 - 🏛️ ADR: [0001 CMS](adr/0001-cms.md) · [0002 Хостинг](adr/0002-hosting.md).
 - 🚀 [Деплой на Cloudflare](deploy.md) — **🟢 live: https://karaokeshop.airg-inggger.workers.dev/**
 - 📘 [Как править сайт самой (для новичка)](redaktirovanie-sajta.md) — товары, цены, фото, тексты через GitHub в браузере.
