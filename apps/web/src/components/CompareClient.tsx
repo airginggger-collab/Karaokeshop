@@ -52,8 +52,13 @@ export function CompareClient() {
               <th className="w-28" />
               {items.map((p) => (
                 <th key={p.slug} className="p-3 text-left align-top">
-                  <div className="flex h-20 items-center justify-center rounded-lg bg-gradient-to-br from-surface to-muted">
-                    <Speaker className="h-7 w-7 text-muted-foreground" />
+                  <div className="flex h-20 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-surface to-muted">
+                    {p.image ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={p.image} alt={p.model} loading="lazy" className="h-full w-full object-cover" />
+                    ) : (
+                      <Speaker className="h-7 w-7 text-muted-foreground" />
+                    )}
                   </div>
                   <div className="mt-2 flex items-start justify-between gap-2">
                     <Link href={`/product/${p.slug}`} className="font-medium hover:text-primary">

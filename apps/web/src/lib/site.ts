@@ -60,6 +60,7 @@ export type Product = {
   reviewsCount?: number;
   power?: string;
   note?: string;
+  image?: string; // путь /products/<slug>.jpg или внешний URL; нет — иконка-заглушка
   // только караоке-системы:
   scenario?: string;
   scenarioLabel?: string;
@@ -97,9 +98,9 @@ export const products: Product[] = [
 
   // Акустика
   { slug: "the-box-achat-mini", type: "akustika", model: "The Box Pro Achat Mini", brand: "The Box", power: "220 Вт", price: 150000, rating: 4.7, reviewsCount: 6, inStock: true },
-  { slug: "the-box-cl115", type: "akustika", model: "The Box CL 115/108", brand: "The Box", power: "900 Вт", price: 240000, rating: 4.8, reviewsCount: 9, inStock: true },
+  { slug: "the-box-cl115", type: "akustika", model: "The Box CL 115/108", brand: "The Box", power: "900 Вт", price: 240000, rating: 4.8, reviewsCount: 9, inStock: true, image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&q=70&auto=format&fit=crop" },
   { slug: "the-box-cl110", type: "akustika", model: "The Box CL 110/118", brand: "The Box", power: "1000 Вт", price: 360000, rating: 4.8, reviewsCount: 5, inStock: true },
-  { slug: "rcf-evox-8", type: "akustika", model: "RCF EVOX 8", brand: "RCF", power: "1400 Вт", price: 520000, rating: 4.9, reviewsCount: 12, inStock: true, featured: true },
+  { slug: "rcf-evox-8", type: "akustika", model: "RCF EVOX 8", brand: "RCF", power: "1400 Вт", price: 520000, rating: 4.9, reviewsCount: 12, inStock: true, featured: true, image: "https://images.unsplash.com/photo-1558537348-c0f8e733989d?w=800&q=70&auto=format&fit=crop" },
   { slug: "hk-polar-10", type: "akustika", model: "HK Audio Polar 10", brand: "HK Audio", power: "активная колонна", price: 480000, rating: 4.8, reviewsCount: 4, inStock: true },
   { slug: "martin-xp12a", type: "akustika", model: "Martin Audio XP12A", brand: "Martin Audio", power: "активная", price: 420000, rating: 4.8, reviewsCount: 3, inStock: true },
 
@@ -107,7 +108,7 @@ export const products: Product[] = [
   { slug: "martin-xp118a", type: "sub", model: "Martin Audio XP118A SUB", brand: "Martin Audio", power: "сабвуфер 18\"", price: 180000, rating: 4.8, reviewsCount: 4, inStock: true },
 
   // Микрофоны и радиосистемы
-  { slug: "shure-blx24-sm58", type: "mikrofon", model: "Shure BLX24E/SM58", brand: "Shure", note: "вокальная радиосистема", price: 95000, rating: 4.9, reviewsCount: 18, inStock: true },
+  { slug: "shure-blx24-sm58", type: "mikrofon", model: "Shure BLX24E/SM58", brand: "Shure", note: "вокальная радиосистема", price: 95000, rating: 4.9, reviewsCount: 18, inStock: true, image: "https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=800&q=70&auto=format&fit=crop" },
   { slug: "shure-blx24-pg58", type: "mikrofon", model: "Shure BLX24/PG58", brand: "Shure", note: "вокальная радиосистема", price: 80000, rating: 4.8, reviewsCount: 11, inStock: true },
   { slug: "shure-blx288", type: "mikrofon", model: "Shure BLX288/PG58 Combo", brand: "Shure", note: "2 микрофона", price: 150000, rating: 4.8, reviewsCount: 7, inStock: true },
   { slug: "shure-qlxd24", type: "mikrofon", model: "Shure QLXD24/B87A", brand: "Shure", note: "цифровая радиосистема", price: 320000, rating: 4.9, reviewsCount: 5, inStock: true },
@@ -115,7 +116,7 @@ export const products: Product[] = [
   { slug: "rolenz-rdl200", type: "mikrofon", model: "Rolenz RDL 200", brand: "Rolenz", note: "радиосистема", price: 50000, rating: 4.6, reviewsCount: 6, inStock: true },
 
   // Микшер
-  { slug: "dynacord-powermate", type: "miksher", model: "Dynacord PowerMate 1000-3", brand: "Dynacord", power: "1000 Вт RMS", price: 350000, rating: 4.9, reviewsCount: 7, inStock: true },
+  { slug: "dynacord-powermate", type: "miksher", model: "Dynacord PowerMate 1000-3", brand: "Dynacord", power: "1000 Вт RMS", price: 350000, rating: 4.9, reviewsCount: 7, inStock: true, image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=70&auto=format&fit=crop" },
 ];
 
 // Одиночные generic-страницы (рендерятся через (pages)/[page])

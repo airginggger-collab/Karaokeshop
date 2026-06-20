@@ -14,8 +14,13 @@ export function ProductCard({ p }: { p: Product }) {
       href={`/product/${p.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-sm transition hover:border-primary"
     >
-      <div className="relative flex h-36 items-center justify-center bg-gradient-to-br from-surface to-muted">
-        <Speaker className="h-9 w-9 text-muted-foreground transition group-hover:scale-105" />
+      <div className="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-surface to-muted">
+        {p.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={p.image} alt={p.model} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+        ) : (
+          <Speaker className="h-9 w-9 text-muted-foreground transition group-hover:scale-105" />
+        )}
         {pct ? (
           <span className="absolute left-2 top-2 rounded-md bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent-fg">
             −{pct}%

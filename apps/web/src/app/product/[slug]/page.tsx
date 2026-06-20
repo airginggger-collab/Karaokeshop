@@ -47,8 +47,13 @@ export default async function Page({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
 
       <div className="grid gap-8 md:grid-cols-2">
-        <div className="flex h-72 items-center justify-center rounded-2xl bg-gradient-to-br from-surface to-muted">
-          <Speaker className="h-16 w-16 text-muted-foreground" />
+        <div className="flex h-72 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-surface to-muted">
+          {p.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={p.image} alt={p.model} className="h-full w-full object-cover" />
+          ) : (
+            <Speaker className="h-16 w-16 text-muted-foreground" />
+          )}
         </div>
 
         <div>
