@@ -24,6 +24,7 @@
 - 🧩 [Модель данных](context/data-model.md).
 - 🏛️ ADR: [0001 CMS](adr/0001-cms.md) · [0002 Хостинг](adr/0002-hosting.md).
 - 🚀 [Деплой на Cloudflare](deploy.md) — **🟢 live: https://karaokeshop.airg-inggger.workers.dev/**
+- 📘 [Как править сайт самой (для новичка)](redaktirovanie-sajta.md) — товары, цены, фото, тексты через GitHub в браузере.
 - 🗺️ [План Фазы 0–1](plans/2026-06-18-phase-0-1.md).
 - 📋 [Единый бриф заказчику](client/client-brief.md) — один файл: критичный минимум + полный бриф + данные каталога + доступы.
 
