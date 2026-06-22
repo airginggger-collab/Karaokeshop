@@ -8,7 +8,7 @@ export type CalcInput = {
   sub: boolean;
 };
 
-export type Line = { name: string; qty: number; price: number; subtotal: number };
+export type Line = { name: string; qty: number; price: number; subtotal: number; hint?: string };
 export type Calc = { base: string; area: number; lines: Line[]; total: number };
 
 export function pickBase(area: number): BaseSystem {
@@ -26,18 +26,18 @@ export function configure(input: CalcInput): Calc {
   const mics = Math.max(2, Math.min(6, Math.round(input.mics)));
 
   const lines: Line[] = [];
-  const add = (name: string, qty: number, price: number) => {
-    if (qty > 0) lines.push({ name, qty, price, subtotal: qty * price });
+  const add = (name: string, qty: number, price: number, hint?: string) => {
+    if (qty > 0) lines.push({ name, qty, price, subtotal: qty * price, hint });
   };
 
-  add(base.name, 1, base.price);
-  add(`${ac.name} · ${ac.power}`, 1, ac.price);
-  add(comps.sub.name, input.sub ? 1 : 0, comps.sub.price);
-  add(comps.mixer.name, 1, comps.mixer.price);
-  add(comps.mic.name, mics, comps.mic.price);
-  add(comps.light.name, input.light ? 2 : 0, comps.light.price);
-  add(comps.cables.name, 1, comps.cables.price);
-  add(comps.install.name, 1, comps.install.price);
+  add(base.name, 1, base.price, "Медиаплеер + эхо-процессор — ключевой модуль системы");
+  add(`${ac.name} · ${ac.power}`, 1, ac.price, `Мощность подобрана под ${area} м²: достаточный запас без перегрева`);
+  add(comps.sub.name, input.sub ? 1 : 0, comps.sub.price, "Расширяет АЧХ до 40 Гц — голос звучит объёмнее");
+  add(comps.mixer.name, 1, comps.mixer.price, "Dynacord PowerMate: балансный выход, 2-полосный EQ на каждый канал");
+  add(comps.mic.name, mics, comps.mic.price, "Shure BLX24 UHF — автовыбор частоты, не конфликтует с Wi-Fi роутером");
+  add(comps.light.name, input.light ? 2 : 0, comps.light.price, "Заливной свет создаёт атмосферу без перегруза сети");
+  add(comps.cables.name, 1, comps.cables.price, "Балансные XLR-кабели — без фона и наводок от сети 220 В");
+  add(comps.install.name, 1, comps.install.price, "Прокладка в кабель-канале, настройка эквалайзера под акустику зала");
 
   const total = lines.reduce((s, l) => s + l.subtotal, 0);
   return { base: base.id, area, lines, total };
