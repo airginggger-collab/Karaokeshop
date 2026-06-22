@@ -30,6 +30,14 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-22) — WCAG AA: warm-accent
+
+- `globals.css`: `--warm-accent` #f97316 → **#c2410c** (orange-700).
+  Было 2.65:1 на `--warm-bg` (#fff7ed) — провал. Стало **4.82:1** — проходит WCAG AA.
+- Та же правка в `.mood-warm` (`--color-primary`/`--color-accent`).
+- `gotovye-resheniya/page.tsx`: заменён inline-breadcrumb на `<Breadcrumb>`.
+- Белый текст на `#c2410c` (кнопки) → 5.1:1 ✓ — ничего не сломалось.
+
 ## Последняя сессия (2026-06-22) — Checkout + Breadcrumbs
 
 ### Checkout (`/checkout`)

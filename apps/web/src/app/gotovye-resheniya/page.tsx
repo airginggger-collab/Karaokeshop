@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Home, Building2, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { priceFmt, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -77,13 +78,8 @@ export default function Page() {
 
   return (
     <Container className="py-10">
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Link href="/" className="hover:text-foreground">Главная</Link>
-        <span>/</span>
-        <span>Готовые решения</span>
-      </div>
-
-      <h1 className="mt-4 font-display text-3xl font-bold sm:text-4xl">Готовые решения</h1>
+      <Breadcrumb items={[{ label: "Готовые решения" }]} />
+      <h1 className="font-display text-3xl font-bold sm:text-4xl">Готовые решения</h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">
         Подобранные комплекты под конкретный сценарий. Цена, состав, что входит — всё сразу. Уточним детали под ваш объект.
       </p>
