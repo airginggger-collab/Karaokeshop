@@ -165,7 +165,8 @@ Live: https://karaokeshop.airg-inggger.workers.dev/
 
 1. `next start` не работает с `output: export` → `npx serve apps/web/out`.
 2. Bash между вызовами сбрасывает cwd на medlog → всегда `git -C ~/Desktop/karaokeshop`.
-3. `/sravnit` есть как роут, но не в `allPaths()` → не в sitemap (хвост).
+3. `/sravnit` есть как роут — уже добавлен в `allPaths()` (fixed 2026-06-22).
 4. Цены в `components.ts` и `site.ts` — оценочные, не из прайса поставщика.
 5. Фото товаров — Unsplash-заглушки, заменить на `/products/<slug>.jpg`.
 6. `storybook-static/` gitignored, не коммить. Пересборка: `npm run build-storybook -w @kk/ui`.
+7. `WhatsAppFAB` не рендерится на `/checkout` (проверяет `usePathname()`). Это намеренно — не дублировать CTA в корзине.

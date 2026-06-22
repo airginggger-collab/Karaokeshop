@@ -10,7 +10,7 @@ export function CartButton() {
     <Link
       href="/checkout"
       aria-label={`Корзина${ready && count > 0 ? `, ${count}` : ""}`}
-      className="relative text-muted-foreground hover:text-foreground"
+      className="relative flex h-11 w-11 items-center justify-center text-muted-foreground hover:text-foreground"
     >
       <ShoppingCart className="h-[18px] w-[18px]" />
       {ready && count > 0 ? (

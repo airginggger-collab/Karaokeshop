@@ -7,6 +7,7 @@ import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CompareBar } from "@/components/CompareBar";
+import { WhatsAppFAB } from "@/components/WhatsAppFAB";
 
 const sans = Manrope({
   subsets: ["latin", "cyrillic"],
@@ -46,6 +47,7 @@ export default function RootLayout({
           {children}
           <Footer />
           <CompareBar />
+          <WhatsAppFAB />
         </Providers>
       </body>
     </html>
