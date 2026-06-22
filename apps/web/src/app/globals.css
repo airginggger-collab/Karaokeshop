@@ -73,8 +73,23 @@ html {
 }
 
 body {
-  background: var(--color-bg);
+  background: #f5f5f5;
   color: var(--color-fg);
+}
+
+.dark body {
+  background: var(--color-bg);
+}
+
+/* Clay morphism: мягкая тень на белых карточках вместо жёсткого бордера */
+.bg-background.rounded-2xl,
+.bg-background.rounded-3xl {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06), 0 0 0 1px rgba(0, 0, 0, .04);
+}
+
+.dark .bg-background.rounded-2xl,
+.dark .bg-background.rounded-3xl {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .4), 0 0 0 1px rgba(255, 255, 255, .05);
 }
 
 h1,
