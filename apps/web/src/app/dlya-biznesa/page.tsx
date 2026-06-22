@@ -4,6 +4,7 @@ import { Building2, Users, Music, ShieldCheck, Wrench, ArrowRight, CheckCircle2,
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { products, priceFmt, siteConfig } from "@/lib/site";
+import { faqJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Оснастить заведение под ключ — бар, ресторан, клуб | Алматы",
@@ -52,8 +53,17 @@ const whatsIncluded = [
 
 const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Хочу оснастить заведение под ключ. Расскажите подробнее.")}`;
 
+const faq = [
+  { q: "Сколько стоит оснастить кафе или ресторан?", a: "Зал до 80 м² — от 1 400 000 ₸. Включает систему, монтаж, настройку и обучение персонала. Для точной сметы пришлите площадь и фото помещения." },
+  { q: "Как долго длится монтаж?", a: "В кафе до 80 м² — 1–2 дня. Клуб или большой зал — 3–5 дней. Работаем так, чтобы не останавливать работу заведения." },
+  { q: "Выезжаете ли в другие города?", a: "Да. Работаем по всему Казахстану: Астана, Шымкент и другие города. Стоимость выезда — по запросу." },
+  { q: "Что будет, если оборудование сломается?", a: "У нас собственный сервис-центр в Алматы. Гарантийное обслуживание + срочный выезд при критических неисправностях." },
+];
+
 export default function Page() {
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
     <Container className="py-10">
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <Link href="/" className="hover:text-foreground">Главная</Link>
@@ -141,6 +151,19 @@ export default function Page() {
         </div>
       </div>
 
+      {/* FAQ */}
+      <section className="mt-10">
+        <h2 className="font-display text-xl font-semibold">Частые вопросы</h2>
+        <div className="mt-4 space-y-3">
+          {faq.map((item) => (
+            <div key={item.q} className="rounded-2xl border border-border bg-background p-5">
+              <p className="font-medium">{item.q}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* CTA */}
       <div className="mt-10 rounded-2xl p-6" style={{ background: "var(--night-bg)", color: "var(--night-fg)" }}>
         <h2 className="font-medium">Расскажите про ваш объект</h2>
@@ -159,5 +182,6 @@ export default function Page() {
         </div>
       </div>
     </Container>
+    </>
   );
 }

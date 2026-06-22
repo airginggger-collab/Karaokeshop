@@ -4,6 +4,7 @@ import { Home, Music, ShieldCheck, Wrench, ArrowRight, CheckCircle2 } from "luci
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { products, priceFmt, siteConfig } from "@/lib/site";
+import { faqJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Домашнее караоке — купить систему для дома, Алматы",
@@ -30,8 +31,17 @@ const whatsIncluded = [
 
 const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Хочу подобрать домашнее караоке.")}`;
 
+const faq = [
+  { q: "Сколько стоит домашнее карао­ке?", a: "Базовый комплект (медиаплеер, 2 микрофона, акустика) — от 749 000 ₸. Точная сумма зависит от модели и площади комнаты. Пришлите размеры — рассчитаем." },
+  { q: "Нужен ли монтаж и можно ли установить самому?", a: "Простые системы (Evobox, AST Mini) можно подключить самостоятельно — это как подключить телевизор. Для стационарного монтажа с прокладкой кабелей мы приедем сами." },
+  { q: "Сколько песен в базе и как она обновляется?", a: "В базе 60 000+ песен: казахские, русские, английские хиты. Обновление — по запросу или по договору." },
+  { q: "Какая гарантия на оборудование?", a: "Гарантия — от 1 года на всё оборудование. Сервис-центр в Алматы, выезд по городу." },
+];
+
 export default function Page() {
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
     <Container className="py-10">
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <Link href="/" className="hover:text-foreground">Главная</Link>
@@ -110,6 +120,19 @@ export default function Page() {
         </div>
       </div>
 
+      {/* FAQ */}
+      <section className="mt-10">
+        <h2 className="font-display text-xl font-semibold">Частые вопросы</h2>
+        <div className="mt-4 space-y-3">
+          {faq.map((item) => (
+            <div key={item.q} className="rounded-2xl border border-border bg-background p-5">
+              <p className="font-medium">{item.q}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* CTA */}
       <div className="mt-10 rounded-2xl bg-surface p-6">
         <h2 className="font-medium">Не знаете, что выбрать?</h2>
@@ -128,5 +151,6 @@ export default function Page() {
         </div>
       </div>
     </Container>
+    </>
   );
 }

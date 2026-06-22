@@ -33,6 +33,32 @@ export const metadata: Metadata = {
   description: siteConfig.defaultDescription,
 };
 
+const localBusinessLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "karaokeshop",
+  description: "Официальный дилер AST и Studio Evolution в Казахстане. Продажа, монтаж и настройка под ключ. Шоурум в Алматы, с 2012.",
+  url: siteConfig.url,
+  telephone: siteConfig.phone,
+  email: siteConfig.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "ул. Муканова, офис 8",
+    addressLocality: "Алматы",
+    addressCountry: "KZ",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      opens: "10:00",
+      closes: "19:00",
+    },
+  ],
+  priceRange: "₸₸₸",
+  foundingDate: "2012",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -42,6 +68,7 @@ export default function RootLayout({
     <html lang="ru" className={`${sans.variable} ${display.variable}`}>
       <body className="min-h-screen font-sans antialiased">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }} />
         <Providers>
           <Header />
           {children}

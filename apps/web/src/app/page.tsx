@@ -395,6 +395,65 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Как мы работаем */}
+      <section className="mt-12">
+        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Как мы работаем</h2>
+        <p className="mt-1 text-sm text-muted-foreground">Пять шагов от заявки до живого звука.</p>
+        <div className="relative mt-6 grid gap-4 sm:grid-cols-5">
+          {[
+            { step: "01", title: "Консультация", body: "Выясним задачу, площадь и бюджет — по WhatsApp или в шоуруме." },
+            { step: "02", title: "Проект", body: "Подготовим смету и акустический расчёт под ваше помещение." },
+            { step: "03", title: "Монтаж", body: "Приедем сами, установим и закрепим оборудование." },
+            { step: "04", title: "Настройка", body: "Откалибруем звук, загрузим базу и проверим всё вместе с вами." },
+            { step: "05", title: "Поддержка", body: "Гарантия, сервис-центр и обновление репертуара по договору." },
+          ].map((s) => (
+            <div key={s.step} className="flex flex-col rounded-2xl bg-surface p-5">
+              <span className="font-display text-3xl font-bold text-primary/20">{s.step}</span>
+              <p className="mt-2 font-medium">{s.title}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Отзывы */}
+      <section className="mt-12">
+        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Клиенты о нас</h2>
+        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+          {[
+            {
+              name: "Дмитрий К.",
+              role: "Владелец бара, Алматы",
+              photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&q=80&auto=format&fit=crop&crop=face",
+              text: "Монтировали за 2 дня, звук настроили идеально под наш зал. Гости сразу оценили — заполняемость выросла.",
+            },
+            {
+              name: "Аида Р.",
+              role: "Частный дом, Астана",
+              photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&q=80&auto=format&fit=crop&crop=face",
+              text: "Поставили в гостиной. База огромная, микрофоны отличные. Дети поют каждый вечер. Спасибо за подбор!",
+            },
+            {
+              name: "Серик М.",
+              role: "Ресторан, Алматы",
+              photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&q=80&auto=format&fit=crop&crop=face",
+              text: "Брали AST-250. Работает без нареканий уже полтора года. Репертуар обновляют регулярно. Рекомендую.",
+            },
+          ].map((r) => (
+            <div key={r.name} className="rounded-2xl border border-border bg-background p-5">
+              <p className="text-sm leading-relaxed text-muted-foreground">«{r.text}»</p>
+              <div className="mt-4 flex items-center gap-3">
+                <img src={r.photo} alt={r.name} loading="lazy" className="h-10 w-10 rounded-full object-cover" />
+                <div>
+                  <p className="text-sm font-medium">{r.name}</p>
+                  <p className="text-xs text-muted-foreground">{r.role}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold sm:text-3xl">Почему karaokeshop</h2>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
