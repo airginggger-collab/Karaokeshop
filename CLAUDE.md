@@ -61,7 +61,11 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 - **Repo:** github.com/airginggger-collab/Karaokeshop (заглавная **K**) · ветка `main` · push по **SSH** (ключ `~/.ssh/id_ed25519`).
 - **Автор коммитов:** `airginggger-collab <airg.inggger@gmail.com>` — задан в local git config репо, отдельный `-c` обычно не нужен. `gh` CLI в фоне может быть не авторизован.
 - Формат коммитов: `<type>(scope?): <subject>` — `feat`, `fix`, `chore`, `docs`, `refactor`, `test`.
-- **Деплой:** Cloudflare assets-only Worker (`wrangler.toml` → `apps/web/out`, `not_found_handling = "404-page"`), **авто на каждый push в `main`** (~1–2 мин). Подробно — [docs/deploy.md](docs/deploy.md).
+- **Деплой:** Cloudflare assets-only Worker через `wrangler.toml`. `out/` в `.gitignore` — **git push НЕ деплоит**. После каждой сессии с изменениями кода — запускать вручную:
+  ```bash
+  cd ~/Desktop/karaokeshop && npm run build -w web && npx wrangler deploy
+  ```
+  Подробно — [docs/deploy.md](docs/deploy.md).
 - **Live:** https://karaokeshop.airg-inggger.workers.dev/ · продакшен-canonical в `siteConfig.url` — `https://www.karaokeshop.kz` (кастомный домен ещё не привязан).
 
 ## CI / Lighthouse
