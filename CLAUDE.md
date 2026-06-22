@@ -77,11 +77,34 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 5. **`_local-assets/` — gitignored локальная свалка** (скриншоты и т.п.). Не ре-трекай. `.gitignore` также блокирует stray-бинарники в корне (`/*.png`, `/*.jpg`, `/*.jpeg`, `/*.pdf`).
 6. **`packages/ui/storybook-static/` — gitignored** (`packages/ui/.gitignore`). В git не попадает; пересобирается `npm run build-storybook -w @kk/ui`.
 
+## UI-конвенции (обязательные)
+
+### Хлебные крошки (Breadcrumb)
+
+**Каждая страница кроме главной (`/`) обязана иметь хлебные крошки.**
+
+Компонент: `src/components/Breadcrumb.tsx`, пропс `items: { label: string; href?: string }[]`.
+Всегда начинается с «Главная» (захардкожено внутри компонента) — в `items` её не передавай.
+
+```tsx
+import { Breadcrumb } from "@/components/Breadcrumb";
+// Одноуровневая:
+<Breadcrumb items={[{ label: "Контакты" }]} />
+// Двухуровневая (каталог → товар):
+<Breadcrumb items={[{ label: "Каталог", href: "/catalog" }, { label: p.model }]} />
+```
+
+Размещай **первым элементом** внутри `<Container>`, до `<h1>`. Не заменяй самодельным `flex gap-2`.
+
+### Рассрочка / Kaspi
+
+Рассрочка Kaspi **удалена полностью** — не упоминать в UI, metadata, CTA. Заказ → WhatsApp (`siteConfig.whatsapp`).
+
 ## Чеклист перед коммитом
 
 - [ ] `npm run build -w web` — собирается чисто (статика в `apps/web/out`)
 - [ ] `npm test -w web` и `npm test -w @kk/ui` — зелёные
-- [ ] Если новый роут — добавлен по [url-map.md](docs/strategy/url-map.md) с `generateMetadata` (title/description), есть в sitemap
+- [ ] Если новый роут — добавлен по [url-map.md](docs/strategy/url-map.md) с `generateMetadata` (title/description), есть в sitemap, **есть `<Breadcrumb>`**
 - [ ] Если изменена модель данных — [docs/context/data-model.md](docs/context/data-model.md) обновлён
 - [ ] Если изменён контент для владельца — сверено с [docs/redaktirovanie-sajta.md](docs/redaktirovanie-sajta.md)
 - [ ] Коммит-автор — `airginggger-collab <airg.inggger@gmail.com>`, push по SSH в `main`
