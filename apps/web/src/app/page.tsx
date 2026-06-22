@@ -11,10 +11,9 @@ import {
   Sparkles,
   UserCheck,
   GitCompare,
-  Briefcase,
-  BookOpen,
   Phone,
-  Info,
+  CheckCircle2,
+  Layers,
 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { products, priceFmt, installmentMonthly } from "@/lib/site";
@@ -45,32 +44,32 @@ export default function HomePage() {
             className="mt-5 font-display text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl"
             style={{ color: "var(--night-fg)" }}
           >
-            Караоке, которое заводит зал
+            Караоке без ошибки в выборе
           </h1>
           <p className="mt-4 max-w-md text-base" style={{ color: "var(--night-muted)" }}>
-            От тёплого вечера дома до клуба под ключ. AST и Studio Evolution — сравните оба бренда и подберём индивидуально, с монтажом и настройкой.
+            AST и Studio Evolution в одном месте. Подберём под площадь, бюджет и задачу — дом, кафе или клуб. Монтаж и настройка включены.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              href="/kalkulyator"
+              href="/dlya-doma"
               className="inline-flex h-11 items-center gap-2 rounded-xl px-5 text-sm font-medium"
               style={{ backgroundColor: "var(--night-accent)", color: "#04241e" }}
             >
-              <Calculator className="h-4 w-4" /> Собрать смету
+              <Home className="h-4 w-4" /> Выбрать домой
             </Link>
             <Link
-              href="/catalog"
+              href="/dlya-biznesa"
               className="inline-flex h-11 items-center gap-2 rounded-xl px-5 text-sm font-medium"
               style={{ border: "1px solid var(--night-soft)", color: "var(--night-fg)" }}
             >
-              Каталог
+              <Building2 className="h-4 w-4" /> Для заведения
             </Link>
           </div>
         </section>
 
         {/* Тёплый вход — для дома */}
         <Link
-          href="/karaoke/dlya-doma"
+          href="/dlya-doma"
           className={`${cell} group flex flex-col lg:col-span-2`}
           style={{ backgroundColor: "var(--warm-bg)", color: "var(--warm-fg)" }}
         >
@@ -80,9 +79,9 @@ export default function HomePage() {
           >
             <Home className="h-5 w-5" />
           </span>
-          <h2 className="mt-3 font-display text-xl font-semibold">Караоке домой</h2>
+          <h2 className="mt-3 font-display text-xl font-semibold">Для дома</h2>
           <p className="mt-1 text-sm" style={{ color: "var(--warm-muted)" }}>
-            Тёплые вечера с любимыми песнями.
+            Гостиная, баня, гостевой дом. Тёплые вечера с любимыми песнями.
           </p>
           <span
             className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-medium"
@@ -94,7 +93,7 @@ export default function HomePage() {
 
         {/* Деловой вход — для заведений */}
         <Link
-          href="/pod-klyuch"
+          href="/dlya-biznesa"
           className={`${cell} group relative flex flex-col overflow-hidden lg:col-span-3`}
           style={{
             backgroundColor: "var(--night-bg)",
@@ -108,15 +107,15 @@ export default function HomePage() {
           >
             <Building2 className="h-5 w-5" />
           </span>
-          <h2 className="mt-3 font-display text-xl font-semibold">Оснастить заведение</h2>
+          <h2 className="mt-3 font-display text-xl font-semibold">Для бизнеса</h2>
           <p className="mt-1 max-w-sm text-sm" style={{ color: "var(--night-muted)" }}>
-            Бар, ресторан, клуб — проект звука, монтаж и обучение под ключ.
+            Кафе, ресторан, VIP-зал, клуб. Проект звука, монтаж и обучение под ключ.
           </p>
           <span
             className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-medium"
             style={{ color: "var(--night-accent)" }}
           >
-            Рассчитать под ключ <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+            Оснастить заведение <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
           </span>
         </Link>
 
@@ -168,51 +167,106 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Ценовые уровни */}
+      <section className="mt-12">
+        <h2 className="font-display text-2xl font-semibold sm:text-3xl">С чего начать</h2>
+        <p className="mt-1 text-sm text-muted-foreground">Ориентиры по бюджету — точная смета считается под ваш проект.</p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <Link
+            href="/dlya-doma"
+            className="group rounded-2xl border border-border bg-background p-6 transition hover:border-primary hover:shadow-sm"
+            style={{ borderTopColor: "var(--warm-accent)", borderTopWidth: 3 }}
+          >
+            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Для дома</p>
+            <p className="mt-2 font-display text-2xl font-bold">от 749 000 ₸</p>
+            <p className="mt-1 text-sm text-muted-foreground">Гостиная, баня, гостевой дом. AST Mini или Evobox + акустика.</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+              Подобрать <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+            </span>
+          </Link>
+
+          <Link
+            href="/dlya-biznesa"
+            className="group rounded-2xl border border-border bg-background p-6 transition hover:border-primary hover:shadow-sm"
+            style={{ borderTopColor: "var(--night-accent)", borderTopWidth: 3 }}
+          >
+            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Кафе / ресторан</p>
+            <p className="mt-2 font-display text-2xl font-bold">от 1 400 000 ₸</p>
+            <p className="mt-1 text-sm text-muted-foreground">AST-250 или Evobox Plus. Зал до 80 м², монтаж включён.</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+              Рассчитать <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+            </span>
+          </Link>
+
+          <Link
+            href="/dlya-biznesa"
+            className="group relative overflow-hidden rounded-2xl border border-border p-6 transition hover:border-primary hover:shadow-sm"
+            style={{
+              background: "var(--night-bg)",
+              color: "var(--night-fg)",
+              borderTopColor: "var(--night-accent)",
+              borderTopWidth: 3,
+            }}
+          >
+            <p className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--night-muted)" }}>
+              Клуб / VIP-зал
+            </p>
+            <p className="mt-2 font-display text-2xl font-bold">от 2 500 000 ₸</p>
+            <p className="mt-1 text-sm" style={{ color: "var(--night-muted)" }}>
+              AST-350 или Evolution Pro2. Акустика RCF, свет, проект звука.
+            </p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium" style={{ color: "var(--night-accent)" }}>
+              Обсудить проект <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+            </span>
+          </Link>
+        </div>
+      </section>
+
       {/* Nav sections — блоки перехода по разделам */}
       <section className="mt-12">
-        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Разделы сайта</h2>
+        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Разделы</h2>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <Link href="/pod-klyuch" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
+          <Link href="/brand/studio-evolution" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <Building2 className="h-5 w-5" />
+              <Sparkles className="h-5 w-5" />
             </span>
             <div>
-              <p className="font-medium group-hover:text-primary">Оснащение под ключ</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">Бар, ресторан, клуб — проект звука, монтаж и обучение.</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Подробнее <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
+              <p className="font-medium group-hover:text-primary">Studio Evolution</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">Evobox, Plus, Premium, Club, Pro2 — линейка для дома и клубов.</p>
+              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Смотреть модели <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
             </div>
           </Link>
 
-          <Link href="/sravnenie" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
+          <Link href="/brand/ast" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
               <GitCompare className="h-5 w-5" />
             </span>
             <div>
-              <p className="font-medium group-hover:text-primary">AST или Evolution</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">Сравните оба бренда и выберите подходящий.</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Сравнить <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
+              <p className="font-medium group-hover:text-primary">AST (Art System)</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">HOME, Mini, AST-50/250/350 — от дома до клуба на 100 м².</p>
+              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Смотреть модели <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
             </div>
           </Link>
 
-          <Link href="/keysy" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
+          <Link href="/gotovye-resheniya" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <Briefcase className="h-5 w-5" />
+              <Layers className="h-5 w-5" />
             </span>
             <div>
-              <p className="font-medium group-hover:text-primary">Кейсы</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">Реализованные проекты — бары, клубы, рестораны.</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Смотреть <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
+              <p className="font-medium group-hover:text-primary">Готовые решения</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">Подобранные комплекты под сценарий — состав и цена сразу.</p>
+              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Выбрать <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
             </div>
           </Link>
 
-          <Link href="/blog" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
+          <Link href="/pod-klyuch" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <BookOpen className="h-5 w-5" />
+              <Wrench className="h-5 w-5" />
             </span>
             <div>
-              <p className="font-medium group-hover:text-primary">Блог</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">Советы по выбору, обзоры, гайды по оборудованию.</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Читать <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
+              <p className="font-medium group-hover:text-primary">Монтаж</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">Проект звука под помещение, монтаж, обучение персонала.</p>
+              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Подробнее <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
             </div>
           </Link>
 
@@ -222,23 +276,12 @@ export default function HomePage() {
             </span>
             <div>
               <p className="font-medium group-hover:text-primary">Сервис и гарантия</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">Настройка, ремонт и обновление репертуара.</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">Настройка, ремонт, обновление репертуара.</p>
               <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Узнать <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
             </div>
           </Link>
 
-          <Link href="/o-nas" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <Info className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="font-medium group-hover:text-primary">О компании</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">Эксперты по караоке в Алматы с 2012 года.</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">О нас <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
-            </div>
-          </Link>
-
-          <Link href="/kontakty" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm sm:col-span-2 lg:col-span-3">
+          <Link href="/kontakty" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
               <Phone className="h-5 w-5" />
             </span>
@@ -256,21 +299,18 @@ export default function HomePage() {
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-2xl border border-border bg-background p-5">
             <UserCheck className="h-5 w-5 text-primary" />
-            <p className="mt-3 font-medium">Индивидуальный подход</p>
-            <p className="mt-1 text-sm text-muted-foreground">Подберём систему и комплект под вашу задачу, площадь и бюджет.</p>
+            <p className="mt-3 font-medium">Подбор без ошибки</p>
+            <p className="mt-1 text-sm text-muted-foreground">Выясним задачу, площадь и бюджет — предложим то, что реально подходит.</p>
           </div>
-          <Link href="/sravnenie" className="group rounded-2xl border border-border bg-background p-5 transition hover:border-primary">
-            <GitCompare className="h-5 w-5 text-primary" />
-            <p className="mt-3 font-medium">AST и Evolution в одном месте</p>
-            <p className="mt-1 text-sm text-muted-foreground">Сравните оба бренда и купите там же — без переплат и беготни.</p>
-            <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">
-              Сравнить <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-            </span>
-          </Link>
           <div className="rounded-2xl border border-border bg-background p-5">
-            <Wrench className="h-5 w-5 text-primary" />
+            <GitCompare className="h-5 w-5 text-primary" />
+            <p className="mt-3 font-medium">Два бренда в одном месте</p>
+            <p className="mt-1 text-sm text-muted-foreground">AST и Studio Evolution — сравниваем честно и помогаем выбрать.</p>
+          </div>
+          <div className="rounded-2xl border border-border bg-background p-5">
+            <CheckCircle2 className="h-5 w-5 text-primary" />
             <p className="mt-3 font-medium">Под ключ</p>
-            <p className="mt-1 text-sm text-muted-foreground">Проект звука под помещение, монтаж, настройка и обучение.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Проект звука, монтаж, настройка, обучение — один договор.</p>
           </div>
           <div className="rounded-2xl border border-border bg-background p-5">
             <Phone className="h-5 w-5 text-primary" />

@@ -7,9 +7,9 @@ export const siteConfig = {
   address: "Алматы, ул. Муканова, офис 8",
   hours: "Пн–Сб · 10:00–19:00",
   email: "karaokeshop2015@gmail.com",
-  defaultTitle: "Караоке под ключ в Казахстане — для дома и заведений",
+  defaultTitle: "Караоке без ошибки в выборе — для дома и заведений | Алматы",
   defaultDescription:
-    "Караоке-системы AST и Studio Evolution. Продажа, монтаж, рассрочка Kaspi. Оснащение баров и клубов под ключ. Алматы, с 2012.",
+    "Официальный дилер AST и Studio Evolution в Казахстане. Подбор, монтаж и настройка под ключ. Шоурум в Алматы, с 2012.",
 } as const;
 
 export type Landing = { slug: string; h1: string; title: string; description: string };
@@ -181,12 +181,12 @@ export function discountPct(price: number, priceOld?: number): number | null {
 
 // Главная навигация (Header + мобильное меню)
 export const mainNav = [
-  { href: "/pod-klyuch", label: "Оснащение под ключ" },
-  { href: "/sravnenie", label: "AST или Evolution" },
-  { href: "/keysy", label: "Кейсы" },
-  { href: "/blog", label: "Блог" },
-  { href: "/servis", label: "Сервис и гарантия" },
-  { href: "/o-nas", label: "О компании" },
+  { href: "/dlya-doma", label: "Для дома" },
+  { href: "/dlya-biznesa", label: "Для бизнеса" },
+  { href: "/brand/studio-evolution", label: "Studio Evolution" },
+  { href: "/brand/ast", label: "AST" },
+  { href: "/gotovye-resheniya", label: "Готовые решения" },
+  { href: "/pod-klyuch", label: "Монтаж" },
   { href: "/kontakty", label: "Контакты" },
 ];
 
@@ -300,6 +300,27 @@ export const blogMeta: Landing = {
   description: "Гайды по выбору и оснащению караоке: для дома, бара, клуба. Сравнения брендов и расчёты.",
 };
 
+export const dlyaDomaMetaV2: Landing = {
+  slug: "dlya-doma",
+  h1: "Домашнее караоке",
+  title: "Домашнее караоке — купить систему для дома, Алматы",
+  description: "Готовые домашние системы AST и Studio Evolution. Подберём по комнате и бюджету. Монтаж, настройка, гарантия.",
+};
+
+export const dlyaBiznesaMeta: Landing = {
+  slug: "dlya-biznesa",
+  h1: "Оснастить заведение под ключ",
+  title: "Оснастить заведение под ключ — бар, ресторан, клуб",
+  description: "Профессиональное оснащение кафе, бара, ресторана и клуба. Проект звука, монтаж, обучение. Алматы, с 2012.",
+};
+
+export const gotovyeResheniyaMeta: Landing = {
+  slug: "gotovye-resheniya",
+  h1: "Готовые решения",
+  title: "Готовые решения для домашнего и коммерческого караоке",
+  description: "Подобранные комплекты под сценарий: гостиная, баня, кафе, клуб. Цена, состав и всё включено.",
+};
+
 export function allPaths(): string[] {
   return [
     "/",
@@ -314,6 +335,9 @@ export function allPaths(): string[] {
     "/sravnit",
     "/o-nas",
     "/kontakty",
+    "/dlya-doma",
+    "/dlya-biznesa",
+    "/gotovye-resheniya",
     ...scenarios.map((s) => `/karaoke/${s.slug}`),
     ...bundles.map((b) => `/komplekty/${b.slug}`),
     ...brands.map((b) => `/brand/${b.slug}`),
