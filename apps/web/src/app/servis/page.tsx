@@ -5,6 +5,7 @@ import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { siteConfig } from "@/lib/site";
+import { faqJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Сервис и гарантия — настройка и ремонт караоке",
@@ -37,6 +38,13 @@ const services = [
 
 const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Нужна помощь по сервису и гарантии.")}`;
 
+const faq = [
+  { q: "Какая гарантия на оборудование?", a: "От 1 года на всё оборудование AST и Studio Evolution. При поломке — диагностика и ремонт в собственном сервис-центре в Алматы." },
+  { q: "Что делать, если система перестала работать?", a: "Напишите в WhatsApp — выедем в тот же или на следующий день. Для коммерческих объектов — приоритетный выезд." },
+  { q: "Как часто обновляется репертуар?", a: "По договору технической поддержки — ежемесячно. По запросу — в любое время." },
+  { q: "Есть ли замена оборудования на время ремонта?", a: "По договорённости предоставляем подменное оборудование для коммерческих объектов." },
+];
+
 export default function Page() {
   return (
     <Container className="py-10">
@@ -58,6 +66,20 @@ export default function Page() {
         ))}
       </div>
 
+      {/* FAQ */}
+      <section className="mt-10">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
+        <h2 className="font-display text-xl font-semibold">Частые вопросы</h2>
+        <div className="mt-4 space-y-3">
+          {faq.map((item) => (
+            <div key={item.q} className="rounded-2xl border border-border bg-background p-5">
+              <p className="font-medium">{item.q}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <div className="mt-10 rounded-2xl bg-surface p-6">
         <h2 className="font-medium">Нужна помощь или консультация?</h2>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -73,6 +95,7 @@ export default function Page() {
             </Button>
           </Link>
         </div>
+        <p className="mt-3 text-xs text-muted-foreground">Ответим в течение часа · Без обязательств</p>
       </div>
     </Container>
   );

@@ -126,6 +126,7 @@ export default function Page() {
             </Button>
           </Link>
         </div>
+        <p className="mt-3 text-xs text-muted-foreground">Ответим в течение часа · Без обязательств</p>
       </div>
     </Container>
   );

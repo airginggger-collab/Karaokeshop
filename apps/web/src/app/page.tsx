@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { HeroWave } from "@/components/HeroWave";
+import { QuizWidget } from "@/components/QuizWidget";
+import { ClientLogos } from "@/components/ClientLogos";
 import { products, priceFmt } from "@/lib/site";
 
 const cell = "rounded-3xl p-6 transition";
@@ -299,6 +301,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <ClientLogos />
+
       {/* Nav sections — блоки перехода по разделам */}
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold sm:text-3xl">Разделы</h2>
@@ -390,6 +394,15 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Квиз-подборщик */}
+      <section className="mt-12">
+        <div className="mb-5">
+          <h2 className="font-display text-2xl font-semibold sm:text-3xl">Подберём за 1 минуту</h2>
+          <p className="mt-1 text-sm text-muted-foreground">Три вопроса — и вы получите готовое решение в WhatsApp.</p>
+        </div>
+        <QuizWidget />
       </section>
 
       {/* Отзывы */}
