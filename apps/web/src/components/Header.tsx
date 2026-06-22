@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mic2, Search, CreditCard } from "lucide-react";
+import { Mic2, Search } from "lucide-react";
 import { Container } from "./Container";
 import { MobileNav } from "./MobileNav";
 import { CartButton } from "./CartButton";
@@ -28,10 +28,6 @@ export function Header() {
             <Search className="h-[18px] w-[18px]" />
           </button>
           <CartButton />
-          <span className="hidden items-center gap-1 rounded-md bg-accent-soft px-2 py-1 text-[11px] font-medium text-accent-fg sm:inline-flex">
-            <CreditCard className="h-3.5 w-3.5" />
-            рассрочка 0-0-12
-          </span>
         </div>
       </Container>
     </header>

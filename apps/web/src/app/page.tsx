@@ -2,7 +2,6 @@ import Link from "next/link";
 import {
   Home,
   Building2,
-  CreditCard,
   Calculator,
   Music,
   ArrowRight,
@@ -49,7 +48,7 @@ export default function HomePage() {
             Караоке, которое заводит зал
           </h1>
           <p className="mt-4 max-w-md text-base" style={{ color: "var(--night-muted)" }}>
-            От тёплого вечера дома до клуба под ключ. AST и Studio Evolution — сравните оба бренда и подберём индивидуально, с монтажом и рассрочкой Kaspi.
+            От тёплого вечера дома до клуба под ключ. AST и Studio Evolution — сравните оба бренда и подберём индивидуально, с монтажом и настройкой.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -92,15 +91,6 @@ export default function HomePage() {
             Выбрать систему <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
           </span>
         </Link>
-
-        {/* Kaspi */}
-        <div className={`${cell} flex flex-col justify-between bg-accent-soft lg:col-span-2`}>
-          <CreditCard className="h-6 w-6 text-accent-fg" />
-          <div>
-            <p className="font-display text-2xl font-bold text-accent-fg">0-0-12</p>
-            <p className="text-sm text-accent-fg">Рассрочка Kaspi без переплаты — одобрение за минуту.</p>
-          </div>
-        </div>
 
         {/* Деловой вход — для заведений */}
         <Link
@@ -283,9 +273,9 @@ export default function HomePage() {
             <p className="mt-1 text-sm text-muted-foreground">Проект звука под помещение, монтаж, настройка и обучение.</p>
           </div>
           <div className="rounded-2xl border border-border bg-background p-5">
-            <CreditCard className="h-5 w-5 text-primary" />
-            <p className="mt-3 font-medium">Рассрочка Kaspi</p>
-            <p className="mt-1 text-sm text-muted-foreground">0-0-12 без переплаты, одобрение в приложении за минуту.</p>
+            <Phone className="h-5 w-5 text-primary" />
+            <p className="mt-3 font-medium">Заказ через WhatsApp</p>
+            <p className="mt-1 text-sm text-muted-foreground">Напишите — ответим быстро, поможем выбрать и оформим заявку.</p>
           </div>
         </div>
       </section>
