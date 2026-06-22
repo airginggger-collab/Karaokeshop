@@ -36,6 +36,7 @@ npm test -w web           # тесты
 - **Новые страницы:** `/dlya-doma`, `/dlya-biznesa`, `/gotovye-resheniya` (собственные файлы в `app/`).
 - **Ценовые тьеры** на главной: от 749k (дом) / 1.4M (кафе) / 2.5M (клуб).
 - **Блок разделов** обновлён под новую навигацию.
+- **HeroWave** (`src/components/HeroWave.tsx`): ambient CSS-эквалайзер в hero, зацикленная анимация 28 баров, toggle «Анимация вкл/выкл», уважает `prefers-reduced-motion`.
 - Ветка `main` — стабильная v1 (откат через `git checkout main`).
 
 ## Последняя сессия (2026-06-20)

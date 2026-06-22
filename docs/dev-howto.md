@@ -185,3 +185,4 @@ Live: https://karaokeshop.airg-inggger.workers.dev/
 5. Фото товаров — Unsplash-заглушки, заменить на `/products/<slug>.jpg`.
 6. `storybook-static/` gitignored, не коммить. Пересборка: `npm run build-storybook -w @kk/ui`.
 7. `WhatsAppFAB` не рендерится на `/checkout` (проверяет `usePathname()`). Это намеренно — не дублировать CTA в корзине.
+8. `HeroWave` — `"use client"` компонент (`src/components/HeroWave.tsx`). Использует `useEffect` для определения `prefers-reduced-motion`. Анимация через CSS `@keyframes kk-bar` (не Framer Motion, не JS-таймеры). Не переносить логику анимации в JS — это намеренно для производительности.
