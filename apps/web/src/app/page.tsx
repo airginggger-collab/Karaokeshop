@@ -98,7 +98,7 @@ export default function HomePage() {
         {/* Деловой вход — для заведений */}
         <Link
           href="/dlya-biznesa"
-          className={`${cell} group relative flex flex-col overflow-hidden lg:col-span-3`}
+          className={`${cell} group relative flex flex-col overflow-hidden lg:col-span-2`}
           style={{
             backgroundColor: "var(--night-bg)",
             backgroundImage: "radial-gradient(90% 120% at 100% 0%, rgba(45,212,191,0.18), transparent 60%)",
@@ -124,7 +124,7 @@ export default function HomePage() {
         </Link>
 
         {/* Калькулятор */}
-        <Link href="/kalkulyator" className={`${cell} group flex flex-col border border-border bg-background lg:col-span-3`}>
+        <Link href="/kalkulyator" className={`${cell} group flex flex-col border border-border bg-background lg:col-span-2`}>
           <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
             <Calculator className="h-5 w-5" />
           </span>
@@ -141,19 +141,6 @@ export default function HomePage() {
           <div>
             <p className="font-display text-2xl font-bold">60 000+</p>
             <p className="text-sm text-muted-foreground">песен · KZ · RU · EN и обновление</p>
-          </div>
-        </Link>
-
-        {/* Популярная система */}
-        <Link
-          href={`/product/${featured.slug}`}
-          className={`${cell} group flex flex-col justify-between border border-border bg-gradient-to-br from-surface to-muted lg:col-span-2`}
-        >
-          <span className="text-xs text-muted-foreground">Хит · {featured.scenarioLabel}</span>
-          <div>
-            <p className="font-medium">{featured.model}</p>
-            <p className="text-sm font-semibold">{priceFmt(featured.price)}</p>
-            <p className="text-xs text-accent-fg">от {priceFmt(installmentMonthly(featured.price))}/мес</p>
           </div>
         </Link>
 
