@@ -181,11 +181,13 @@ export function discountPct(price: number, priceOld?: number): number | null {
 
 // Главная навигация (Header + мобильное меню)
 export const mainNav = [
-  { href: "/catalog", label: "Каталог" },
-  { href: "/komplekty", label: "Комплекты" },
-  { href: "/kalkulyator", label: "Калькулятор" },
-  { href: "/pod-klyuch", label: "Под ключ" },
-  { href: "/pesni", label: "Песни" },
+  { href: "/pod-klyuch", label: "Оснащение под ключ" },
+  { href: "/sravnenie", label: "AST или Evolution" },
+  { href: "/keysy", label: "Кейсы" },
+  { href: "/blog", label: "Блог" },
+  { href: "/servis", label: "Сервис и гарантия" },
+  { href: "/o-nas", label: "О компании" },
+  { href: "/kontakty", label: "Контакты" },
 ];
 
 export const kalkulyatorMeta: Landing = {

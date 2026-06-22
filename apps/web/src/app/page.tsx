@@ -12,6 +12,10 @@ import {
   Sparkles,
   UserCheck,
   GitCompare,
+  Briefcase,
+  BookOpen,
+  Phone,
+  Info,
 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { products, priceFmt, installmentMonthly } from "@/lib/site";
@@ -173,6 +177,89 @@ export default function HomePage() {
           </p>
         </div>
       </div>
+
+      {/* Nav sections — блоки перехода по разделам */}
+      <section className="mt-12">
+        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Разделы сайта</h2>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <Link href="/pod-klyuch" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+              <Building2 className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="font-medium group-hover:text-primary">Оснащение под ключ</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">Бар, ресторан, клуб — проект звука, монтаж и обучение.</p>
+              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Подробнее <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
+            </div>
+          </Link>
+
+          <Link href="/sravnenie" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+              <GitCompare className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="font-medium group-hover:text-primary">AST или Evolution</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">Сравните оба бренда и выберите подходящий.</p>
+              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Сравнить <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
+            </div>
+          </Link>
+
+          <Link href="/keysy" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+              <Briefcase className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="font-medium group-hover:text-primary">Кейсы</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">Реализованные проекты — бары, клубы, рестораны.</p>
+              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Смотреть <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
+            </div>
+          </Link>
+
+          <Link href="/blog" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+              <BookOpen className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="font-medium group-hover:text-primary">Блог</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">Советы по выбору, обзоры, гайды по оборудованию.</p>
+              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Читать <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
+            </div>
+          </Link>
+
+          <Link href="/servis" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+              <ShieldCheck className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="font-medium group-hover:text-primary">Сервис и гарантия</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">Настройка, ремонт и обновление репертуара.</p>
+              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Узнать <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
+            </div>
+          </Link>
+
+          <Link href="/o-nas" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+              <Info className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="font-medium group-hover:text-primary">О компании</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">Эксперты по караоке в Алматы с 2012 года.</p>
+              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">О нас <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
+            </div>
+          </Link>
+
+          <Link href="/kontakty" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm sm:col-span-2 lg:col-span-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
+              <Phone className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="font-medium group-hover:text-primary">Контакты</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">Алматы, ул. Муканова 8 · WhatsApp, телефон, карта.</p>
+              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Написать <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
+            </div>
+          </Link>
+        </div>
+      </section>
 
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold sm:text-3xl">Почему karaokeshop</h2>
