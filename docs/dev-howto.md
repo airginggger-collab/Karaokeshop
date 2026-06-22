@@ -39,9 +39,16 @@ npx serve apps/web/out
 
 ## Навигация (mainNav)
 
-`mainNav` в `apps/web/src/lib/site.ts` — 7 пунктов: Оснащение под ключ, AST или Evolution, Кейсы, Блог, Сервис и гарантия, О компании, Контакты. Все пункты ведут на существующие страницы. Не добавляй новые пункты без создания полноценной страницы.
+`mainNav` в `apps/web/src/lib/site.ts` — 7 пунктов (v2, feat/v2-homepage):
+**Для дома / Для бизнеса / Studio Evolution / AST / Готовые решения / Монтаж / Контакты**
 
-Страница `/servis` — собственный файл `app/servis/page.tsx` (не через catch-all `(pages)/[page]`).
+Страницы:
+- `/dlya-doma` — `app/dlya-doma/page.tsx` (собственный файл)
+- `/dlya-biznesa` — `app/dlya-biznesa/page.tsx` (собственный файл)
+- `/gotovye-resheniya` — `app/gotovye-resheniya/page.tsx` (собственный файл)
+- `/brand/studio-evolution` и `/brand/ast` — через `app/brand/[slug]/page.tsx`
+- `/pod-klyuch` (Монтаж) и `/kontakty` — существующие
+- `/servis` — `app/servis/page.tsx` (не через catch-all)
 
 ---
 
@@ -178,3 +185,4 @@ Live: https://karaokeshop.airg-inggger.workers.dev/
 5. Фото товаров — Unsplash-заглушки, заменить на `/products/<slug>.jpg`.
 6. `storybook-static/` gitignored, не коммить. Пересборка: `npm run build-storybook -w @kk/ui`.
 7. `WhatsAppFAB` не рендерится на `/checkout` (проверяет `usePathname()`). Это намеренно — не дублировать CTA в корзине.
+8. `HeroWave` — `"use client"` компонент (`src/components/HeroWave.tsx`). Использует `useEffect` для определения `prefers-reduced-motion`. Анимация через CSS `@keyframes kk-bar` (не Framer Motion, не JS-таймеры). Не переносить логику анимации в JS — это намеренно для производительности.
