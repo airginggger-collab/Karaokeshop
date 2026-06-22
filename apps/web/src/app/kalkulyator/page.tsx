@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { CalculatorClient } from "@/components/CalculatorClient";
 import { kalkulyatorMeta } from "@/lib/site";
 import { supplierBrands } from "@/lib/components";
@@ -13,7 +14,8 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <Container className="py-10">
-      <h1 className="text-2xl font-medium">{kalkulyatorMeta.h1}</h1>
+      <Breadcrumb items={[{ label: "Калькулятор сметы" }]} />
+      <h1 className="font-display text-2xl font-bold">{kalkulyatorMeta.h1}</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{kalkulyatorMeta.description}</p>
       <div className="mt-6">
         <CalculatorClient />

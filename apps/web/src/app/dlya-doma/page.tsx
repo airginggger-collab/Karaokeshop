@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Home, Music, ShieldCheck, Wrench, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { products, priceFmt, siteConfig } from "@/lib/site";
 import { faqJsonLd } from "@/lib/seo";
 
@@ -43,13 +44,8 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
     <Container className="py-10">
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Link href="/" className="hover:text-foreground">Главная</Link>
-        <span>/</span>
-        <span>Для дома</span>
-      </div>
-
-      <h1 className="mt-4 font-display text-3xl font-bold sm:text-4xl">Домашнее караоке</h1>
+      <Breadcrumb items={[{ label: "Домашнее карао­ке" }]} />
+      <h1 className="font-display text-3xl font-bold sm:text-4xl">Домашнее карао­ке</h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">
         Тёплые вечера с семьёй и друзьями. Подберём систему под вашу комнату и бюджет — привезём, подключим, настроим.
       </p>

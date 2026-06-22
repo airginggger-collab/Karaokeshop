@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { MapPin, Phone, MessageCircle, Mail, Clock } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { kontaktyMeta, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -19,7 +20,8 @@ const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("�
 export default function Page() {
   return (
     <Container className="py-10">
-      <h1 className="text-2xl font-medium">{kontaktyMeta.h1}</h1>
+      <Breadcrumb items={[{ label: "Контакты" }]} />
+      <h1 className="font-display text-2xl font-bold">{kontaktyMeta.h1}</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{kontaktyMeta.description}</p>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[340px_1fr]">

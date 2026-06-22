@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { ProductGrid } from "@/components/ProductGrid";
 import { brands, products } from "@/lib/site";
 
@@ -35,7 +36,8 @@ export default async function Page({
 
   return (
     <Container className="py-10">
-      <h1 className="text-2xl font-medium">{b.h1}</h1>
+      <Breadcrumb items={[{ label: "Каталог", href: "/catalog" }, { label: b.name }]} />
+      <h1 className="font-display text-2xl font-bold">{b.h1}</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{b.description}</p>
       <div className="mt-6">
         <ProductGrid items={items} />

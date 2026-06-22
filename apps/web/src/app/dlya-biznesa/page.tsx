@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Building2, Users, Music, ShieldCheck, Wrench, ArrowRight, CheckCircle2, TrendingUp } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { products, priceFmt, siteConfig } from "@/lib/site";
 import { faqJsonLd } from "@/lib/seo";
 
@@ -65,13 +66,8 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
     <Container className="py-10">
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Link href="/" className="hover:text-foreground">Главная</Link>
-        <span>/</span>
-        <span>Для бизнеса</span>
-      </div>
-
-      <h1 className="mt-4 font-display text-3xl font-bold sm:text-4xl">Оснастить заведение под ключ</h1>
+      <Breadcrumb items={[{ label: "Для бизнеса" }]} />
+      <h1 className="font-display text-3xl font-bold sm:text-4xl">Оснастить заведение под ключ</h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">
         Кафе, ресторан, VIP-зал, клуб. Делаем проект звука, монтируем, настраиваем и обучаем персонал. С 2012 года — Алматы и весь Казахстан.
       </p>

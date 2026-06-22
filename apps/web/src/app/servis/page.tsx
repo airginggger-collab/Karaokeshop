@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ShieldCheck, Wrench, RefreshCw, Phone, ArrowRight } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -39,7 +40,8 @@ const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("�
 export default function Page() {
   return (
     <Container className="py-10">
-      <h1 className="text-2xl font-medium">Сервис и гарантия</h1>
+      <Breadcrumb items={[{ label: "Сервис и гарантия" }]} />
+      <h1 className="font-display text-2xl font-bold">Сервис и гарантия</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
         Полное сопровождение — от монтажа до регулярного обновления репертуара. Работаем в Алматы и области.
       </p>

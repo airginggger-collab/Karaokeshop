@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MapPin, Quote, ArrowRight } from "lucide-react";
 import { Badge } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { keysyMeta, cases, siteConfig } from "@/lib/site";
 import { faqJsonLd } from "@/lib/seo";
 
@@ -37,6 +38,7 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
       <Container className="py-10">
+        <Breadcrumb items={[{ label: keysyMeta.h1 }]} />
         <h1 className="font-display text-3xl font-bold sm:text-4xl">{keysyMeta.h1}</h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">{keysyMeta.description}</p>
 

@@ -30,6 +30,22 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-22) — Checkout + Breadcrumbs
+
+### Checkout (`/checkout`)
+- Убрана вся рассрочка Kaspi из UI (payment radio, monthly text).
+- `CheckoutClient.tsx`: новый флоу — форма имя/телефон → кнопка «Отправить в WhatsApp» открывает WA с составом заказа.
+- Хлебная крошка добавлена, h1 обновлён на `font-display`.
+
+### Breadcrumbs — новый компонент
+- `src/components/Breadcrumb.tsx` — `items: {label, href?}[]`, всегда начинается с «Главная».
+- Добавлен на **все** страницы: o-nas, keysy, dlya-doma, dlya-biznesa, pod-klyuch, kontakty, servis, pesni, kalkulyator, catalog, sravnit, sravnenie, brand/[slug], product/[slug], checkout.
+- Для brand/[slug] и product/[slug] — двухуровневые крошки (Каталог → Продукт).
+
+### Рассрочка удалена везде
+- `product/[slug]`: убрана строка «Kaspi рассрочка от … × 12 мес», исправлен title/description metadata.
+- `page.tsx`: убран неиспользуемый импорт `installmentMonthly`.
+
 ## Последняя сессия (2026-06-22) — Editorial product cards (Alphane Labs style)
 
 - `page.tsx`: секция «Популярное оборудование» переделана под editorial 2×2 композицию.

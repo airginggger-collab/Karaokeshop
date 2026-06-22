@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Check, ArrowRight, GitCompare } from "lucide-react";
 import { Badge, Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { sravnenieMeta, products, priceFmt } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -42,10 +43,11 @@ const brandsCmp = [
 export default function Page() {
   return (
     <Container className="py-10">
+      <Breadcrumb items={[{ label: "Сравнение брендов" }]} />
       <Badge tone="primary">
         <GitCompare className="h-3.5 w-3.5" /> Оба бренда в одном месте
       </Badge>
-      <h1 className="mt-3 text-2xl font-medium">{sravnenieMeta.h1}</h1>
+      <h1 className="mt-3 font-display text-2xl font-bold">{sravnenieMeta.h1}</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{sravnenieMeta.description}</p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">

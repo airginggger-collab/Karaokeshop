@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Speaker, Star, ShieldCheck, Wrench, Music, CreditCard, Zap } from "lucide-react";
+import { Speaker, Star, ShieldCheck, Wrench, Music, Zap } from "lucide-react";
 import { Badge, Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { AddToCart } from "@/components/AddToCart";
 import { CompareToggle } from "@/components/CompareToggle";
-import { products, priceFmt, installmentMonthly, discountPct, typeLabels, siteConfig } from "@/lib/site";
+import { products, priceFmt, discountPct, typeLabels, siteConfig } from "@/lib/site";
 import { productJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -22,8 +23,8 @@ export async function generateMetadata({
   if (!p) return {};
   const detail = p.areaMax ? `до ${p.areaMax} м²` : p.power ?? p.note ?? typeLabels[p.type];
   return {
-    title: `${p.model} — купить в ${siteConfig.city}, цена ${priceFmt(p.price)} | рассрочка Kaspi`,
-    description: `${p.model} (${p.brand}) — ${detail}. Цена ${priceFmt(p.price)}, рассрочка Kaspi 0-0-12, монтаж и гарантия.`,
+    title: `${p.model} — купить в ${siteConfig.city}, цена ${priceFmt(p.price)}`,
+    description: `${p.model} (${p.brand}) — ${detail}. Цена ${priceFmt(p.price)}, монтаж, настройка и гарантия.`,
     alternates: { canonical: `/product/${p.slug}` },
   };
 }
@@ -44,6 +45,7 @@ export default async function Page({
 
   return (
     <Container className="py-10">
+      <Breadcrumb items={[{ label: "Каталог", href: "/catalog" }, { label: p.model }]} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
 
       <div className="grid gap-8 md:grid-cols-2">
@@ -76,9 +78,6 @@ export default async function Page({
             ) : null}
             {pct ? <Badge tone="accent">−{pct}%</Badge> : null}
           </div>
-          <p className="mt-1 flex items-center gap-1 text-sm text-accent-fg">
-            <CreditCard className="h-4 w-4" /> Kaspi рассрочка — от {priceFmt(installmentMonthly(p.price))} × 12 мес
-          </p>
 
           <div className="mt-4 flex flex-wrap gap-2">
             <AddToCart item={{ id: p.slug, name: p.model, price: p.price, meta: label }} />

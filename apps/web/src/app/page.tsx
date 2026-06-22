@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { HeroWave } from "@/components/HeroWave";
-import { products, priceFmt, installmentMonthly } from "@/lib/site";
+import { products, priceFmt } from "@/lib/site";
 
 const cell = "rounded-3xl p-6 transition";
 const featuredProducts = products.filter((p) => p.type === "sistema").slice(0, 4);

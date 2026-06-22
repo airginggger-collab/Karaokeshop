@@ -2,13 +2,15 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { CreditCard, Truck, Speaker, Trash2, Check } from "lucide-react";
+import { Truck, Speaker, Trash2, Check, MessageCircle } from "lucide-react";
 import { Button } from "@kk/ui";
 import { useCart } from "@/lib/cart";
-import { priceFmt, installmentMonthly } from "@/lib/site";
+import { priceFmt, siteConfig } from "@/lib/site";
 
 export function CheckoutClient() {
   const { items, total, remove, clear, ready } = useCart();
+  const [name, setName] = React.useState("");
+  const [phone, setPhone] = React.useState("");
   const [done, setDone] = React.useState(false);
 
   if (!ready) {
@@ -17,13 +19,13 @@ export function CheckoutClient() {
 
   if (done) {
     return (
-      <div className="mt-8 rounded-2xl border border-border p-8 text-center">
+      <div className="mt-8 rounded-2xl bg-background p-8 text-center">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-accent-soft text-accent-fg">
           <Check className="h-6 w-6" />
         </div>
-        <h2 className="mt-3 text-lg font-medium">Заявка принята</h2>
+        <h2 className="mt-3 text-lg font-medium">Заявка отправлена</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Менеджер свяжется с вами для подтверждения и оформления рассрочки Kaspi.
+          Откроется WhatsApp — отправьте сообщение, менеджер свяжется в течение часа.
         </p>
         <Link href="/catalog" className="mt-4 inline-block text-sm text-primary hover:underline">
           Вернуться в каталог
@@ -34,99 +36,108 @@ export function CheckoutClient() {
 
   if (!items.length) {
     return (
-      <div className="mt-8 rounded-2xl border border-border p-8 text-center">
+      <div className="mt-8 rounded-2xl bg-background p-8 text-center">
         <h2 className="text-lg font-medium">Корзина пуста</h2>
-        <p className="mt-1 text-sm text-muted-foreground">Добавьте систему из каталога или соберите смету в калькуляторе.</p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Добавьте систему из каталога или соберите смету в калькуляторе.
+        </p>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
-          <Link href="/catalog">
-            <Button>Перейти в каталог</Button>
-          </Link>
-          <Link href="/kalkulyator">
-            <Button variant="ghost">Открыть калькулятор</Button>
-          </Link>
+          <Link href="/catalog"><Button>Перейти в каталог</Button></Link>
+          <Link href="/kalkulyator"><Button variant="ghost">Открыть калькулятор</Button></Link>
         </div>
       </div>
     );
   }
 
-  const monthly = priceFmt(installmentMonthly(total));
+  function handleSubmit() {
+    const lines = items.map((it) => `— ${it.name}${it.meta ? ` (${it.meta})` : ""}: ${priceFmt(it.price * it.qty)}`);
+    const text = [
+      "Здравствуйте! Хочу оформить заказ.",
+      "",
+      ...lines,
+      "",
+      `Итого: ${priceFmt(total)}`,
+      name ? `Имя: ${name}` : "",
+      phone ? `Телефон: ${phone}` : "",
+    ]
+      .filter((l) => l !== undefined)
+      .join("\n");
+
+    clear();
+    setDone(true);
+    window.open(`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
+  }
 
   return (
     <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_360px]">
+      {/* Контактные данные */}
       <div>
-        <h2 className="mb-3 text-sm font-medium">Способ оплаты</h2>
-        <label className="mb-2 flex items-start gap-3 rounded-xl border-2 border-primary p-4">
-          <input type="radio" name="pay" defaultChecked className="mt-1 accent-primary" />
-          <span>
-            <span className="text-sm font-medium">Kaspi рассрочка 0-0-12</span>
-            <span className="mt-0.5 block text-sm text-accent-fg">{monthly} × 12 мес · без переплаты</span>
-            <span className="mt-0.5 block text-xs text-muted-foreground">Одобрение в приложении Kaspi за минуту</span>
-          </span>
-        </label>
-        <label className="mb-2 flex items-center gap-3 rounded-xl border border-border p-4">
-          <input type="radio" name="pay" className="accent-primary" />
-          <span className="text-sm">Kaspi Pay — оплатить сразу</span>
-        </label>
-        <label className="mb-6 flex items-center gap-3 rounded-xl border border-border p-4">
-          <input type="radio" name="pay" className="accent-primary" />
-          <span className="text-sm">Картой онлайн / при получении</span>
-        </label>
+        <h2 className="mb-3 text-sm font-medium">Ваши данные</h2>
+        <input
+          type="text"
+          placeholder="Имя (необязательно)"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="mb-2 h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+        />
+        <input
+          type="tel"
+          placeholder="Телефон (необязательно)"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="mb-4 h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+        />
 
         <h2 className="mb-3 text-sm font-medium">Доставка</h2>
-        <input type="text" placeholder="Город, адрес" className="mb-2 h-11 w-full rounded-lg border border-border bg-transparent px-3 text-sm outline-none" />
-        <input type="tel" placeholder="Телефон" className="mb-2 h-11 w-full rounded-lg border border-border bg-transparent px-3 text-sm outline-none" />
-        <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Truck className="h-4 w-4" /> Доставка по Алматы бесплатно · монтаж по согласованию
+        <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <Truck className="h-4 w-4 shrink-0 text-primary" />
+          Доставка по Алматы бесплатно · монтаж по согласованию
+        </p>
+        <p className="mt-2 text-xs text-muted-foreground">
+          После отправки заявки менеджер уточнит адрес и время доставки в WhatsApp.
         </p>
       </div>
 
-      <aside className="h-fit rounded-2xl bg-surface p-5">
+      {/* Итого */}
+      <aside className="h-fit rounded-2xl bg-background p-5">
         <h2 className="mb-3 text-sm font-medium">Ваш заказ</h2>
         {items.map((it) => (
           <div key={it.id} className="mb-3 flex gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-background">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-surface">
               <Speaker className="h-5 w-5 text-muted-foreground" />
             </div>
-            <div className="flex-1">
-              <p className="text-sm font-medium">{it.name}</p>
+            <div className="flex-1 min-w-0">
+              <p className="truncate text-sm font-medium">{it.name}</p>
               <p className="text-xs text-muted-foreground">
-                {it.meta ? `${it.meta} · ` : ""}
-                {it.qty} шт
+                {it.meta ? `${it.meta} · ` : ""}{it.qty} шт
               </p>
             </div>
-            <div className="text-right">
+            <div className="shrink-0 text-right">
               <p className="text-sm">{priceFmt(it.price * it.qty)}</p>
               <button
                 type="button"
                 onClick={() => remove(it.id)}
                 aria-label="Убрать"
-                className="mt-1 text-muted-foreground hover:text-foreground"
+                className="mt-1 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Trash2 className="h-3.5 w-3.5" />
               </button>
             </div>
           </div>
         ))}
-        <div className="border-t border-border pt-3 text-sm">
-          <div className="mb-1 flex justify-between text-muted-foreground">
-            <span>Доставка</span>
-            <span>0 ₸</span>
+
+        <div className="border-t border-border pt-3">
+          <div className="mb-1 flex justify-between text-sm text-muted-foreground">
+            <span>Доставка</span><span>0 ₸</span>
           </div>
           <div className="mb-4 flex justify-between font-medium">
-            <span>Итого</span>
-            <span>{priceFmt(total)}</span>
+            <span>Итого</span><span>{priceFmt(total)}</span>
           </div>
-          <Button
-            className="w-full"
-            onClick={() => {
-              setDone(true);
-              clear();
-            }}
-          >
-            Подтвердить заказ
+          <Button className="w-full gap-2" onClick={handleSubmit}>
+            <MessageCircle className="h-4 w-4" /> Отправить заявку в WhatsApp
           </Button>
-          <p className="mt-2 flex items-center justify-center gap-1 text-center text-[11px] text-muted-foreground">
-            <CreditCard className="h-3.5 w-3.5" /> или {monthly}/мес в рассрочку Kaspi
+          <p className="mt-3 text-center text-[11px] text-muted-foreground">
+            Менеджер свяжется в течение часа и подтвердит заказ
           </p>
         </div>
       </aside>

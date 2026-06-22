@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Music, RefreshCw, Globe } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { SongsClient } from "@/components/SongsClient";
 import { pesniMeta, songsTotal } from "@/lib/site";
 
@@ -16,7 +17,8 @@ const total = new Intl.NumberFormat("ru-RU").format(songsTotal);
 export default function Page() {
   return (
     <Container className="py-10">
-      <h1 className="text-2xl font-medium">{pesniMeta.h1}</h1>
+      <Breadcrumb items={[{ label: "Песни" }]} />
+      <h1 className="font-display text-2xl font-bold">{pesniMeta.h1}</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{pesniMeta.description}</p>
 
       <div className="mb-8 mt-6 grid gap-3 sm:grid-cols-3">
