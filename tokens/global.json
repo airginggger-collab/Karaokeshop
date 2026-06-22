@@ -1,0 +1,73 @@
+{
+  "color": {
+    "$type": "color",
+    "primary": {
+      "$value": "#1F6F66",
+      "$description": "Основной акцентный цвет (тил)"
+    },
+    "primary-fg": {
+      "$value": "#FFFFFF",
+      "$description": "Текст на primary-фоне"
+    },
+    "primary-soft": {
+      "$value": "#E3F3F0",
+      "$description": "Мягкий оттенок primary (фон чипов, бейджей)"
+    },
+    "accent": {
+      "$value": "#1FA86F",
+      "$description": "Акцент (зелёный)"
+    },
+    "accent-fg": {
+      "$value": "#0B5B3B",
+      "$description": "Текст на accent-фоне"
+    },
+    "accent-soft": {
+      "$value": "#E4F7EC",
+      "$description": "Мягкий оттенок accent"
+    },
+    "bg": {
+      "$value": "#FFFFFF",
+      "$description": "Фон страницы (светлая тема)"
+    },
+    "surface": {
+      "$value": "#F8FAFC",
+      "$description": "Фон карточек / секций"
+    },
+    "fg": {
+      "$value": "#0E1726",
+      "$description": "Основной текст"
+    },
+    "muted": {
+      "$value": "#F1F5F9",
+      "$description": "Приглушённый фон (плашки, теги)"
+    },
+    "muted-fg": {
+      "$value": "#64748B",
+      "$description": "Приглушённый текст"
+    },
+    "border": {
+      "$value": "#E2E8F0",
+      "$description": "Граница (инпуты, разделители)"
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "sm": { "$value": "6px" },
+    "md": { "$value": "8px" },
+    "lg": { "$value": "12px" },
+    "xl": { "$value": "16px" }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "sans": {
+        "$value": "Manrope",
+        "$description": "Основной шрифт (текст, UI)"
+      },
+      "display": {
+        "$value": "Unbounded",
+        "$description": "Заголовочный шрифт (H1, бренд)"
+      }
+    }
+  }
+}
