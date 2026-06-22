@@ -16,6 +16,7 @@ import {
   Layers,
 } from "lucide-react";
 import { Container } from "@/components/Container";
+import { HeroWave } from "@/components/HeroWave";
 import { products, priceFmt, installmentMonthly } from "@/lib/site";
 
 const cell = "rounded-3xl p-6 transition";
@@ -65,6 +66,8 @@ export default function HomePage() {
               <Building2 className="h-4 w-4" /> Для заведения
             </Link>
           </div>
+
+          <HeroWave />
         </section>
 
         {/* Тёплый вход — для дома */}
