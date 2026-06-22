@@ -30,6 +30,12 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-22) — Clay morphism / фон страницы
+
+- `apps/web/src/app/globals.css`: `body` bg light → `#f5f5f5` (тёмная без изменений).
+- Глобальные CSS-правила `.bg-background.rounded-2xl/3xl` → `box-shadow: 0 1px 3px rgba(0,0,0,.06)` — clay morphism вместо жёсткого border. Компоненты не трогались.
+- `.dark` вариант: тень темнее + белый ring `rgba(255,255,255,.05)`.
+
 ## Последняя сессия (2026-06-22) — E-E-A-T / AI Overviews
 
 ### SEO / Schema
