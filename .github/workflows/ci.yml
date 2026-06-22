@@ -25,6 +25,11 @@ jobs:
         run: npm run build -w web
       - name: Build Storybook
         run: npm run build-storybook -w @kk/ui
+      - name: Deploy to Cloudflare Workers
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
   lighthouse:
     runs-on: ubuntu-latest
