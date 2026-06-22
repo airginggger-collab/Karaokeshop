@@ -30,6 +30,15 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-22) — Editorial product cards (Alphane Labs style)
+
+- `page.tsx`: секция «Популярное оборудование» переделана под editorial 2×2 композицию.
+  - Карточка: белый `bg-background`, фото-зона вверху `h-56/h-64` с `object-cover`, внизу "полка" с характеристиками.
+  - Сценарий-бейдж (`scenarioLabel`) поверх фото — тёплый/ночной акцент.
+  - Чипы характеристик (`до X м²`, `N+ песен`) в `bg-surface` пилюлях.
+  - Цена акцентным цветом + CTA-кнопка с `gap` анимацией при hover.
+  - Фильтр расширен: все `type === "sistema"` (4 продукта, не только featured), grid 2×2.
+
 ## Последняя сессия (2026-06-22) — Clay morphism / фон страницы
 
 - `apps/web/src/app/globals.css`: `body` bg light → `#f5f5f5` (тёмная без изменений).
