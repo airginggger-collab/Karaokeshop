@@ -57,17 +57,4 @@
     "lg": { "$value": "12px" },
     "xl": { "$value": "16px" }
   },
-  "font": {
-    "family": {
-      "$type": "fontFamily",
-      "sans": {
-        "$value": "Manrope",
-        "$description": "Основной шрифт (текст, UI)"
-      },
-      "display": {
-        "$value": "Unbounded",
-        "$description": "Заголовочный шрифт (H1, бренд)"
-      }
-    }
-  }
 }
