@@ -21,6 +21,7 @@ import { products, priceFmt, installmentMonthly } from "@/lib/site";
 
 const cell = "rounded-3xl p-6 transition";
 const featured = products.find((p) => p.slug === "evobox") ?? products[0];
+const featuredProducts = products.filter((p) => p.featured && p.type === "sistema").slice(0, 4);
 
 export default function HomePage() {
   return (
@@ -221,6 +222,116 @@ export default function HomePage() {
             <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium" style={{ color: "var(--night-accent)" }}>
               Обсудить проект <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
             </span>
+          </Link>
+        </div>
+      </section>
+
+      {/* Большие карточки оборудования */}
+      <section className="mt-12">
+        <div className="flex items-end justify-between">
+          <h2 className="font-display text-2xl font-semibold sm:text-3xl">Популярное оборудование</h2>
+          <Link href="/catalog" className="hidden items-center gap-1 text-sm font-medium text-primary sm:flex">
+            Весь каталог <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
+          {featuredProducts.map((p) => {
+            const isHome = p.scenario === "dom";
+            return (
+              <Link
+                key={p.slug}
+                href={`/product/${p.slug}`}
+                className="group relative flex min-h-[380px] flex-col overflow-hidden rounded-3xl lg:min-h-[440px]"
+              >
+                {/* Фото */}
+                <div className="absolute inset-0">
+                  <img
+                    src={p.image}
+                    alt={p.model}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  {/* Градиент снизу */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: isHome
+                        ? "linear-gradient(to top, var(--warm-bg) 30%, rgba(0,0,0,0) 70%)"
+                        : "linear-gradient(to top, #0d1117 35%, rgba(0,0,0,0.1) 70%)",
+                    }}
+                  />
+                  {/* Лёгкий виньет сверху */}
+                  <div
+                    className="absolute inset-x-0 top-0 h-24"
+                    style={{
+                      background: isHome
+                        ? "linear-gradient(to bottom, rgba(255,245,235,0.6), transparent)"
+                        : "linear-gradient(to bottom, rgba(13,17,23,0.5), transparent)",
+                    }}
+                  />
+                </div>
+
+                {/* Бейдж сверху */}
+                <div className="relative z-10 p-5">
+                  <span
+                    className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium"
+                    style={
+                      isHome
+                        ? { backgroundColor: "var(--warm-soft)", color: "var(--warm-accent)" }
+                        : { backgroundColor: "rgba(45,212,191,0.15)", color: "var(--night-accent)" }
+                    }
+                  >
+                    {p.scenarioLabel}
+                  </span>
+                </div>
+
+                {/* Контент снизу */}
+                <div className="relative z-10 mt-auto p-5">
+                  <p
+                    className="text-xs font-medium uppercase tracking-wider"
+                    style={{ color: isHome ? "var(--warm-muted)" : "var(--night-muted)" }}
+                  >
+                    {p.brand}
+                  </p>
+                  <h3
+                    className="mt-1 font-display text-2xl font-bold"
+                    style={{ color: isHome ? "var(--warm-fg)" : "var(--night-fg)" }}
+                  >
+                    {p.model}
+                  </h3>
+                  {p.areaMax && (
+                    <p className="mt-0.5 text-sm" style={{ color: isHome ? "var(--warm-muted)" : "var(--night-muted)" }}>
+                      до {p.areaMax} м² · {p.songsCount?.toLocaleString("ru-RU")}+ песен
+                    </p>
+                  )}
+                  <div className="mt-3 flex items-center justify-between">
+                    <span
+                      className="font-display text-xl font-bold"
+                      style={{ color: isHome ? "var(--warm-accent)" : "var(--night-accent)" }}
+                    >
+                      {priceFmt(p.price)}
+                    </span>
+                    <span
+                      className="inline-flex items-center gap-1 rounded-xl px-4 py-2 text-sm font-medium transition group-hover:gap-2"
+                      style={
+                        isHome
+                          ? { backgroundColor: "var(--warm-accent)", color: "#fff" }
+                          : { backgroundColor: "var(--night-accent)", color: "#04241e" }
+                      }
+                    >
+                      Подробнее <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+
+        <div className="mt-3 flex sm:hidden">
+          <Link href="/catalog" className="flex items-center gap-1 text-sm font-medium text-primary">
+            Весь каталог <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
