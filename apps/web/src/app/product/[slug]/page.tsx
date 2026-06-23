@@ -6,6 +6,7 @@ import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { AddToCart } from "@/components/AddToCart";
 import { ProductImage } from "@/components/ProductImage";
+import { ProductCard } from "@/components/ProductCard";
 import { ProductStickyBar } from "@/components/ProductStickyBar";
 import { products, priceFmt, discountPct, typeLabels, siteConfig } from "@/lib/site";
 import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
@@ -38,6 +39,13 @@ export default async function Page({
   const { slug } = await params;
   const p = products.find((x) => x.slug === slug);
   if (!p) notFound();
+
+  // Похожие: тот же бренд (до 3), + альтернативы другого бренда того же типа (до 6 итого)
+  const sameBrand = products.filter((x) => x.slug !== p.slug && x.brand === p.brand).slice(0, 3);
+  const altBrand = products
+    .filter((x) => x.slug !== p.slug && x.brand !== p.brand && x.type === p.type)
+    .slice(0, Math.max(0, 6 - sameBrand.length));
+  const related = [...sameBrand, ...altBrand];
 
   const ld = productJsonLd({ name: p.model, price: p.price, slug: p.slug, brand: p.brand, inStock: p.inStock, image: p.image, rating: p.rating, reviewsCount: p.reviewsCount });
   const breadcrumbLd = breadcrumbJsonLd([
@@ -163,6 +171,16 @@ export default async function Page({
             ) : null}
           </dl>
         </div>
+      )}
+
+      {/* Похожие товары */}
+      {related.length > 0 && (
+        <section className="mt-12">
+          <h2 className="mb-4 font-display text-xl font-semibold">Похожие товары</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {related.map((r) => <ProductCard key={r.slug} p={r} />)}
+          </div>
+        </section>
       )}
 
       {/* Mobile sticky bottom bar */}
