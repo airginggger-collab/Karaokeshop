@@ -32,7 +32,14 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — все mood-страницы следуют теме; Mood удалён
+## Последняя сессия (2026-06-23) — редизайн P0#1: навигация 7→5 + активный пункт
+
+Начат редизайн-спринт (39 задач, брейнсторм завершён). Выполнена P0-задача №1:
+- `apps/web/src/lib/site.ts` `mainNav`: 7 пунктов → 5 (`/catalog`, `/dlya-doma`, `/dlya-biznesa`, `/pod-klyuch`, `/kontakty`); убраны `/brand/studio-evolution`, `/brand/ast`, `/gotovye-resheniya`.
+- `apps/web/src/components/Header.tsx`: добавлен `"use client"` + `usePathname()`; активный пункт выделяется `border-b-2 border-primary`; неактивные — `text-muted-foreground hover:text-foreground`.
+- Сборка и тесты зелёные.
+
+## Предыдущая сессия (2026-06-23) — все mood-страницы следуют теме; Mood удалён
 
 Распространён фикс pod-klyuch на остальные принудительно-mood страницы:
 - Снята обёртка `<Mood variant=…>` с `komplekty`, `komplekty/[area]`, `karaoke/[scenario]` — теперь следуют теме сайта (светлая в светлой). Убраны неиспользуемые импорты и `const variant` в karaoke.

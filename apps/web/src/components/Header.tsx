@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Mic2, Search } from "lucide-react";
 import { Container } from "./Container";
 import { MobileNav } from "./MobileNav";
@@ -7,6 +10,8 @@ import { ThemeToggle } from "./ThemeToggle";
 import { mainNav } from "@/lib/site";
 
 export function Header() {
+  const pathname = usePathname();
+
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background dark:border-white/[0.08] dark:bg-page">
       <Container className="flex h-14 items-center gap-4">
@@ -15,12 +20,23 @@ export function Header() {
           <Mic2 className="h-5 w-5 text-primary" />
           karaokeshop
         </Link>
-        <nav className="hidden flex-1 items-center gap-5 text-sm text-muted-foreground md:flex">
-          {mainNav.map((n) => (
-            <Link key={n.href} href={n.href} className="hover:text-foreground">
-              {n.label}
-            </Link>
-          ))}
+        <nav className="hidden flex-1 items-center gap-5 text-sm md:flex">
+          {mainNav.map((n) => {
+            const active = pathname === n.href || (n.href !== "/" && pathname.startsWith(n.href));
+            return (
+              <Link
+                key={n.href}
+                href={n.href}
+                className={
+                  active
+                    ? "border-b-2 border-primary pb-0.5 text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }
+              >
+                {n.label}
+              </Link>
+            );
+          })}
         </nav>
         <div className="ml-auto flex items-center gap-3">
           <ThemeToggle />

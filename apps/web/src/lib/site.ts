@@ -177,11 +177,9 @@ export function discountPct(price: number, priceOld?: number): number | null {
 
 // Главная навигация (Header + мобильное меню)
 export const mainNav = [
+  { href: "/catalog", label: "Каталог" },
   { href: "/dlya-doma", label: "Для дома" },
   { href: "/dlya-biznesa", label: "Для бизнеса" },
-  { href: "/brand/studio-evolution", label: "Studio Evolution" },
-  { href: "/brand/ast", label: "AST" },
-  { href: "/gotovye-resheniya", label: "Готовые решения" },
   { href: "/pod-klyuch", label: "Монтаж" },
   { href: "/kontakty", label: "Контакты" },
 ];
