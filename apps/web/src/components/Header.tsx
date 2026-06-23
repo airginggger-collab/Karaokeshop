@@ -8,7 +8,7 @@ import { mainNav } from "@/lib/site";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-background dark:border-white/[0.08] dark:bg-[#0e131c]">
+    <header className="sticky top-0 z-30 border-b border-border bg-background dark:border-white/[0.08] dark:bg-page">
       <Container className="flex h-14 items-center gap-4">
         <MobileNav />
         <Link href="/" className="flex items-center gap-1.5 font-semibold tracking-tight">

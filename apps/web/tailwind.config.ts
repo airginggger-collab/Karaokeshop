@@ -13,6 +13,7 @@ export default {
         "primary-fg": "var(--color-primary-fg)",
         background: "var(--color-bg)",
         foreground: "var(--color-fg)",
+        page: "var(--color-page)",
         muted: "var(--color-muted)",
         "muted-foreground": "var(--color-muted-fg)",
         border: "var(--color-border)",

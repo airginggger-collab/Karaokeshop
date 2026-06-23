@@ -32,6 +32,12 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-23) — фон страницы → токен --color-page
+
+- Добавлен токен `--color-page` в `theme.css` (`#f5f5f5` light / `#0e131c` dark) + утилита `bg-page` в tailwind.config.
+- Убран хардкод: `globals.css body` → `var(--color-page)` (удалён отдельный `.dark body`); Header/Footer `dark:bg-[#0e131c]` → `dark:bg-page`. Один источник фона страницы.
+- Проверено: build web + визуал light (белый хедер на `#f5f5f5`) и dark (хедер сливается с `#0e131c`). Регрессий нет.
+
 ## Последняя сессия (2026-06-23) — /pod-klyuch следует теме (убран форс mood-night)
 
 - **Баг:** `/pod-klyuch` был обёрнут в `<Mood variant="night">` → принудительно тёмная палитра НЕЗАВИСИМО от темы. В светлой теме = тёмный «остров» внутри светлого шелла (светлый body + светлый футер) → «страница не собралась», футер не совпадал.

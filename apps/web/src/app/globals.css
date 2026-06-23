@@ -16,14 +16,11 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+/* Фон страницы и текст — через токены (флипаются в theme.css: light/.dark).
+   Один источник: --color-page (#f5f5f5 / #0e131c), --color-fg. */
 body {
-  background: #f5f5f5;              /* светлая тема: серый фон страницы */
+  background: var(--color-page);
   color: var(--color-fg);
-}
-
-.dark body {
-  background: #0e131c;       /* тёмная тема: страница темнее карточки (фон страницы, не токен) */
-  color: var(--color-fg);    /* единый источник — theme.css (.dark → #f0f4fc) */
 }
 
 /* Clay morphism: ЛЮБАЯ карточка (bg-background) отделяется от фона мягкой тенью.
