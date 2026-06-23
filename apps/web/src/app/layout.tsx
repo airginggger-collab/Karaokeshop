@@ -76,7 +76,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={`${sans.variable} ${display.variable}`}>
-      <body className="min-h-screen font-sans antialiased">
+      <body className="min-h-screen font-sans antialiased dark:bg-[#0e131c] dark:text-[#f0f4fc]">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }} />
         <Providers>

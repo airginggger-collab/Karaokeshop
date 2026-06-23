@@ -32,6 +32,13 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-23) — dark: явный цвет текста на body
+
+Корневая причина: tokens.css ставит `--color-fg: #0E1726` в `:root`; `.dark { --color-fg }` не всегда перебивает при статическом экспорте.
+
+- `globals.css`: `.dark body { color: #f0f4fc }` — явно без var(), перебивает tokens.css
+- `layout.tsx`: `<body dark:bg-[#0e131c] dark:text-[#f0f4fc]>` — Tailwind-фолбэк для статики
+
 ## Последняя сессия (2026-06-23) — Header/Footer: явный тёмный текст
 
 - `Header.tsx`: nav и кнопка поиска → `dark:text-[#b8cfe0] dark:hover:text-white`
