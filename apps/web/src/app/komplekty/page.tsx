@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { bundles, komplektyIndexMeta } from "@/lib/site";
 import { LandingPage } from "@/components/LandingPage";
-import { Mood } from "@/components/Mood";
 
 export const metadata: Metadata = {
   title: komplektyIndexMeta.title,
@@ -12,7 +11,6 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <Mood variant="night">
     <LandingPage h1={komplektyIndexMeta.h1} description={komplektyIndexMeta.description}>
       <ul className="mt-6 grid gap-3 sm:grid-cols-2">
         {bundles.map((b) => (
@@ -27,6 +25,5 @@ export default function Page() {
         ))}
       </ul>
     </LandingPage>
-    </Mood>
   );
 }

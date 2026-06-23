@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
 import { Badge, Button } from "@kk/ui";
 import { Container } from "@/components/Container";
-import { Mood } from "@/components/Mood";
 import { BundleTiers } from "@/components/BundleTiers";
 import { bundles } from "@/lib/site";
 
@@ -44,7 +43,6 @@ export default async function Page({
   if (!b) notFound();
 
   return (
-    <Mood variant="night">
     <Container className="py-10">
       <Badge tone="primary">B2B · под ключ</Badge>
       <h1 className="mt-3 text-2xl font-medium">{b.h1}</h1>
@@ -67,6 +65,5 @@ export default async function Page({
       <h2 className="mt-10 mb-3 text-lg font-medium">Другие площади</h2>
       <BundleTiers current={b.slug} />
     </Container>
-    </Mood>
   );
 }
