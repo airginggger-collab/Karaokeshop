@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ShieldCheck, Wrench, RefreshCw, Phone, ArrowRight, type LucideIcon } from "lucide-react";
+import { ShieldCheck, Wrench, RefreshCw, Phone, ArrowRight, CheckCircle2, XCircle, type LucideIcon } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { FaqAccordion } from "@/components/FaqAccordion";
 import { siteConfig } from "@/lib/site";
 import { faqJsonLd } from "@/lib/seo";
 
@@ -43,6 +44,21 @@ const faq = [
   { q: "Что делать, если система перестала работать?", a: "Напишите в WhatsApp — выедем в тот же или на следующий день. Для коммерческих объектов — приоритетный выезд." },
   { q: "Как часто обновляется репертуар?", a: "По договору технической поддержки — ежемесячно. По запросу — в любое время." },
   { q: "Есть ли замена оборудования на время ремонта?", a: "По договорённости предоставляем подменное оборудование для коммерческих объектов." },
+  { q: "Работаете за пределами Алматы?", a: "Выезжаем по Алматинской области. Для отдалённых регионов — удалённая поддержка и консультация по WhatsApp." },
+];
+
+const covered = [
+  "Заводской брак и дефекты производства",
+  "Отказ электронных компонентов при нормальной эксплуатации",
+  "Неисправности ПО и прошивки — обновление бесплатно",
+  "Выход из строя блока питания",
+];
+
+const notCovered = [
+  "Механические повреждения (удары, падения)",
+  "Попадание жидкости внутрь устройства",
+  "Самостоятельный ремонт или вскрытие",
+  "Нарушение условий эксплуатации",
 ];
 
 export default function Page() {
@@ -68,18 +84,45 @@ export default function Page() {
         ))}
       </div>
 
-      {/* FAQ */}
-      <section className="mt-10">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
-        <h2 className="font-display text-xl font-semibold">Частые вопросы</h2>
-        <div className="mt-4 space-y-3">
-          {faq.map((item) => (
-            <div key={item.q} className="rounded-2xl border border-border bg-background p-5">
-              <p className="font-medium">{item.q}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{item.a}</p>
-            </div>
-          ))}
+      {/* Что покрывает гарантия */}
+      <section className="mt-12">
+        <h2 className="font-display text-xl font-semibold">Что покрывает гарантия</h2>
+        <p className="mt-1 text-sm text-muted-foreground">Срок гарантии — от 1 года на всё оборудование.</p>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-background p-5">
+            <p className="mb-3 flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-400">
+              <CheckCircle2 className="h-4 w-4" /> Покрывается гарантией
+            </p>
+            <ul className="space-y-2">
+              {covered.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-border bg-background p-5">
+            <p className="mb-3 flex items-center gap-2 text-sm font-semibold text-destructive">
+              <XCircle className="h-4 w-4" /> Не покрывается
+            </p>
+            <ul className="space-y-2">
+              {notCovered.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-destructive/60" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
+      </section>
+
+      {/* FAQ аккордеон */}
+      <section className="mt-12">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
+        <h2 className="mb-4 font-display text-xl font-semibold">Частые вопросы</h2>
+        <FaqAccordion items={faq} />
       </section>
 
       <div className="mt-10 rounded-2xl bg-surface p-6">
