@@ -32,7 +32,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — P1#8: мобильный drawer
+## Последняя сессия (2026-06-23) — P1#8–9: drawer + FAB скролл + тема в drawer
+
+P1#9 — `WhatsAppFAB.tsx`: появляется после 300px скролла (`opacity`+`translate-y` transition), виден и на десктопе. `MobileNav.tsx`: добавлен `ThemeToggle` в footer drawer рядом с телефоном.
+
+## Предыдущая сессия (2026-06-23) — P1#8: мобильный drawer
 
 `MobileNav.tsx` переписан: полноэкранный drawer (slide from left), `body overflow:hidden` при открытии, активный пункт `bg-primary/10 text-primary`, WhatsApp-кнопка + телефон/часы в футере drawer.
 

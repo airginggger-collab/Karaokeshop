@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 import { mainNav, siteConfig } from "@/lib/site";
 
 export function MobileNav() {
@@ -98,7 +99,10 @@ export function MobileNav() {
             </svg>
             Написать в WhatsApp
           </a>
-          <p className="text-center text-sm text-muted-foreground">{siteConfig.phone} · {siteConfig.hours}</p>
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">{siteConfig.phone} · {siteConfig.hours}</p>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </div>
