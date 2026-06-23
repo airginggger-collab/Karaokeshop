@@ -32,7 +32,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — фавикон
+## Последняя сессия (2026-06-23) — Lottie-анимация в герое
+
+`lottie-react` установлен (`-w web`). Анимация `lottie-mic.json` (70KB, микрофон + аудиооборудование) скачана в `public/`. Компонент `LottieHero.tsx` — клиентский, импортирует JSON напрямую. Встроен в герой главной (`page.tsx`) — абсолютный блок `bottom-0 right-0 w-56 opacity-60`, виден только на `lg+`. Заменить JSON на другой файл — положить в `public/` и поменять импорт в `LottieHero.tsx`.
+
+## Предыдущая сессия (2026-06-23) — фавикон
 
 `apps/web/src/app/icon.svg` — SVG-фавикон: тёмный фон `#0d1117` + микрофон `#2dd4bf` (цвет night-accent). Next.js App Router подхватывает автоматически.
 

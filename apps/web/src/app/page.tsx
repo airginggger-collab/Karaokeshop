@@ -16,6 +16,7 @@ import {
 import { Container } from "@/components/Container";
 import { ProductImage } from "@/components/ProductImage";
 import { HeroWave } from "@/components/HeroWave";
+import { LottieHero } from "@/components/LottieHero";
 import { QuizWidget } from "@/components/QuizWidget";
 import { ClientLogos } from "@/components/ClientLogos";
 import { products, priceFmt } from "@/lib/site";
@@ -82,6 +83,9 @@ export default function HomePage() {
           </div>
 
           <HeroWave />
+          <div className="pointer-events-none absolute bottom-0 right-0 hidden w-56 opacity-60 lg:block xl:w-64">
+            <LottieHero />
+          </div>
         </section>
 
         {/* Тёплый вход — для дома */}
