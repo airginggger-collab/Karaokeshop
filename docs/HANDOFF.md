@@ -32,7 +32,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — P1#8–9: drawer + FAB скролл + тема в drawer
+## Последняя сессия (2026-06-23) — P1#8–10: drawer + FAB + footer 3 колонки
+
+P1#10 — `Footer.tsx` переписан: 3 колонки (О нас | Каталог | Контакты) на `sm:grid-cols-3`, копирайт внизу с `new Date().getFullYear()`.
+
+## Предыдущая сессия (2026-06-23) — P1#8–9: drawer + FAB скролл + тема в drawer
 
 P1#9 — `WhatsAppFAB.tsx`: появляется после 300px скролла (`opacity`+`translate-y` transition), виден и на десктопе. `MobileNav.tsx`: добавлен `ThemeToggle` в footer drawer рядом с телефоном.
 
