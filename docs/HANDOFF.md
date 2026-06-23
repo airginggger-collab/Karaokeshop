@@ -32,6 +32,24 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-23) — Homepage: контраст карточек + единая система переменных
+
+- **Проблема:** `bg-surface` (#F8FAFC) на `body` (#f5f5f5) = 1.03:1 — карточки сливались с фоном.
+- Trust block («С 2012», «Гарантия + сервис-центр», «Монтаж и настройка»): `bg-surface` → `bg-background` + `font-medium`. Получают clay-тень из globals.css автоматически.
+- «Как мы работаем» шаги: `bg-surface` → `bg-background`; нумерация `text-primary/20` → `/40` (читаема).
+- `ServiceSteps.tsx`: `bg-surface` → `bg-background`.
+- «Для дома» бенто-карточка: добавлен `border: 1px solid var(--warm-soft)` — визуально отделяется от серого фона.
+- **Принцип:** нейтральные карточки = `bg-background` (белый + clay-тень); тёплые/ночные карточки = явные `var(--warm-*)` / `var(--night-*)`. Две системы переменных остаются, но каждая применяется строго к своей области.
+
+## Последняя сессия (2026-06-23) — Аудит P0–P2: SEO, .gitignore, dead code, гигиена
+
+- SEO: canonical на `/`, 301 `/karaoke/dlya-doma` → `/dlya-doma`, OG/Twitter meta в root layout, Product JSON-LD с image, BreadcrumbList на страницах товара.
+- Lighthouse CI: 3 → 8 URL.
+- `.gitignore`: `*.zip`, `*.tsbuildinfo`, `.claude/`, `скриныыы*/` добавлены; дубль `.next/` убран.
+- Orphan `tokens/` (корень) удалён; build читает `packages/tokens/`.
+- Dead components удалены: FilterRail, SectionHeading, TrustStrip.
+- `.prettierrc` создан; `engines: { node: ">=20" }` и `format` скрипт в `package.json`; `turbo.json` обновлён.
+
 ## Последняя сессия (2026-06-23) — CI/CD: автодеплой на Cloudflare через GitHub Actions
 
 - **Проблема найдена:** `out/` в `.gitignore` → `git push` никогда не деплоил файлы. Деплой требовал ручного `npx wrangler deploy` после каждой сборки.
