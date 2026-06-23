@@ -43,19 +43,20 @@
 .dark {
   color-scheme: dark;
 
-  /* Карточки (#141c27) отличаются от фона страницы (#0b0f14) тенью + кольцом */
-  --color-bg:           #141c27;   /* карточка: чуть светлее страницы  */
-  --color-surface:      #1e2a3a;   /* вторичные заливки, чипы          */
-  --color-fg:           #e6eaf1;   /* основной текст:  13.8:1 на bg  ✓ AAA */
-  --color-muted:        #1a2333;   /* тонкий фон */
-  --color-muted-fg:     #94a3b8;   /* второй. текст:    6.8:1 на bg  ✓ AA  */
-  --color-border:       #283348;   /* декоративный бордер */
-  --color-primary:      #34d3b5;   /* тил:             10.7:1 на bg  ✓ AAA */
-  --color-primary-fg:   #04241e;   /* текст на primary: 8.4:1         ✓ AAA */
-  --color-primary-soft: #112a28;
-  --color-accent:       #34d399;   /* зелёный акцент:  10.2:1 на bg  ✓ AAA */
-  --color-accent-fg:    #bbf7d0;   /*                  14.2:1 на soft ✓ AAA */
-  --color-accent-soft:  #10241b;
+  /* Карточки (#1c2840) заметно светлее страницы (#0e131c).
+     Разделение усилено тенью + белым кольцом 12% */
+  --color-bg:           #1c2840;   /* карточка / панель              */
+  --color-surface:      #263550;   /* чипы, второстепенные заливки   */
+  --color-fg:           #edf2fa;   /* основной текст:  12.5:1 на bg  ✓ AAA */
+  --color-muted:        #1a2438;   /* тонкий фон */
+  --color-muted-fg:     #a0b8cc;   /* второй. текст:    7.6:1 на bg  ✓ AAA */
+  --color-border:       #2e4060;   /* декоративный бордер */
+  --color-primary:      #38d9bc;   /* тил:              9.3:1 на bg  ✓ AAA */
+  --color-primary-fg:   #041e1a;   /* текст на primary: 9.1:1         ✓ AAA */
+  --color-primary-soft: #143028;
+  --color-accent:       #38d99a;   /* зелёный акцент:   9.0:1 на bg  ✓ AAA */
+  --color-accent-fg:    #c0fae4;   /*                  13.8:1 на soft ✓ AAA */
+  --color-accent-soft:  #112b20;
 }
 
 /* ─── Тёплое настроение (страницы «для дома») ─── */
@@ -104,7 +105,7 @@ body {
 }
 
 .dark body {
-  background: #0b0f14;              /* тёмная тема: самый тёмный слой */
+  background: #0e131c;              /* тёмная тема: страница темнее карточки */
 }
 
 /* Clay morphism: карточки (bg-background) отделяются от фона мягкой тенью */
@@ -113,10 +114,10 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, .07), 0 0 0 1px rgba(0, 0, 0, .05);
 }
 
-/* В тёмной теме: кольцо 10% белого + глубокая тень */
+/* В тёмной теме: кольцо 12% белого + глубокая тень для чёткого отделения от страницы */
 .dark .bg-background.rounded-2xl,
 .dark .bg-background.rounded-3xl {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 255, 255, .10);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .12);
 }
 
 h1,
