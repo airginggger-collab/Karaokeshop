@@ -167,6 +167,22 @@ export default function HomePage() {
         </Link>
       </div>
 
+      {/* Trust-блок: 4 цифры */}
+      <section className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {[
+          { value: "12+", label: "лет на рынке", sub: "с 2012 года" },
+          { value: "200+", label: "установок", sub: "дома и заведения" },
+          { value: "60 000+", label: "песен в базе", sub: "KZ · RU · EN" },
+          { value: "2 года", label: "гарантия", sub: "и сервис-центр" },
+        ].map((s) => (
+          <div key={s.value} className="flex flex-col items-center rounded-2xl border border-border bg-background py-5 text-center">
+            <span className="font-display text-3xl font-bold text-primary">{s.value}</span>
+            <span className="mt-1 text-sm font-medium">{s.label}</span>
+            <span className="text-xs text-muted-foreground">{s.sub}</span>
+          </div>
+        ))}
+      </section>
+
       {/* Ценовые уровни */}
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold sm:text-3xl">С чего начать</h2>
