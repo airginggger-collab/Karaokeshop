@@ -75,48 +75,48 @@ export const products: Product[] = [
     slug: "ast-250", type: "sistema", model: "AST-250", brand: "AST", scenario: "bar", scenarioLabel: "бар / клуб",
     areaMax: 80, price: 1500000, priceOld: 2664000, songsCount: 60000,
     kit: ["Сенсорный пульт-моноблок", "2 беспроводных микрофона", "Усилитель", "Акустика (пара)", "Сабвуфер", "Микшер", "ИБП", "Кабельная обвязка"],
-    rating: 4.9, reviewsCount: 23, inStock: true, featured: true, image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=70&auto=format&fit=crop",
+    rating: 4.9, reviewsCount: 23, inStock: true, featured: true,
   },
   {
     slug: "ast-mini", type: "sistema", model: "AST Mini", brand: "AST", scenario: "dom", scenarioLabel: "дом / кафе",
     areaMax: 30, price: 720000, songsCount: 60000,
     kit: ["Пульт-моноблок", "2 микрофона", "Активная акустика", "Кабели"],
-    rating: 4.8, reviewsCount: 14, inStock: true, featured: true, image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=70&auto=format&fit=crop",
+    rating: 4.8, reviewsCount: 14, inStock: true, featured: true,
   },
   {
     slug: "evobox", type: "sistema", model: "Evolution Evobox", brand: "Studio Evolution", scenario: "dom", scenarioLabel: "для дома",
     areaMax: 30, price: 749000, songsCount: 50000,
     kit: ["Медиаплеер Evobox", "2 микрофона", "Пульт управления"],
-    rating: 4.7, reviewsCount: 31, inStock: true, featured: true, image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&q=70&auto=format&fit=crop",
+    rating: 4.7, reviewsCount: 31, inStock: true, featured: true,
   },
   {
     slug: "evobox-plus", type: "sistema", model: "Evobox Plus", brand: "Studio Evolution", scenario: "klub", scenarioLabel: "бар / клуб",
     areaMax: 100, price: 1390000, songsCount: 60000,
     kit: ["Evobox Plus", "4 радиомикрофона", "Акустика + сабвуфер", "Микшер", "Свет"],
-    rating: 4.8, reviewsCount: 9, inStock: true, image: "https://images.unsplash.com/photo-1525362081669-2b476bb628c3?w=800&q=70&auto=format&fit=crop",
+    rating: 4.8, reviewsCount: 9, inStock: true,
   },
 
   // Акустика
-  { slug: "the-box-achat-mini", type: "akustika", model: "The Box Pro Achat Mini", brand: "The Box", power: "220 Вт", price: 150000, rating: 4.7, reviewsCount: 6, inStock: true, image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=70&auto=format&fit=crop" },
-  { slug: "the-box-cl115", type: "akustika", model: "The Box CL 115/108", brand: "The Box", power: "900 Вт", price: 240000, rating: 4.8, reviewsCount: 9, inStock: true, image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&q=70&auto=format&fit=crop" },
-  { slug: "the-box-cl110", type: "akustika", model: "The Box CL 110/118", brand: "The Box", power: "1000 Вт", price: 360000, rating: 4.8, reviewsCount: 5, inStock: true, image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&q=70&auto=format&fit=crop" },
-  { slug: "rcf-evox-8", type: "akustika", model: "RCF EVOX 8", brand: "RCF", power: "1400 Вт", price: 520000, rating: 4.9, reviewsCount: 12, inStock: true, featured: true, image: "https://images.unsplash.com/photo-1558537348-c0f8e733989d?w=800&q=70&auto=format&fit=crop" },
-  { slug: "hk-polar-10", type: "akustika", model: "HK Audio Polar 10", brand: "HK Audio", power: "активная колонна", price: 480000, rating: 4.8, reviewsCount: 4, inStock: true, image: "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=800&q=70&auto=format&fit=crop" },
-  { slug: "martin-xp12a", type: "akustika", model: "Martin Audio XP12A", brand: "Martin Audio", power: "активная", price: 420000, rating: 4.8, reviewsCount: 3, inStock: true, image: "https://images.unsplash.com/photo-1484755560615-a4c64e778a6c?w=800&q=70&auto=format&fit=crop" },
+  { slug: "the-box-achat-mini", type: "akustika", model: "The Box Pro Achat Mini", brand: "The Box", power: "220 Вт", price: 150000, rating: 4.7, reviewsCount: 6, inStock: true },
+  { slug: "the-box-cl115", type: "akustika", model: "The Box CL 115/108", brand: "The Box", power: "900 Вт", price: 240000, rating: 4.8, reviewsCount: 9, inStock: true },
+  { slug: "the-box-cl110", type: "akustika", model: "The Box CL 110/118", brand: "The Box", power: "1000 Вт", price: 360000, rating: 4.8, reviewsCount: 5, inStock: true },
+  { slug: "rcf-evox-8", type: "akustika", model: "RCF EVOX 8", brand: "RCF", power: "1400 Вт", price: 520000, rating: 4.9, reviewsCount: 12, inStock: true, featured: true },
+  { slug: "hk-polar-10", type: "akustika", model: "HK Audio Polar 10", brand: "HK Audio", power: "активная колонна", price: 480000, rating: 4.8, reviewsCount: 4, inStock: true },
+  { slug: "martin-xp12a", type: "akustika", model: "Martin Audio XP12A", brand: "Martin Audio", power: "активная", price: 420000, rating: 4.8, reviewsCount: 3, inStock: true },
 
   // Сабвуфер
-  { slug: "martin-xp118a", type: "sub", model: "Martin Audio XP118A SUB", brand: "Martin Audio", power: "сабвуфер 18\"", price: 180000, rating: 4.8, reviewsCount: 4, inStock: true, image: "https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=800&q=70&auto=format&fit=crop" },
+  { slug: "martin-xp118a", type: "sub", model: "Martin Audio XP118A SUB", brand: "Martin Audio", power: "сабвуфер 18\"", price: 180000, rating: 4.8, reviewsCount: 4, inStock: true },
 
   // Микрофоны и радиосистемы
-  { slug: "shure-blx24-sm58", type: "mikrofon", model: "Shure BLX24E/SM58", brand: "Shure", note: "вокальная радиосистема", price: 95000, rating: 4.9, reviewsCount: 18, inStock: true, image: "https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=800&q=70&auto=format&fit=crop" },
-  { slug: "shure-blx24-pg58", type: "mikrofon", model: "Shure BLX24/PG58", brand: "Shure", note: "вокальная радиосистема", price: 80000, rating: 4.8, reviewsCount: 11, inStock: true, image: "https://images.unsplash.com/photo-1565035010268-a3816f98589a?w=800&q=70&auto=format&fit=crop" },
-  { slug: "shure-blx288", type: "mikrofon", model: "Shure BLX288/PG58 Combo", brand: "Shure", note: "2 микрофона", price: 150000, rating: 4.8, reviewsCount: 7, inStock: true, image: "https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=800&q=70&auto=format&fit=crop" },
-  { slug: "shure-qlxd24", type: "mikrofon", model: "Shure QLXD24/B87A", brand: "Shure", note: "цифровая радиосистема", price: 320000, rating: 4.9, reviewsCount: 5, inStock: true, image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=70&auto=format&fit=crop" },
-  { slug: "rolenz-vm200", type: "mikrofon", model: "Rolenz VM 200", brand: "Rolenz", note: "радиосистема", price: 45000, rating: 4.6, reviewsCount: 8, inStock: true, image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=70&auto=format&fit=crop" },
-  { slug: "rolenz-rdl200", type: "mikrofon", model: "Rolenz RDL 200", brand: "Rolenz", note: "радиосистема", price: 50000, rating: 4.6, reviewsCount: 6, inStock: true, image: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=70&auto=format&fit=crop" },
+  { slug: "shure-blx24-sm58", type: "mikrofon", model: "Shure BLX24E/SM58", brand: "Shure", note: "вокальная радиосистема", price: 95000, rating: 4.9, reviewsCount: 18, inStock: true },
+  { slug: "shure-blx24-pg58", type: "mikrofon", model: "Shure BLX24/PG58", brand: "Shure", note: "вокальная радиосистема", price: 80000, rating: 4.8, reviewsCount: 11, inStock: true },
+  { slug: "shure-blx288", type: "mikrofon", model: "Shure BLX288/PG58 Combo", brand: "Shure", note: "2 микрофона", price: 150000, rating: 4.8, reviewsCount: 7, inStock: true },
+  { slug: "shure-qlxd24", type: "mikrofon", model: "Shure QLXD24/B87A", brand: "Shure", note: "цифровая радиосистема", price: 320000, rating: 4.9, reviewsCount: 5, inStock: true },
+  { slug: "rolenz-vm200", type: "mikrofon", model: "Rolenz VM 200", brand: "Rolenz", note: "радиосистема", price: 45000, rating: 4.6, reviewsCount: 8, inStock: true },
+  { slug: "rolenz-rdl200", type: "mikrofon", model: "Rolenz RDL 200", brand: "Rolenz", note: "радиосистема", price: 50000, rating: 4.6, reviewsCount: 6, inStock: true },
 
   // Микшер
-  { slug: "dynacord-powermate", type: "miksher", model: "Dynacord PowerMate 1000-3", brand: "Dynacord", power: "1000 Вт RMS", price: 350000, rating: 4.9, reviewsCount: 7, inStock: true, image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=70&auto=format&fit=crop" },
+  { slug: "dynacord-powermate", type: "miksher", model: "Dynacord PowerMate 1000-3", brand: "Dynacord", power: "1000 Вт RMS", price: 350000, rating: 4.9, reviewsCount: 7, inStock: true },
 ];
 
 // Одиночные generic-страницы (рендерятся через (pages)/[page])

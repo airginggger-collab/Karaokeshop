@@ -21,6 +21,7 @@ import {
   Layers,
 } from "lucide-react";
 import { Container } from "@/components/Container";
+import { ProductImage } from "@/components/ProductImage";
 import { HeroWave } from "@/components/HeroWave";
 import { QuizWidget } from "@/components/QuizWidget";
 import { ClientLogos } from "@/components/ClientLogos";
@@ -277,12 +278,7 @@ export default function HomePage() {
                   className="relative h-56 overflow-hidden sm:h-64"
                   style={{ background: photoBg }}
                 >
-                  <img
-                    src={p.image}
-                    alt={p.model}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
-                  />
+                  <ProductImage src={p.image} model={p.model} className="transition duration-500 group-hover:scale-[1.04]" />
                   {/* Сценарий-бейдж */}
                   <span
                     className="absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-medium"

@@ -32,7 +32,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — редизайн P0#1–5: навигация + WhatsApp + Trust + Hero + Compare удалён
+## Последняя сессия (2026-06-23) — редизайн P0#1–6: навигация + WhatsApp + Trust + Hero + Compare + Placeholder
+
+P0#6 — новый компонент `ProductImage.tsx`: показывает `<img>` если есть `src`, иначе серый градиент с названием модели. Все Unsplash-URL удалены из `site.ts` (sed). `ProductCard` и editorial-блок главной используют `ProductImage`. Фото товаров добавляются через `public/products/<slug>.jpg` + поле `image` в `site.ts`.
+
+## Предыдущая сессия (2026-06-23) — редизайн P0#1–5: навигация + WhatsApp + Trust + Hero + Compare удалён
 
 P0#5 — удалён весь compare-слой: роут `/sravnit`, компоненты `CompareToggle`/`CompareBar`/`CompareClient`, либа `lib/compare.tsx`, `CompareProvider` из `Providers.tsx`, `<CompareBar>` из `layout.tsx`, `CompareToggle` из страницы товара, `/sravnit` из sitemap-списка `site.ts`.
 
