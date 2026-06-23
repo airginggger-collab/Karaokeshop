@@ -32,7 +32,17 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — P2 завершён (#16–23)
+## Последняя сессия (2026-06-23) — P3 завершён (#24–27)
+
+P3#27 — `/kontakty` редизайн: карточка контактов + WhatsApp CTA + блок быстрых ссылок + карта; `ScrollToTop` (левый нижний угол, появляется после 400px скролла) добавлен глобально в layout; кастомная `not-found.tsx` (404) с иконкой Music и кнопками «На главную» / «Каталог».
+
+P3#25 — `/keysy` переработан: Unsplash убран → `Building2` градиент-заглушка; `Badge` из `@kk/ui` → нативный span; FAQ → `FaqAccordion`; добавлен `breadcrumbJsonLd`.
+
+P3#24 — `/gotovye-resheniya` почищен: `Button` из `@kk/ui` → нативные ссылки; добавлен `breadcrumbJsonLd`; импорт `gotovyeResheniyaMeta`.
+
+P3#26 — тёмная тема уже была реализована ранее (ThemeToggle в Header + MobileNav + no-FOUC скрипт в layout).
+
+## Предыдущая сессия — P2 завершён (#16–23)
 
 P2#23 — `/product/[slug]` — добавлена секция «Похожие товары»: до 3 товаров того же бренда + до 6 итого альтернатив того же типа от других брендов. Рендерится через `ProductCard`.
 

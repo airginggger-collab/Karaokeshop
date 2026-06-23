@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Home, Building2, ArrowRight, CheckCircle2 } from "lucide-react";
-import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { priceFmt, siteConfig } from "@/lib/site";
+import { gotovyeResheniyaMeta, priceFmt, siteConfig } from "@/lib/site";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Готовые решения для домашнего и коммерческого караоке",
-  description: "Подобранные комплекты под сценарий: гостиная, баня, кафе, клуб. Цена, состав и всё включено.",
+  title: gotovyeResheniyaMeta.title,
+  description: gotovyeResheniyaMeta.description,
   alternates: { canonical: "/gotovye-resheniya" },
 };
 
@@ -70,77 +70,87 @@ const solutions: Solution[] = [
   },
 ];
 
-const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Интересует готовое решение для ")}`;
-
 export default function Page() {
   const home = solutions.filter((s) => s.category === "home");
   const business = solutions.filter((s) => s.category === "business");
 
   return (
-    <Container className="py-10">
-      <Breadcrumb items={[{ label: "Готовые решения" }]} />
-      <h1 className="font-display text-3xl font-bold sm:text-4xl">Готовые решения</h1>
-      <p className="mt-2 max-w-2xl text-muted-foreground">
-        Подобранные комплекты под конкретный сценарий. Цена, состав, что входит — всё сразу. Уточним детали под ваш объект.
-      </p>
-
-      {/* Для дома */}
-      <section className="mt-10">
-        <div className="flex items-center gap-2">
-          <Home className="h-5 w-5 text-primary" />
-          <h2 className="font-display text-xl font-semibold">Для дома</h2>
-        </div>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          {home.map((s) => (
-            <SolutionCard key={s.id} solution={s} warm />
-          ))}
-        </div>
-      </section>
-
-      {/* Для бизнеса */}
-      <section className="mt-10">
-        <div className="flex items-center gap-2">
-          <Building2 className="h-5 w-5 text-primary" />
-          <h2 className="font-display text-xl font-semibold">Для заведений</h2>
-        </div>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {business.map((s) => (
-            <SolutionCard key={s.id} solution={s} warm={false} />
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <div className="mt-10 rounded-2xl bg-surface p-6">
-        <h2 className="font-medium">Не нашли подходящее?</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Расскажите про задачу — подберём индивидуально и пришлём смету.
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Готовые решения", path: "/gotovye-resheniya" }])
+          ),
+        }}
+      />
+      <Container className="py-10">
+        <Breadcrumb items={[{ label: "Готовые решения" }]} />
+        <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">{gotovyeResheniyaMeta.h1}</h1>
+        <p className="mt-2 max-w-2xl text-muted-foreground">
+          Подобранные комплекты под конкретный сценарий. Цена, состав, что входит — всё сразу. Уточним детали под ваш объект.
         </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <a href={waUrl} target="_blank" rel="noopener noreferrer">
-            <Button>Написать в WhatsApp</Button>
-          </a>
-          <Link href="/kalkulyator">
-            <Button variant="ghost">
+
+        {/* Для дома */}
+        <section className="mt-10">
+          <div className="flex items-center gap-2">
+            <Home className="h-5 w-5 text-primary" />
+            <h2 className="font-display text-xl font-semibold">Для дома</h2>
+          </div>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {home.map((s) => <SolutionCard key={s.id} solution={s} warm />)}
+          </div>
+        </section>
+
+        {/* Для бизнеса */}
+        <section className="mt-10">
+          <div className="flex items-center gap-2">
+            <Building2 className="h-5 w-5 text-primary" />
+            <h2 className="font-display text-xl font-semibold">Для заведений</h2>
+          </div>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {business.map((s) => <SolutionCard key={s.id} solution={s} warm={false} />)}
+          </div>
+        </section>
+
+        {/* CTA */}
+        <div className="mt-10 rounded-2xl bg-surface p-6">
+          <h2 className="font-medium">Не нашли подходящее?</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Расскажите про задачу — подберём индивидуально и пришлём смету.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <a
+              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Хочу подобрать готовое решение.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
+            >
+              Написать в WhatsApp
+            </a>
+            <Link
+              href="/kalkulyator"
+              className="inline-flex items-center gap-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium hover:border-primary"
+            >
               Калькулятор <ArrowRight className="h-4 w-4" />
-            </Button>
-          </Link>
+            </Link>
+          </div>
+          <p className="mt-3 text-xs text-muted-foreground">Ответим в течение часа · Без обязательств</p>
         </div>
-        <p className="mt-3 text-xs text-muted-foreground">Ответим в течение часа · Без обязательств</p>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 }
 
 function SolutionCard({ solution, warm }: { solution: Solution; warm: boolean }) {
-  const { label, scenario, price, system, includes, id } = solution;
+  const { label, scenario, price, system, includes } = solution;
   const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(`Здравствуйте! Интересует готовое решение «${label}».`)}`;
 
   if (warm) {
     return (
       <div
         className="flex flex-col rounded-2xl p-5"
-        style={{ backgroundColor: "var(--warm-bg)", border: "1px solid var(--warm-soft)", color: "var(--warm-fg)", boxShadow: "0 1px 4px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.04)" }}
+        style={{ backgroundColor: "var(--warm-bg)", border: "1px solid var(--warm-soft)", color: "var(--warm-fg)" }}
       >
         <p className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--warm-muted)" }}>{scenario}</p>
         <p className="mt-1 font-display text-lg font-semibold">{label}</p>
@@ -148,13 +158,13 @@ function SolutionCard({ solution, warm }: { solution: Solution; warm: boolean })
         <p className="mt-3 text-xl font-bold" style={{ color: "var(--warm-accent)" }}>{priceFmt(price)}</p>
         <ul className="mt-3 space-y-1">
           {includes.map((item) => (
-            <li key={item} className="flex items-center gap-2 text-sm" style={{ color: "var(--warm-fg)" }}>
+            <li key={item} className="flex items-center gap-2 text-sm">
               <CheckCircle2 className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--warm-accent)" }} />
               {item}
             </li>
           ))}
         </ul>
-        <a href={waUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-sm font-medium" style={{ color: "var(--warm-accent)" }}>
+        <a href={waUrl} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-medium" style={{ color: "var(--warm-accent)" }}>
           Обсудить <ArrowRight className="h-3.5 w-3.5" />
         </a>
       </div>
@@ -164,7 +174,7 @@ function SolutionCard({ solution, warm }: { solution: Solution; warm: boolean })
   return (
     <div
       className="flex flex-col rounded-2xl p-5"
-      style={{ backgroundColor: "var(--night-bg)", border: "1px solid var(--night-soft)", color: "var(--night-fg)", boxShadow: "0 1px 4px rgba(0,0,0,.18), 0 0 0 1px rgba(255,255,255,.04)" }}
+      style={{ backgroundColor: "var(--night-bg)", border: "1px solid var(--night-soft)", color: "var(--night-fg)" }}
     >
       <p className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--night-muted)" }}>{scenario}</p>
       <p className="mt-1 font-display text-lg font-semibold">{label}</p>
@@ -172,13 +182,13 @@ function SolutionCard({ solution, warm }: { solution: Solution; warm: boolean })
       <p className="mt-3 text-xl font-bold" style={{ color: "var(--night-accent)" }}>{priceFmt(price)}</p>
       <ul className="mt-3 space-y-1">
         {includes.map((item) => (
-          <li key={item} className="flex items-center gap-2 text-sm" style={{ color: "var(--night-fg)" }}>
+          <li key={item} className="flex items-center gap-2 text-sm">
             <CheckCircle2 className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--night-accent)" }} />
             {item}
           </li>
         ))}
       </ul>
-      <a href={waUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-sm font-medium" style={{ color: "var(--night-accent)" }}>
+      <a href={waUrl} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-medium" style={{ color: "var(--night-accent)" }}>
         Обсудить <ArrowRight className="h-3.5 w-3.5" />
       </a>
     </div>

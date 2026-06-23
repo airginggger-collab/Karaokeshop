@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { MapPin, Phone, MessageCircle, Mail, Clock } from "lucide-react";
-import { Button } from "@kk/ui";
+import { MapPin, Phone, MessageCircle, Mail, Clock, ArrowRight } from "lucide-react";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { kontaktyMeta, siteConfig } from "@/lib/site";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: kontaktyMeta.title,
@@ -15,55 +15,97 @@ const mapSrc =
   "https://maps.google.com/maps?q=" +
   encodeURIComponent("Алматы, улица Муканова 8") +
   "&z=15&output=embed";
+
 const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Вопрос по караоке-оборудованию.")}`;
 
 export default function Page() {
   return (
-    <Container className="py-10">
-      <Breadcrumb items={[{ label: "Контакты" }]} />
-      <h1 className="font-display text-2xl font-bold">{kontaktyMeta.h1}</h1>
-      <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{kontaktyMeta.description}</p>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Контакты", path: "/kontakty" }])
+          ),
+        }}
+      />
+      <Container className="py-10">
+        <Breadcrumb items={[{ label: "Контакты" }]} />
+        <h1 className="mt-2 font-display text-2xl font-bold">{kontaktyMeta.h1}</h1>
+        <p className="mt-1 max-w-xl text-sm text-muted-foreground">{kontaktyMeta.description}</p>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[340px_1fr]">
-        <div className="space-y-3 text-sm">
-          <p className="flex items-start gap-2">
-            <MapPin className="mt-0.5 h-4 w-4 text-primary" /> {siteConfig.address}
-          </p>
-          <p className="flex items-center gap-2">
-            <Phone className="h-4 w-4 text-primary" />
-            <a href={`tel:${siteConfig.phone.replace(/[^+\d]/g, "")}`} className="hover:text-primary">
-              {siteConfig.phone}
+        <div className="mt-8 grid gap-6 lg:grid-cols-[380px_1fr]">
+          {/* Контактные данные */}
+          <div className="space-y-4">
+            <div className="rounded-2xl border border-border bg-background p-6">
+              <h2 className="mb-4 font-semibold">Как с нами связаться</h2>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-3">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <span>{siteConfig.address}</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone className="h-4 w-4 shrink-0 text-primary" />
+                  <a href={`tel:${siteConfig.phone.replace(/[^+\d]/g, "")}`} className="hover:text-primary">
+                    {siteConfig.phone}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail className="h-4 w-4 shrink-0 text-primary" />
+                  <a href={`mailto:${siteConfig.email}`} className="hover:text-primary">
+                    {siteConfig.email}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Clock className="h-4 w-4 shrink-0 text-primary" />
+                  <span>{siteConfig.hours}</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* WhatsApp CTA */}
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 rounded-2xl bg-[#25D366] py-4 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
+            >
+              <MessageCircle className="h-5 w-5" />
+              Написать в WhatsApp
             </a>
-          </p>
-          <p className="flex items-center gap-2">
-            <Mail className="h-4 w-4 text-primary" />
-            <a href={`mailto:${siteConfig.email}`} className="hover:text-primary">
-              {siteConfig.email}
-            </a>
-          </p>
-          <p className="flex items-center gap-2">
-            <Clock className="h-4 w-4 text-primary" /> {siteConfig.hours}
-          </p>
-          <div className="pt-2">
-            <a href={waUrl} target="_blank" rel="noopener noreferrer">
-              <Button>
-                <MessageCircle className="h-4 w-4" /> Написать в WhatsApp
-              </Button>
-            </a>
+
+            {/* Быстрые ссылки */}
+            <div className="rounded-2xl bg-surface p-5 text-sm">
+              <p className="mb-3 font-medium text-muted-foreground">Частые запросы</p>
+              <ul className="space-y-2">
+                {[
+                  { label: "Подобрать систему для дома", href: "/dlya-doma" },
+                  { label: "Оснастить заведение под ключ", href: "/dlya-biznesa" },
+                  { label: "Рассчитать смету", href: "/kalkulyator" },
+                ].map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href} className="inline-flex items-center gap-1 hover:text-primary">
+                      {l.label} <ArrowRight className="h-3.5 w-3.5" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Карта */}
+          <div className="overflow-hidden rounded-2xl border border-border">
+            <iframe
+              src={mapSrc}
+              title="Карта — karaokeshop, Алматы"
+              loading="lazy"
+              className="h-full min-h-[360px] w-full"
+              style={{ border: 0 }}
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
-
-        <div className="overflow-hidden rounded-2xl border border-border">
-          <iframe
-            src={mapSrc}
-            title="Карта — karaokeshop, Алматы"
-            loading="lazy"
-            className="h-[360px] w-full"
-            style={{ border: 0 }}
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 }

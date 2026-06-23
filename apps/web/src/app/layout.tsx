@@ -8,6 +8,7 @@ import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import Script from "next/script";
 
 const YM_ID = "XXXXXXXX"; // TODO: заменить на реальный ID счётчика Яндекс.Метрики
@@ -97,6 +98,7 @@ export default function RootLayout({
           {children}
           <Footer />
           <WhatsAppFAB />
+          <ScrollToTop />
         </Providers>
         <Script id="ym-init" strategy="afterInteractive">{`
           (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
