@@ -1,6 +1,6 @@
-import { Ruler, Wrench, SlidersHorizontal, Users, RefreshCw } from "lucide-react";
+import { Ruler, Wrench, SlidersHorizontal, Users, RefreshCw, type LucideIcon } from "lucide-react";
 
-const steps = [
+const steps: { icon?: LucideIcon; label: string }[] = [
   { icon: Ruler, label: "Проект звука" },
   { icon: Wrench, label: "Монтаж" },
   { icon: SlidersHorizontal, label: "Настройка" },
@@ -14,7 +14,7 @@ export function ServiceSteps() {
       {steps.map(({ icon: Icon, label }, i) => (
         <div key={label} className="rounded-lg bg-background px-3 py-3">
           <p className="text-xs text-muted-foreground">0{i + 1}</p>
-          <Icon className="mt-1 h-4 w-4 text-primary" />
+          {Icon && <Icon className="mt-1 h-4 w-4 text-primary" />}
           <p className="mt-1 text-sm">{label}</p>
         </div>
       ))}

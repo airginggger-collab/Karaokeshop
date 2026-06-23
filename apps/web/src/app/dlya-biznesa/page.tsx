@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Building2, Users, Music, ShieldCheck, Wrench, ArrowRight, CheckCircle2, TrendingUp } from "lucide-react";
+import { Building2, Users, Music, ShieldCheck, Wrench, ArrowRight, CheckCircle2, TrendingUp, type LucideIcon } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -17,7 +17,7 @@ const businessSystems = products.filter(
   (p) => p.type === "sistema" && (p.scenario === "bar" || p.scenario === "klub")
 );
 
-const venueTypes = [
+const venueTypes: { icon?: LucideIcon; label: string; area: string; body: string; price: string }[] = [
   {
     icon: Music,
     label: "Кафе / ресторан",
@@ -82,12 +82,14 @@ export default function Page() {
               className="flex flex-col rounded-2xl border border-border p-5"
               style={{ borderTopColor: "var(--night-accent)", borderTopWidth: 3, background: "var(--night-bg)", color: "var(--night-fg)" }}
             >
-              <span
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full"
-                style={{ background: "var(--night-soft)", color: "var(--night-accent)" }}
-              >
-                <Icon className="h-5 w-5" />
-              </span>
+              {Icon && (
+                <span
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full"
+                  style={{ background: "var(--night-soft)", color: "var(--night-accent)" }}
+                >
+                  <Icon className="h-5 w-5" />
+                </span>
+              )}
               <p className="mt-3 font-medium">{label}</p>
               <p className="text-xs" style={{ color: "var(--night-muted)" }}>{area}</p>
               <p className="mt-2 text-sm" style={{ color: "var(--night-muted)" }}>{body}</p>

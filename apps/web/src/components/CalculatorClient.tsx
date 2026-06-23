@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { MessageCircle, ShoppingCart, Check, BadgeCheck, Gauge, Wifi, Zap } from "lucide-react";
+import { MessageCircle, ShoppingCart, Check, BadgeCheck, Gauge, Wifi, Zap, type LucideIcon } from "lucide-react";
 import { Button, Badge } from "@kk/ui";
 import { useCart } from "@/lib/cart";
 import { configure, configureByBudget, smetaText, type Calc } from "@/lib/calculator";
@@ -9,7 +9,7 @@ import { priceFmt, siteConfig } from "@/lib/site";
 
 const venueTypes = ["Кафе", "Бар / паб", "Караоке-клуб", "Отель / банкет"];
 
-const expertPoints = [
+const expertPoints: { icon?: LucideIcon; text: string }[] = [
   { icon: Gauge, text: "Мощность акустики считаем по площади и геометрии зала" },
   { icon: Wifi, text: "Shure BLX24 — UHF, автовыбор частоты, не конфликтует с Wi-Fi" },
   { icon: Zap, text: "Балансные XLR-кабели везде — ноль фона от сети 220 В" },
@@ -62,7 +62,7 @@ export function CalculatorClient() {
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {expertPoints.map(({ icon: Icon, text }) => (
           <div key={text} className="flex items-start gap-2.5 rounded-2xl bg-background p-4 text-sm">
-            <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+            {Icon && <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />}
             <span className="text-muted-foreground leading-tight">{text}</span>
           </div>
         ))}

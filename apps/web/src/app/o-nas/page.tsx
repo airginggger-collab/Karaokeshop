@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CalendarClock, Music, GitCompare, Wrench, CheckCircle2 } from "lucide-react";
+import { CalendarClock, Music, GitCompare, Wrench, CheckCircle2, type LucideIcon } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/o-nas" },
 };
 
-const stats = [
+const stats: { icon?: LucideIcon; value: string; label: string }[] = [
   { icon: CalendarClock, value: "с 2012", label: "на рынке Казахстана" },
   { icon: GitCompare, value: "200+", label: "оснащённых объектов" },
   { icon: Music, value: "60 000+", label: "песен в базе" },
@@ -76,13 +76,16 @@ export default function Page() {
 
       {/* Статистика */}
       <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.label} className="rounded-2xl bg-surface p-5">
-            <s.icon className="h-5 w-5 text-primary" />
-            <p className="mt-2 font-display text-2xl font-bold">{s.value}</p>
-            <p className="text-xs text-muted-foreground">{s.label}</p>
-          </div>
-        ))}
+        {stats.map((s) => {
+          const Icon = s.icon;
+          return (
+            <div key={s.label} className="rounded-2xl bg-surface p-5">
+              {Icon && <Icon className="h-5 w-5 text-primary" />}
+              <p className="mt-2 font-display text-2xl font-bold">{s.value}</p>
+              <p className="text-xs text-muted-foreground">{s.label}</p>
+            </div>
+          );
+        })}
       </div>
 
       {/* О компании */}

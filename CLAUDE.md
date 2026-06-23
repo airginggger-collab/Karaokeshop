@@ -99,9 +99,27 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 
 Размещай **первым элементом** внутри `<Container>`, до `<h1>`. Не заменяй самодельным `flex gap-2`.
 
+### Иконки в списках карточек (guard — обязательно)
+
+Поле `icon` в data-массивах — **опциональное в типе и защищённое в рендере**, чтобы удаление иконки не роняло карточку (история бага: «убрал иконку → пропала карточка» = `<undefined/>` → краш рендера / ошибка сборки).
+
+```tsx
+import { Wrench, type LucideIcon } from "lucide-react";
+const items: { icon?: LucideIcon; title: string }[] = [{ icon: Wrench, title: "…" }];
+// в рендере — guard:
+{Icon && <Icon className="h-5 w-5" />}
+// для доступа s.icon: const Icon = s.icon; {Icon && <Icon .../>}
+```
+
+«Убрать иконки с карточек» = убрать поле `icon` из ДАННЫХ. Рендер не трогать — guard уже держит. Применено в: servis, dlya-doma, dlya-biznesa, o-nas, ServiceSteps, CalculatorClient.
+
+### Темизируемый текст — только токен-утилиты
+
+Цвет текста, который меняется по теме, — **только** `text-foreground` / `text-muted-foreground` (флипаются через `.dark` в `theme.css`). **Никаких** `dark:text-[#…]` / `dark:text-white` в компонентах — это возвращает whack-a-mole тёмной темы. `dark:hover:text-white` → не нужен: `hover:text-foreground` в тёмной даёт светлый. (Фон страницы `#0e131c`/`#f5f5f5` в Header/Footer пока хардкод — это не токен; кандидат на `--color-page` позже.)
+
 ### Рассрочка / Kaspi
 
-Рассрочка Kaspi **удалена полностью** — не упоминать в UI, metadata, CTA. Заказ → WhatsApp (`siteConfig.whatsapp`).
+Рассрочка Kaspi **удалена полностью** — не упоминать в UI, metadata, CTA. Заказ → WhatsApp (`siteConfig.whatsapp`). ⚠️ Аудит 2026-06-22 нашёл, что на LIVE рассрочка ещё присутствует (≈21 вхождение) — рассинхрон, решается с заказчиком (Задача 6 в `docs/fix-plan-2026-06-22.md`).
 
 ## Правило: КОММИТ + ПУШ + ДОКИ — всегда в одном коммите
 

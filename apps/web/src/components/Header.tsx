@@ -15,16 +15,16 @@ export function Header() {
           <Mic2 className="h-5 w-5 text-primary" />
           karaokeshop
         </Link>
-        <nav className="hidden flex-1 items-center gap-5 text-sm text-muted-foreground dark:text-[#b8cfe0] md:flex">
+        <nav className="hidden flex-1 items-center gap-5 text-sm text-muted-foreground md:flex">
           {mainNav.map((n) => (
-            <Link key={n.href} href={n.href} className="hover:text-foreground dark:hover:text-white">
+            <Link key={n.href} href={n.href} className="hover:text-foreground">
               {n.label}
             </Link>
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-3">
           <ThemeToggle />
-          <button aria-label="Поиск" className="text-muted-foreground hover:text-foreground dark:text-[#b8cfe0] dark:hover:text-white">
+          <button aria-label="Поиск" className="text-muted-foreground hover:text-foreground">
             <Search className="h-[18px] w-[18px]" />
           </button>
           <CartButton />

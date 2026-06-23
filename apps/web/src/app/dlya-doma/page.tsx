@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Home, Music, ShieldCheck, Wrench, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Home, Music, ShieldCheck, Wrench, ArrowRight, CheckCircle2, type LucideIcon } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const homeSystems = products.filter((p) => p.type === "sistema" && p.scenario === "dom");
 
-const scenarios = [
+const scenarios: { icon?: LucideIcon; label: string; body: string }[] = [
   { icon: Home, label: "Гостиная", body: "Система с хорошей акустикой под телевизор. Управление с дивана, база 60 000+ песен." },
   { icon: Music, label: "Баня / сауна", body: "Влагостойкие колонки, беспроводные микрофоны. Хиты под пар." },
   { icon: Home, label: "Гостевой дом", body: "Всесезонный формат — семья, друзья, праздники. Просто включить и петь." },
@@ -56,9 +56,11 @@ export default function Page() {
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
           {scenarios.map(({ icon: Icon, label, body }) => (
             <div key={label} className="rounded-2xl border border-border bg-background p-5">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
-                <Icon className="h-5 w-5" />
-              </span>
+              {Icon && (
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
+                  <Icon className="h-5 w-5" />
+                </span>
+              )}
               <p className="mt-3 font-medium">{label}</p>
               <p className="mt-1 text-sm text-muted-foreground">{body}</p>
             </div>

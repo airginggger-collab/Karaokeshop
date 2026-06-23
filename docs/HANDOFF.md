@@ -32,6 +32,14 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-23) — раздел C добит: icon-guard везде + чистка хардкод-dark-текста
+
+- **C4 (распространён):** опциональная+guarded иконка во всех списках с `icon:` — `servis`, `dlya-doma`, `dlya-biznesa`, `o-nas`, `ServiceSteps`, `CalculatorClient`. Тип `icon?: LucideIcon` + `{Icon && …}`. Удаление иконки из данных больше не роняет карточку нигде.
+- **C2 (добит):** убраны все хардкод `dark:text-[#…]` / `dark:text-white` / `dark:hover:text-white` в `Header.tsx`, `Footer.tsx`, `layout.tsx` (body). Текст темизируется через `text-foreground`/`text-muted-foreground` (флип в `theme.css`). Проверено визуально в dark — Header/Footer читаемы.
+- Правила в CLAUDE.md: добавлены конвенции «иконки в списках — guard» и «темизируемый текст — только токен-утилиты». Чек-лист раздела C закрыт (C0–C4 ✓).
+- Остаток (вне C): фон страницы `#0e131c`/`#f5f5f5` — хардкод в Header/Footer/globals (кандидат на `--color-page`); Kaspi-рассинхрон на LIVE (Задача 6, ждёт заказчика).
+- Проверено: тесты ui(2)+web(10), build web + Storybook, визуал light/dark/mood.
+
 ## Последняя сессия (2026-06-23) — КОРНЕВОЙ ФИКС токенов + CI (раздел C fix-plan)
 
 Диагноз «правлю в одном месте — в другом не применяется» / бесконечная правка тёмной темы → **двойной источник правды для цветов** (tokens.css дублировал globals.css, globals молча перебивал). Плюс «убрал иконку → пропала карточка» = связность import↔данные↔рендер. Фиксы:
