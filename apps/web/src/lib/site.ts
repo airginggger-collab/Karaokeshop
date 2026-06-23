@@ -16,8 +16,8 @@ export type Landing = { slug: string; h1: string; title: string; description: st
 
 // Сценарные лендинги (кластеры A/B из docs/strategy/url-map.md)
 export const scenarios: Landing[] = [
-  { slug: "dlya-doma", h1: "Караоке для дома", title: "Караоке для дома — купить домашнюю систему, Алматы", description: "Домашние караоке-системы от 415 000 ₸. Рассрочка Kaspi 0-0-12, доставка, гарантия. Подбор по бюджету." },
-  { slug: "dlya-kafe", h1: "Караоке для кафе", title: "Караоке для кафе — система под ключ, Алматы", description: "Караоке для кафе: компактные системы, монтаж и настройка. Рассрочка Kaspi." },
+  { slug: "dlya-doma", h1: "Караоке для дома", title: "Караоке для дома — купить домашнюю систему, Алматы", description: "Домашние караоке-системы от 415 000 ₸. Доставка, гарантия, подбор по бюджету." },
+  { slug: "dlya-kafe", h1: "Караоке для кафе", title: "Караоке для кафе — система под ключ, Алматы", description: "Караоке для кафе: компактные системы, монтаж и настройка под ключ." },
   { slug: "dlya-bara", h1: "Караоке для бара", title: "Караоке для бара — оборудование под ключ, Алматы", description: "Профессиональные караоке-системы для бара. Проект звука, монтаж, обучение. Расчёт по площади зала." },
   { slug: "dlya-restorana", h1: "Караоке для ресторана", title: "Караоке для ресторана — оснащение под ключ", description: "Караоке-комплекты для ресторана: звук, свет, монтаж, обновление песен. Расчёт по площади." },
   { slug: "dlya-kluba", h1: "Караоке для клуба", title: "Караоке для клуба — профессиональное оборудование", description: "Оснащение караоке-клуба под ключ: AST-250/350, акустика RCF, свет. Проект и монтаж." },
@@ -26,14 +26,14 @@ export const scenarios: Landing[] = [
 // Комплекты по площади (кластер H)
 export const bundles: Landing[] = [
   { slug: "do-30", h1: "Караоке для зала до 30 м²", title: "Караоке для зала до 30 м² — готовый комплект", description: "Готовый комплект караоке для кафе до 30 м². Под ключ: монтаж, настройка, обучение." },
-  { slug: "do-50", h1: "Караоке для зала до 50 м²", title: "Караоке для зала до 50 м² — готовый комплект", description: "Готовый комплект караоке для зала до 50 м². Под ключ с рассрочкой Kaspi." },
+  { slug: "do-50", h1: "Караоке для зала до 50 м²", title: "Караоке для зала до 50 м² — готовый комплект", description: "Готовый комплект караоке для зала до 50 м². Под ключ: монтаж, настройка, обучение." },
   { slug: "do-80", h1: "Караоке для бара до 80 м²", title: "Караоке для бара до 80 м² — комплект AST-350", description: "Готовое решение на базе AST-350 для бара до 80 м². Проект, монтаж, обучение." },
   { slug: "do-100", h1: "Караоке для клуба до 100+ м²", title: "Караоке для клуба до 100+ м² — премиум-комплект", description: "Премиум-комплект для клуба от 100 м²: AST-350 + RCF, свет, монтаж под ключ." },
 ];
 
 export type Brand = { slug: string; name: string; h1: string; title: string; description: string };
 export const brands: Brand[] = [
-  { slug: "ast", name: "AST", h1: "Караоке AST (Art System)", title: "Караоке AST (Art System) — модели и цены", description: "Караоке-системы AST: HOME, Mini, AST-50/250/350. Для дома и заведений. Рассрочка Kaspi." },
+  { slug: "ast", name: "AST", h1: "Караоке AST (Art System)", title: "Караоке AST (Art System) — модели и цены", description: "Караоке-системы AST: HOME, Mini, AST-50/250/350. Для дома и заведений." },
   { slug: "studio-evolution", name: "Studio Evolution", h1: "Караоке Studio Evolution", title: "Караоке Studio Evolution / Evobox — купить", description: "Системы Studio Evolution: Evobox, Evobox Plus, Pro2. Для дома, баров и клубов." },
 ];
 
@@ -149,7 +149,7 @@ export const catalogMeta: Landing = {
   slug: "catalog",
   h1: "Каталог",
   title: "Каталог караоке-систем и оборудования",
-  description: "Караоке-системы, акустика, микрофоны, свет. Фильтр по сценарию, бренду и площади. Рассрочка Kaspi.",
+  description: "Караоке-системы, акустика, микрофоны, свет. Фильтр по сценарию, бренду и площади.",
 };
 
 export const podKlyuchMeta: Landing = {
@@ -163,15 +163,11 @@ export const komplektyIndexMeta: Landing = {
   slug: "komplekty",
   h1: "Готовые комплекты по площади",
   title: "Готовые комплекты караоке — по площади заведения",
-  description: "Готовые решения под площадь зала: до 30, 50, 80 и 100+ м². Под ключ с рассрочкой Kaspi.",
+  description: "Готовые решения под площадь зала: до 30, 50, 80 и 100+ м². Под ключ: монтаж и настройка.",
 };
 
 export function priceFmt(n: number): string {
   return new Intl.NumberFormat("ru-RU").format(n) + " ₸";
-}
-
-export function installmentMonthly(price: number): number {
-  return Math.round(price / 12);
 }
 
 export function discountPct(price: number, priceOld?: number): number | null {
@@ -194,7 +190,7 @@ export const kalkulyatorMeta: Landing = {
   slug: "kalkulyator",
   h1: "Онлайн-калькулятор караоке",
   title: "Калькулятор караоке — смета под ключ онлайн",
-  description: "Соберите смету на оснащение караоке под ключ: по параметрам зала или по бюджету. Итог, рассрочка Kaspi, заявка в один клик.",
+  description: "Соберите смету на оснащение караоке под ключ: по параметрам зала или по бюджету. Итог сметы, заявка в один клик.",
 };
 
 export const pesniMeta: Landing = {
@@ -275,7 +271,6 @@ export const blogPosts: BlogPost[] = [
     ],
     faq: [
       { q: "Что входит в оснащение под ключ?", a: "Проект звука под помещение, монтаж, настройка, обучение персонала, гарантия и обновление песен." },
-      { q: "Можно ли в рассрочку?", a: "Да, через Kaspi 0-0-12 для систем, доступных в рассрочку." },
     ],
   },
   {

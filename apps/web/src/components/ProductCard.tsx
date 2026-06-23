@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Speaker } from "lucide-react";
 import { Badge } from "@kk/ui";
 import { CompareToggle } from "./CompareToggle";
-import { priceFmt, installmentMonthly, discountPct, typeLabels, type Product } from "@/lib/site";
+import { priceFmt, discountPct, typeLabels, type Product } from "@/lib/site";
 
 export function ProductCard({ p }: { p: Product }) {
   const pct = discountPct(p.price, p.priceOld);
@@ -37,9 +37,7 @@ export function ProductCard({ p }: { p: Product }) {
         <p className="mt-1 text-[15px] font-semibold">{priceFmt(p.price)}</p>
         {pct ? (
           <p className="text-xs text-muted-foreground line-through">{priceFmt(p.priceOld!)}</p>
-        ) : (
-          <p className="text-xs text-accent-fg">от {priceFmt(installmentMonthly(p.price))}/мес</p>
-        )}
+        ) : null}
       </div>
     </Link>
   );

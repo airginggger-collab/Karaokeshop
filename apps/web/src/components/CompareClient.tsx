@@ -5,11 +5,10 @@ import { X, ShoppingCart, Speaker } from "lucide-react";
 import { Button, Badge } from "@kk/ui";
 import { useCompare } from "@/lib/compare";
 import { useCart } from "@/lib/cart";
-import { products, priceFmt, installmentMonthly, typeLabels, type Product } from "@/lib/site";
+import { products, priceFmt, typeLabels, type Product } from "@/lib/site";
 
 const rows: { label: string; render: (p: Product) => string }[] = [
   { label: "Цена", render: (p) => priceFmt(p.price) },
-  { label: "Рассрочка", render: (p) => `от ${priceFmt(installmentMonthly(p.price))}/мес` },
   { label: "Бренд", render: (p) => p.brand },
   { label: "Тип", render: (p) => typeLabels[p.type] },
   { label: "Сценарий", render: (p) => p.scenarioLabel ?? "—" },

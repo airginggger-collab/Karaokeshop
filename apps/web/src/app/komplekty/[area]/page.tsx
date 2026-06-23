@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Check, CreditCard } from "lucide-react";
+import { Check } from "lucide-react";
 import { Badge, Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Mood } from "@/components/Mood";
@@ -49,10 +49,6 @@ export default async function Page({
       <Badge tone="primary">B2B · под ключ</Badge>
       <h1 className="mt-3 text-2xl font-medium">{b.h1}</h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">{b.description}</p>
-
-      <div className="mt-5 inline-flex items-center gap-1 rounded-md bg-accent-soft px-3 py-1.5 text-sm text-accent-fg">
-        <CreditCard className="h-4 w-4" /> рассрочка Kaspi · под ключ
-      </div>
 
       <div className="mt-6 flex flex-wrap gap-3">
         <Button>Оставить заявку на расчёт</Button>
