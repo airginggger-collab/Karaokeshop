@@ -151,7 +151,7 @@ export default function HomePage() {
         </Link>
 
         {/* Доверие */}
-        <div className={`${cell} flex flex-col justify-center gap-3 bg-background lg:col-span-2`}>
+        <Link href="/servis" className={`${cell} group flex flex-col justify-center gap-3 bg-background lg:col-span-2`}>
           <p className="flex items-center gap-2 text-sm font-medium">
             <CalendarClock className="h-4 w-4 text-primary" /> С 2012 года
           </p>
@@ -161,7 +161,10 @@ export default function HomePage() {
           <p className="flex items-center gap-2 text-sm font-medium">
             <Wrench className="h-4 w-4 text-primary" /> Монтаж и настройка
           </p>
-        </div>
+          <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-primary opacity-0 transition group-hover:opacity-100">
+            Подробнее <ArrowRight className="h-3 w-3" />
+          </span>
+        </Link>
       </div>
 
       {/* Ценовые уровни */}
