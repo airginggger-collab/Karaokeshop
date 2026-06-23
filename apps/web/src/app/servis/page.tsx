@@ -55,13 +55,10 @@ export default function Page() {
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        {services.map(({ icon: Icon, title, body }) => (
-          <div key={title} className="rounded-2xl border border-border bg-background p-5 shadow-sm">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <Icon className="h-5 w-5" />
-            </span>
-            <h2 className="mt-3 font-medium">{title}</h2>
-            <p className="mt-1 text-sm text-muted-foreground">{body}</p>
+        {services.map(({ title, body }) => (
+          <div key={title} className="rounded-2xl border border-border bg-background p-6 shadow-sm">
+            <h2 className="font-display text-xl font-bold">{title}</h2>
+            <p className="mt-2 text-base text-muted-foreground">{body}</p>
           </div>
         ))}
       </div>
