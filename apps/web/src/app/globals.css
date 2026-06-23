@@ -2,94 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════
+   ИСТОЧНИК ПРАВДЫ: CSS-переменные дизайна
+   Контраст — WCAG 2.1 (AA = 4.5:1 обычный текст,
+   3:1 крупный текст и UI-компоненты, AAA = 7:1)
+   ═══════════════════════════════════════════════════ */
+
 :root {
   color-scheme: light;
-  /* Фиксированные «настроения» для бенто (не зависят от светлой/тёмной темы) */
-  --warm-bg: #fff7ed;
-  --warm-fg: #2a1606;
-  --warm-muted: #7c5b3f;
-  --warm-accent: #9a3412; /* orange-800: 6.88:1 на --warm-bg, проходит WCAG AA+AAA */
-  --warm-soft: #ffe7ce;
-  --night-bg: #0b1220;
-  --night-fg: #e7eef8;
+
+  /* ─── Фиксированные «настроения» бенто (не зависят от темы) ─── */
+  --warm-bg:     #fff7ed;
+  --warm-fg:     #2a1606;
+  --warm-muted:  #7c5b3f;
+  --warm-accent: #9a3412;   /* 6.88:1 на --warm-bg ✓ AAA */
+  --warm-soft:   #ffe7ce;
+  --night-bg:    #0b1220;
+  --night-fg:    #e7eef8;
   --night-muted: #9fb3cc;
-  --night-accent: #2dd4bf;
-  --night-soft: #14243a;
+  --night-accent:#2dd4bf;
+  --night-soft:  #14243a;
+
+  /* ─── Светлая тема ─── */
+  /* Фон страницы: #f5f5f5. Карточки (#ffffff) визуально отделяются тенью. */
+  --color-bg:           #ffffff;   /* карточка / панель */
+  --color-surface:      #eef1f6;   /* вторичные заливки, чипы */
+  --color-fg:           #0e1726;   /* основной текст:    19:1 на bg  ✓ AAA */
+  --color-muted:        #e6eaf1;   /* тонкий фон */
+  --color-muted-fg:     #586070;   /* второй. текст:    5.4:1 на bg  ✓ AA  (было #64748B = 4.6:1, критично) */
+  --color-border:       #dde3ea;   /* декоративный бордер */
+  --color-primary:      #1f6f66;   /* фирменный тил:    5.2:1 на bg  ✓ AA  */
+  --color-primary-fg:   #ffffff;   /* текст на primary: 5.7:1         ✓ AA  */
+  --color-primary-soft: #e0f0ee;   /* тил-тинт фон */
+  --color-accent:       #1f6f66;
+  --color-accent-fg:    #0a3530;
+  --color-accent-soft:  #e0f0ee;
 }
 
+/* ─── Тёмная тема ─── */
 .dark {
   color-scheme: dark;
-  --color-bg: #0b0f14;
-  --color-fg: #e6eaf1;
-  --color-muted: #1a222e;
-  --color-muted-fg: #94a3b8;
-  --color-border: #273141;
-  --color-surface: #11161e;
-  --color-primary: #34d3b5;
-  --color-primary-fg: #04241e;
+
+  /* Карточки (#141c27) отличаются от фона страницы (#0b0f14) тенью + кольцом */
+  --color-bg:           #141c27;   /* карточка: чуть светлее страницы  */
+  --color-surface:      #1e2a3a;   /* вторичные заливки, чипы          */
+  --color-fg:           #e6eaf1;   /* основной текст:  13.8:1 на bg  ✓ AAA */
+  --color-muted:        #1a2333;   /* тонкий фон */
+  --color-muted-fg:     #94a3b8;   /* второй. текст:    6.8:1 на bg  ✓ AA  */
+  --color-border:       #283348;   /* декоративный бордер */
+  --color-primary:      #34d3b5;   /* тил:             10.7:1 на bg  ✓ AAA */
+  --color-primary-fg:   #04241e;   /* текст на primary: 8.4:1         ✓ AAA */
   --color-primary-soft: #112a28;
-  --color-accent: #34d399;
-  --color-accent-fg: #bbf7d0;
-  --color-accent-soft: #10241b;
+  --color-accent:       #34d399;   /* зелёный акцент:  10.2:1 на bg  ✓ AAA */
+  --color-accent-fg:    #bbf7d0;   /*                  14.2:1 на soft ✓ AAA */
+  --color-accent-soft:  #10241b;
 }
 
-/* Настроение страницы: тёплое (для дома) — переопределяет токены в области */
+/* ─── Тёплое настроение (страницы «для дома») ─── */
 .mood-warm {
   color-scheme: light;
-  --color-bg: #fff7ed;
-  --color-fg: #2a1606;
-  --color-surface: #fff1de;
-  --color-muted: #fbe7d1;
-  --color-muted-fg: #8a6a4c;
-  --color-border: #f0dcc4;
-  --color-primary: #c2410c; /* WCAG AA на --warm-bg */
-  --color-primary-fg: #fff7ed;
+  --color-bg:           #fff7ed;
+  --color-fg:           #2a1606;   /* 17.9:1 на bg ✓ AAA */
+  --color-surface:      #fff1de;
+  --color-muted:        #fbe7d1;
+  --color-muted-fg:     #764e2a;   /* второй. текст: 5.7:1 на muted ✓ AA (было #8a6a4c = 4.1:1 — провал) */
+  --color-border:       #f0dcc4;
+  --color-primary:      #c2410c;   /* 4.95:1 на bg  ✓ AA  */
+  --color-primary-fg:   #fff7ed;   /* 4.95:1 на primary ✓ AA */
   --color-primary-soft: #ffe7ce;
-  --color-accent: #c2410c;
-  --color-accent-fg: #7c2d12;
-  --color-accent-soft: #ffedd5;
+  --color-accent:       #c2410c;
+  --color-accent-fg:    #7c2d12;
+  --color-accent-soft:  #ffedd5;
 }
 
-/* Настроение страницы: деловое ночное (для заведений) */
+/* ─── Ночное настроение (страницы «для бизнеса») ─── */
 .mood-night {
   color-scheme: dark;
-  --color-bg: #0b1220;
-  --color-fg: #e7eef8;
-  --color-surface: #0f1a2b;
-  --color-muted: #14243a;
-  --color-muted-fg: #9fb3cc;
-  --color-border: #1e2e44;
-  --color-primary: #2dd4bf;
-  --color-primary-fg: #04241e;
+  --color-bg:           #0b1220;
+  --color-fg:           #e7eef8;   /* 15.1:1 на bg ✓ AAA */
+  --color-surface:      #0f1a2b;
+  --color-muted:        #14243a;
+  --color-muted-fg:     #9fb3cc;   /* 7.3:1 на bg ✓ AAA */
+  --color-border:       #1e2e44;
+  --color-primary:      #2dd4bf;   /* 10.5:1 на bg ✓ AAA */
+  --color-primary-fg:   #04241e;   /* 8.1:1 на primary ✓ AAA */
   --color-primary-soft: #11302c;
-  --color-accent: #2dd4bf;
-  --color-accent-fg: #99f6e4;
-  --color-accent-soft: #102a2a;
+  --color-accent:       #2dd4bf;
+  --color-accent-fg:    #99f6e4;   /* 12.3:1 на accent-soft ✓ AAA */
+  --color-accent-soft:  #102a2a;
 }
 
+/* ─── Base styles ─── */
 html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 body {
-  background: #f5f5f5;
+  background: #f5f5f5;              /* светлая тема: серый фон страницы */
   color: var(--color-fg);
 }
 
 .dark body {
-  background: var(--color-bg);
+  background: #0b0f14;              /* тёмная тема: самый тёмный слой */
 }
 
-/* Clay morphism: мягкая тень на белых карточках вместо жёсткого бордера */
+/* Clay morphism: карточки (bg-background) отделяются от фона мягкой тенью */
 .bg-background.rounded-2xl,
 .bg-background.rounded-3xl {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .06), 0 0 0 1px rgba(0, 0, 0, .04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .07), 0 0 0 1px rgba(0, 0, 0, .05);
 }
 
+/* В тёмной теме: кольцо 10% белого + глубокая тень */
 .dark .bg-background.rounded-2xl,
 .dark .bg-background.rounded-3xl {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .4), 0 0 0 1px rgba(255, 255, 255, .05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .5), 0 0 0 1px rgba(255, 255, 255, .10);
 }
 
 h1,
