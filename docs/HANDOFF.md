@@ -32,7 +32,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — редизайн P0 COMPLETE (задачи 1–7)
+## Последняя сессия (2026-06-23) — P1#8: мобильный drawer
+
+`MobileNav.tsx` переписан: полноэкранный drawer (slide from left), `body overflow:hidden` при открытии, активный пункт `bg-primary/10 text-primary`, WhatsApp-кнопка + телефон/часы в футере drawer.
+
+## Предыдущая сессия (2026-06-23) — редизайн P0 COMPLETE (задачи 1–7)
 
 P0#7 — `apps/web/src/app/layout.tsx`: Яндекс.Метрика через `next/script` (strategy="afterInteractive"), вебвизор включён. Константа `YM_ID = "XXXXXXXX"` — заменить на реальный ID счётчика.
 
