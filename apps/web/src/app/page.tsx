@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   Wrench,
   Sparkles,
+  MapPin,
 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { ProductImage } from "@/components/ProductImage";
@@ -198,6 +199,14 @@ export default function HomePage() {
           </svg>
           С 2012 года · Алматы
         </span>
+        <div className="mx-2 hidden h-4 w-px bg-border sm:block" />
+        <Link
+          href="/kontakty"
+          className="flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-medium text-primary transition hover:bg-primary/10"
+        >
+          <MapPin className="h-3 w-3" />
+          Шоурум · Выезд по Алматы за 1 час
+        </Link>
       </div>
 
       {/* Trust-блок: 4 цифры */}

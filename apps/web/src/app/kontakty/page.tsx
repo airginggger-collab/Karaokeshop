@@ -34,7 +34,35 @@ export default function Page() {
         <h1 className="mt-2 font-display text-2xl font-bold">{kontaktyMeta.h1}</h1>
         <p className="mt-1 max-w-xl text-sm text-muted-foreground">{kontaktyMeta.description}</p>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[380px_1fr]">
+        {/* Алматы-баннер */}
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          <div className="flex items-start gap-4 rounded-2xl border border-primary/30 bg-primary/5 p-5">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-white">
+              <MapPin className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="font-semibold">Подъехать в шоурум</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">{siteConfig.address}</p>
+              <p className="mt-1.5 text-xs font-medium text-primary">
+                Покажем живой звук систем AST и Studio Evolution
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 rounded-2xl border border-primary/30 bg-primary/5 p-5">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-white">
+              <Clock className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="font-semibold">Выезд на объект</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">По любому району Алматы в течение 1 часа</p>
+              <p className="mt-1.5 text-xs font-medium text-primary">
+                Замерим акустику, составим смету — бесплатно
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-6 lg:grid-cols-[380px_1fr]">
           {/* Контактные данные */}
           <div className="space-y-4">
             <div className="rounded-2xl border border-border bg-background p-6">
