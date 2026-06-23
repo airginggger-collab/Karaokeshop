@@ -81,7 +81,7 @@ export default function HomePage() {
         <Link
           href="/dlya-doma"
           className={`${cell} group flex flex-col lg:col-span-2`}
-          style={{ backgroundColor: "var(--warm-bg)", color: "var(--warm-fg)" }}
+          style={{ backgroundColor: "var(--warm-bg)", color: "var(--warm-fg)", border: "1px solid var(--warm-soft)" }}
         >
           <span
             className="inline-flex h-10 w-10 items-center justify-center rounded-full"
@@ -151,14 +151,14 @@ export default function HomePage() {
         </Link>
 
         {/* Доверие */}
-        <div className={`${cell} flex flex-col justify-center gap-3 bg-surface lg:col-span-2`}>
-          <p className="flex items-center gap-2 text-sm">
+        <div className={`${cell} flex flex-col justify-center gap-3 bg-background lg:col-span-2`}>
+          <p className="flex items-center gap-2 text-sm font-medium">
             <CalendarClock className="h-4 w-4 text-primary" /> С 2012 года
           </p>
-          <p className="flex items-center gap-2 text-sm">
+          <p className="flex items-center gap-2 text-sm font-medium">
             <ShieldCheck className="h-4 w-4 text-primary" /> Гарантия + сервис-центр
           </p>
-          <p className="flex items-center gap-2 text-sm">
+          <p className="flex items-center gap-2 text-sm font-medium">
             <Wrench className="h-4 w-4 text-primary" /> Монтаж и настройка
           </p>
         </div>
@@ -392,8 +392,8 @@ export default function HomePage() {
             { step: "04", title: "Настройка", body: "Откалибруем звук, загрузим базу и проверим всё вместе с вами." },
             { step: "05", title: "Поддержка", body: "Гарантия, сервис-центр и обновление репертуара по договору." },
           ].map((s) => (
-            <div key={s.step} className="flex flex-col rounded-2xl bg-surface p-5">
-              <span className="font-display text-3xl font-bold text-primary/20">{s.step}</span>
+            <div key={s.step} className="flex flex-col rounded-2xl bg-background p-5">
+              <span className="font-display text-3xl font-bold text-primary/40">{s.step}</span>
               <p className="mt-2 font-medium">{s.title}</p>
               <p className="mt-1 text-sm text-muted-foreground">{s.body}</p>
             </div>
