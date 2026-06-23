@@ -32,7 +32,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — SEO-блог: +8 статей по ~5 000 симв. (итого 18, 68 стр.)
+## Последняя сессия (2026-06-23) — floating orbs + AnimationToggle
+
+HeroWave: 28 div-баров → 3 CSS floating gradient orbs (only `transform`+`opacity`, `will-change: transform`). Управление через `.anim-paused` класс на `<html>` + CustomEvent `kk-anim-toggle`/`kk-anim-state`. Новый компонент `AnimationToggle` — фиксированная кнопка ⏸/▶ рядом со ScrollToTop (`bottom-[72px] left-4`), глобально в layout.
+
+## Предыдущая сессия (2026-06-23) — SEO-блог: +8 статей по ~5 000 симв. (итого 18, 68 стр.)
 
 Пакет 2: 8 статей с плотным содержанием (~5 000 символов каждая, без воды). Страниц: 60 → 68.
 - Карао для бани и сауны (IP-защита, расстановка, кабели)

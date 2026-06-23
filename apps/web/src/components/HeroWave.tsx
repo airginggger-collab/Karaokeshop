@@ -2,105 +2,131 @@
 
 import { useEffect, useState } from "react";
 
-const BARS = 28;
+/* ─── Три floating-orb'а. Только transform + opacity → GPU composited layer.
+   Никаких requestAnimationFrame, никакого JS в рендер-цикле.
+   Управление через CSS-класс .anim-paused на <html>. ─── */
 
-const heights = [
-  0.35, 0.55, 0.75, 0.9, 0.65, 0.45, 0.8, 0.6, 0.95, 0.5,
-  0.7, 0.85, 0.4, 0.65, 0.9, 0.55, 0.75, 0.45, 0.8, 0.6,
-  0.7, 0.5, 0.85, 0.4, 0.65, 0.9, 0.55, 0.75,
-];
-
-const delays = [
-  0, 0.18, 0.06, 0.3, 0.12, 0.24, 0.08, 0.36, 0.02, 0.2,
-  0.14, 0.28, 0.1, 0.22, 0.04, 0.32, 0.16, 0.26, 0.07, 0.19,
-  0.11, 0.31, 0.05, 0.23, 0.13, 0.29, 0.09, 0.25,
+const ORBS = [
+  {
+    /* правый — тёплый акцент */
+    size: 520,
+    style: {
+      top: "-15%",
+      right: "-8%",
+      background: "radial-gradient(circle, var(--night-accent) 0%, transparent 70%)",
+      opacity: 0.28,
+      animationName: "kk-orb-a",
+      animationDuration: "14s",
+    },
+  },
+  {
+    /* центр-низ — холодный */
+    size: 380,
+    style: {
+      bottom: "-20%",
+      left: "25%",
+      background: "radial-gradient(circle, var(--color-primary) 0%, transparent 70%)",
+      opacity: 0.18,
+      animationName: "kk-orb-b",
+      animationDuration: "19s",
+    },
+  },
+  {
+    /* левый верх — небольшой */
+    size: 260,
+    style: {
+      top: "5%",
+      left: "-6%",
+      background: "radial-gradient(circle, var(--night-accent) 0%, transparent 70%)",
+      opacity: 0.14,
+      animationName: "kk-orb-c",
+      animationDuration: "24s",
+    },
+  },
 ];
 
 export function HeroWave() {
-  const [reduced, setReduced] = useState(false);
   const [paused, setPaused] = useState(false);
 
+  /* Читаем предпочтение пользователя из localStorage */
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const stored = localStorage.getItem("kk-anim") === "off";
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const shouldPause = stored || mq;
+    setPaused(shouldPause);
+    document.documentElement.classList.toggle("anim-paused", shouldPause);
   }, []);
 
-  const stopped = reduced || paused;
+  const toggle = () => {
+    const next = !paused;
+    setPaused(next);
+    document.documentElement.classList.toggle("anim-paused", next);
+    try { localStorage.setItem("kk-anim", next ? "off" : "on"); } catch {}
+  };
 
   return (
     <>
       <style>{`
-        @keyframes kk-bar {
-          0%, 100% { transform: scaleY(0.15); }
-          50%       { transform: scaleY(1); }
+        @keyframes kk-orb-a {
+          0%,100% { transform: translate(0px, 0px) scale(1); }
+          33%      { transform: translate(-30px, 20px) scale(1.08); }
+          66%      { transform: translate(20px, -25px) scale(0.95); }
+        }
+        @keyframes kk-orb-b {
+          0%,100% { transform: translate(0px, 0px) scale(1); }
+          40%      { transform: translate(40px, -30px) scale(1.1); }
+          70%      { transform: translate(-20px, 15px) scale(0.93); }
+        }
+        @keyframes kk-orb-c {
+          0%,100% { transform: translate(0px, 0px) scale(1); }
+          50%      { transform: translate(25px, 30px) scale(1.12); }
+        }
+        .anim-paused .kk-orb {
+          animation-play-state: paused !important;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .kk-orb { animation: none !important; }
         }
       `}</style>
 
-      {/* Equalizer bars */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 right-0 flex items-end justify-center gap-[3px] px-6 pb-0"
-        style={{ height: "55%", opacity: 0.18 }}
+        className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        {heights.map((h, i) => (
+        {ORBS.map((orb, i) => (
           <div
             key={i}
+            className="kk-orb absolute rounded-full"
             style={{
-              flex: "1 1 0",
-              maxWidth: 14,
-              height: `${h * 100}%`,
-              borderRadius: "3px 3px 0 0",
-              backgroundColor: "var(--night-accent)",
-              transformOrigin: "bottom",
-              animation: stopped
-                ? "none"
-                : `kk-bar ${1.4 + h * 0.8}s ${delays[i]}s ease-in-out infinite`,
-              transform: stopped ? "scaleY(0.2)" : undefined,
+              width: orb.size,
+              height: orb.size,
+              ...orb.style,
+              animationTimingFunction: "ease-in-out",
+              animationIterationCount: "infinite",
+              willChange: "transform",
             }}
           />
         ))}
       </div>
 
-      {/* Reduce Motion toggle — bottom-left, like microsoft.ai */}
-      <button
-        onClick={() => setPaused((p) => !p)}
-        className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-medium transition"
-        style={{
-          background: "rgba(255,255,255,0.08)",
-          color: "var(--night-muted)",
-          border: "1px solid rgba(255,255,255,0.12)",
-        }}
-        aria-label={paused ? "Включить анимацию" : "Выключить анимацию"}
-      >
-        <span
-          style={{
-            display: "inline-block",
-            width: 20,
-            height: 11,
-            borderRadius: 6,
-            background: paused ? "rgba(255,255,255,0.15)" : "var(--night-accent)",
-            position: "relative",
-            transition: "background 0.2s",
-          }}
-        >
-          <span
-            style={{
-              position: "absolute",
-              top: 2,
-              left: paused ? 2 : 11,
-              width: 7,
-              height: 7,
-              borderRadius: "50%",
-              background: "#fff",
-              transition: "left 0.2s",
-            }}
-          />
-        </span>
-        {paused ? "Анимация выкл" : "Анимация вкл"}
-      </button>
+      {/* Кнопка управления анимацией — в AnimationToggle (layout.tsx) */}
+      {/* Экспортируем toggle для использования снаружи */}
+      <_HeroToggleTrigger paused={paused} onToggle={toggle} />
     </>
   );
+}
+
+/* Невидимый маркер — реальная кнопка в AnimationToggle читает состояние через custom event */
+function _HeroToggleTrigger({ paused, onToggle }: { paused: boolean; onToggle: () => void }) {
+  useEffect(() => {
+    const handler = () => onToggle();
+    window.addEventListener("kk-anim-toggle", handler);
+    return () => window.removeEventListener("kk-anim-toggle", handler);
+  }, [onToggle]);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("kk-anim-state", { detail: { paused } }));
+  }, [paused]);
+
+  return null;
 }

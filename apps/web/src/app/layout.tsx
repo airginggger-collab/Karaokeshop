@@ -9,6 +9,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { AnimationToggle } from "@/components/AnimationToggle";
 import Script from "next/script";
 
 const YM_ID = "XXXXXXXX"; // TODO: заменить на реальный ID счётчика Яндекс.Метрики
@@ -99,6 +100,7 @@ export default function RootLayout({
           <Footer />
           <WhatsAppFAB />
           <ScrollToTop />
+          <AnimationToggle />
         </Providers>
         <Script id="ym-init" strategy="afterInteractive">{`
           (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
