@@ -100,14 +100,31 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 
 Рассрочка Kaspi **удалена полностью** — не упоминать в UI, metadata, CTA. Заказ → WhatsApp (`siteConfig.whatsapp`).
 
+## Правило: КОММИТ + ПУШ + ДОКИ — всегда в одном коммите
+
+**Никогда не коммитить код без обновления `docs/HANDOFF.md` в том же коммите.** Никогда не коммитить без немедленного `git push origin main`.
+
+Три шага всегда идут вместе — нельзя пропустить ни один:
+1. **Коммит** (`git -C ~/Desktop/karaokeshop commit`) — с обновлённым `docs/HANDOFF.md`
+2. **Пуш** (`git push origin main`) — сразу после коммита, не позже
+3. **Доки** (`docs/HANDOFF.md`) — в том же коммите что и код, не follow-up'ом
+
+| Что изменилось | Что обновить |
+|---|---|
+| Любой код / компонент | `docs/HANDOFF.md` — раздел «Последняя сессия» |
+| Новый роут / страница | `docs/HANDOFF.md` + `apps/web/src/app/sitemap.ts` |
+| Дизайн / токены / тема | `docs/HANDOFF.md` |
+| Стек / зависимости / конфиг | `CLAUDE.md` + `docs/HANDOFF.md` |
+
 ## Чеклист перед коммитом
 
 - [ ] `npm run build -w web` — собирается чисто (статика в `apps/web/out`)
 - [ ] `npm test -w web` и `npm test -w @kk/ui` — зелёные
+- [ ] **`docs/HANDOFF.md` обновлён** в этом же коммите
 - [ ] Если новый роут — добавлен по [url-map.md](docs/strategy/url-map.md) с `generateMetadata` (title/description), есть в sitemap, **есть `<Breadcrumb>`**
 - [ ] Если изменена модель данных — [docs/context/data-model.md](docs/context/data-model.md) обновлён
 - [ ] Если изменён контент для владельца — сверено с [docs/redaktirovanie-sajta.md](docs/redaktirovanie-sajta.md)
-- [ ] Коммит-автор — `airginggger-collab <airg.inggger@gmail.com>`, push по SSH в `main`
+- [ ] Коммит-автор — `airginggger-collab <airg.inggger@gmail.com>`, push по SSH в `main` **сразу**
 
 ## Ссылки
 
