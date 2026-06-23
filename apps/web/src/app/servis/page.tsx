@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ShieldCheck, Wrench, RefreshCw, Phone, ArrowRight } from "lucide-react";
+import { ShieldCheck, Wrench, RefreshCw, Phone, ArrowRight, type LucideIcon } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/servis" },
 };
 
-const services = [
+const services: { icon?: LucideIcon; title: string; body: string }[] = [
   {
     icon: Wrench,
     title: "Подключение и настройка",
@@ -57,9 +57,11 @@ export default function Page() {
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {services.map(({ icon: Icon, title, body }) => (
           <div key={title} className="rounded-2xl border border-border bg-background p-5 shadow-sm">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <Icon className="h-5 w-5" />
-            </span>
+            {Icon && (
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
+                <Icon className="h-5 w-5" />
+              </span>
+            )}
             <h2 className="mt-3 text-base font-semibold">{title}</h2>
             <p className="mt-1 text-sm text-foreground/70">{body}</p>
           </div>

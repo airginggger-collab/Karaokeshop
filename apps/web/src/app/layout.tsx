@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Unbounded } from "next/font/google";
 import "@kk/tokens/tokens.css";
+import "@kk/tokens/theme.css";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
 import { Providers } from "@/components/Providers";

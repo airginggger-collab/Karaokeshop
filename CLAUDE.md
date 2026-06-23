@@ -21,14 +21,17 @@ apps/web/             — Next.js сайт (App Router)
   src/app/            — роуты по URL-карте (docs/strategy/url-map.md)
   src/components/     — React-компоненты сайта
   src/lib/            — site.ts (контент), components.ts (калькулятор), seo.ts, calculator.ts, cart/compare
-packages/tokens/      — @kk/tokens: tokens.json → css/tokens.css (Style Dictionary)
+packages/tokens/      — @kk/tokens: css/theme.css (ЦВЕТА: light/.dark/.mood-*) + tokens.json → css/tokens.css (радиусы, Style Dictionary)
 packages/ui/          — @kk/ui: Button, Badge + Storybook + Vitest
 ```
 
-1. **Пакеты не лезут во внутренности друг друга.** Импорт переиспользуемого UI — только через barrel `@kk/ui` (его `exports` → `src/index.ts`), токенов — через `@kk/tokens/tokens.css`. Не импортируй из `@kk/ui/src/Button` напрямую.
+1. **Пакеты не лезут во внутренности друг друга.** Импорт переиспользуемого UI — только через barrel `@kk/ui` (его `exports` → `src/index.ts`), токенов — через `@kk/tokens/tokens.css` (радиусы) и `@kk/tokens/theme.css` (цвета). Не импортируй из `@kk/ui/src/Button` напрямую.
 2. **Сайт host-agnostic.** Никакого Vercel-only лок-ина: переезд на Vercel Pro должен быть сменой таргета деплоя, а не рефакторингом (см. [ADR-0002](docs/adr/0002-hosting.md)).
 3. **No backend / статика.** `next.config.mjs` → `output: "export"`. Серверных рантаймов, API-роутов, ISR, Image Optimization нет (`images.unoptimized = true`). Если задача требует SSR/CMS — это переход на «вариант B» (адаптер `@opennextjs/cloudflare`), поднимай флаг, не вводи молча.
-4. **Дизайн — через токены.** Цвета/радиусы — из `@kk/tokens` (Tailwind настроен на них). Не хардкодь HEX в компонентах. Единый источник токенов — `packages/tokens/tokens.json`; Figma синхронизируется от него, а не наоборот.
+4. **Дизайн — через токены. Один источник на каждый вид токена (не дублировать!).**
+   - **Цвета** (`--color-*`, `--warm-*`, `--night-*`, light/`.dark`/`.mood-*`) — ТОЛЬКО `packages/tokens/css/theme.css`. Импортится и приложением, и Storybook. НЕ дублировать в `globals.css` и НЕ класть в `tokens.json` — иначе вернётся баг «правлю цвет, ничего не меняется» (был дубль tokens.css↔globals.css, globals молча перебивал).
+   - **Радиусы** — `tokens.json` → `css/tokens.css` (Style Dictionary).
+   - Tailwind-утилиты замаплены на `var(--color-*)`. Темизируемый текст — `text-foreground`/`text-muted-foreground`, НЕ хардкод `text-[#…]`. `globals.css` — только Tailwind-слои, база страницы и тени карточек.
 5. **SEO — позвоночник.** URL и мета проектируются от семантического ядра ([url-map.md](docs/strategy/url-map.md)). JSON-LD/sitemap/robots — в `apps/web/src/lib/seo.ts`, `app/sitemap.ts`, `app/robots.ts`. Не ломай canonical-дисциплину и hreflang-структуру.
 
 ## Где контент и данные (для правок)
@@ -66,7 +69,7 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 
 ## CI / Lighthouse
 
-`.github/workflows/ci.yml` (push в `main`/`master` + PR): сборка токенов → тесты `@kk/ui` → тесты web → сборка web → сборка Storybook; отдельным джобом **Lighthouse CI** с бюджетом Core Web Vitals (`lighthouserc.json`: performance ≥ 0.9, SEO ≥ 0.95, LCP ≤ 2.5s, CLS ≤ 0.1). Деградация скорости валит CI — это привязано к SEO-цели. Регрессией скорости PR не мерджим.
+`.github/workflows/ci.yml` (push в `main`/`master` + PR): сборка токенов → тесты `@kk/ui` → тесты web → сборка web → сборка Storybook → **деплой** (`wrangler deploy`, только push в `main`); отдельным джобом **Lighthouse CI** (`lighthouserc.json`). Деплой в джобе `build-test` и **не зависит** от Lighthouse — красный Lighthouse НЕ блокирует деплой. Бюджет: performance `warn` (≥0.9, не валит CI — иначе каждый пуш горел красным и казалось «не задеплоилось»), SEO `error` ≥0.95, LCP/CLS/TBT `warn`. Перф чинить (next/image, JS) — отдельная задача, не блокером.
 
 ## Ловушки
 

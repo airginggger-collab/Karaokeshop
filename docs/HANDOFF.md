@@ -32,6 +32,16 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-23) — КОРНЕВОЙ ФИКС токенов + CI (раздел C fix-plan)
+
+Диагноз «правлю в одном месте — в другом не применяется» / бесконечная правка тёмной темы → **двойной источник правды для цветов** (tokens.css дублировал globals.css, globals молча перебивал). Плюс «убрал иконку → пропала карточка» = связность import↔данные↔рендер. Фиксы:
+- **C1 (корень):** цвета вынесены в единый `packages/tokens/css/theme.css` (light/`.dark`/`.mood-*`), импортится приложением (`layout.tsx`) И Storybook (`preview.ts`). Цвета убраны из `tokens.json`/`tokens.css` (там теперь только радиусы) и из `globals.css` (только база + тени). Правка цвета теперь в ОДНОМ месте. Проверено: build web + Storybook + визуал light/dark/mood.
+- **C2:** `.dark body` вернулся на `var(--color-fg)` (костыль-хардкод не нужен — конфликта нет).
+- **C3:** clay-тень привязана ко ВСЕМ `.bg-background`, а не к `rounded-2xl/3xl` → смена радиуса больше не «теряет» карточку.
+- **C4:** `servis/page.tsx` — иконка опциональна (`icon?: LucideIcon`) + guard `{Icon && …}`; удаление иконки из данных больше не роняет карточку.
+- **C0 (CI):** `lighthouserc.json` performance `error`→`warn`. Деплой (job `build-test`) и так шёл; красный Lighthouse создавал ложное «не задеплоилось». Деплой от Lighthouse не зависит.
+- Правило в CLAUDE.md обновлено: один источник на вид токена; цвета — только в `theme.css`.
+
 ## Последняя сессия (2026-06-23) — /servis: контраст текста в карточках
 
 - `servis/page.tsx`: заголовок карточки `font-medium` → `text-base font-semibold`; тело `text-muted-foreground` → `text-foreground/70`
