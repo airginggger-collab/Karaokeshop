@@ -41,7 +41,7 @@ export default function HomePage() {
             className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium"
             style={{ backgroundColor: "var(--night-soft)", color: "var(--night-accent)" }}
           >
-            <Sparkles className="h-3.5 w-3.5" /> Эксперты по караоке с 2012 года
+            <Sparkles className="h-3.5 w-3.5" /> Официальный дилер AST и Studio Evolution
           </span>
           <h1
             className="mt-5 font-display text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl"
@@ -160,6 +160,44 @@ export default function HomePage() {
             Подробнее <ArrowRight className="h-3 w-3" />
           </span>
         </Link>
+      </div>
+
+      {/* Дилерская полоса */}
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-border bg-background px-6 py-4">
+        <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          Официальный дилер
+        </span>
+        <div className="mx-2 hidden h-4 w-px bg-border sm:block" />
+        <a
+          href="/brand/ast"
+          className="group flex items-center gap-2 rounded-xl border border-border px-4 py-2 transition hover:border-primary"
+        >
+          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary-soft text-[10px] font-bold text-primary">
+            A
+          </span>
+          <span className="text-sm font-semibold">AST</span>
+          <span className="text-xs text-muted-foreground">Art System</span>
+        </a>
+        <a
+          href="/brand/studio-evolution"
+          className="group flex items-center gap-2 rounded-xl border border-border px-4 py-2 transition hover:border-primary"
+        >
+          <span
+            className="flex h-6 w-6 items-center justify-center rounded-md text-[10px] font-bold"
+            style={{ background: "var(--night-soft)", color: "var(--night-accent)" }}
+          >
+            SE
+          </span>
+          <span className="text-sm font-semibold">Studio Evolution</span>
+          <span className="text-xs text-muted-foreground">Evobox</span>
+        </a>
+        <div className="mx-2 hidden h-4 w-px bg-border sm:block" />
+        <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-primary" aria-hidden>
+            <path d="M8 0l1.6 4.9H15l-4.4 3.2 1.7 5L8 10l-4.3 3.1 1.7-5L1 4.9h5.4z"/>
+          </svg>
+          С 2012 года · Алматы
+        </span>
       </div>
 
       {/* Trust-блок: 4 цифры */}

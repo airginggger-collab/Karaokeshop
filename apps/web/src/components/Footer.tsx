@@ -54,8 +54,19 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <div className="mt-8 border-t border-border pt-6 text-xs text-muted-foreground">
-          <p>© {new Date().getFullYear()} karaokeshop · {siteConfig.city} · Официальный дилер AST и Studio Evolution</p>
+        <div className="mt-8 border-t border-border pt-6">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <span className="text-xs text-muted-foreground">Официальный дилер:</span>
+            <span className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-1 text-xs font-semibold">
+              <span className="inline-flex h-4 w-4 items-center justify-center rounded bg-primary-soft text-[9px] font-bold text-primary">A</span>
+              AST (Art System)
+            </span>
+            <span className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-1 text-xs font-semibold">
+              <span className="inline-flex h-4 w-4 items-center justify-center rounded text-[9px] font-bold" style={{ background: "var(--night-soft)", color: "var(--night-accent)" }}>SE</span>
+              Studio Evolution
+            </span>
+          </div>
+          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} karaokeshop · {siteConfig.city}</p>
         </div>
       </Container>
     </footer>
