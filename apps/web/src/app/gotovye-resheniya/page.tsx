@@ -139,8 +139,8 @@ function SolutionCard({ solution, warm }: { solution: Solution; warm: boolean })
   if (warm) {
     return (
       <div
-        className="flex flex-col rounded-2xl border p-5"
-        style={{ backgroundColor: "var(--warm-bg)", borderColor: "var(--warm-soft)", color: "var(--warm-fg)" }}
+        className="flex flex-col rounded-2xl p-5"
+        style={{ backgroundColor: "var(--warm-bg)", border: "1px solid var(--warm-soft)", color: "var(--warm-fg)", boxShadow: "0 1px 4px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.04)" }}
       >
         <p className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--warm-muted)" }}>{scenario}</p>
         <p className="mt-1 font-display text-lg font-semibold">{label}</p>
@@ -163,8 +163,8 @@ function SolutionCard({ solution, warm }: { solution: Solution; warm: boolean })
 
   return (
     <div
-      className="flex flex-col rounded-2xl border p-5"
-      style={{ backgroundColor: "var(--night-bg)", borderColor: "var(--night-soft)", color: "var(--night-fg)" }}
+      className="flex flex-col rounded-2xl p-5"
+      style={{ backgroundColor: "var(--night-bg)", border: "1px solid var(--night-soft)", color: "var(--night-fg)", boxShadow: "0 1px 4px rgba(0,0,0,.18), 0 0 0 1px rgba(255,255,255,.04)" }}
     >
       <p className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--night-muted)" }}>{scenario}</p>
       <p className="mt-1 font-display text-lg font-semibold">{label}</p>

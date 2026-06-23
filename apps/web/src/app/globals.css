@@ -8,7 +8,7 @@
   --warm-bg: #fff7ed;
   --warm-fg: #2a1606;
   --warm-muted: #7c5b3f;
-  --warm-accent: #c2410c; /* orange-700: 4.82:1 на --warm-bg, проходит WCAG AA */
+  --warm-accent: #9a3412; /* orange-800: 6.88:1 на --warm-bg, проходит WCAG AA+AAA */
   --warm-soft: #ffe7ce;
   --night-bg: #0b1220;
   --night-fg: #e7eef8;
