@@ -72,7 +72,7 @@ export default function HomePage() {
 
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
             {[
-              { value: "с 2012", label: "года на рынке" },
+              { value: "14+", label: "лет на рынке" },
               { value: "200+", label: "проектов" },
               { value: "2 дня", label: "монтаж" },
             ].map((s) => (
@@ -149,7 +149,7 @@ export default function HomePage() {
         {/* Доверие */}
         <Link href="/servis" className={`${cell} group flex flex-col justify-center gap-3 bg-background lg:col-span-2`}>
           <p className="flex items-center gap-2 text-sm font-medium">
-            <CalendarClock className="h-4 w-4 text-primary" /> С 2012 года
+            <CalendarClock className="h-4 w-4 text-primary" /> 14+ лет на рынке
           </p>
           <p className="flex items-center gap-2 text-sm font-medium">
             <ShieldCheck className="h-4 w-4 text-primary" /> Гарантия + сервис-центр
@@ -197,7 +197,7 @@ export default function HomePage() {
           <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-primary" aria-hidden>
             <path d="M8 0l1.6 4.9H15l-4.4 3.2 1.7 5L8 10l-4.3 3.1 1.7-5L1 4.9h5.4z"/>
           </svg>
-          С 2012 года · Алматы
+          14+ лет · Алматы
         </span>
         <div className="mx-2 hidden h-4 w-px bg-border sm:block" />
         <Link
@@ -212,7 +212,7 @@ export default function HomePage() {
       {/* Trust-блок: 4 цифры */}
       <section className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[
-          { value: "12+", label: "лет на рынке", sub: "с 2012 года" },
+          { value: "14+", label: "лет на рынке", sub: "с 2012 года" },
           { value: "200+", label: "установок", sub: "дома и заведения" },
           { value: "60 000+", label: "песен в базе", sub: "KZ · RU · EN" },
           { value: "2 года", label: "гарантия", sub: "и сервис-центр" },

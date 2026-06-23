@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 const stats = [
-  { value: "с 2012", label: "на рынке Казахстана" },
+  { value: "14+", label: "лет на рынке" },
   { value: "200+", label: "оснащённых объектов" },
   { value: "60 000+", label: "песен в базе" },
   { value: "2 года", label: "гарантия на оборудование" },
