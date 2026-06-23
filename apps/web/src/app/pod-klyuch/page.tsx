@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Badge } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { faqJsonLd } from "@/lib/seo";
+import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { ServiceSteps } from "@/components/ServiceSteps";
 import { AreaCalculator } from "@/components/AreaCalculator";
 import { podKlyuchMeta, siteConfig } from "@/lib/site";
@@ -27,6 +27,7 @@ export default function Page() {
   return (
     <Container className="py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Монтаж под ключ", path: "/pod-klyuch" }])) }} />
       <Breadcrumb items={[{ label: "Монтаж под ключ" }]} />
       <Badge tone="primary">B2B · для заведений</Badge>
       <h1 className="mt-3 font-display text-2xl font-bold">{podKlyuchMeta.h1}</h1>

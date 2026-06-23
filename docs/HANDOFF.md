@@ -32,7 +32,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — P1#8–15: + калькулятор 3 шага
+## Последняя сессия (2026-06-23) — P2#16: JSON-LD обогащение
+
+P2#16 — `seo.ts`: `productJsonLd` принимает `rating`/`reviewsCount`, добавляет `aggregateRating` + `seller`. `layout.tsx` LocalBusiness: добавлены `@id`, `geo` (43.2567, 76.9286), `addressRegion`, `sameAs` (2GIS placeholder). BreadcrumbList JSON-LD добавлен на: catalog, dlya-doma, dlya-biznesa, servis, o-nas, pod-klyuch. Страница товара передаёт `rating`/`reviewsCount` в productJsonLd.
+
+## Предыдущая сессия (2026-06-23) — P1#8–15: + калькулятор 3 шага
 
 P1#15 — `CalculatorClient.tsx` переписан как 3-шаговый wizard: Шаг 1 — сценарий (5 карточек), Шаг 2 — площадь (слайдер + быстрые кнопки), Шаг 3 — ориентир по бюджету (4 варианта). Смета на шаге 4: таблица позиций + итого + WhatsApp-кнопка со сметой в тексте. StepIndicator с чекбоксами пройденных шагов.
 

@@ -7,6 +7,8 @@ export type ProductLd = {
   brand?: string;
   inStock?: boolean;
   image?: string;
+  rating?: number;
+  reviewsCount?: number;
 };
 
 export function productJsonLd(p: ProductLd) {
@@ -14,8 +16,17 @@ export function productJsonLd(p: ProductLd) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: p.name,
-    ...(p.image ? { image: p.image } : {}),
+    ...(p.image ? { image: `${siteConfig.url}${p.image}` } : {}),
     ...(p.brand ? { brand: { "@type": "Brand", name: p.brand } } : {}),
+    ...(p.rating && p.reviewsCount ? {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: p.rating,
+        reviewCount: p.reviewsCount,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    } : {}),
     offers: {
       "@type": "Offer",
       priceCurrency: "KZT",
@@ -25,6 +36,7 @@ export function productJsonLd(p: ProductLd) {
           ? "https://schema.org/OutOfStock"
           : "https://schema.org/InStock",
       url: `${siteConfig.url}/product/${p.slug}`,
+      seller: { "@type": "Organization", name: "karaokeshop" },
     },
   };
 }

@@ -5,6 +5,7 @@ import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { oNasMeta } from "@/lib/site";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: oNasMeta.title,
@@ -59,6 +60,7 @@ const values = [
 export default function Page() {
   return (
     <Container className="py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "О компании", path: "/o-nas" }])) }} />
       <Breadcrumb items={[{ label: "О компании" }]} />
       {/* Hero */}
       <div className="relative overflow-hidden rounded-3xl">

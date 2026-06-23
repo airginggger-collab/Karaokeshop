@@ -5,7 +5,7 @@ import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { products, priceFmt, siteConfig } from "@/lib/site";
-import { faqJsonLd } from "@/lib/seo";
+import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Домашнее караоке — купить систему для дома, Алматы",
@@ -44,6 +44,7 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
     <Container className="py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Для дома", path: "/dlya-doma" }])) }} />
       <Breadcrumb items={[{ label: "Домашнее карао­ке" }]} />
       <h1 className="font-display text-3xl font-bold sm:text-4xl">Домашнее карао­ке</h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">

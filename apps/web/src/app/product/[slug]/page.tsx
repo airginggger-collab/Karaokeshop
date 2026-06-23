@@ -39,7 +39,7 @@ export default async function Page({
   const p = products.find((x) => x.slug === slug);
   if (!p) notFound();
 
-  const ld = productJsonLd({ name: p.model, price: p.price, slug: p.slug, brand: p.brand, inStock: p.inStock, image: p.image });
+  const ld = productJsonLd({ name: p.model, price: p.price, slug: p.slug, brand: p.brand, inStock: p.inStock, image: p.image, rating: p.rating, reviewsCount: p.reviewsCount });
   const breadcrumbLd = breadcrumbJsonLd([
     { name: "Главная", path: "/" },
     { name: "Каталог", path: "/catalog" },

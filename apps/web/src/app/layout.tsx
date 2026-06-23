@@ -49,6 +49,7 @@ export const metadata: Metadata = {
 const localBusinessLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": `${siteConfig.url}/#business`,
   name: "karaokeshop",
   description: "Официальный дилер AST и Studio Evolution в Казахстане. Продажа, монтаж и настройка под ключ. Шоурум в Алматы, с 2012.",
   url: siteConfig.url,
@@ -58,7 +59,13 @@ const localBusinessLd = {
     "@type": "PostalAddress",
     streetAddress: "ул. Муканова, офис 8",
     addressLocality: "Алматы",
+    addressRegion: "Алматы",
     addressCountry: "KZ",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 43.2567,
+    longitude: 76.9286,
   },
   openingHoursSpecification: [
     {
@@ -70,6 +77,9 @@ const localBusinessLd = {
   ],
   priceRange: "₸₸₸",
   foundingDate: "2012",
+  sameAs: [
+    "https://2gis.kz/almaty/search/karaokeshop",
+  ],
 };
 
 export default function RootLayout({
