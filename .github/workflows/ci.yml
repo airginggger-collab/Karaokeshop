@@ -4,6 +4,8 @@ on:
   push:
     branches: [main, master]
   pull_request:
+  schedule:
+    - cron: "0 8 * * *"   # каждый день в 08:00 UTC (11:00 Алматы) — обновление новостей
 
 jobs:
   build-test:

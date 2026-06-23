@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Heart, MessageCircle } from "lucide-react";
+import { ArrowRight, Heart } from "lucide-react";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { NewsSection } from "@/components/NewsSection";
 import { blogMeta, blogPosts, storyPosts } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -100,6 +101,8 @@ export default function Page() {
           ))}
         </div>
       </div>
+
+      <NewsSection />
     </Container>
   );
 }
