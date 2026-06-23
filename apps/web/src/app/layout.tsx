@@ -7,7 +7,6 @@ import { siteConfig } from "@/lib/site";
 import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { CompareBar } from "@/components/CompareBar";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
 
 const sans = Manrope({
@@ -84,7 +83,6 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
-          <CompareBar />
           <WhatsAppFAB />
         </Providers>
       </body>

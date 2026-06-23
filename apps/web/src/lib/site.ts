@@ -325,7 +325,6 @@ export function allPaths(): string[] {
     "/blog",
     "/kalkulyator",
     "/sravnenie",
-    "/sravnit",
     "/o-nas",
     "/kontakty",
     "/dlya-doma",

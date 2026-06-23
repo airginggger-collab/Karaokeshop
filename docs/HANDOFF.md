@@ -32,7 +32,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — редизайн P0#1–4: навигация + WhatsApp + Trust + Hero цифры
+## Последняя сессия (2026-06-23) — редизайн P0#1–5: навигация + WhatsApp + Trust + Hero + Compare удалён
+
+P0#5 — удалён весь compare-слой: роут `/sravnit`, компоненты `CompareToggle`/`CompareBar`/`CompareClient`, либа `lib/compare.tsx`, `CompareProvider` из `Providers.tsx`, `<CompareBar>` из `layout.tsx`, `CompareToggle` из страницы товара, `/sravnit` из sitemap-списка `site.ts`.
+
+## Предыдущая сессия (2026-06-23) — редизайн P0#1–4: навигация + WhatsApp + Trust + Hero цифры
 
 P0#4 — `apps/web/src/app/page.tsx`: в hero-ячейку под CTA добавлен ряд из 3 цифр: «с 2012 года на рынке · 200+ проектов · 2 дня монтаж», цвет night-fg/night-muted.
 

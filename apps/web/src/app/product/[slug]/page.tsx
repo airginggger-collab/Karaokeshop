@@ -5,7 +5,6 @@ import { Badge, Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { AddToCart } from "@/components/AddToCart";
-import { CompareToggle } from "@/components/CompareToggle";
 import { products, priceFmt, discountPct, typeLabels, siteConfig } from "@/lib/site";
 import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -87,7 +86,6 @@ export default async function Page({
 
           <div className="mt-4 flex flex-wrap gap-2">
             <AddToCart item={{ id: p.slug, name: p.model, price: p.price, meta: label }} />
-            <CompareToggle slug={p.slug} variant="button" />
             <Button variant="ghost">Нужна консультация</Button>
           </div>
 
