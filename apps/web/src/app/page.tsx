@@ -440,39 +440,61 @@ export default function HomePage() {
 
       {/* Отзывы */}
       <section className="mt-12">
-        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Клиенты о нас</h2>
+        <div className="flex items-end justify-between">
+          <h2 className="font-display text-2xl font-semibold sm:text-3xl">Клиенты о нас</h2>
+          <a
+            href="https://www.google.com/maps/search/karaokeshop+алматы"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-1 text-sm font-medium text-primary sm:flex"
+          >
+            Все отзывы на Google <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
           {[
             {
               name: "Дмитрий К.",
-              role: "Владелец бара, Алматы",
-              photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&q=80&auto=format&fit=crop&crop=face",
+              context: "AST-250 · бар 60 м², Алматы",
               text: "Монтировали за 2 дня, звук настроили идеально под наш зал. Гости сразу оценили — заполняемость выросла.",
+              stars: 5,
             },
             {
               name: "Аида Р.",
-              role: "Частный дом, Астана",
-              photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&q=80&auto=format&fit=crop&crop=face",
+              context: "Evobox · гостиная частного дома, Астана",
               text: "Поставили в гостиной. База огромная, микрофоны отличные. Дети поют каждый вечер. Спасибо за подбор!",
+              stars: 5,
             },
             {
               name: "Серик М.",
-              role: "Ресторан, Алматы",
-              photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&q=80&auto=format&fit=crop&crop=face",
-              text: "Брали AST-250. Работает без нареканий уже полтора года. Репертуар обновляют регулярно. Рекомендую.",
+              context: "AST-250 · ресторан на 80 мест, Алматы",
+              text: "Работает без нареканий уже полтора года. Репертуар обновляют по договору. Сервис отвечает быстро.",
+              stars: 5,
             },
           ].map((r) => (
-            <div key={r.name} className="rounded-2xl border border-border bg-background p-5">
-              <p className="text-sm leading-relaxed text-muted-foreground">«{r.text}»</p>
-              <div className="mt-4 flex items-center gap-3">
-                <img src={r.photo} alt={r.name} loading="lazy" className="h-10 w-10 rounded-full object-cover" />
-                <div>
-                  <p className="text-sm font-medium">{r.name}</p>
-                  <p className="text-xs text-muted-foreground">{r.role}</p>
-                </div>
+            <div key={r.name} className="flex flex-col rounded-2xl border border-border bg-background p-5">
+              <div className="flex gap-0.5">
+                {Array.from({ length: r.stars }).map((_, i) => (
+                  <svg key={i} viewBox="0 0 16 16" className="h-4 w-4 fill-yellow-400" aria-hidden><path d="M8 1l1.854 3.756L14 5.528l-3 2.924.708 4.13L8 10.56l-3.708 2.02.708-4.13-3-2.923 4.146-.772z"/></svg>
+                ))}
+              </div>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">«{r.text}»</p>
+              <div className="mt-4 border-t border-border pt-3">
+                <p className="text-sm font-medium">{r.name}</p>
+                <p className="text-xs text-muted-foreground">{r.context}</p>
               </div>
             </div>
           ))}
+        </div>
+        <div className="mt-3 flex sm:hidden">
+          <a
+            href="https://www.google.com/maps/search/karaokeshop+алматы"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-sm font-medium text-primary"
+          >
+            Все отзывы на Google <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
       </section>
 
