@@ -2,17 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { Mic2, Search } from "lucide-react";
 import { Container } from "./Container";
 import { MobileNav } from "./MobileNav";
 import { CartButton } from "./CartButton";
 import { ThemeToggle } from "./ThemeToggle";
+import { SearchOverlay } from "./SearchOverlay";
 import { mainNav } from "@/lib/site";
 
 export function Header() {
   const pathname = usePathname();
+  const [searchOpen, setSearchOpen] = useState(false);
 
   return (
+    <>
+    <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
     <header className="sticky top-0 z-30 border-b border-border bg-background dark:border-white/[0.08] dark:bg-page">
       <Container className="flex h-14 items-center gap-4">
         <MobileNav />
@@ -40,12 +45,17 @@ export function Header() {
         </nav>
         <div className="ml-auto flex items-center gap-3">
           <ThemeToggle />
-          <button aria-label="Поиск" className="text-muted-foreground hover:text-foreground">
+          <button
+            aria-label="Поиск"
+            onClick={() => setSearchOpen(true)}
+            className="text-muted-foreground hover:text-foreground"
+          >
             <Search className="h-[18px] w-[18px]" />
           </button>
           <CartButton />
         </div>
       </Container>
     </header>
+    </>
   );
 }

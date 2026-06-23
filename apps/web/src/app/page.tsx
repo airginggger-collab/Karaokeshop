@@ -7,18 +7,11 @@ export const metadata: Metadata = {
 import {
   Home,
   Building2,
-  Calculator,
-  Music,
   ArrowRight,
-  ShieldCheck,
   CalendarClock,
+  ShieldCheck,
   Wrench,
   Sparkles,
-  UserCheck,
-  GitCompare,
-  Phone,
-  CheckCircle2,
-  Layers,
 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { ProductImage } from "@/components/ProductImage";
@@ -97,13 +90,7 @@ export default function HomePage() {
           className={`${cell} group flex flex-col lg:col-span-2`}
           style={{ backgroundColor: "var(--warm-bg)", color: "var(--warm-fg)", border: "1px solid var(--warm-soft)" }}
         >
-          <span
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full"
-            style={{ backgroundColor: "var(--warm-soft)", color: "var(--warm-accent)" }}
-          >
-            <Home className="h-5 w-5" />
-          </span>
-          <h2 className="mt-3 font-display text-xl font-semibold">Для дома</h2>
+          <h2 className="font-display text-xl font-semibold">Для дома</h2>
           <p className="mt-1 text-sm" style={{ color: "var(--warm-muted)" }}>
             Гостиная, баня, гостевой дом. Тёплые вечера с любимыми песнями.
           </p>
@@ -125,13 +112,7 @@ export default function HomePage() {
             color: "var(--night-fg)",
           }}
         >
-          <span
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full"
-            style={{ backgroundColor: "var(--night-soft)", color: "var(--night-accent)" }}
-          >
-            <Building2 className="h-5 w-5" />
-          </span>
-          <h2 className="mt-3 font-display text-xl font-semibold">Для бизнеса</h2>
+          <h2 className="font-display text-xl font-semibold">Для бизнеса</h2>
           <p className="mt-1 max-w-sm text-sm" style={{ color: "var(--night-muted)" }}>
             Кафе, ресторан, VIP-зал, клуб. Проект звука, монтаж и обучение под ключ.
           </p>
@@ -145,10 +126,7 @@ export default function HomePage() {
 
         {/* Калькулятор */}
         <Link href="/kalkulyator" className={`${cell} group flex flex-col border border-border bg-background lg:col-span-2`}>
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
-            <Calculator className="h-5 w-5" />
-          </span>
-          <h2 className="mt-3 font-display text-xl font-semibold">Калькулятор сметы</h2>
+          <h2 className="font-display text-xl font-semibold">Калькулятор сметы</h2>
           <p className="mt-1 text-sm text-muted-foreground">Комплект под вашу площадь или бюджет — за минуту.</p>
           <span className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-medium text-primary">
             Открыть <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
@@ -156,8 +134,7 @@ export default function HomePage() {
         </Link>
 
         {/* Песни */}
-        <Link href="/pesni" className={`${cell} flex flex-col justify-between border border-border bg-background lg:col-span-2`}>
-          <Music className="h-6 w-6 text-primary" />
+        <Link href="/pesni" className={`${cell} flex flex-col justify-end border border-border bg-background lg:col-span-2`}>
           <div>
             <p className="font-display text-2xl font-bold">60 000+</p>
             <p className="text-sm text-muted-foreground">песен · KZ · RU · EN и обновление</p>
@@ -340,71 +317,22 @@ export default function HomePage() {
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold sm:text-3xl">Разделы</h2>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <Link href="/brand/studio-evolution" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <Sparkles className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="font-medium group-hover:text-primary">Studio Evolution</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">Evobox, Plus, Premium, Club, Pro2 — линейка для дома и клубов.</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Смотреть модели <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
-            </div>
-          </Link>
-
-          <Link href="/brand/ast" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <GitCompare className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="font-medium group-hover:text-primary">AST (Art System)</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">HOME, Mini, AST-50/250/350 — от дома до клуба на 100 м².</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Смотреть модели <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
-            </div>
-          </Link>
-
-          <Link href="/gotovye-resheniya" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <Layers className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="font-medium group-hover:text-primary">Готовые решения</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">Подобранные комплекты под сценарий — состав и цена сразу.</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Выбрать <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
-            </div>
-          </Link>
-
-          <Link href="/pod-klyuch" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <Wrench className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="font-medium group-hover:text-primary">Монтаж</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">Проект звука под помещение, монтаж, обучение персонала.</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Подробнее <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
-            </div>
-          </Link>
-
-          <Link href="/servis" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <ShieldCheck className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="font-medium group-hover:text-primary">Сервис и гарантия</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">Настройка, ремонт, обновление репертуара.</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Узнать <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
-            </div>
-          </Link>
-
-          <Link href="/kontakty" className="group flex items-start gap-4 rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary">
-              <Phone className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="font-medium group-hover:text-primary">Контакты</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">Алматы, ул. Муканова 8 · WhatsApp, телефон, карта.</p>
-              <span className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">Написать <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" /></span>
-            </div>
-          </Link>
+          {[
+            { href: "/brand/studio-evolution", title: "Studio Evolution", sub: "Evobox, Plus, Premium, Club, Pro2 — линейка для дома и клубов.", cta: "Смотреть модели" },
+            { href: "/brand/ast", title: "AST (Art System)", sub: "HOME, Mini, AST-50/250/350 — от дома до клуба на 100 м².", cta: "Смотреть модели" },
+            { href: "/gotovye-resheniya", title: "Готовые решения", sub: "Подобранные комплекты под сценарий — состав и цена сразу.", cta: "Выбрать" },
+            { href: "/pod-klyuch", title: "Монтаж", sub: "Проект звука под помещение, монтаж, обучение персонала.", cta: "Подробнее" },
+            { href: "/servis", title: "Сервис и гарантия", sub: "Настройка, ремонт, обновление репертуара.", cta: "Узнать" },
+            { href: "/kontakty", title: "Контакты", sub: "Алматы, ул. Муканова 8 · WhatsApp, телефон, карта.", cta: "Написать" },
+          ].map((item) => (
+            <Link key={item.href} href={item.href} className="group flex flex-col rounded-2xl border border-border bg-background p-5 transition hover:border-primary hover:shadow-sm">
+              <p className="font-medium group-hover:text-primary">{item.title}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{item.sub}</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary">
+                {item.cta} <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -501,26 +429,17 @@ export default function HomePage() {
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold sm:text-3xl">Почему karaokeshop</h2>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-2xl border border-border bg-background p-5">
-            <UserCheck className="h-5 w-5 text-primary" />
-            <p className="mt-3 font-medium">Подбор без ошибки</p>
-            <p className="mt-1 text-sm text-muted-foreground">Выясним задачу, площадь и бюджет — предложим то, что реально подходит.</p>
-          </div>
-          <div className="rounded-2xl border border-border bg-background p-5">
-            <GitCompare className="h-5 w-5 text-primary" />
-            <p className="mt-3 font-medium">Два бренда в одном месте</p>
-            <p className="mt-1 text-sm text-muted-foreground">AST и Studio Evolution — сравниваем честно и помогаем выбрать.</p>
-          </div>
-          <div className="rounded-2xl border border-border bg-background p-5">
-            <CheckCircle2 className="h-5 w-5 text-primary" />
-            <p className="mt-3 font-medium">Под ключ</p>
-            <p className="mt-1 text-sm text-muted-foreground">Проект звука, монтаж, настройка, обучение — один договор.</p>
-          </div>
-          <div className="rounded-2xl border border-border bg-background p-5">
-            <Phone className="h-5 w-5 text-primary" />
-            <p className="mt-3 font-medium">Заказ через WhatsApp</p>
-            <p className="mt-1 text-sm text-muted-foreground">Напишите — ответим быстро, поможем выбрать и оформим заявку.</p>
-          </div>
+          {[
+            { title: "Подбор без ошибки", body: "Выясним задачу, площадь и бюджет — предложим то, что реально подходит." },
+            { title: "Два бренда в одном месте", body: "AST и Studio Evolution — сравниваем честно и помогаем выбрать." },
+            { title: "Под ключ", body: "Проект звука, монтаж, настройка, обучение — один договор." },
+            { title: "Заказ через WhatsApp", body: "Напишите — ответим быстро, поможем выбрать и оформим заявку." },
+          ].map((item) => (
+            <div key={item.title} className="rounded-2xl border border-border bg-background p-5">
+              <p className="font-medium">{item.title}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{item.body}</p>
+            </div>
+          ))}
         </div>
       </section>
     </Container>
