@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Badge } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { Mood } from "@/components/Mood";
 import { faqJsonLd } from "@/lib/seo";
 import { ServiceSteps } from "@/components/ServiceSteps";
 import { AreaCalculator } from "@/components/AreaCalculator";
@@ -26,7 +25,6 @@ const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("�
 
 export default function Page() {
   return (
-    <Mood variant="night">
     <Container className="py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
       <Breadcrumb items={[{ label: "Монтаж под ключ" }]} />
@@ -73,6 +71,5 @@ export default function Page() {
         </div>
       </div>
     </Container>
-    </Mood>
   );
 }
