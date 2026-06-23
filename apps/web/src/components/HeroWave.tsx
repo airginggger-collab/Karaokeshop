@@ -9,48 +9,52 @@ import { useEffect, useState } from "react";
 const ORBS = [
   {
     /* правый верх — teal, большой якорный */
-    size: 560,
+    size: 600,
     style: {
-      top: "-20%",
-      right: "-10%",
-      background: "radial-gradient(circle, #2dd4bf 0%, transparent 65%)",
-      opacity: 0.45,
+      top: "-25%",
+      right: "-12%",
+      background: "radial-gradient(circle, #2dd4bf 0%, #0d9488 35%, transparent 65%)",
+      opacity: 0.75,
+      mixBlendMode: "screen" as const,
       animationName: "kk-orb-a",
       animationDuration: "14s",
     },
   },
   {
     /* центр-низ — оранжевый контраст */
-    size: 420,
+    size: 460,
     style: {
-      bottom: "-25%",
-      left: "20%",
-      background: "radial-gradient(circle, #f97316 0%, transparent 65%)",
-      opacity: 0.38,
+      bottom: "-30%",
+      left: "18%",
+      background: "radial-gradient(circle, #fb923c 0%, #ea580c 30%, transparent 65%)",
+      opacity: 0.65,
+      mixBlendMode: "screen" as const,
       animationName: "kk-orb-b",
       animationDuration: "19s",
     },
   },
   {
     /* левый верх — teal мягкий */
-    size: 300,
+    size: 320,
     style: {
-      top: "0%",
-      left: "-8%",
-      background: "radial-gradient(circle, #2dd4bf 0%, transparent 65%)",
-      opacity: 0.28,
+      top: "-5%",
+      left: "-10%",
+      background: "radial-gradient(circle, #2dd4bf 0%, transparent 60%)",
+      opacity: 0.55,
+      mixBlendMode: "screen" as const,
       animationName: "kk-orb-c",
       animationDuration: "24s",
     },
   },
   {
     /* правый низ — фиолетовый глубина */
-    size: 280,
+    size: 300,
     style: {
-      bottom: "10%",
-      right: "5%",
-      background: "radial-gradient(circle, #818cf8 0%, transparent 65%)",
-      opacity: 0.30,
+      bottom: "5%",
+      right: "8%",
+      background: "radial-gradient(circle, #a78bfa 0%, #7c3aed 30%, transparent 65%)",
+      opacity: 0.55,
+      mixBlendMode: "screen" as const,
       animationName: "kk-orb-d",
       animationDuration: "17s",
     },
