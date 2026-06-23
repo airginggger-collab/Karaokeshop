@@ -15,13 +15,13 @@ const links = [
 export function Footer() {
   return (
     <footer className="mt-16 border-t border-border bg-surface dark:border-white/[0.06] dark:bg-[#0e131c]">
-      <Container className="flex flex-col gap-2 py-8 text-sm text-muted-foreground">
-        <p className="font-medium text-foreground">karaokeshop · {siteConfig.city}</p>
+      <Container className="flex flex-col gap-2 py-8 text-sm text-muted-foreground dark:text-[#b8cfe0]">
+        <p className="font-medium text-foreground dark:text-white">karaokeshop · {siteConfig.city}</p>
         <p>Караоке-системы AST и Studio Evolution. Продажа, монтаж, сервис с 2012.</p>
-        <p className="text-foreground">{siteConfig.phone}</p>
+        <p className="text-foreground dark:text-white">{siteConfig.phone}</p>
         <nav className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="hover:text-foreground">
+            <Link key={l.href} href={l.href} className="hover:text-foreground dark:hover:text-white">
               {l.label}
             </Link>
           ))}

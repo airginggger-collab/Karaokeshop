@@ -32,6 +32,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-23) — Header/Footer: явный тёмный текст
+
+- `Header.tsx`: nav и кнопка поиска → `dark:text-[#b8cfe0] dark:hover:text-white`
+- `Footer.tsx`: основной текст → `dark:text-[#b8cfe0]`; заголовок и телефон → `dark:text-white`; ссылки → `dark:hover:text-white`
+
 ## Последняя сессия (2026-06-23) — dark theme: night-карточки + контраст текста
 
 - `.dark` переопределяет `--night-bg: #1e2e48` (было фикс. `#0b1220` = темнее страницы → карточки тонули)
