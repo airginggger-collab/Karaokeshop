@@ -34,7 +34,7 @@ export default function HomePage() {
           style={{
             backgroundColor: "var(--night-bg)",
             backgroundImage:
-              "radial-gradient(110% 110% at 15% 0%, rgba(45,212,191,0.22), transparent 55%), radial-gradient(100% 120% at 100% 100%, rgba(249,115,22,0.16), transparent 55%)",
+              "radial-gradient(110% 110% at 15% 0%, rgba(45,212,191,0.18), transparent 50%), radial-gradient(100% 120% at 100% 100%, rgba(249,115,22,0.12), transparent 50%)",
           }}
         >
           <span

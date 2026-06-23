@@ -8,39 +8,51 @@ import { useEffect, useState } from "react";
 
 const ORBS = [
   {
-    /* правый — тёплый акцент */
-    size: 520,
+    /* правый верх — teal, большой якорный */
+    size: 560,
     style: {
-      top: "-15%",
-      right: "-8%",
-      background: "radial-gradient(circle, var(--night-accent) 0%, transparent 70%)",
-      opacity: 0.28,
+      top: "-20%",
+      right: "-10%",
+      background: "radial-gradient(circle, #2dd4bf 0%, transparent 65%)",
+      opacity: 0.45,
       animationName: "kk-orb-a",
       animationDuration: "14s",
     },
   },
   {
-    /* центр-низ — холодный */
-    size: 380,
+    /* центр-низ — оранжевый контраст */
+    size: 420,
     style: {
-      bottom: "-20%",
-      left: "25%",
-      background: "radial-gradient(circle, var(--color-primary) 0%, transparent 70%)",
-      opacity: 0.18,
+      bottom: "-25%",
+      left: "20%",
+      background: "radial-gradient(circle, #f97316 0%, transparent 65%)",
+      opacity: 0.38,
       animationName: "kk-orb-b",
       animationDuration: "19s",
     },
   },
   {
-    /* левый верх — небольшой */
-    size: 260,
+    /* левый верх — teal мягкий */
+    size: 300,
     style: {
-      top: "5%",
-      left: "-6%",
-      background: "radial-gradient(circle, var(--night-accent) 0%, transparent 70%)",
-      opacity: 0.14,
+      top: "0%",
+      left: "-8%",
+      background: "radial-gradient(circle, #2dd4bf 0%, transparent 65%)",
+      opacity: 0.28,
       animationName: "kk-orb-c",
       animationDuration: "24s",
+    },
+  },
+  {
+    /* правый низ — фиолетовый глубина */
+    size: 280,
+    style: {
+      bottom: "10%",
+      right: "5%",
+      background: "radial-gradient(circle, #818cf8 0%, transparent 65%)",
+      opacity: 0.30,
+      animationName: "kk-orb-d",
+      animationDuration: "17s",
     },
   },
 ];
@@ -80,6 +92,11 @@ export function HeroWave() {
         @keyframes kk-orb-c {
           0%,100% { transform: translate(0px, 0px) scale(1); }
           50%      { transform: translate(25px, 30px) scale(1.12); }
+        }
+        @keyframes kk-orb-d {
+          0%,100% { transform: translate(0px, 0px) scale(1); }
+          45%      { transform: translate(-35px, -20px) scale(1.15); }
+          75%      { transform: translate(15px, 25px) scale(0.9); }
         }
         .anim-paused .kk-orb {
           animation-play-state: paused !important;
