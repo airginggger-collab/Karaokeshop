@@ -1,185 +1,250 @@
 "use client";
 
 import * as React from "react";
-import { MessageCircle, ShoppingCart, Check, BadgeCheck, Gauge, Wifi, Zap, type LucideIcon } from "lucide-react";
-import { Button, Badge } from "@kk/ui";
-import { useCart } from "@/lib/cart";
-import { configure, configureByBudget, smetaText, type Calc } from "@/lib/calculator";
+import { ArrowLeft, ArrowRight, Check, MessageCircle } from "lucide-react";
+import { Button } from "@kk/ui";
+import { configure, smetaText, type Calc } from "@/lib/calculator";
 import { priceFmt, siteConfig } from "@/lib/site";
 
-const venueTypes = ["Кафе", "Бар / паб", "Караоке-клуб", "Отель / банкет"];
-
-const expertPoints: { icon?: LucideIcon; text: string }[] = [
-  { icon: Gauge, text: "Мощность акустики считаем по площади и геометрии зала" },
-  { icon: Wifi, text: "Shure BLX24 — UHF, автовыбор частоты, не конфликтует с Wi-Fi" },
-  { icon: Zap, text: "Балансные XLR-кабели везде — ноль фона от сети 220 В" },
-  { icon: BadgeCheck, text: "Проверено на 200+ объектах в Казахстане с 2012 года" },
+const SCENARIOS = [
+  { id: "dom", label: "Дом", sub: "гостиная, баня, гостевой дом" },
+  { id: "kafe", label: "Кафе", sub: "до 40 мест" },
+  { id: "bar", label: "Бар / паб", sub: "40–80 мест" },
+  { id: "restoran", label: "Ресторан", sub: "банкеты, мероприятия" },
+  { id: "klub", label: "Клуб / VIP", sub: "от 80 м²" },
 ];
 
-function chip(active: boolean): string {
-  return `rounded-full border px-3 py-1.5 text-sm transition ${
-    active ? "border-primary bg-primary text-primary-fg" : "border-border text-foreground hover:bg-surface"
-  }`;
-}
-function tab(active: boolean): string {
-  return `rounded-md px-3 py-1.5 text-sm transition ${
-    active ? "bg-primary text-primary-fg" : "text-muted-foreground hover:text-foreground"
-  }`;
+const SCENARIO_VENUE: Record<string, string> = {
+  dom: "Кафе",
+  kafe: "Кафе",
+  bar: "Бар / паб",
+  restoran: "Кафе",
+  klub: "Караоке-клуб",
+};
+
+const AREA_DEFAULTS: Record<string, number> = {
+  dom: 25, kafe: 40, bar: 70, restoran: 80, klub: 120,
+};
+
+const BUDGET_OPTS = [
+  { label: "до 1 000 000 ₸", value: 1000000 },
+  { label: "1 000 000 – 2 000 000 ₸", value: 2000000 },
+  { label: "2 000 000 – 3 500 000 ₸", value: 3500000 },
+  { label: "Без ограничений", value: 9999999 },
+];
+
+function StepIndicator({ step, total }: { step: number; total: number }) {
+  return (
+    <div className="mb-6 flex items-center gap-2">
+      {Array.from({ length: total }).map((_, i) => (
+        <React.Fragment key={i}>
+          <div
+            className={[
+              "flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold transition",
+              i + 1 < step
+                ? "bg-primary text-white"
+                : i + 1 === step
+                ? "border-2 border-primary text-primary"
+                : "border border-border text-muted-foreground",
+            ].join(" ")}
+          >
+            {i + 1 < step ? <Check className="h-3.5 w-3.5" /> : i + 1}
+          </div>
+          {i < total - 1 && (
+            <div className={`h-px flex-1 transition ${i + 1 < step ? "bg-primary" : "bg-border"}`} />
+          )}
+        </React.Fragment>
+      ))}
+    </div>
+  );
 }
 
 export function CalculatorClient() {
-  const { add } = useCart();
-  const [mode, setMode] = React.useState<"params" | "budget">("params");
-  const [area, setArea] = React.useState(80);
-  const [venue, setVenue] = React.useState("Бар / паб");
-  const [mics, setMics] = React.useState(4);
-  const [light, setLight] = React.useState(true);
-  const [sub, setSub] = React.useState(true);
-  const [budget, setBudget] = React.useState(2500000);
-  const [added, setAdded] = React.useState(false);
+  const [step, setStep] = React.useState(1);
+  const [scenario, setScenario] = React.useState<string | null>(null);
+  const [area, setArea] = React.useState(70);
+  const [budgetIdx, setBudgetIdx] = React.useState(2);
+  const [calc, setCalc] = React.useState<Calc | null>(null);
 
-  let calc: Calc;
-  let fits = true;
-  if (mode === "params") {
-    calc = configure({ area, venueType: venue, mics, light, sub });
-  } else {
-    const r = configureByBudget(budget, venue);
-    calc = r.calc;
-    fits = r.fits;
+  function handleScenario(id: string) {
+    setScenario(id);
+    setArea(AREA_DEFAULTS[id] ?? 70);
   }
 
-  const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(smetaText(calc, venue))}`;
+  function buildSmeta() {
+    const venue = SCENARIO_VENUE[scenario ?? "bar"] ?? "Бар / паб";
+    const result = configure({ area, venueType: venue, mics: 4, light: true, sub: area >= 50 });
+    setCalc(result);
+    setStep(4);
+  }
 
-  const addSmeta = () => {
-    add({ id: `smeta-${Date.now()}`, name: `Смета · ${calc.area} м² · ${venue}`, price: calc.total, meta: "конфигуратор" });
-    setAdded(true);
-    window.setTimeout(() => setAdded(false), 1600);
-  };
+  const waUrl = calc
+    ? `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(smetaText(calc, scenario ?? "bar"))}`
+    : "#";
 
   return (
-    <div className="space-y-6">
-      {/* Expert trust strip */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {expertPoints.map(({ icon: Icon, text }) => (
-          <div key={text} className="flex items-start gap-2.5 rounded-2xl bg-background p-4 text-sm">
-            {Icon && <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />}
-            <span className="text-muted-foreground leading-tight">{text}</span>
-          </div>
-        ))}
-      </div>
+    <div className="mx-auto max-w-xl">
+      {step < 4 && <StepIndicator step={step} total={3} />}
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
-        {/* Left — controls */}
-        <div className="rounded-2xl bg-background p-6">
-          <div className="mb-5 inline-flex rounded-lg border border-border p-1">
-            <button type="button" onClick={() => setMode("params")} className={tab(mode === "params")}>
-              По параметрам
-            </button>
-            <button type="button" onClick={() => setMode("budget")} className={tab(mode === "budget")}>
-              По бюджету
-            </button>
-          </div>
-
-          <p className="mb-2 text-xs text-muted-foreground">Тип заведения</p>
-          <div className="mb-5 flex flex-wrap gap-2">
-            {venueTypes.map((t) => (
-              <button key={t} type="button" onClick={() => setVenue(t)} className={chip(venue === t)}>
-                {t}
+      {/* Шаг 1 — Сценарий */}
+      {step === 1 && (
+        <div>
+          <h2 className="mb-4 font-display text-lg font-semibold">Шаг 1 — Выберите сценарий</h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {SCENARIOS.map((s) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => handleScenario(s.id)}
+                className={[
+                  "rounded-2xl border p-4 text-left transition",
+                  scenario === s.id
+                    ? "border-primary bg-primary/5"
+                    : "border-border bg-background hover:border-primary",
+                ].join(" ")}
+              >
+                <p className="font-medium">{s.label}</p>
+                <p className="text-sm text-muted-foreground">{s.sub}</p>
               </button>
             ))}
           </div>
-
-          {mode === "params" ? (
-            <>
-              <p className="mb-2 text-sm font-medium">
-                Площадь зала: <span className="text-primary">{area} м²</span>
-              </p>
-              <input type="range" min={10} max={150} step={5} value={area} onChange={(e) => setArea(Number(e.target.value))} className="w-full accent-primary" />
-
-              <p className="mb-2 mt-5 text-sm font-medium">
-                Радиомикрофоны: <span className="text-primary">{mics}</span>
-              </p>
-              <input type="range" min={2} max={6} step={1} value={mics} onChange={(e) => setMics(Number(e.target.value))} className="w-full accent-primary" />
-
-              <div className="mt-5 flex flex-wrap gap-5 text-sm">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={sub} onChange={(e) => setSub(e.target.checked)} className="h-4 w-4 accent-primary" />
-                  Сабвуфер
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={light} onChange={(e) => setLight(e.target.checked)} className="h-4 w-4 accent-primary" />
-                  Световое оборудование
-                </label>
-              </div>
-            </>
-          ) : (
-            <>
-              <p className="mb-2 text-sm font-medium">Бюджет, ₸</p>
-              <input
-                type="number"
-                min={400000}
-                step={100000}
-                value={budget}
-                onChange={(e) => setBudget(Number(e.target.value))}
-                className="h-11 w-full max-w-xs rounded-lg border border-border bg-transparent px-3 text-sm outline-none focus:border-primary"
-              />
-              {!fits ? (
-                <p className="mt-2 text-xs text-muted-foreground">
-                  Бюджета недостаточно для полного комплекта — показываем минимальную конфигурацию.
-                </p>
-              ) : (
-                <p className="mt-2 text-xs text-muted-foreground">Подобрали максимальную комплектацию в рамках бюджета.</p>
-              )}
-            </>
-          )}
-        </div>
-
-        {/* Right — smeta */}
-        <aside className="h-fit rounded-2xl bg-background p-5 shadow-sm">
-          <div className="flex items-center justify-between">
-            <h3 className="font-medium">Смета под ключ</h3>
-            <Badge tone="primary">{calc.area} м²</Badge>
+          <div className="mt-5 flex justify-end">
+            <Button onClick={() => setStep(2)} disabled={!scenario}>
+              Далее <ArrowRight className="h-4 w-4" />
+            </Button>
           </div>
+        </div>
+      )}
 
-          <div className="mt-3 divide-y divide-border text-sm">
-            {calc.lines.map((l) => (
-              <div key={l.name} className="py-2.5">
-                <div className="flex items-baseline justify-between gap-2">
-                  <span className="text-foreground">
-                    {l.name} {l.qty > 1 ? <span className="text-muted-foreground">× {l.qty}</span> : null}
-                  </span>
-                  <span className="whitespace-nowrap font-medium">{priceFmt(l.subtotal)}</span>
-                </div>
-                {l.hint && (
-                  <p className="mt-0.5 text-[11px] text-muted-foreground leading-tight">{l.hint}</p>
-                )}
-              </div>
+      {/* Шаг 2 — Площадь */}
+      {step === 2 && (
+        <div>
+          <h2 className="mb-4 font-display text-lg font-semibold">Шаг 2 — Площадь помещения</h2>
+          <div className="rounded-2xl border border-border bg-background p-6">
+            <p className="mb-2 text-sm font-medium">
+              Площадь зала: <span className="text-primary font-semibold">{area} м²</span>
+            </p>
+            <input
+              type="range"
+              min={15}
+              max={200}
+              step={5}
+              value={area}
+              onChange={(e) => setArea(Number(e.target.value))}
+              className="w-full accent-primary"
+            />
+            <div className="mt-1 flex justify-between text-xs text-muted-foreground">
+              <span>15 м²</span><span>200 м²</span>
+            </div>
+            <div className="mt-5 flex gap-2">
+              {[25, 50, 80, 120].map((v) => (
+                <button
+                  key={v}
+                  type="button"
+                  onClick={() => setArea(v)}
+                  className={[
+                    "rounded-full border px-3 py-1 text-sm transition",
+                    area === v ? "border-primary bg-primary text-white" : "border-border hover:border-primary",
+                  ].join(" ")}
+                >
+                  {v} м²
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="mt-5 flex justify-between">
+            <Button variant="ghost" onClick={() => setStep(1)}>
+              <ArrowLeft className="h-4 w-4" /> Назад
+            </Button>
+            <Button onClick={() => setStep(3)}>
+              Далее <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* Шаг 3 — Бюджет */}
+      {step === 3 && (
+        <div>
+          <h2 className="mb-4 font-display text-lg font-semibold">Шаг 3 — Ориентир по бюджету</h2>
+          <div className="grid gap-3">
+            {BUDGET_OPTS.map((opt, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setBudgetIdx(i)}
+                className={[
+                  "rounded-2xl border p-4 text-left transition",
+                  budgetIdx === i
+                    ? "border-primary bg-primary/5"
+                    : "border-border bg-background hover:border-primary",
+                ].join(" ")}
+              >
+                <p className="font-medium">{opt.label}</p>
+              </button>
             ))}
           </div>
-
-          <div className="mt-3 flex items-baseline justify-between border-t border-border pt-3">
-            <span className="font-medium">Итого</span>
-            <span className="text-xl font-semibold">{priceFmt(calc.total)}</span>
-          </div>
-
-          <div className="mt-4 flex flex-col gap-2">
-            <Button onClick={() => window.open(waUrl, "_blank", "noopener")}>
-              <MessageCircle className="h-4 w-4" /> Заявка со сметой в WhatsApp
+          <div className="mt-5 flex justify-between">
+            <Button variant="ghost" onClick={() => setStep(2)}>
+              <ArrowLeft className="h-4 w-4" /> Назад
             </Button>
-            <Button variant="ghost" onClick={addSmeta}>
-              {added ? (
-                <>
-                  <Check className="h-4 w-4" /> Добавлено
-                </>
-              ) : (
-                <>
-                  <ShoppingCart className="h-4 w-4" /> Добавить смету в корзину
-                </>
-              )}
+            <Button onClick={buildSmeta}>
+              Рассчитать смету <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
-        </aside>
-      </div>
+        </div>
+      )}
+
+      {/* Шаг 4 — Смета */}
+      {step === 4 && calc && (
+        <div>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="font-display text-lg font-semibold">Ваша смета</h2>
+            <button
+              type="button"
+              onClick={() => { setStep(1); setScenario(null); setCalc(null); }}
+              className="text-sm text-primary hover:underline"
+            >
+              Пересчитать
+            </button>
+          </div>
+
+          <div className="rounded-2xl border border-border bg-background p-5">
+            <div className="divide-y divide-border text-sm">
+              {calc.lines.map((l) => (
+                <div key={l.name} className="py-2.5">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span>
+                      {l.name}{l.qty > 1 ? <span className="ml-1 text-muted-foreground">× {l.qty}</span> : null}
+                    </span>
+                    <span className="whitespace-nowrap font-medium">{priceFmt(l.subtotal)}</span>
+                  </div>
+                  {l.hint && <p className="mt-0.5 text-[11px] text-muted-foreground">{l.hint}</p>}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-3 flex items-baseline justify-between border-t border-border pt-3">
+              <span className="font-medium">Итого</span>
+              <span className="font-display text-2xl font-bold text-primary">{priceFmt(calc.total)}</span>
+            </div>
+          </div>
+
+          <p className="mt-3 text-xs text-muted-foreground">
+            Площадь {calc.area} м² · {SCENARIOS.find(s => s.id === scenario)?.label}. Итоговые цены подтверждаем по счёту.
+          </p>
+
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
+          >
+            <MessageCircle className="h-4 w-4" />
+            Отправить смету в WhatsApp
+          </a>
+        </div>
+      )}
     </div>
   );
 }
