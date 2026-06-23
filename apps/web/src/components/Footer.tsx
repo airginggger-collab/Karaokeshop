@@ -14,7 +14,7 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="mt-16 border-t border-border bg-surface">
+    <footer className="mt-16 border-t border-border bg-surface dark:border-white/[0.06] dark:bg-[#0e131c]">
       <Container className="flex flex-col gap-2 py-8 text-sm text-muted-foreground">
         <p className="font-medium text-foreground">karaokeshop · {siteConfig.city}</p>
         <p>Караоке-системы AST и Studio Evolution. Продажа, монтаж, сервис с 2012.</p>

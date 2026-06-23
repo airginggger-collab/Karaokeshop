@@ -32,6 +32,12 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-23) — Header/Footer: явная тёмная тема
+
+- `tailwind.config.ts`: добавлен `darkMode: "class"` (ранее отсутствовал → `dark:` утилиты работали через media query, а не `.dark` класс)
+- `Header.tsx`: `dark:bg-[#0e131c] dark:border-white/[0.08]` — хэдер сливается с фоном страницы в тёмной теме
+- `Footer.tsx`: `dark:bg-[#0e131c] dark:border-white/[0.06]` — аналогично, убрана яркая `bg-surface` в тёмной теме
+
 ## Последняя сессия (2026-06-23) — globals.css: тёмная тема — читаемость карточек
 
 - `--color-bg` (тёмная карточка): `#141c27` → `#1c2840` — заметнее отличается от фона страницы
