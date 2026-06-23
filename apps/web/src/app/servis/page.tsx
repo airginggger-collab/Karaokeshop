@@ -60,8 +60,8 @@ export default function Page() {
             <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
               <Icon className="h-5 w-5" />
             </span>
-            <h2 className="mt-3 font-medium">{title}</h2>
-            <p className="mt-1 text-sm text-muted-foreground">{body}</p>
+            <h2 className="mt-3 text-base font-semibold">{title}</h2>
+            <p className="mt-1 text-sm text-foreground/70">{body}</p>
           </div>
         ))}
       </div>

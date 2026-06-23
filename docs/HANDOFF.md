@@ -32,6 +32,10 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Последняя сессия (2026-06-23) — /servis: контраст текста в карточках
+
+- `servis/page.tsx`: заголовок карточки `font-medium` → `text-base font-semibold`; тело `text-muted-foreground` → `text-foreground/70`
+
 ## Последняя сессия (2026-06-23) — dark: явный цвет текста на body
 
 Корневая причина: tokens.css ставит `--color-fg: #0E1726` в `:root`; `.dark { --color-fg }` не всегда перебивает при статическом экспорте.
