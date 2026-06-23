@@ -74,6 +74,19 @@ export default function HomePage() {
             </Link>
           </div>
 
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+            {[
+              { value: "с 2012", label: "года на рынке" },
+              { value: "200+", label: "проектов" },
+              { value: "2 дня", label: "монтаж" },
+            ].map((s) => (
+              <div key={s.value} className="flex items-baseline gap-1.5">
+                <span className="font-display text-lg font-bold" style={{ color: "var(--night-fg)" }}>{s.value}</span>
+                <span className="text-xs" style={{ color: "var(--night-muted)" }}>{s.label}</span>
+              </div>
+            ))}
+          </div>
+
           <HeroWave />
         </section>
 
