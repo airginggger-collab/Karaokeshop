@@ -32,7 +32,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — P2#16–17: JSON-LD + SEO мета
+## Последняя сессия (2026-06-23) — P2#16–18: JSON-LD + SEO + лендинги
+
+P2#18 — `/dlya-doma` и `/dlya-biznesa` переписаны: герой с УТП + цена-от + WhatsApp CTA + иконки УТП; карточки товаров заменены на `ProductCard` (с WhatsApp-кнопкой); FAQ заменён на `FaqAccordion`. Убраны `Button` из `@kk/ui` в пользу прямых `<a>` и `<Link>`.
+
+## Предыдущая сессия (2026-06-23) — P2#16–17: JSON-LD + SEO мета
 
 P2#17 — улучшены title/description на 3 страницах:
 - catalog: "Купить системы AST и Studio Evolution — каталог с ценами | Алматы" + rich description с числами
