@@ -8,8 +8,8 @@ import { products, priceFmt, siteConfig } from "@/lib/site";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Домашнее караоке — купить систему для дома, Алматы",
-  description: "Готовые домашние системы AST и Studio Evolution. Подберём по комнате и бюджету. Монтаж, настройка, гарантия.",
+  title: "Купить домашнее караоке в Алматы — AST Mini и Evobox от 749 000 ₸",
+  description: "Системы AST Mini и Studio Evolution Evobox для гостиной, бани и гостевого дома. Подберём под комнату и бюджет. Монтаж, настройка и гарантия 1 год.",
   alternates: { canonical: "/dlya-doma" },
 };
 

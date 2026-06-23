@@ -148,8 +148,8 @@ export const sravnenieMeta: Landing = {
 export const catalogMeta: Landing = {
   slug: "catalog",
   h1: "Каталог",
-  title: "Каталог караоке-систем и оборудования",
-  description: "Караоке-системы, акустика, микрофоны, свет. Фильтр по сценарию, бренду и площади.",
+  title: "Купить системы AST и Studio Evolution — каталог с ценами | Алматы",
+  description: "18 моделей: системы AST и Studio Evolution, акустика RCF, микрофоны Shure. Официальный дилер в Казахстане. Фильтр по типу и бренду. Монтаж и гарантия.",
 };
 
 export const podKlyuchMeta: Landing = {
@@ -296,15 +296,15 @@ export const blogMeta: Landing = {
 export const dlyaDomaMetaV2: Landing = {
   slug: "dlya-doma",
   h1: "Домашнее караоке",
-  title: "Домашнее караоке — купить систему для дома, Алматы",
-  description: "Готовые домашние системы AST и Studio Evolution. Подберём по комнате и бюджету. Монтаж, настройка, гарантия.",
+  title: "Купить домашнее караоке в Алматы — AST Mini и Evobox от 749 000 ₸",
+  description: "Системы AST Mini и Studio Evolution Evobox для гостиной, бани и гостевого дома. Подберём под комнату и бюджет. Монтаж, настройка и гарантия 1 год.",
 };
 
 export const dlyaBiznesaMeta: Landing = {
   slug: "dlya-biznesa",
   h1: "Оснастить заведение под ключ",
-  title: "Оснастить заведение под ключ — бар, ресторан, клуб",
-  description: "Профессиональное оснащение кафе, бара, ресторана и клуба. Проект звука, монтаж, обучение. Алматы, с 2012.",
+  title: "Оснастить бар, ресторан, клуб под ключ — Алматы | karaokeshop",
+  description: "Проект звука, монтаж и обучение для кафе, баров, ресторанов и клубов. AST-250/350, Studio Evolution, акустика RCF. 200+ проектов с 2012. Расчёт бесплатно.",
 };
 
 export const gotovyeResheniyaMeta: Landing = {

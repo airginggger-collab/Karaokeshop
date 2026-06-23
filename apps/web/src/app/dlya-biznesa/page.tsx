@@ -8,8 +8,8 @@ import { products, priceFmt, siteConfig } from "@/lib/site";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Оснастить заведение под ключ — бар, ресторан, клуб | Алматы",
-  description: "Профессиональное оснащение кафе, бара, ресторана и клуба. Проект звука, монтаж, обучение. Алматы, с 2012.",
+  title: "Оснастить бар, ресторан, клуб под ключ — Алматы | karaokeshop",
+  description: "Проект звука, монтаж и обучение для кафе, баров, ресторанов и клубов. AST-250/350, Studio Evolution, акустика RCF. 200+ проектов с 2012. Расчёт бесплатно.",
   alternates: { canonical: "/dlya-biznesa" },
 };
 

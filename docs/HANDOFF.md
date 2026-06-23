@@ -32,7 +32,15 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — P2#16: JSON-LD обогащение
+## Последняя сессия (2026-06-23) — P2#16–17: JSON-LD + SEO мета
+
+P2#17 — улучшены title/description на 3 страницах:
+- catalog: "Купить системы AST и Studio Evolution — каталог с ценами | Алматы" + rich description с числами
+- dlya-doma: ценовой сигнал "от 749 000 ₸" + конкретные модели в title
+- dlya-biznesa: "200+ проектов с 2012" + "Расчёт бесплатно" в description
+Обновлено и в `site.ts` (dlyaDomaMetaV2, dlyaBiznesaMeta, catalogMeta), и инлайн в page.tsx.
+
+## Предыдущая сессия (2026-06-23) — P2#16: JSON-LD обогащение
 
 P2#16 — `seo.ts`: `productJsonLd` принимает `rating`/`reviewsCount`, добавляет `aggregateRating` + `seller`. `layout.tsx` LocalBusiness: добавлены `@id`, `geo` (43.2567, 76.9286), `addressRegion`, `sameAs` (2GIS placeholder). BreadcrumbList JSON-LD добавлен на: catalog, dlya-doma, dlya-biznesa, servis, o-nas, pod-klyuch. Страница товара передаёт `rating`/`reviewsCount` в productJsonLd.
 
