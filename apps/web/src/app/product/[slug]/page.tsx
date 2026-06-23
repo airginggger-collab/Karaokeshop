@@ -7,7 +7,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { AddToCart } from "@/components/AddToCart";
 import { CompareToggle } from "@/components/CompareToggle";
 import { products, priceFmt, discountPct, typeLabels, siteConfig } from "@/lib/site";
-import { productJsonLd } from "@/lib/seo";
+import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -38,7 +38,12 @@ export default async function Page({
   const p = products.find((x) => x.slug === slug);
   if (!p) notFound();
 
-  const ld = productJsonLd({ name: p.model, price: p.price, slug: p.slug, brand: p.brand, inStock: p.inStock });
+  const ld = productJsonLd({ name: p.model, price: p.price, slug: p.slug, brand: p.brand, inStock: p.inStock, image: p.image });
+  const breadcrumbLd = breadcrumbJsonLd([
+    { name: "Главная", path: "/" },
+    { name: "Каталог", path: "/catalog" },
+    { name: p.model, path: `/product/${p.slug}` },
+  ]);
   const pct = discountPct(p.price, p.priceOld);
   const label = p.scenarioLabel ?? typeLabels[p.type];
   const songs = p.songsCount ? new Intl.NumberFormat("ru-RU").format(p.songsCount) : null;
@@ -47,6 +52,7 @@ export default async function Page({
     <Container className="py-10">
       <Breadcrumb items={[{ label: "Каталог", href: "/catalog" }, { label: p.model }]} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
       <div className="grid gap-8 md:grid-cols-2">
         <div className="flex h-72 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-surface to-muted">

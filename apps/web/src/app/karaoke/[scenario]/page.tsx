@@ -19,7 +19,7 @@ export async function generateMetadata({
   return {
     title: s.title,
     description: s.description,
-    alternates: { canonical: `/karaoke/${s.slug}` },
+    alternates: { canonical: s.slug === "dlya-doma" ? "/dlya-doma" : `/karaoke/${s.slug}` },
   };
 }
 

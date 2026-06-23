@@ -1,10 +1,12 @@
 node_modules/
 dist/
-.next/
 .env
 .env.local
 .DS_Store
 *.log
+*.zip
+*.tsbuildinfo
+.claude/
 
 # build / tooling
 .next/
@@ -16,6 +18,7 @@ out/
 
 # local scratch assets
 _local-assets/
+скриныыы*/
 /*.png
 /*.jpg
 /*.jpeg

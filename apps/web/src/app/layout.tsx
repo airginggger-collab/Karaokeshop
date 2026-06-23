@@ -31,6 +31,16 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.defaultDescription,
+  openGraph: {
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    locale: "ru_KZ",
+    type: "website",
+    images: [{ url: `${siteConfig.url}/og.jpg`, width: 1200, height: 630 }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 const localBusinessLd = {

@@ -2,7 +2,16 @@
   "ci": {
     "collect": {
       "staticDistDir": "apps/web/out",
-      "url": ["/index.html", "/karaoke/dlya-bara.html", "/product/ast-250.html"],
+      "url": [
+        "/index.html",
+        "/catalog.html",
+        "/karaoke/dlya-bara.html",
+        "/dlya-doma.html",
+        "/kalkulyator.html",
+        "/kontakty.html",
+        "/dlya-biznesa.html",
+        "/komplekty.html"
+      ],
       "numberOfRuns": 1
     },
     "assert": {

@@ -6,6 +6,7 @@ export type ProductLd = {
   slug: string;
   brand?: string;
   inStock?: boolean;
+  image?: string;
 };
 
 export function productJsonLd(p: ProductLd) {
@@ -13,6 +14,7 @@ export function productJsonLd(p: ProductLd) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: p.name,
+    ...(p.image ? { image: p.image } : {}),
     ...(p.brand ? { brand: { "@type": "Brand", name: p.brand } } : {}),
     offers: {
       "@type": "Offer",

@@ -7,12 +7,16 @@
     "packages/*"
   ],
   "packageManager": "npm@10.9.2",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "tokens": "npm run build -w @kk/tokens"
+    "tokens": "npm run build -w @kk/tokens",
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,css,md}\" --ignore-path .gitignore"
   },
   "devDependencies": {
     "prettier": "^3.3.3",
