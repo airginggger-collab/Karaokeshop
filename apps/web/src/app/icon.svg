@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="8" fill="#0d1117"/>
+  <!-- mic body -->
+  <rect x="12" y="4" width="8" height="14" rx="4" fill="#2dd4bf"/>
+  <!-- mic stand -->
+  <path d="M8 16c0 4.418 3.582 8 8 8s8-3.582 8-8" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <line x1="16" y1="24" x2="16" y2="28" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"/>
+  <line x1="12" y1="28" x2="20" y2="28" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"/>
+</svg>
