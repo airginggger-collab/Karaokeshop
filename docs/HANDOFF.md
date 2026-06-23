@@ -32,7 +32,12 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — редизайн P0#1: навигация 7→5 + активный пункт
+## Последняя сессия (2026-06-23) — редизайн P0#1+2: навигация + WhatsApp CTA в карточке
+
+P0#1 — навигация 7→5 + активный пункт (см. ниже).
+P0#2 — `ProductCard.tsx`: убран `CompareToggle`; добавлена кнопка «Узнать цену» (WhatsApp) с предзаполненным сообщением «Здравствуйте! Интересует {model}...»; `"use client"` для `onClick` (stopPropagation); `wa.me/${siteConfig.whatsapp}?text=...`.
+
+## Предыдущая сессия (2026-06-23) — редизайн P0#1: навигация 7→5 + активный пункт
 
 Начат редизайн-спринт (39 задач, брейнсторм завершён). Выполнена P0-задача №1:
 - `apps/web/src/lib/site.ts` `mainNav`: 7 пунктов → 5 (`/catalog`, `/dlya-doma`, `/dlya-biznesa`, `/pod-klyuch`, `/kontakty`); убраны `/brand/studio-evolution`, `/brand/ast`, `/gotovye-resheniya`.
