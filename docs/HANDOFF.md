@@ -32,7 +32,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
-## Последняя сессия (2026-06-23) — P1#8–11: drawer + FAB + footer + страница товара
+## Последняя сессия (2026-06-23) — P1#8–12: drawer + FAB + footer + товар + каталог
+
+P1#12 — `CatalogClient.tsx` переписан: поиск наверху (по модели и бренду, с кнопкой сброса), горизонтальные чипы-фильтры по типу (Все + 5 типов), shimmer-скелетоны через `useTransition` при фильтрации, убран sidebar с чекбоксами.
+
+## Предыдущая сессия (2026-06-23) — P1#8–11: drawer + FAB + footer + страница товара
 
 P1#11 — `product/[slug]/page.tsx`: desktop split (`lg:grid-cols-[1fr_420px]`), фото слева (h-520px), детали справа `lg:sticky lg:top-[72px]`, desktop CTA — WhatsApp + AddToCart + консультация. `ProductStickyBar.tsx` (новый) — fixed bottom bar на мобиле: цена + WhatsApp. `pb-28 lg:pb-10` чтобы контент не прятался за баром. `ProductImage` вместо Speaker-заглушки.
 
