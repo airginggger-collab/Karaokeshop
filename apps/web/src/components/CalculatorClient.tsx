@@ -3,7 +3,7 @@
 import * as React from "react";
 import { ArrowLeft, ArrowRight, Check, MessageCircle } from "lucide-react";
 import { Button } from "@kk/ui";
-import { configure, smetaText, type Calc } from "@/lib/calculator";
+import { configureWithinBudget, smetaText, type Calc } from "@/lib/calculator";
 import { priceFmt, siteConfig } from "@/lib/site";
 
 const SCENARIOS = [
@@ -65,6 +65,8 @@ export function CalculatorClient() {
   const [area, setArea] = React.useState(70);
   const [budgetIdx, setBudgetIdx] = React.useState(2);
   const [calc, setCalc] = React.useState<Calc | null>(null);
+  const [fits, setFits] = React.useState(true);
+  const [trimmed, setTrimmed] = React.useState<string[]>([]);
 
   function handleScenario(id: string) {
     setScenario(id);
@@ -73,8 +75,14 @@ export function CalculatorClient() {
 
   function buildSmeta() {
     const venue = SCENARIO_VENUE[scenario ?? "bar"] ?? "Бар / паб";
-    const result = configure({ area, venueType: venue, mics: 4, light: true, sub: area >= 50 });
-    setCalc(result);
+    const budget = BUDGET_OPTS[budgetIdx].value;
+    const result = configureWithinBudget(
+      { area, venueType: venue, mics: 4, light: true, sub: area >= 50 },
+      budget,
+    );
+    setCalc(result.calc);
+    setFits(result.fits);
+    setTrimmed(result.trimmed);
     setStep(4);
   }
 
@@ -202,7 +210,7 @@ export function CalculatorClient() {
             <h2 className="font-display text-lg font-semibold">Ваша смета</h2>
             <button
               type="button"
-              onClick={() => { setStep(1); setScenario(null); setCalc(null); }}
+              onClick={() => { setStep(1); setScenario(null); setCalc(null); setFits(true); setTrimmed([]); }}
               className="text-sm text-primary hover:underline"
             >
               Пересчитать
@@ -233,6 +241,17 @@ export function CalculatorClient() {
           <p className="mt-3 text-xs text-muted-foreground">
             Площадь {calc.area} м² · {SCENARIOS.find(s => s.id === scenario)?.label}. Итоговые цены подтверждаем по счёту.
           </p>
+
+          {fits && trimmed.length > 0 && (
+            <p className="mt-2 text-xs text-muted-foreground">
+              Чтобы уложиться в бюджет «{BUDGET_OPTS[budgetIdx].label}», из комплекта убрали: {trimmed.join(", ")}.
+            </p>
+          )}
+          {!fits && (
+            <p className="mt-2 rounded-lg bg-primary-soft px-3 py-2 text-xs text-primary">
+              Минимальный комплект под {calc.area} м² выходит дороже бюджета «{BUDGET_OPTS[budgetIdx].label}» — показываем ориентир, точную смету подберём по проекту.
+            </p>
+          )}
 
           <a
             href={waUrl}

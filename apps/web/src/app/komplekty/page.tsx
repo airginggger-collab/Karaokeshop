@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { bundles, komplektyIndexMeta } from "@/lib/site";
 import { LandingPage } from "@/components/LandingPage";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
   title: komplektyIndexMeta.title,
@@ -11,7 +12,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <LandingPage h1={komplektyIndexMeta.h1} description={komplektyIndexMeta.description}>
+    <LandingPage
+      h1={komplektyIndexMeta.h1}
+      description={komplektyIndexMeta.description}
+      breadcrumb={<Breadcrumb items={[{ label: "Готовые комплекты" }]} />}
+    >
       <ul className="mt-6 grid gap-3 sm:grid-cols-2">
         {bundles.map((b) => (
           <li key={b.slug}>

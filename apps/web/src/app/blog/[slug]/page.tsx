@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { blogPosts } from "@/lib/site";
 import { faqJsonLd } from "@/lib/seo";
 
@@ -43,9 +43,7 @@ export default async function Page({
       ) : null}
 
       <article className="mx-auto max-w-2xl">
-        <Link href="/blog" className="text-sm text-primary hover:underline">
-          ← Блог
-        </Link>
+        <Breadcrumb items={[{ label: "Блог", href: "/blog" }, { label: post.title }]} />
         <h1 className="mt-3 text-3xl font-semibold tracking-tight">{post.title}</h1>
         {post.body.map((para, i) => (
           <p key={i} className="mt-4 text-[15px] leading-7">

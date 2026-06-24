@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { scenarios } from "@/lib/site";
 import { LandingPage } from "@/components/LandingPage";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export function generateStaticParams() {
   return scenarios.map((s) => ({ scenario: s.slug }));
@@ -31,6 +32,10 @@ export default async function Page({
   const s = scenarios.find((x) => x.slug === scenario);
   if (!s) notFound();
   return (
-    <LandingPage h1={s.h1} description={s.description} />
+    <LandingPage
+      h1={s.h1}
+      description={s.description}
+      breadcrumb={<Breadcrumb items={[{ label: s.h1 }]} />}
+    />
   );
 }

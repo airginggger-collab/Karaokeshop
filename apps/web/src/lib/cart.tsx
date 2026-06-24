@@ -18,6 +18,28 @@ type CartCtx = {
 const Ctx = React.createContext<CartCtx | null>(null);
 const KEY = "kk-cart";
 
+/** Защищает от повреждённого/подделанного localStorage: отбрасывает мусор,
+ * приводит qty к целому ≥1, проверяет, что цена — конечное число ≥0, дедуплицирует id. */
+function sanitizeCart(raw: unknown): CartItem[] {
+  if (!Array.isArray(raw)) return [];
+  const seen = new Set<string>();
+  const out: CartItem[] = [];
+  for (const it of raw) {
+    if (!it || typeof it !== "object") continue;
+    const r = it as Record<string, unknown>;
+    const id = typeof r.id === "string" ? r.id : null;
+    const name = typeof r.name === "string" ? r.name : null;
+    const price = typeof r.price === "number" && Number.isFinite(r.price) && r.price >= 0 ? r.price : null;
+    if (!id || !name || price === null || seen.has(id)) continue;
+    const qtyFloor = typeof r.qty === "number" ? Math.floor(r.qty) : 1;
+    const qty = Number.isFinite(qtyFloor) && qtyFloor >= 1 ? qtyFloor : 1;
+    const meta = typeof r.meta === "string" ? r.meta : undefined;
+    seen.add(id);
+    out.push({ id, name, price, qty, meta });
+  }
+  return out;
+}
+
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = React.useState<CartItem[]>([]);
   const [ready, setReady] = React.useState(false);
@@ -25,7 +47,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   React.useEffect(() => {
     try {
       const raw = localStorage.getItem(KEY);
-      if (raw) setItems(JSON.parse(raw));
+      if (raw) setItems(sanitizeCart(JSON.parse(raw)));
     } catch {
       /* ignore */
     }

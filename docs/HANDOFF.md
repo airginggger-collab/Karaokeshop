@@ -2,7 +2,7 @@
 
 > Краткий контекст проекта karaokeshop.kz, чтобы быстро войти в курс. Полная карта — [docs/README.md](README.md) · правила для AI — [/CLAUDE.md](../CLAUDE.md).
 >
-> **Обновлено: 2026-06-24.** Ветка `main` — актуальная, деплоится на Cloudflare автоматически.
+> **Обновлено: 2026-06-25.** Ветка `main` — актуальная, деплоится на Cloudflare автоматически.
 >
 > 🔧 **Аудит сайта (2026-06-22):** [`audit-2026-06-22.md`](audit-2026-06-22.md) — оценки и находки по визуалу/UX/продажам/SEO/репо. План устранения с файлами и проверкой — [`fix-plan-2026-06-22.md`](fix-plan-2026-06-22.md) (точка входа для работ).
 
@@ -17,7 +17,7 @@
 - **Деплой:** Cloudflare assets-only Worker (`wrangler.toml` → `apps/web/out`), **авто на каждый push в main**. Превью-MCP привязан к medlog — проверять надо `build` + `curl` живого URL.
 
 ## Стек
-Next.js 15 (App Router, `output: "export"` — статика) · Turborepo (npm workspaces) · Tailwind на дизайн-токенах (Style Dictionary) · Storybook · lucide-react · lottie-react · шрифты Manrope + Unbounded. **77 статических страниц** (26 блог-статей + 18 товаров + служебные). Тесты Vitest: web 10 (calculator 7 + seo 3) + ui 2.
+Next.js 15 (App Router, `output: "export"` — статика) · Turborepo (npm workspaces) · Tailwind на дизайн-токенах (Style Dictionary) · Storybook · lucide-react · lottie-react · шрифты Manrope + Unbounded. **77 статических страниц** (26 блог-статей + 18 товаров + служебные). Тесты Vitest: web 15 (calculator 12 + seo 3) + ui 2.
 
 ## Сборка / проверка
 ```
@@ -31,6 +31,18 @@ npm test -w web           # тесты
 - `apps/web/src/lib/components.ts` — цены оборудования в калькуляторе сметы.
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
+
+## Сессия 2026-06-25 — QA-прогон LIVE + фиксы находок
+
+Полный QA-прогон сайта (head-of-QA). Подтверждено: XSS нет (React экранирует), все 70 URL → 200, корзина/checkout/визард/поиск/тема/моб-меню работают. Найдено и **исправлено** (build+tests зелёные, проверено на свежем `out/`):
+
+1. **Калькулятор — бюджет был плацебо.** `buildSmeta` звал `configure()` и игнорировал `budgetIdx` → смета одинакова при любом бюджете (и превышала лимит). Добавлен `configureWithinBudget(input, budget)` в [calculator.ts](../apps/web/src/lib/calculator.ts) — триммит опции (свет → сабвуфер → микрофоны до 2) под выбранный бюджет, **сохраняя площадь** (в отличие от `configureByBudget`). Подключён в [CalculatorClient.tsx](../apps/web/src/components/CalculatorClient.tsx) + заметка о тримминге/превышении. +5 тестов. Вживую: «до 1М» теперь 978 000 ₸ (было 1 328 000 ₸).
+2. **Хлебные крошки** добавлены на 4 динамических роута (нарушали правило CLAUDE.md): `blog/[slug]`, `komplekty` (индекс), `komplekty/[area]`, `karaoke/[scenario]`. В [LandingPage.tsx](../apps/web/src/components/LandingPage.tsx) добавлен опциональный проп `breadcrumb`.
+3. **`/og.jpg` не существовал** (404 на всём сайте → шеринг без превью). Создан брендированный 1200×630 [apps/web/public/og.jpg](../apps/web/public/og.jpg) (SVG→JPG через `sips`).
+4. **Яндекс.Метрика с заглушкой `XXXXXXXX`** грузила битый пиксель на всех страницах. В [layout.tsx](../apps/web/src/app/layout.tsx) гард `YM_ENABLED` (regex на числовой ID) — пока ID заглушка, Метрика не рендерится. Вставить реальный числовой ID, чтобы включить.
+5. **Корзина** теперь санитайзит `localStorage` при загрузке ([cart.tsx](../apps/web/src/lib/cart.tsx) `sanitizeCart`): qty→целое ≥1, цена — конечное число ≥0, дедуп id, отброс мусора.
+
+**Осталось (не код — деплой/DNS):** canonical/`og:image`/`og:url` абсолютны на `https://www.karaokeshop.kz`, домен ещё не привязан (→ 400). Социальные превью и canonical заработают после привязки домена. og-ассет уже на месте. Лог-артефакт: локальный `next build` иногда отдаёт устаревший HTML из кэша даже после `rm -rf .next out` — структуру проверять `curl` живого URL.
 
 ## Сессия 2026-06-24 (продолжение 8) — permissions allowlist, меньше апрувов
 

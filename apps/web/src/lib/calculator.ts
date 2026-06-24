@@ -43,6 +43,42 @@ export function configure(input: CalcInput): Calc {
   return { base: base.id, area, lines, total };
 }
 
+export type BudgetFit = { calc: Calc; fits: boolean; trimmed: string[] };
+
+/**
+ * Собирает смету под выбранную площадь и пытается уложиться в бюджет,
+ * снимая необязательные позиции (свет → сабвуфер → лишние микрофоны).
+ * Площадь зала НЕ меняется — в отличие от configureByBudget. Если даже
+ * минимальный комплект дороже бюджета, возвращает его с fits=false.
+ */
+export function configureWithinBudget(input: CalcInput, budget: number): BudgetFit {
+  const trimmed: string[] = [];
+  let current: CalcInput = { ...input };
+  let calc = configure(current);
+  if (calc.total <= budget) return { calc, fits: true, trimmed };
+
+  if (current.light) {
+    current = { ...current, light: false };
+    calc = configure(current);
+    trimmed.push("световое оборудование");
+    if (calc.total <= budget) return { calc, fits: true, trimmed };
+  }
+  if (current.sub) {
+    current = { ...current, sub: false };
+    calc = configure(current);
+    trimmed.push("сабвуфер");
+    if (calc.total <= budget) return { calc, fits: true, trimmed };
+  }
+  if (current.mics > 2) {
+    current = { ...current, mics: 2 };
+    calc = configure(current);
+    trimmed.push("микрофоны до 2 шт");
+    if (calc.total <= budget) return { calc, fits: true, trimmed };
+  }
+
+  return { calc, fits: false, trimmed };
+}
+
 export function configureByBudget(budget: number, venueType: string): { calc: Calc; fits: boolean } {
   const tiers = [130, 80, 50, 30];
   for (const area of tiers) {

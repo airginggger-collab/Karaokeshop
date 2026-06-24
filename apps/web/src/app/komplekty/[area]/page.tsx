@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
 import { Badge, Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { BundleTiers } from "@/components/BundleTiers";
 import { bundles } from "@/lib/site";
 
@@ -44,6 +45,7 @@ export default async function Page({
 
   return (
     <Container className="py-10">
+      <Breadcrumb items={[{ label: "Готовые комплекты", href: "/komplekty" }, { label: b.h1 }]} />
       <Badge tone="primary">B2B · под ключ</Badge>
       <h1 className="mt-3 text-2xl font-medium">{b.h1}</h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">{b.description}</p>

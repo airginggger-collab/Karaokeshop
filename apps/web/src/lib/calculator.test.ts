@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { configure, configureByBudget, pickBase, pickAcoustic } from "./calculator";
+import { configure, configureByBudget, configureWithinBudget, pickBase, pickAcoustic } from "./calculator";
 
 describe("pickBase", () => {
   it("выбирает систему по площади", () => {
@@ -49,5 +49,44 @@ describe("configureByBudget", () => {
   it("при слишком малом бюджете отдаёт минимум с флагом fits=false", () => {
     const r = configureByBudget(100000, "kafe");
     expect(r.fits).toBe(false);
+  });
+});
+
+describe("configureWithinBudget", () => {
+  const input = { area: 80, venueType: "bar", mics: 4, light: true, sub: true };
+
+  it("сохраняет площадь пользователя (не даунгрейдит зал)", () => {
+    const r = configureWithinBudget(input, 1_000_000);
+    expect(r.calc.area).toBe(80);
+  });
+
+  it("при достаточном бюджете ничего не триммит", () => {
+    const full = configure(input);
+    const r = configureWithinBudget(input, full.total);
+    expect(r.fits).toBe(true);
+    expect(r.trimmed).toEqual([]);
+    expect(r.calc.total).toBe(full.total);
+  });
+
+  it("триммит опции, чтобы уложиться в бюджет, и итог не превышает бюджет", () => {
+    const full = configure(input);
+    const budget = full.total - 1; // чуть меньше полного — нужен тримминг
+    const r = configureWithinBudget(input, budget);
+    expect(r.fits).toBe(true);
+    expect(r.calc.total).toBeLessThanOrEqual(budget);
+    expect(r.trimmed.length).toBeGreaterThan(0);
+  });
+
+  it("свет триммится раньше сабвуфера", () => {
+    const full = configure(input);
+    // бюджет, достижимый только снятием света (самая дешёвая опция: 2×25 000)
+    const r = configureWithinBudget(input, full.total - 1);
+    expect(r.trimmed[0]).toMatch(/свет/i);
+  });
+
+  it("если даже минимум превышает бюджет — fits=false, итог всё равно отдаётся", () => {
+    const r = configureWithinBudget(input, 50_000);
+    expect(r.fits).toBe(false);
+    expect(r.calc.total).toBeGreaterThan(0);
   });
 });
