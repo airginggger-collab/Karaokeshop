@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Система работы над проектом — методология</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --panel-2: #1c2330; --line: #2a3342;
+    --fg: #e6edf3; --muted: #9aa7b4; --accent: #2dd4bf; --accent-2: #6ea8fe;
+    --warn: #f0b429;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 "Helvetica Neue", system-ui, -apple-system, sans-serif;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 56px 24px 96px; }
+  header.top { margin-bottom: 40px; }
+  .kicker { color: var(--accent); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; }
+  h1 { font-size: 38px; line-height: 1.1; margin: 10px 0 8px; letter-spacing: -.02em; }
+  .sub { color: var(--muted); max-width: 60ch; }
+  h2 { font-size: 24px; margin: 44px 0 14px; letter-spacing: -.01em; }
+  h3 { font-size: 17px; margin: 0 0 6px; }
+  p { margin: 0 0 12px; }
+  .muted { color: var(--muted); }
+  .toolbar { position: sticky; top: 0; background: rgba(13,17,23,.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 12px 0; margin-bottom: 8px; z-index: 5; }
+  .toolbar .wrap2 { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    background: var(--accent); color: #04241e; border: 0; border-radius: 10px;
+    padding: 9px 16px; font-weight: 700; font-size: 14px; }
+  .btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+  .principles { display: grid; gap: 10px; }
+  .principle { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .principle b { color: var(--accent); }
+  .principle .why { color: var(--muted); font-size: 13px; }
+  .phase { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent-2);
+    border-radius: 12px; padding: 18px 20px; margin: 14px 0; break-inside: avoid; }
+  .phase .num { color: var(--accent-2); font-weight: 800; font-size: 13px; letter-spacing: .1em; }
+  .phase ul { margin: 8px 0 0; padding-left: 18px; }
+  .phase li { margin: 3px 0; }
+  .row { display: grid; gap: 6px; margin-top: 10px; font-size: 14px; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 999px; margin-right: 8px; }
+  .tag.art { background: rgba(45,212,191,.14); color: var(--accent); }
+  .tag.gate { background: rgba(110,168,254,.16); color: var(--accent-2); }
+  .tag.trap { background: rgba(240,180,41,.16); color: var(--warn); }
+  pre { background: #0a0e14; border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+    overflow-x: auto; font: 12.5px/1.55 ui-monospace, "SF Mono", Menlo, monospace; color: #cfe3df;
+    white-space: pre-wrap; break-inside: avoid; }
+  .checklist { columns: 2; column-gap: 28px; font-size: 14px; }
+  .checklist div { break-inside: avoid; margin: 4px 0; }
+  footer { margin-top: 48px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 16px; }
+
+  /* ── Print → PDF: светлый, чернила экономим, разрывы аккуратные ── */
+  @media print {
+    :root { --bg:#fff; --panel:#fff; --panel-2:#f5f7fa; --line:#dde3ea; --fg:#11181c; --muted:#586070; --accent:#0a8f7f; --accent-2:#2563eb; }
+    .toolbar { display: none; }
+    .wrap { padding: 0; max-width: none; }
+    body { font-size: 11pt; }
+    h1 { font-size: 24pt; }
+    h2 { font-size: 15pt; page-break-after: avoid; }
+    .phase, .principle, pre, .checklist div { break-inside: avoid; page-break-inside: avoid; box-shadow: none; }
+    .phase { border-left: 3px solid var(--accent-2); }
+    pre { background: #f5f7fa; color: #11181c; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+<div class="toolbar"><div class="wrap2">
+  <span class="muted" style="font-size:13px">Сара Полякова · методология</span>
+  <button class="btn" onclick="window.print()">⬇ Скачать / распечатать как PDF</button>
+</div></div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="kicker">Как я веду проект</div>
+    <h1>Система работы над проектом</h1>
+    <p class="sub">Пошаговый процесс от интервью до передачи. Принципы выведены из реального опыта проектов MedLog · karaokeshop · WhatDaDev. Это не «советы», а правила, нарушение которых уже стоило времени.</p>
+  </header>
+
+  <h2>Принципы — зашиты во все фазы</h2>
+  <div class="principles">
+    <div class="principle"><b>1. Гейты между фазами.</b> Нельзя переходить дальше без письменного OK клиента. <span class="why">Устное «вроде ок» — не гейт.</span></div>
+    <div class="principle"><b>2. Решения до кода (Decision Log / ADR).</b> Каждое нетривиальное решение письменно: контекст → варианты → выбор → аргумент. <span class="why">Урок: karaokeshop — конфликт источников токенов.</span></div>
+    <div class="principle"><b>3. Аналитика в первый коммит.</b> Счётчик/Umami сразу, не «потом». <span class="why">Урок: WhatDaDev — редизайн вслепую без данных.</span></div>
+    <div class="principle"><b>4. Деплой в первый день.</b> Рабочая заготовка живёт на проде с начала. <span class="why">Нет сюрпризов на сдаче.</span></div>
+    <div class="principle"><b>5. Один источник правды на тип данных.</b> Цвет — в одном файле, контент — в одном файле. <span class="why">Дубль = тихий рассинхрон.</span></div>
+    <div class="principle"><b>6. Тест на устройстве, не в Figma.</b> Мокап ≠ реальный рендер. <span class="why">Урок: MedLog — mobile-first.</span></div>
+    <div class="principle"><b>7. Доки в том же коммите, что и код.</b> CHANGELOG / HANDOFF / контекст — не отдельным заходом.</div>
+    <div class="principle"><b>8. Максимум 2 раунда правок по дизайну.</b> Дальше — вне scope = новый бриф.</div>
+  </div>
+
+  <h2>Фазы — пошагово</h2>
+
+  <div class="phase">
+    <div class="num">ФАЗА 0</div>
+    <h3>Интервью и брифинг</h3>
+    <p class="muted">Понять бизнес и ограничения раньше, чем открыт редактор.</p>
+    <ul>
+      <li><b>Бизнес</b> — что продаёт, кому, чем зарабатывает, конкуренты, отличие.</li>
+      <li><b>Сайт</b> — зачем (продажи/лиды/бренд/SEO), что есть, что болит.</li>
+      <li><b>Контент</b> — что есть (тексты, фото, прайс), что создать, кто даёт.</li>
+      <li><b>Тех-ограничения</b> — бюджет на сервер, резидентность данных, домены, интеграции, кто ведёт после.</li>
+    </ul>
+    <div class="row">
+      <div><span class="tag art">Артефакты</span>заметки интервью, список ограничений, что ждём от клиента</div>
+      <div><span class="tag gate">Гейт</span>клиент подтвердил, что цели и ограничения зафиксированы верно</div>
+      <div><span class="tag trap">Ловушка</span>не начинать дизайн без ответа «зачем сайт» и «кто ведёт после»</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="num">ФАЗА 1</div>
+    <h3>Структура и воронки (IA)</h3>
+    <p class="muted">Карта страниц от пользовательских сценариев, не от «хочу красиво».</p>
+    <ul>
+      <li>Выделить воронки (напр. B2C и B2B — разные пути).</li>
+      <li>Воронки → карта страниц (sitemap).</li>
+      <li>Приоритеты: что в MVP, что фаза 2.</li>
+      <li>Для SEO — от семантического ядра к URL-карте.</li>
+    </ul>
+    <div class="row">
+      <div><span class="tag art">Артефакты</span>sitemap / IA-карта, URL-карта, приоритизация</div>
+      <div><span class="tag gate">Гейт</span>клиент согласовал структуру и слаги</div>
+      <div><span class="tag trap">Ловушка</span>группировать по тех-сущностям, а не по сценариям пользователя</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="num">ФАЗА 2</div>
+    <h3>Решения до кода (ADR)</h3>
+    <p class="muted">Зафиксировать ключевые решения письменно, прежде чем писать код.</p>
+    <ul>
+      <li>По каждому решению: контекст → варианты → выбор → аргумент.</li>
+      <li>Решаем: токены/цвет, стек, хостинг/деплой, CMS vs статика, резидентность, модель данных, аналитика.</li>
+    </ul>
+    <div class="row">
+      <div><span class="tag art">Артефакты</span>docs/adr/NNNN-*.md, сводный Decision Log</div>
+      <div><span class="tag gate">Гейт</span>блокирующие вопросы (резидентность, CMS, домен) отправлены клиенту, ответы получены</div>
+      <div><span class="tag trap">Ловушка</span>«решим по ходу» → решение в коде без фиксации, дубль источников разойдётся</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="num">ФАЗА 3</div>
+    <h3>Визуализация и утверждение стиля</h3>
+    <p class="muted">Согласовать визуальный язык без вёрстки — менять токены дешевле, чем HTML/CSS.</p>
+    <ul>
+      <li>Дизайн-токены: палитра (WCAG-контраст), типографика, радиусы, отступы — один источник.</li>
+      <li>Референсы и направление (тон: минимал / премиум / …).</li>
+      <li>Согласование на токенах/референсах, не на готовых страницах.</li>
+    </ul>
+    <div class="row">
+      <div><span class="tag art">Артефакты</span>файл токенов, борд референсов, мини-гайд стиля</div>
+      <div><span class="tag gate">Гейт</span>клиент утвердил визуальное направление</div>
+      <div><span class="tag trap">Ловушка</span>показывать полу-свёрстанные страницы → правки летят в код; не дублировать цвета</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="num">ФАЗА 4</div>
+    <h3>Первый коммит и деплой (день 1)</h3>
+    <p class="muted">Рабочая заготовка в проде в первый день.</p>
+    <ul>
+      <li>Скелет по решениям Фазы 2 на токенах Фазы 3.</li>
+      <li>Ленивая загрузка, барьеры модулей, дата-роутер (по стеку).</li>
+      <li><b>Аналитика — в этот же коммит.</b></li>
+      <li>Авто-деплой (push → прод), прислать живой URL.</li>
+    </ul>
+    <div class="row">
+      <div><span class="tag art">Артефакты</span>живой прод-URL, репозиторий, настроенный CI/деплой</div>
+      <div><span class="tag gate">Гейт</span>заготовка открывается на проде, аналитика шлёт события</div>
+      <div><span class="tag trap">Ловушка</span>копить локально неделю до «показа»</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="num">ФАЗА 5</div>
+    <h3>Итерации (рабочий цикл)</h3>
+    <p class="muted">Предсказуемый цикл на каждое изменение.</p>
+    <pre>задача → обсуждение → ADR (если нетривиально) → реализация
+      → проверка (build + устройство) → коммит (+доки) → пуш/деплой</pre>
+    <ul>
+      <li>Нетривиальное решение → сначала ADR.</li>
+      <li>Проверка перед «готово»: сборка зелёная + визуал на устройстве/превью.</li>
+      <li>Доки — в том же коммите. Максимум 2 раунда правок на блок.</li>
+    </ul>
+    <div class="row">
+      <div><span class="tag gate">Гейт на задачу</span>проверено и задеплоено, клиент видит на проде</div>
+      <div><span class="tag trap">Ловушка</span>«причешу потом» → whack-a-mole; чинить корень, не симптом</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="num">ФАЗА 6</div>
+    <h3>Проверка и передача (handoff)</h3>
+    <p class="muted">Сайт можно отдать другому разработчику/владельцу без меня.</p>
+    <ul>
+      <li><b>Техника:</b> сборка/тесты зелёные, нет оверфлоу/битых ссылок, 404, мобайл на устройстве.</li>
+      <li><b>SEO:</b> уникальные title/description, один H1, canonical, sitemap/robots, OG, структурированные данные.</li>
+      <li><b>Контент:</b> реальные тексты/фото, верные контакты.</li>
+      <li><b>Доступы/инфра:</b> домен подключён, аналитика активна, секреты на месте.</li>
+    </ul>
+    <div class="row">
+      <div><span class="tag art">Артефакты</span>README/CLAUDE.md, ARCHITECTURE.md, HANDOFF.md, dev-howto, инструкция владельцу, (бэк) контракты/env.example</div>
+      <div><span class="tag gate">Гейт</span>новый человек поднимает проект и делает первый PR по докам без меня</div>
+      <div><span class="tag trap">Ловушка</span>доки «потом» — передавать так, будто завтра исчезаешь</div>
+    </div>
+  </div>
+
+  <h2>Чеклист перед запуском</h2>
+  <div class="checklist">
+    <div>☐ Сборка/тесты зелёные</div>
+    <div>☐ Нет горизонтального оверфлоу</div>
+    <div>☐ Битых ссылок нет, 404 работает</div>
+    <div>☐ Мобайл проверен на устройстве</div>
+    <div>☐ Уникальные title / description</div>
+    <div>☐ Один H1 на странице</div>
+    <div>☐ canonical + sitemap + robots</div>
+    <div>☐ OG / Twitter-теги</div>
+    <div>☐ Реальные тексты и фото</div>
+    <div>☐ Контакты верны</div>
+    <div>☐ Домен подключён</div>
+    <div>☐ Аналитика активна</div>
+    <div>☐ Доки и инструкция владельцу готовы</div>
+  </div>
+
+  <h2>Старт нового проекта — копи-паст промт</h2>
+  <p class="muted">Заполни поля в [ … ], вставь агенту. Методология уже зашита внутрь.</p>
+  <pre>Ты — мой senior-инженер и дизайнер. Ведёшь новый проект end-to-end по МОЕЙ методологии.
+Рабочая папка: [ПУТЬ_К_ПРОЕКТУ].
+
+БРИФ:
+- Название: [...]
+- Что это / что делает: [...]
+- Клиент / для кого: [...]
+- Главная цель сайта: [продажи / лиды / бренд / SEO]
+- Аудитория и воронки: [...]
+- Что уже есть: [старый сайт? тексты, фото, прайс]
+- Тех-ограничения: [бюджет на сервер; резидентность; домен+DNS; интеграции]
+- Кто ведёт после сдачи: [клиент-новичок / разработчик / я]
+- Стек/деплой (если решено): [...]
+- Язык и SEO-гео: [...]
+
+ПРИНЦИПЫ (строго): гейты (письменный OK между фазами) · решения до кода (ADR) ·
+аналитика в первый коммит · деплой в день 1 · один источник правды на цвет/контент ·
+тест на устройстве, не в Figma · доки в том же коммите · максимум 2 раунда правок.
+
+ПРОЦЕСС (на каждом гейте — СТОП, жди мой OK):
+0 Интервью → 1 Структура/воронки → 2 ADR → 3 Визуализация(токены) →
+4 Первый коммит+деплой → 5 Итерации → 6 Проверка+передача.
+
+НАЧНИ: задай мне 3–5 уточняющих вопросов (Фаза 0), КОД НЕ ПИШИ. Потом предложи карту
+страниц на утверждение. Код — не раньше Фазы 4 и не до моего OK по предыдущим фазам.
+Коммить по просьбе; автор: [ИМЯ &lt;EMAIL&gt;]; пуш в основную ветку = прод — подтверждай.</pre>
+
+  <footer>
+    Единый источник: <b>СИСТЕМА_РАБОТЫ.md</b>. Эта страница — для печати в PDF и показа клиентам.<br>
+    Чтобы сохранить как PDF: кнопка вверху или <b>Cmd/Ctrl + P → Сохранить как PDF</b>.
+  </footer>
+</div>
+</body>
+</html>
