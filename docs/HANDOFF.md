@@ -32,6 +32,17 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Сессия 2026-06-24 (продолжение 8) — permissions allowlist, меньше апрувов
+
+`.claude/settings.json` создан (gitignored, локальный). 24 паттерна без апрува:
+- Все `mcp__Claude_Preview__preview_*` — скриншоты, клики, eval, логи, старт/стоп
+- `mcp__visualize__show_widget` + `read_me`
+- `Bash(npm run build -w web)`, `Bash(npm test -w web)`, `Bash(npm test -w @kk/ui)`, `Bash(npm run tokens)`
+- `Bash(git -C ~/Desktop/karaokeshop push origin main)`
+- `Bash(npx tsc --noEmit *)`, `Bash(gh run list *)`
+
+Апрув остаётся на: `git add`, `git commit`, `rm -rf`, `sed -i` — мутирующие операции.
+
 ## Сессия 2026-06-24 (продолжение 7) — оптимизация производительности
 
 - **Изображения товаров сконвертированы в WebP** (sharp): `ast-250.jpg` 57KB→5KB, `ast-250-3.png` 180KB→30KB, `ast-350-2.png` 32KB→7KB, `ast-250-2.png` 113KB→16KB. Ссылки в `site.ts` обновлены.
