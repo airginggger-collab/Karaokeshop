@@ -32,6 +32,12 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Сессия 2026-06-24 (продолжение 7) — оптимизация производительности
+
+- **Изображения товаров сконвертированы в WebP** (sharp): `ast-250.jpg` 57KB→5KB, `ast-250-3.png` 180KB→30KB, `ast-350-2.png` 32KB→7KB, `ast-250-2.png` 113KB→16KB. Ссылки в `site.ts` обновлены.
+- **Lottie — динамический импорт** (`next/dynamic`, `ssr: false`) — библиотека lottie-react больше не блокирует первый рендер, грузится после hydration.
+- **ProductImage** — добавлен пропс `priority`: `fetchPriority="high"` + `loading="eager"` для above-the-fold картинок; `decoding="async"` на всех.
+
 ## Сессия 2026-06-24 (продолжение 6) — «Как я работаю» для портфолио и клиентов
 
 Созданы два файла:

@@ -2,13 +2,21 @@ interface ProductImageProps {
   src?: string;
   model: string;
   className?: string;
+  priority?: boolean;
 }
 
-export function ProductImage({ src, model, className = "" }: ProductImageProps) {
+export function ProductImage({ src, model, className = "", priority = false }: ProductImageProps) {
   if (src) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={src} alt={model} loading="lazy" className={`h-full w-full object-cover ${className}`} />
+      <img
+        src={src}
+        alt={model}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        fetchPriority={priority ? "high" : "low"}
+        className={`h-full w-full object-cover ${className}`}
+      />
     );
   }
 

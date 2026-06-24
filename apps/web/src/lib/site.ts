@@ -74,14 +74,14 @@ export const products: Product[] = [
   {
     slug: "ast-250", type: "sistema", model: "AST-250", brand: "AST", scenario: "bar", scenarioLabel: "бар / клуб",
     areaMax: 80, price: 1500000, priceOld: 2664000, songsCount: 60000,
-    image: "/products/ast-250.jpg",
+    image: "/products/ast-250.webp",
     kit: ["Сенсорный пульт-моноблок", "2 беспроводных микрофона", "Усилитель", "Акустика (пара)", "Сабвуфер", "Микшер", "ИБП", "Кабельная обвязка"],
     rating: 4.9, reviewsCount: 23, inStock: true, featured: true,
   },
   {
     slug: "ast-mini", type: "sistema", model: "AST Mini", brand: "AST", scenario: "dom", scenarioLabel: "дом / кафе",
     areaMax: 30, price: 720000, songsCount: 60000,
-    image: "/products/ast-250.jpg",
+    image: "/products/ast-250.webp",
     kit: ["Пульт-моноблок", "2 микрофона", "Активная акустика", "Кабели"],
     rating: 4.8, reviewsCount: 14, inStock: true, featured: true,
   },
