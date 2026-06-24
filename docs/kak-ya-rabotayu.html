@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как я работаю — методология запуска проекта</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #141824;
+    --border: #1e2535;
+    --text: #e8eaf0;
+    --muted: #6b7280;
+    --accent: #2dd4bf;
+    --blue: #60a5fa;
+    --green: #4ade80;
+    --pink: #f472b6;
+    --purple: #a78bfa;
+    --orange: #fb923c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+
+  .hero { text-align: center; padding: 72px 24px 48px; border-bottom: 1px solid var(--border); }
+  .hero-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; }
+  .hero h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 16px; }
+  .hero p { font-size: 16px; color: var(--muted); max-width: 520px; margin: 0 auto 32px; }
+  .hero-stat { display: inline-flex; gap: 32px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px 32px; }
+  .stat { text-align: center; }
+  .stat-val { font-size: 22px; font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  .main { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .phase { margin-bottom: 16px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .phase-header { display: flex; align-items: center; gap: 14px; padding: 18px 20px; cursor: pointer; background: var(--card); transition: background 0.15s; }
+  .phase-header:hover { background: #1a2030; }
+  .num { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; flex-shrink: 0; }
+  .phase-info { flex: 1; }
+  .phase-title { font-weight: 700; font-size: 16px; }
+  .phase-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .arrow { color: var(--muted); transition: transform 0.2s; font-size: 12px; }
+  .open .arrow { transform: rotate(90deg); }
+
+  .phase-body { display: none; padding: 20px; border-top: 1px solid var(--border); background: #0c0f18; }
+  .open .phase-body { display: block; }
+
+  .steps { display: flex; flex-direction: column; gap: 16px; }
+  .step { display: flex; gap: 12px; }
+  .step-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+  .step-text h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .step-text p { font-size: 13px; color: #9ca3af; }
+  .prompt { margin-top: 8px; background: #141824; border-left: 3px solid var(--border); border-radius: 0 6px 6px 0; padding: 8px 12px; font-size: 12px; color: #d1d5db; font-style: italic; font-family: monospace; }
+
+  .warn { background: #2a1a0a; border: 1px solid #92400e; border-radius: 8px; padding: 12px 14px; font-size: 13px; color: #fbbf24; margin-top: 16px; }
+  .warn strong { display: block; margin-bottom: 4px; }
+
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .checklist li { display: flex; gap: 10px; font-size: 13px; align-items: flex-start; }
+  .check { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { text-align: left; color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 12px; border-bottom: 1px solid #111827; color: #d1d5db; }
+  td:first-child { font-weight: 600; color: var(--text); }
+
+  .footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); }
+  .footer p { font-size: 13px; color: var(--muted); }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  /* Phase colors */
+  .p1 .num { background: #1e3a5f; color: var(--blue); }
+  .p1 .phase-header { border-left: 3px solid var(--blue); }
+  .p1 .step-dot { background: var(--blue); }
+  .p2 .num { background: #1a3a2a; color: var(--green); }
+  .p2 .phase-header { border-left: 3px solid var(--green); }
+  .p2 .step-dot { background: var(--green); }
+  .p3 .num { background: #3a1a2a; color: var(--pink); }
+  .p3 .phase-header { border-left: 3px solid var(--pink); }
+  .p3 .step-dot { background: var(--pink); }
+  .p4 .num { background: #2a1a3a; color: var(--purple); }
+  .p4 .phase-header { border-left: 3px solid var(--purple); }
+  .p4 .step-dot { background: var(--purple); }
+  .p5 .num { background: #3a2a1a; color: var(--orange); }
+  .p5 .phase-header { border-left: 3px solid var(--orange); }
+  .p5 .step-dot { background: var(--orange); }
+  .p6 .num { background: #1a3a3a; color: var(--accent); }
+  .p6 .phase-header { border-left: 3px solid var(--accent); }
+  .p6 .step-dot { background: var(--accent); }
+
+  @media (max-width: 600px) {
+    .hero-stat { gap: 20px; padding: 12px 20px; }
+    .stat-val { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Методология</div>
+  <h1>Как я работаю</h1>
+  <p>6 этапов от первого звонка до передачи заказчику. Собрано из реального опыта — не теория.</p>
+  <div class="hero-stat">
+    <div class="stat"><div class="stat-val">6</div><div class="stat-label">этапов</div></div>
+    <div class="stat"><div class="stat-val">77</div><div class="stat-label">страниц</div></div>
+    <div class="stat"><div class="stat-val">17.5ч</div><div class="stat-label">от идеи до прода</div></div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="phase p1 open">
+    <div class="phase-header" onclick="toggle(this)">
+      <div class="num">1</div>
+      <div class="phase-info">
+        <div class="phase-title">Интервью с заказчиком</div>
+        <div class="phase-sub">30–60 минут · до открытия редактора</div>
+      </div>
+      <div class="arrow">▶</div>
+    </div>
+    <div class="phase-body">
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot"></div>
+          <div class="step-text">
+            <h4>Бизнес и аудитория</h4>
+            <p>Что продаёт, кому, где. B2C или B2B. Текущий сайт и его проблемы.</p>
+            <div class="prompt">«Расскажи про бизнес в 3 предложениях. Кто покупает — частники или компании? Что сейчас не работает?»</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot"></div>
+          <div class="step-text">
+            <h4>Одна главная цель</h4>
+            <p>Звонки, заявки, SEO, доверие — выбрать одну. Остальное — потом.</p>
+            <div class="prompt">«Если сайт сделает одно — что это? Как ты поймёшь что он работает?»</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot"></div>
+          <div class="step-text">
+            <h4>Что точно НЕ нужно</h4>
+            <p>Исключить заранее: авторизация, рассрочка, корзина, CMS — проговорить до кода.</p>
+          </div>
+        </div>
+      </div>
+      <div class="warn"><strong>⚠️ Реальная ошибка</strong>Kaspi-рассрочку добавили без спроса — потом удаляли из 21 места по всему сайту. Спроси про запреты ДО начала.</div>
+    </div>
+  </div>
+
+  <div class="phase p2">
+    <div class="phase-header" onclick="toggle(this)">
+      <div class="num">2</div>
+      <div class="phase-info">
+        <div class="phase-title">Брейншторм и стратегия</div>
+        <div class="phase-sub">1–2 часа · конкуренты, URL-карта, архитектура</div>
+      </div>
+      <div class="arrow">▶</div>
+    </div>
+    <div class="phase-body">
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot"></div>
+          <div class="step-text">
+            <h4>Анализ конкурентов</h4>
+            <p>Найти незакрытые позиции в нише и гео. Что делают плохо — сделать лучше.</p>
+            <div class="prompt">«Проанализируй конкурентов [ниша] в [город]. Что они делают плохо? Где наше окно?»</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot"></div>
+          <div class="step-text">
+            <h4>URL-карта от семантики</h4>
+            <p>Структура сайта от поисковых запросов, не от «хотелок». Каждый URL = кластер запросов.</p>
+            <div class="prompt">«Составь URL-карту от семантического ядра для [ниша + гео]. SEO-приоритет.»</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot"></div>
+          <div class="step-text">
+            <h4>Архитектурное решение</h4>
+            <p>Статика vs SSR, монорепо vs монолит, CMS vs хардкод — с обоснованием каждого выбора.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase p3">
+    <div class="phase-header" onclick="toggle(this)">
+      <div class="num">3</div>
+      <div class="phase-info">
+        <div class="phase-title">Утверждение визуала</div>
+        <div class="phase-sub">до написания кода · письменное «ок»</div>
+      </div>
+      <div class="arrow">▶</div>
+    </div>
+    <div class="phase-body">
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot"></div>
+          <div class="step-text">
+            <h4>Дизайн-токены и палитра</h4>
+            <p>Утвердить цвета и шрифты ДО верстки. Один источник правды — потом не переделывать.</p>
+            <div class="prompt">«Предложи 3 варианта палитры для [ниша]. Покажи на кнопке, карточке, хедере.»</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot"></div>
+          <div class="step-text">
+            <h4>Мокап в чате</h4>
+            <p>SVG/HTML мокап прямо в разговоре — утвердить структуру до кода, без Figma.</p>
+            <div class="prompt">«Нарисуй мокап главной: hero, 3 секции, футер. Стиль: [референс].»</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-dot"></div>
+          <div class="step-text">
+            <h4>Письменное «ок»</h4>
+            <p>Заказчик подтверждает конкретный мокап. Скриншот сохраняется в docs/design/.</p>
+          </div>
+        </div>
+      </div>
+      <div class="warn"><strong>⚠️ Реальная ошибка</strong>В karaokeshop дизайн менялся 3 раза (clay morphism → editorial → bento) потому что не было утверждённого мокапа на старте.</div>
+    </div>
+  </div>
+
+  <div class="phase p4">
+    <div class="phase-header" onclick="toggle(this)">
+      <div class="num">4</div>
+      <div class="phase-info">
+        <div class="phase-title">Сборка итерациями</div>
+        <div class="phase-sub">скелет → контент → дизайн</div>
+      </div>
+      <div class="arrow">▶</div>
+    </div>
+    <div class="phase-body">
+      <table>
+        <tr><th>Итерация</th><th>Фокус</th><th>Результат</th></tr>
+        <tr><td>1 — Скелет</td><td>Монорепо, роуты, CI/CD</td><td>Живой URL на день 1</td></tr>
+        <tr><td>2 — Контент</td><td>Все страницы, SEO-метаданные, JSON-LD</td><td>Google видит сайт</td></tr>
+        <tr><td>3 — Дизайн</td><td>Полировка UI, тёмная тема, анимации</td><td>Выглядит как задумано</td></tr>
+      </table>
+      <div class="steps" style="margin-top:16px">
+        <div class="step">
+          <div class="step-dot"></div>
+          <div class="step-text">
+            <h4>Правило коммита</h4>
+            <p>Каждый коммит: build ✓ → test ✓ → HANDOFF обновлён → пуш. Никогда не пушить без сборки.</p>
+            <div class="prompt">npm run build && npm test → только потом git commit && git push</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase p5">
+    <div class="phase-header" onclick="toggle(this)">
+      <div class="num">5</div>
+      <div class="phase-info">
+        <div class="phase-title">Проверка перед сдачей</div>
+        <div class="phase-sub">чеклист · SEO, мобайл, контент, аналитика</div>
+      </div>
+      <div class="arrow">▶</div>
+    </div>
+    <div class="phase-body">
+      <ul class="checklist">
+        <li><div class="check">◻</div><span><strong>SEO:</strong> Lighthouse ≥ 0.95. Все страницы в sitemap. JSON-LD валидный. Canonical.</span></li>
+        <li><div class="check">◻</div><span><strong>Мобильный:</strong> скриншоты 375px и 1280px, обе темы (светлая + тёмная).</span></li>
+        <li><div class="check">◻</div><span><strong>Контент-аудит:</strong> grep TODO / FIXME / XXXXXXXX / placeholder по всему коду.</span></li>
+        <li><div class="check">◻</div><span><strong>Аналитика:</strong> Umami или Яндекс.Метрика с реальным ID, события фиксируются.</span></li>
+        <li><div class="check">◻</div><span><strong>CTA:</strong> все кнопки ведут куда надо — WhatsApp, форма, телефон.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="phase p6">
+    <div class="phase-header" onclick="toggle(this)">
+      <div class="num">6</div>
+      <div class="phase-info">
+        <div class="phase-title">Передача заказчику</div>
+        <div class="phase-sub">документация, доступы, backlog</div>
+      </div>
+      <div class="arrow">▶</div>
+    </div>
+    <div class="phase-body">
+      <table>
+        <tr><th>Что</th><th>Зачем</th></tr>
+        <tr><td>Инструкция (PDF / .docx)</td><td>Менять текст и фото без разработчика</td></tr>
+        <tr><td>Доступы (GitHub, хостинг, домен)</td><td>Заказчик владеет своим сайтом</td></tr>
+        <tr><td>Backlog незакрытых задач</td><td>Без сюрпризов после сдачи</td></tr>
+        <tr><td>Кейс для портфолио</td><td>Метрики и скриншоты до/после пока свежо</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>Методология применена в <a href="https://www.karaokeshop.kz">karaokeshop.kz</a> — 77 страниц за 17.5 часов активной работы.</p>
+</div>
+
+<script>
+function toggle(header) {
+  header.parentElement.classList.toggle('open');
+}
+</script>
+</body>
+</html>
