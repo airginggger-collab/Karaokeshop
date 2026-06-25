@@ -73,16 +73,27 @@ export function CheckoutClient() {
       {/* Контактные данные */}
       <div>
         <h2 className="mb-3 text-sm font-medium">Ваши данные</h2>
+        <label htmlFor="co-name" className="mb-1 block text-xs font-medium text-muted-foreground">
+          Имя <span className="font-normal">(необязательно)</span>
+        </label>
         <input
+          id="co-name"
           type="text"
-          placeholder="Имя (необязательно)"
+          autoComplete="name"
+          placeholder="Напр., Айгерим"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="mb-2 h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+          className="mb-3 h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none focus:ring-2 focus:ring-primary/30"
         />
+        <label htmlFor="co-phone" className="mb-1 block text-xs font-medium text-muted-foreground">
+          Телефон <span className="font-normal">(необязательно)</span>
+        </label>
         <input
+          id="co-phone"
           type="tel"
-          placeholder="Телефон (необязательно)"
+          inputMode="tel"
+          autoComplete="tel"
+          placeholder="+7 (___) ___-__-__"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           className="mb-4 h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none focus:ring-2 focus:ring-primary/30"
@@ -118,9 +129,9 @@ export function CheckoutClient() {
                 type="button"
                 onClick={() => remove(it.id)}
                 aria-label="Убрать"
-                className="mt-1 text-muted-foreground hover:text-foreground transition-colors"
+                className="mt-1 -mr-2 inline-flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
               >
-                <Trash2 className="h-3.5 w-3.5" />
+                <Trash2 className="h-4 w-4" />
               </button>
             </div>
           </div>
