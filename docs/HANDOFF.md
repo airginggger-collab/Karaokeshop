@@ -11,7 +11,8 @@
 Полный ребилд интернет-магазина караоке-оборудования (Алматы; бренды AST + Studio Evolution + проф-оборудование). Цели: B2C-продажи + B2B-лиды (оснащение под ключ) + бренд + **SEO-приоритет**.
 
 ## Где живёт (важно)
-- 🟢 **Live:** https://karaokeshop.airg-inggger.workers.dev/
+- 🟢 **Live (боевой прод):** https://karaokeshop.airg-inggger.workers.dev/ — = HEAD `main`, проверять надо **именно его, не `.kz`**.
+- ⚠️ **Бренд-домен `karaokeshop.kz` ещё НЕ привязан — отдаёт СТАРЫЙ сайт на Wix** (DNS не переведён на Cloudflare). При этом `siteConfig.url = "https://www.karaokeshop.kz"` → `canonical`/`og:url`/`og:image` нового сайта ведут на чужой Wix = **SEO-риск до привязки домена**. Долг известный, `siteConfig.url` пока **не трогаем** — закроется в момент привязки домена. Чек-лист «Проверка после деплоя» + детали — [deploy.md](deploy.md).
 - **Repo:** github.com/airginggger-collab/Karaokeshop · ветка `main`
 - **Локально:** `~/Desktop/karaokeshop` — **ОТДЕЛЬНЫЙ проект, не medlog** (сессии часто стартуют из каталога medlog).
 - **Коммит/пуш:** только `git -C ~/Desktop/karaokeshop`. Bash сбрасывает cwd на medlog между вызовами. Push по **SSH** (ключ `~/.ssh/id_ed25519` работает). Identity репо: `airginggger-collab <airg.inggger@gmail.com>` (в local git config). `gh` CLI не авторизован (токен в Keychain, фону недоступен).
@@ -45,7 +46,7 @@ npm test -w web           # тесты
 
 **Доп. проход по гайду «Основы дизайна» (§7 формы, §9 тач-зоны):** в [CheckoutClient.tsx](../apps/web/src/components/CheckoutClient.tsx) поля «Имя»/«Телефон» получили видимые лейблы над полями (был placeholder вместо лейбла), placeholder теперь пример/маска (`Напр., Айгерим`, `+7 (___) ___-__-__`), + `autoComplete`/`inputMode`. Кнопка «Убрать» в заказе — тач-зона 44×44 (была ~14px). Остальное по гайду уже соблюдено (шкала отступов Tailwind 4px, цвета через токены, фон страницы off-white, `text-white` только на цветных кнопках) — токены не трогали.
 
-**Осталось (не код — деплой/DNS):** canonical/`og:image`/`og:url` абсолютны на `https://www.karaokeshop.kz`, домен ещё не привязан (→ 400). Социальные превью и canonical заработают после привязки домена. og-ассет уже на месте. Лог-артефакт: локальный `next build` иногда отдаёт устаревший HTML из кэша даже после `rm -rf .next out` — структуру проверять `curl` живого URL.
+**Осталось (не код — деплой/DNS) ⚠️ SEO-риск:** canonical/`og:image`/`og:url` абсолютны на `https://www.karaokeshop.kz`, но домен ещё **НЕ привязан** — `karaokeshop.kz` сейчас отдаёт **старый сайт на Wix** (подтверждено аудитом деплоя 2026-06-26). Значит canonical и соц-превью нового сайта ведут на чужой Wix, пока домен не переведён на Cloudflare. Боевой прод — только `*.workers.dev` (= HEAD, всё ок); **проверять надо его, не `.kz`**. Социальные превью и canonical станут корректны автоматически после привязки домена; `siteConfig.url` до этого не трогаем. og-ассет уже на месте. Лог-артефакт: локальный `next build` иногда отдаёт устаревший HTML из кэша даже после `rm -rf .next out` — структуру проверять `curl` живого URL. Чек-лист «Проверка после деплоя» — [deploy.md](deploy.md).
 
 ## Сессия 2026-06-24 (продолжение 8) — permissions allowlist, меньше апрувов
 

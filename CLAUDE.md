@@ -65,7 +65,7 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 - **Автор коммитов:** `airginggger-collab <airg.inggger@gmail.com>` — задан в local git config репо, отдельный `-c` обычно не нужен. `gh` CLI в фоне может быть не авторизован.
 - Формат коммитов: `<type>(scope?): <subject>` — `feat`, `fix`, `chore`, `docs`, `refactor`, `test`.
 - **Деплой:** Cloudflare assets-only Worker через `wrangler.toml`. `out/` в `.gitignore`. CI (`.github/workflows/ci.yml`) автоматически деплоит после успешного `push` в `main` — шаг `npx wrangler deploy` с секретом `CLOUDFLARE_API_TOKEN`. PR-ветки деплой не триггерят. Подробно — [docs/deploy.md](docs/deploy.md).
-- **Live:** https://karaokeshop.airg-inggger.workers.dev/ · продакшен-canonical в `siteConfig.url` — `https://www.karaokeshop.kz` (кастомный домен ещё не привязан).
+- **Live (боевой прод):** https://karaokeshop.airg-inggger.workers.dev/ — = HEAD `main`, проверять надо ИМЕННО его. ⚠️ Бренд-домен `karaokeshop.kz` ещё **НЕ привязан** и отдаёт **старый сайт на Wix** (DNS не переведён на Cloudflare). При этом `siteConfig.url` = `https://www.karaokeshop.kz` → canonical/`og:url`/`og:image` ведут на чужой Wix = **SEO-риск до привязки домена** (см. ловушку 7 и [docs/deploy.md](docs/deploy.md)).
 
 ## CI / Lighthouse
 
@@ -79,6 +79,7 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 4. **show-service — поставщик, на сайте НЕ упоминается** (использован как справочник номенклатуры). Цены оценочные (поставщик их скрывает); фото товаров — демо (Unsplash), временные. Заменить по счёту/реальным фото.
 5. **`_local-assets/` — gitignored локальная свалка** (скриншоты и т.п.). Не ре-трекай. `.gitignore` также блокирует stray-бинарники в корне (`/*.png`, `/*.jpg`, `/*.jpeg`, `/*.pdf`).
 6. **`packages/ui/storybook-static/` — gitignored** (`packages/ui/.gitignore`). В git не попадает; пересобирается `npm run build-storybook -w @kk/ui`.
+7. **Бренд-домен `karaokeshop.kz` ещё НЕ привязан — отдаёт старый Wix; `siteConfig.url` ведёт canonical/og на чужой сайт (SEO-риск).** Боевой прод — только `*.workers.dev`; `.kz` сейчас старый сайт на Wix (DNS не на Cloudflare). А `siteConfig.url = "https://www.karaokeshop.kz"` → `seo.ts` строит от него `canonical`, `og:url`, `og:image` → они указывают на Wix. Пока домен не привязан: **проверять прод только на `*.workers.dev`** (не на `.kz`), `siteConfig.url` по этому поводу **не менять** без отдельного решения — долг закроется в момент привязки домена. Чек-лист «Проверка после деплоя» — в [docs/deploy.md](docs/deploy.md).
 
 ## UI-конвенции (обязательные)
 

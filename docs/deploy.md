@@ -1,6 +1,8 @@
 # Деплой — Cloudflare (₸0)
 
-> **🟢 Live:** https://karaokeshop.airg-inggger.workers.dev/ — авто-деплой на каждый push в `main`.
+> **🟢 Live (боевой прод):** https://karaokeshop.airg-inggger.workers.dev/ — авто-деплой на каждый push в `main`. Совпадает с HEAD `main`.
+>
+> ⚠️ **Бренд-домен `karaokeshop.kz` ещё НЕ привязан** — отдаёт старый сайт на Wix. Проверять прод надо на `*.workers.dev`, не на `.kz`. `siteConfig.url` указывает на `karaokeshop.kz` → canonical/og ведут на Wix (SEO-риск). Подробно — раздел «Бренд-домен» и «Проверка после деплоя» ниже.
 >
 > Вариант A — статический экспорт ([ADR-0002](adr/0002-hosting.md)). Сайт полностью SSG → `output: "export"` собирает чистую статику в `apps/web/out`. Cloudflare отдаёт её как **assets-only Worker** (`wrangler.toml`) — бесплатно, коммерция разрешена, безлимит-трафик, авто-деплой на каждый push в `main`. Чистые URL (без `.html`); неизвестные пути → `404.html` (`not_found_handling = "404-page"`).
 
@@ -42,8 +44,40 @@ npm run build -w web        # → apps/web/out (47 статических стр
 npx serve apps/web/out      # посмотреть локально
 ```
 
-## Кастомный домен (позже)
-Cloudflare → Workers & Pages → проект `karaokeshop` → **Custom domains/Routes** → добавить `karaokeshop.kz` → перенести NS/DNS на Cloudflare (или CNAME). Бесплатный SSL автоматически. (В `siteConfig.url` продакшен-canonical уже задан как `https://www.karaokeshop.kz` — привязать домен и сверить.)
+## ⚠️ Бренд-домен `karaokeshop.kz` ещё НЕ привязан — отдаёт старый Wix (SEO-риск)
+
+> Подтверждено аудитом деплоя 2026-06-26.
+
+- **Боевой прод — только `*.workers.dev`:** https://karaokeshop.airg-inggger.workers.dev/ (= HEAD `main`, всё ок). **Проверять надо именно его, не `.kz`.**
+- **Бренд-домен `www.karaokeshop.kz` сейчас отдаёт СТАРЫЙ сайт на Wix** — DNS ещё не переведён на Cloudflare, домен к Worker не привязан.
+- **SEO-риск (до привязки домена):** в `apps/web/src/lib/site.ts` → `siteConfig.url = "https://www.karaokeshop.kz"`. От него строятся `canonical`, `og:url`, `og:image` (см. `apps/web/src/lib/seo.ts`). Значит **canonical и соц-превью нового сайта ведут на чужой Wix.** Пока домен не привязан, поисковики/соцсети получают ссылку на старый сайт — каноникал указывает не на тот хост, превью тянутся с Wix. Это известный долг, **`siteConfig.url` не трогаем по этому таску** (только доки); устранится автоматически в момент привязки домена.
+
+### Кастомный домен (когда привязываем)
+Cloudflare → Workers & Pages → проект `karaokeshop` → **Custom domains/Routes** → добавить `karaokeshop.kz` (+`www`) → перенести NS/DNS на Cloudflare (или CNAME). Бесплатный SSL автоматически. После привязки: открыть `https://www.karaokeshop.kz` и убедиться, что отдаётся новый сайт (не Wix), а `siteConfig.url` совпадает с реальным хостом — тогда canonical/og перестанут указывать на чужой ресурс.
+
+## Проверка после деплоя
+
+После каждого push в `main` (CI авто-деплоит) пройди чек-лист — **проверяй `*.workers.dev`, а НЕ `.kz`** (бренд-домен ещё на Wix):
+
+```bash
+# 1. Локальный HEAD == origin/main (то, что должно быть задеплоено)
+git -C ~/Desktop/karaokeshop rev-parse HEAD
+git -C ~/Desktop/karaokeshop rev-parse origin/main   # должны совпасть
+
+# 2. Последний CI-run деплоя — success и задеплоил этот SHA
+gh run list --repo airginggger-collab/Karaokeshop --branch main --limit 5
+# сверь headSha успешного run с HEAD выше
+
+# 3. Прод-ассеты на *.workers.dev совпадают с локальной сборкой
+npm run build -w web                                  # → apps/web/out
+curl -s https://karaokeshop.airg-inggger.workers.dev/ | head
+# спот-сверка с apps/web/out/index.html (структура/контент совпадают)
+```
+
+- [ ] `git rev-parse HEAD` == `git rev-parse origin/main`
+- [ ] Последний деплой-CI-run — **success** и его SHA == HEAD (`gh run list`)
+- [ ] Прод на `*.workers.dev` совпадает с локальной сборкой `apps/web/out`
+- [ ] Проверял именно `*.workers.dev` (не `.kz` — там пока Wix)
 
 ## Когда переключаться на вариант B
 Как только добавим **CMS / SSR / ISR** (серверный рендеринг), статического экспорта не хватит. Тогда:
