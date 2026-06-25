@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_eval",
+      "mcp__Claude_Preview__preview_screenshot",
+      "mcp__Claude_Preview__preview_resize",
+      "mcp__Claude_Preview__preview_start",
+      "mcp__Claude_Preview__preview_stop",
+      "mcp__Claude_Preview__preview_console_logs",
+      "mcp__Claude_Preview__preview_click",
+      "mcp__Claude_Preview__preview_fill",
+      "mcp__Claude_Preview__preview_list",
+      "mcp__Claude_Preview__preview_snapshot",
+      "mcp__Claude_Preview__preview_inspect",
+      "mcp__Claude_Preview__preview_network",
+      "mcp__visualize__show_widget",
+      "mcp__visualize__read_me",
+      "Bash(npm run build -w web)",
+      "Bash(npm test -w web)",
+      "Bash(npm test -w @kk/ui)",
+      "Bash(npm run tokens)",
+      "Bash(npm run build -w web 2>&1 *)",
+      "Bash(npm test -w web 2>&1 *)",
+      "Bash(git -C ~/Desktop/karaokeshop push origin main)",
+      "Bash(npx tsc --noEmit *)",
+      "Bash(gh run list *)",
+      "Bash(npm run lint)",
+      "Bash(npm run lint *)",
+      "Bash(npm run build *)",
+      "Bash(npm test *)",
+      "Bash(npx eslint *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git -C ~/Desktop/karaokeshop add *)",
+      "Bash(git -C ~/Desktop/karaokeshop commit *)",
+      "Bash(git -C ~/Desktop/karaokeshop push *)"
+    ]
+  }
+}

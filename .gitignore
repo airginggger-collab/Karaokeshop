@@ -6,7 +6,8 @@ dist/
 *.log
 *.zip
 *.tsbuildinfo
-.claude/
+.claude/*
+!.claude/settings.json
 
 # build / tooling
 .next/
