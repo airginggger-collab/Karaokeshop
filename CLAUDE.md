@@ -52,7 +52,7 @@ npm run test                 # turbo run test
 npm run tokens               # пересобрать @kk/tokens
 
 npm run build -w web         # сборка сайта → apps/web/out (статика)
-npm test -w web              # тесты web (Vitest): 10
+npm test -w web              # тесты web (Vitest): 15 (calculator 12 + seo 3)
 npm test -w @kk/ui           # тесты UI-кита: 2
 npm run storybook -w @kk/ui  # Storybook на :6006
 ```
@@ -98,6 +98,8 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 ```
 
 Размещай **первым элементом** внутри `<Container>`, до `<h1>`. Не заменяй самодельным `flex gap-2`.
+
+Страницы на компоненте `LandingPage` крошку получают через опциональный проп `breadcrumb` (`<LandingPage breadcrumb={<Breadcrumb …/>} …>`), а не внутри `<Container>`. Покрыты все динамические роуты: `blog/[slug]`, `komplekty` (индекс), `komplekty/[area]`, `karaoke/[scenario]` (добавлено 2026-06-25 — раньше нарушали правило).
 
 ### Иконки в списках карточек (guard — обязательно)
 
