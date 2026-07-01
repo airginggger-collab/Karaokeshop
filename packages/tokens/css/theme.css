@@ -18,7 +18,7 @@
   --night-bg:    #0b1220;
   --night-fg:    #e7eef8;
   --night-muted: #9fb3cc;
-  --night-accent:#2dd4bf;
+  --night-accent:#f59e0b;
   --night-soft:  #14243a;
 
   /* ─── Светлая тема ─── */
@@ -30,12 +30,12 @@
   --color-muted:        #e6eaf1;   /* тонкий фон */
   --color-muted-fg:     #586070;   /* второй. текст:    5.4:1 на bg  ✓ AA  (было #64748B = 4.6:1, критично) */
   --color-border:       #dde3ea;   /* декоративный бордер */
-  --color-primary:      #1f6f66;   /* фирменный тил:    5.2:1 на bg  ✓ AA  */
-  --color-primary-fg:   #ffffff;   /* текст на primary: 5.7:1         ✓ AA  */
-  --color-primary-soft: #e0f0ee;   /* тил-тинт фон */
-  --color-accent:       #1f6f66;
-  --color-accent-fg:    #0a3530;
-  --color-accent-soft:  #e0f0ee;
+  --color-primary:      #b45309;   /* янтарь-текст:     ~5:1 на bg   ✓ AA  */
+  --color-primary-fg:   #fff7ed;   /* текст на primary: AA           ✓ AA  */
+  --color-primary-soft: #fef3c7;   /* золотой тинт фон */
+  --color-accent:       #b45309;
+  --color-accent-fg:    #7c2d12;
+  --color-accent-soft:  #ffedd5;
 }
 
 /* ─── Тёмная тема ─── */
@@ -54,12 +54,12 @@
   --color-muted:        #1a2438;   /* тонкий фон */
   --color-muted-fg:     #aac0d6;   /* второй. текст:    8.2:1 на bg  ✓ AAA */
   --color-border:       #344a68;   /* декоративный бордер */
-  --color-primary:      #4de3c8;   /* тил яркий:       11.2:1 на bg  ✓ AAA */
-  --color-primary-fg:   #021a15;   /* текст на primary:11.0:1         ✓ AAA */
-  --color-primary-soft: #143028;
-  --color-accent:       #4de3a8;   /* зелёный акцент:  10.5:1 на bg  ✓ AAA */
-  --color-accent-fg:    #d0fcea;   /*                  15.1:1 на soft ✓ AAA */
-  --color-accent-soft:  #112b20;
+  --color-primary:      #f59e0b;   /* янтарь яркий:    ~9:1 на bg    ✓ AAA */
+  --color-primary-fg:   #1a1204;   /* тёмный на янтаре ✓ AAA */
+  --color-primary-soft: #2a1c08;
+  --color-accent:       #f59e0b;   /* янтарь:          ~9:1 на bg    ✓ AAA */
+  --color-accent-fg:    #ffe9c2;   /*                  на soft ✓ AAA */
+  --color-accent-soft:  #2a1c08;
 }
 
 /* ─── Тёплое настроение (страницы «для дома») ─── */
