@@ -24,3 +24,6 @@ _local-assets/
 /*.jpg
 /*.jpeg
 /*.pdf
+
+# brainstorming visual companion
+.superpowers/
