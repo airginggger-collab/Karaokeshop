@@ -30,7 +30,7 @@ export default function HomePage() {
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             {["Официальный дилер", "14+ лет", "200+ проектов", "Монтаж под ключ"].map((c) => (
-              <span key={c} className="rounded-full border border-border bg-background px-3 py-1 text-xs text-muted-foreground">
+              <span key={c} className="cursor-default rounded-full border border-border bg-background px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground">
                 {c}
               </span>
             ))}
