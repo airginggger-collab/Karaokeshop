@@ -17,25 +17,35 @@ export default function HomePage() {
   return (
     <Container className="py-6 sm:py-10">
       {/* Hero — квиз-подбор (услуга во главе) */}
-      <section className="animate-fade-up">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-soft px-3 py-1 text-xs font-medium text-primary">
-          <Sparkles className="h-3.5 w-3.5" /> Официальный дилер AST и Studio Evolution · 14 лет
-        </span>
-        <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.05] sm:text-5xl">
-          Караоке без ошибки в выборе
-        </h1>
-        <p className="mt-3 max-w-2xl text-base text-muted-foreground sm:text-lg">
-          Бесплатный подбор под вашу площадь и бюджет — за минуту. Дальше смета, монтаж, настройка и гарантия под ключ.
-        </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {["Официальный дилер", "14+ лет", "200+ проектов", "Монтаж под ключ"].map((c) => (
-            <span key={c} className="rounded-full border border-border bg-background px-3 py-1 text-xs text-muted-foreground">
-              {c}
-            </span>
-          ))}
+      <section className="animate-fade-up grid gap-6 lg:grid-cols-[1fr_380px]">
+        <div>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-soft px-3 py-1 text-xs font-medium text-primary">
+            <Sparkles className="h-3.5 w-3.5" /> Официальный дилер AST и Studio Evolution · 14 лет
+          </span>
+          <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.05] sm:text-5xl">
+            Караоке без ошибки в выборе
+          </h1>
+          <p className="mt-3 max-w-2xl text-base text-muted-foreground sm:text-lg">
+            Бесплатный подбор под вашу площадь и бюджет — за минуту. Дальше смета, монтаж, настройка и гарантия под ключ.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {["Официальный дилер", "14+ лет", "200+ проектов", "Монтаж под ключ"].map((c) => (
+              <span key={c} className="rounded-full border border-border bg-background px-3 py-1 text-xs text-muted-foreground">
+                {c}
+              </span>
+            ))}
+          </div>
+          <div className="mt-6">
+            <QuizWidget />
+          </div>
         </div>
-        <div className="mt-6">
-          <QuizWidget />
+        <div className="hidden overflow-hidden rounded-3xl lg:block">
+          <img
+            src="/scenariy/poyushchie.jpg"
+            alt="Люди поют караоке"
+            loading="eager"
+            className="h-full w-full object-cover"
+          />
         </div>
       </section>
 
@@ -58,6 +68,27 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Дом и бизнес — сценарные входы с фото */}
+      <section className="mt-12 grid gap-4 sm:grid-cols-2">
+        {[
+          { href: "/dlya-doma", img: "/scenariy/dom.jpg", title: "Караоке для дома", sub: "Гостиная, баня, гостевой дом. Тёплые вечера с песнями.", cta: "Выбрать домой" },
+          { href: "/dlya-biznesa", img: "/scenariy/biznes.jpg", title: "Караоке для бизнеса", sub: "Кафе, бар, ресторан, клуб. Проект звука и монтаж под ключ.", cta: "Оснастить заведение" },
+        ].map((c) => (
+          <Link key={c.href} href={c.href} className="group flex flex-col overflow-hidden rounded-3xl bg-background">
+            <div className="relative h-48 overflow-hidden sm:h-56">
+              <img src={c.img} alt={c.title} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" />
+            </div>
+            <div className="flex flex-1 flex-col p-5">
+              <h3 className="font-display text-xl font-bold">{c.title}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{c.sub}</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary">
+                {c.cta} <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+              </span>
+            </div>
+          </Link>
+        ))}
       </section>
 
       {/* Дилерская полоса */}
