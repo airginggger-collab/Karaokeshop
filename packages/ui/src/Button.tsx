@@ -12,7 +12,7 @@ const sizes: Record<NonNullable<ButtonProps["size"]>, string> = {
 };
 
 const byVariant: Record<NonNullable<ButtonProps["variant"]>, string> = {
-  primary: "bg-primary text-primary-fg shadow-sm hover:opacity-90 active:scale-[.98]",
+  primary: "bg-cta text-cta-fg shadow-sm hover:opacity-90 active:scale-[.98]",
   ghost: "border border-border bg-background text-foreground hover:bg-muted active:scale-[.98]",
 };
 
