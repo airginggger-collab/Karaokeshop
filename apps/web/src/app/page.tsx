@@ -145,8 +145,8 @@ export default function HomePage() {
           { value: "60 000+", label: "песен в базе", sub: "KZ · RU · EN" },
           { value: "2 года", label: "гарантия", sub: "и сервис-центр" },
         ].map((s) => (
-          <div key={s.value} className="flex flex-col items-center rounded-2xl border border-border bg-background py-5 text-center">
-            <span className="font-display text-3xl font-bold text-primary">{s.value}</span>
+          <div key={s.value} className="group flex flex-col items-center rounded-2xl border border-border bg-background py-5 text-center transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md">
+            <span className="font-display text-3xl font-bold text-primary transition group-hover:scale-110">{s.value}</span>
             <span className="mt-1 text-sm font-medium">{s.label}</span>
             <span className="text-xs text-muted-foreground">{s.sub}</span>
           </div>
