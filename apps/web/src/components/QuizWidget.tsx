@@ -1,8 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { ArrowRight, ChevronRight } from "lucide-react";
-import { siteConfig } from "@/lib/site";
+import Link from "next/link";
+import { ChevronRight, MessageCircle, Check } from "lucide-react";
+import { siteConfig, priceFmt } from "@/lib/site";
+import { configureWithinBudget } from "@/lib/calculator";
+import { quizToInput, quizBudget } from "@/lib/quiz";
 
 type Step = { question: string; options: string[] };
 
@@ -32,15 +35,7 @@ export function QuizWidget() {
     if (step < steps.length - 1) {
       setStep(step + 1);
     } else {
-      const text = [
-        "Здравствуйте! Подбираю систему по результатам квиза:",
-        `— ${steps[0].question} ${next[0]}`,
-        `— ${steps[1].question} ${next[1]}`,
-        `— ${steps[2].question} ${next[2]}`,
-        "Можете подобрать решение?",
-      ].join("\n");
-      setDone(true);
-      window.open(`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
+      setDone(true); // результат покажем инлайн, WhatsApp — по кнопке
     }
   }
 
@@ -51,6 +46,22 @@ export function QuizWidget() {
   }
 
   const current = steps[step];
+
+  const result = done && answers.length === steps.length
+    ? configureWithinBudget(quizToInput(answers), quizBudget(answers))
+    : null;
+
+  const waText = result
+    ? [
+        "Здравствуйте! Подбираю систему по результатам квиза:",
+        `— ${steps[0].question} ${answers[0]}`,
+        `— ${steps[1].question} ${answers[1]}`,
+        `— ${steps[2].question} ${answers[2]}`,
+        `Рекомендация: ${result.calc.lines[0].name}, ориентир ${priceFmt(result.calc.total)}.`,
+        "Уточните, пожалуйста, смету.",
+      ].join("\n")
+    : "";
+  const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(waText)}`;
 
   return (
     <div className="rounded-3xl bg-background p-6 sm:p-8">
@@ -65,11 +76,54 @@ export function QuizWidget() {
         ))}
       </div>
 
-      {done ? (
-        <div className="text-center">
-          <p className="font-display text-lg font-semibold">Открываем WhatsApp…</p>
-          <p className="mt-1 text-sm text-muted-foreground">Ваши ответы уже в сообщении — просто отправьте.</p>
-          <button onClick={reset} className="mt-4 text-sm text-primary hover:underline">
+      {done && result ? (
+        <div>
+          <div className="mb-3 flex items-center gap-2">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-accent-fg">
+              <Check className="h-4 w-4" />
+            </span>
+            <p className="font-display text-lg font-semibold">Готово — вот ориентир</p>
+          </div>
+
+          <div className="rounded-2xl border border-border p-4">
+            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+              Рекомендуемая база
+            </p>
+            <p className="mt-1 font-medium">{result.calc.lines[0].name}</p>
+            <div className="mt-3 flex items-baseline justify-between border-t border-border pt-3">
+              <span className="text-sm text-muted-foreground">Ориентир под ключ</span>
+              <span className="font-display text-2xl font-bold text-primary">{priceFmt(result.calc.total)}</span>
+            </div>
+            {result.trimmed.length > 0 && result.fits && (
+              <p className="mt-2 text-xs text-muted-foreground">
+                Под ваш бюджет: без {result.trimmed.join(", ")}.
+              </p>
+            )}
+            {!result.fits && (
+              <p className="mt-2 text-xs text-muted-foreground">
+                Минимальный комплект под {result.calc.area} м² дороже выбранного бюджета — это ориентир, точную смету подберём по проекту.
+              </p>
+            )}
+          </div>
+
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
+            >
+              <MessageCircle className="h-4 w-4" /> Заявка в WhatsApp
+            </a>
+            <Link
+              href="/kalkulyator"
+              className="inline-flex flex-1 items-center justify-center rounded-xl border border-border py-3 text-sm font-medium transition hover:border-primary hover:text-primary"
+            >
+              Открыть полную смету
+            </Link>
+          </div>
+
+          <button onClick={reset} className="mt-3 text-sm text-primary hover:underline">
             Пройти заново
           </button>
         </div>
