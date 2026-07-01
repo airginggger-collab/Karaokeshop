@@ -9,9 +9,8 @@ import { Container } from "@/components/Container";
 import { ProductImage } from "@/components/ProductImage";
 import { QuizWidget } from "@/components/QuizWidget";
 import { ClientLogos } from "@/components/ClientLogos";
-import { products, priceFmt } from "@/lib/site";
+import { products, priceFmt, siteConfig } from "@/lib/site";
 
-const cell = "rounded-3xl p-6 transition";
 const featuredProducts = products.filter((p) => p.type === "sistema").slice(0, 4);
 
 export default function HomePage() {
@@ -40,8 +39,29 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Как мы работаем (услуга под ключ) */}
+      <section className="mt-12">
+        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Как мы работаем</h2>
+        <p className="mt-1 text-sm text-muted-foreground">Пять шагов от заявки до живого звука.</p>
+        <div className="relative mt-6 grid gap-4 sm:grid-cols-5">
+          {[
+            { step: "01", title: "Консультация", body: "Выясним задачу, площадь и бюджет — по WhatsApp или в шоуруме." },
+            { step: "02", title: "Проект", body: "Подготовим смету и акустический расчёт под ваше помещение." },
+            { step: "03", title: "Монтаж", body: "Приедем сами, установим и закрепим оборудование." },
+            { step: "04", title: "Настройка", body: "Откалибруем звук, загрузим базу и проверим всё вместе с вами." },
+            { step: "05", title: "Поддержка", body: "Гарантия, сервис-центр и обновление репертуара по договору." },
+          ].map((s) => (
+            <div key={s.step} className="flex flex-col rounded-2xl bg-background p-5">
+              <span className="font-display text-3xl font-bold text-primary/40">{s.step}</span>
+              <p className="mt-2 font-medium">{s.title}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Дилерская полоса */}
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-border bg-background px-6 py-4">
+      <div className="mt-12 flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-border bg-background px-6 py-4">
         <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           Официальный дилер
         </span>
@@ -102,10 +122,90 @@ export default function HomePage() {
         ))}
       </section>
 
-      {/* Оборудование — editorial 2×2 */}
+      <ClientLogos />
+
+      {/* Отзывы */}
       <section className="mt-12">
         <div className="flex items-end justify-between">
-          <h2 className="font-display text-2xl font-semibold sm:text-3xl">Популярное оборудование</h2>
+          <h2 className="font-display text-2xl font-semibold sm:text-3xl">Клиенты о нас</h2>
+          <a
+            href="https://www.google.com/maps/search/karaokeshop+алматы"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-1 text-sm font-medium text-primary sm:flex"
+          >
+            Все отзывы на Google <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+          {[
+            {
+              name: "Дмитрий К.",
+              context: "AST-250 · бар 60 м², Алматы",
+              text: "Монтировали за 2 дня, звук настроили идеально под наш зал. Гости сразу оценили — заполняемость выросла.",
+              stars: 5,
+            },
+            {
+              name: "Аида Р.",
+              context: "Evobox · гостиная частного дома, Астана",
+              text: "Поставили в гостиной. База огромная, микрофоны отличные. Дети поют каждый вечер. Спасибо за подбор!",
+              stars: 5,
+            },
+            {
+              name: "Серик М.",
+              context: "AST-250 · ресторан на 80 мест, Алматы",
+              text: "Работает без нареканий уже полтора года. Репертуар обновляют по договору. Сервис отвечает быстро.",
+              stars: 5,
+            },
+          ].map((r) => (
+            <div key={r.name} className="flex flex-col rounded-2xl border border-border bg-background p-5">
+              <div className="flex gap-0.5">
+                {Array.from({ length: r.stars }).map((_, i) => (
+                  <svg key={i} viewBox="0 0 16 16" className="h-4 w-4 fill-yellow-400" aria-hidden><path d="M8 1l1.854 3.756L14 5.528l-3 2.924.708 4.13L8 10.56l-3.708 2.02.708-4.13-3-2.923 4.146-.772z"/></svg>
+                ))}
+              </div>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">«{r.text}»</p>
+              <div className="mt-4 border-t border-border pt-3">
+                <p className="text-sm font-medium">{r.name}</p>
+                <p className="text-xs text-muted-foreground">{r.context}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 flex sm:hidden">
+          <a
+            href="https://www.google.com/maps/search/karaokeshop+алматы"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-sm font-medium text-primary"
+          >
+            Все отзывы на Google <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+      </section>
+
+      {/* Почему karaokeshop */}
+      <section className="mt-12">
+        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Почему karaokeshop</h2>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { title: "Подбор без ошибки", body: "Выясним задачу, площадь и бюджет — предложим то, что реально подходит." },
+            { title: "Два бренда в одном месте", body: "AST и Studio Evolution — сравниваем честно и помогаем выбрать." },
+            { title: "Под ключ", body: "Проект звука, монтаж, настройка, обучение — один договор." },
+            { title: "Заказ через WhatsApp", body: "Напишите — ответим быстро, поможем выбрать и оформим заявку." },
+          ].map((item) => (
+            <div key={item.title} className="rounded-2xl border border-border bg-background p-5">
+              <p className="font-medium">{item.title}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Оборудование — на чём собираем (доказательство) */}
+      <section className="mt-12">
+        <div className="flex items-end justify-between">
+          <h2 className="font-display text-2xl font-semibold sm:text-3xl">На чём собираем</h2>
           <Link href="/catalog" className="hidden items-center gap-1 text-sm font-medium text-primary sm:flex">
             Весь каталог <ArrowRight className="h-4 w-4" />
           </Link>
@@ -184,8 +284,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <ClientLogos />
-
       {/* Nav sections — блоки перехода по разделам */}
       <section className="mt-12">
         <h2 className="font-display text-2xl font-semibold sm:text-3xl">Разделы</h2>
@@ -209,101 +307,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Как мы работаем */}
-      <section className="mt-12">
-        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Как мы работаем</h2>
-        <p className="mt-1 text-sm text-muted-foreground">Пять шагов от заявки до живого звука.</p>
-        <div className="relative mt-6 grid gap-4 sm:grid-cols-5">
-          {[
-            { step: "01", title: "Консультация", body: "Выясним задачу, площадь и бюджет — по WhatsApp или в шоуруме." },
-            { step: "02", title: "Проект", body: "Подготовим смету и акустический расчёт под ваше помещение." },
-            { step: "03", title: "Монтаж", body: "Приедем сами, установим и закрепим оборудование." },
-            { step: "04", title: "Настройка", body: "Откалибруем звук, загрузим базу и проверим всё вместе с вами." },
-            { step: "05", title: "Поддержка", body: "Гарантия, сервис-центр и обновление репертуара по договору." },
-          ].map((s) => (
-            <div key={s.step} className="flex flex-col rounded-2xl bg-background p-5">
-              <span className="font-display text-3xl font-bold text-primary/40">{s.step}</span>
-              <p className="mt-2 font-medium">{s.title}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{s.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Отзывы */}
-      <section className="mt-12">
-        <div className="flex items-end justify-between">
-          <h2 className="font-display text-2xl font-semibold sm:text-3xl">Клиенты о нас</h2>
+      {/* Финальный CTA */}
+      <section className="mt-12 rounded-3xl bg-primary-soft p-8 text-center">
+        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Подберём за минуту — бесплатно</h2>
+        <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
+          Пройдите квиз выше или напишите нам — ответим и предложим то, что реально подходит под вашу задачу и бюджет.
+        </p>
+        <div className="mt-5 flex flex-wrap justify-center gap-3">
           <a
-            href="https://www.google.com/maps/search/karaokeshop+алматы"
+            href={`https://wa.me/${siteConfig.whatsapp}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden items-center gap-1 text-sm font-medium text-primary sm:flex"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
           >
-            Все отзывы на Google <ArrowRight className="h-4 w-4" />
+            Написать в WhatsApp
           </a>
-        </div>
-        <div className="mt-5 grid gap-4 sm:grid-cols-3">
-          {[
-            {
-              name: "Дмитрий К.",
-              context: "AST-250 · бар 60 м², Алматы",
-              text: "Монтировали за 2 дня, звук настроили идеально под наш зал. Гости сразу оценили — заполняемость выросла.",
-              stars: 5,
-            },
-            {
-              name: "Аида Р.",
-              context: "Evobox · гостиная частного дома, Астана",
-              text: "Поставили в гостиной. База огромная, микрофоны отличные. Дети поют каждый вечер. Спасибо за подбор!",
-              stars: 5,
-            },
-            {
-              name: "Серик М.",
-              context: "AST-250 · ресторан на 80 мест, Алматы",
-              text: "Работает без нареканий уже полтора года. Репертуар обновляют по договору. Сервис отвечает быстро.",
-              stars: 5,
-            },
-          ].map((r) => (
-            <div key={r.name} className="flex flex-col rounded-2xl border border-border bg-background p-5">
-              <div className="flex gap-0.5">
-                {Array.from({ length: r.stars }).map((_, i) => (
-                  <svg key={i} viewBox="0 0 16 16" className="h-4 w-4 fill-yellow-400" aria-hidden><path d="M8 1l1.854 3.756L14 5.528l-3 2.924.708 4.13L8 10.56l-3.708 2.02.708-4.13-3-2.923 4.146-.772z"/></svg>
-                ))}
-              </div>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">«{r.text}»</p>
-              <div className="mt-4 border-t border-border pt-3">
-                <p className="text-sm font-medium">{r.name}</p>
-                <p className="text-xs text-muted-foreground">{r.context}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-3 flex sm:hidden">
-          <a
-            href="https://www.google.com/maps/search/karaokeshop+алматы"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 text-sm font-medium text-primary"
-          >
-            Все отзывы на Google <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
-      </section>
-
-      <section className="mt-12">
-        <h2 className="font-display text-2xl font-semibold sm:text-3xl">Почему karaokeshop</h2>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { title: "Подбор без ошибки", body: "Выясним задачу, площадь и бюджет — предложим то, что реально подходит." },
-            { title: "Два бренда в одном месте", body: "AST и Studio Evolution — сравниваем честно и помогаем выбрать." },
-            { title: "Под ключ", body: "Проект звука, монтаж, настройка, обучение — один договор." },
-            { title: "Заказ через WhatsApp", body: "Напишите — ответим быстро, поможем выбрать и оформим заявку." },
-          ].map((item) => (
-            <div key={item.title} className="rounded-2xl border border-border bg-background p-5">
-              <p className="font-medium">{item.title}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{item.body}</p>
-            </div>
-          ))}
+          <Link href="/kalkulyator" className="inline-flex items-center rounded-xl border border-border px-5 py-3 text-sm font-medium transition hover:border-primary hover:text-primary">
+            Открыть калькулятор
+          </Link>
         </div>
       </section>
     </Container>
