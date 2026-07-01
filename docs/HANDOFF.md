@@ -34,6 +34,17 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Сессия 2026-07-01 (2) — янтарный ре-колор + фото
+
+Визуальный апдейт по референсу (тёмный + янтарь). Ветка `redesign-amber`.
+
+- **Цвет:** фирменный акцент тил/зелёный → **янтарь** (только [theme.css](../packages/tokens/css/theme.css)). Тёмная: `#f59e0b`. Светлая: текст/ссылки/цены — глубокий `#b45309` (AA на белом).
+- **Золотые кнопки (светлая тема):** новый токен `--color-cta` (`#f59e0b` + тёмный текст) для primary-кнопок — чтобы кнопки «светились» золотом, а ссылки оставались читаемыми. Переведены: `@kk/ui` Button (primary), инлайн-пилюли в CalculatorClient/CatalogClient/BrandProductFilter. Ссылки/бордеры/тинты — на `--color-primary`. Маппинг `cta`/`cta-fg` — в [tailwind.config.ts](../apps/web/tailwind.config.ts).
+- **WhatsApp-зелёный** (`#25D366`) — не тронут.
+- **Фото** (Unsplash, jpg — sips не дал webp): [apps/web/public/scenariy/](../apps/web/public/scenariy/) `poyushchie.jpg` (поющие, в hero главной справа), `dom.jpg`/`biznes.jpg` (секция «Дом и бизнес» на главной после «Как работаем» + hero-фото на `/dlya-doma` и `/dlya-biznesa`). Изначальные кандидаты поющих оказались Unsplash+ премиум → взято свободное фото.
+- Проверено в **обеих темах** (desktop+mobile): акцент янтарный, кнопки золотые/читаемые, фото грузятся, тесты web 19 / ui 2 зелёные.
+- Спек: [specs/2026-07-01-vizualnyy-apdeyt-amber-design.md](superpowers/specs/2026-07-01-vizualnyy-apdeyt-amber-design.md) · План: [plans/2026-07-01-vizualnyy-apdeyt-amber.md](superpowers/plans/2026-07-01-vizualnyy-apdeyt-amber.md).
+
 ## Сессия 2026-07-01 — главная пересобрана под «подбор-как-услугу»
 
 Брейнсторм → спек → план → реализация (ветка `redesign-home-usluga`, мердж в `main`). Главная теперь продаёт экспертный подбор, а не «коробку».
