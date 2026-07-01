@@ -52,6 +52,8 @@ export default function Page() {
         <section className="mt-4 rounded-3xl bg-gradient-to-br from-surface to-muted p-8 sm:p-10"
           style={{ borderTop: "3px solid var(--warm-accent)" }}
         >
+          <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-center">
+          <div>
           <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--warm-accent)" }}>
             Для дома
           </p>
@@ -76,6 +78,11 @@ export default function Page() {
             <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-primary" /> Гарантия 1 год</span>
             <span className="flex items-center gap-1.5"><Wrench className="h-4 w-4 text-primary" /> Монтаж включён</span>
             <span className="flex items-center gap-1.5"><Music className="h-4 w-4 text-primary" /> 60 000+ песен</span>
+          </div>
+          </div>
+          <div className="hidden overflow-hidden rounded-2xl md:block">
+            <img src="/scenariy/dom.jpg" alt="Домашнее караоке" loading="eager" className="h-full w-full object-cover" />
+          </div>
           </div>
         </section>
 

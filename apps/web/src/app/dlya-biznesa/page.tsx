@@ -79,6 +79,8 @@ export default function Page() {
             borderTop: "3px solid var(--night-accent)",
           }}
         >
+          <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-center">
+          <div>
           <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--night-accent)" }}>
             Для бизнеса
           </p>
@@ -103,6 +105,11 @@ export default function Page() {
             <span className="flex items-center gap-1.5"><TrendingUp className="h-4 w-4" style={{ color: "var(--night-accent)" }} /> 200+ проектов</span>
             <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" style={{ color: "var(--night-accent)" }} /> Гарантия и сервис</span>
             <span className="flex items-center gap-1.5"><Wrench className="h-4 w-4" style={{ color: "var(--night-accent)" }} /> Монтаж 1–2 дня</span>
+          </div>
+          </div>
+          <div className="hidden overflow-hidden rounded-2xl md:block">
+            <img src="/scenariy/biznes.jpg" alt="Караоке в заведении" loading="eager" className="h-full w-full object-cover" />
+          </div>
           </div>
         </section>
 
