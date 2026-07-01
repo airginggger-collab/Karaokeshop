@@ -42,7 +42,7 @@ function StepIndicator({ step, total }: { step: number; total: number }) {
             className={[
               "flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold transition",
               i + 1 < step
-                ? "bg-primary text-white"
+                ? "bg-cta text-cta-fg"
                 : i + 1 === step
                 ? "border-2 border-primary text-primary"
                 : "border border-border text-muted-foreground",
@@ -152,7 +152,7 @@ export function CalculatorClient() {
                   onClick={() => setArea(v)}
                   className={[
                     "rounded-full border px-3 py-1 text-sm transition",
-                    area === v ? "border-primary bg-primary text-white" : "border-border hover:border-primary",
+                    area === v ? "border-cta bg-cta text-cta-fg" : "border-border hover:border-primary",
                   ].join(" ")}
                 >
                   {v} м²

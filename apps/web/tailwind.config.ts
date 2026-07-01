@@ -11,6 +11,8 @@ export default {
       colors: {
         primary: "var(--color-primary)",
         "primary-fg": "var(--color-primary-fg)",
+        cta: "var(--color-cta)",
+        "cta-fg": "var(--color-cta-fg)",
         background: "var(--color-bg)",
         foreground: "var(--color-fg)",
         page: "var(--color-page)",

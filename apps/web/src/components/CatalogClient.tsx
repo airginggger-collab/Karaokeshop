@@ -15,7 +15,7 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
       className={[
         "inline-flex shrink-0 items-center gap-1 rounded-full border px-3.5 py-1.5 text-sm font-medium transition",
         active
-          ? "border-primary bg-primary text-white"
+          ? "border-cta bg-cta text-cta-fg"
           : "border-border bg-background text-muted-foreground hover:border-primary hover:text-foreground",
       ].join(" ")}
     >

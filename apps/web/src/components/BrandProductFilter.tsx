@@ -27,7 +27,7 @@ export function BrandProductFilter({ items }: { items: Product[] }) {
               onClick={() => setActive(s.key)}
               className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
                 active === s.key
-                  ? "bg-primary text-primary-fg"
+                  ? "bg-cta text-cta-fg"
                   : "bg-surface text-muted-foreground hover:text-foreground"
               }`}
             >
