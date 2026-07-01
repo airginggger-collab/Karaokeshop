@@ -2,7 +2,7 @@
 
 > Краткий контекст проекта karaokeshop.kz, чтобы быстро войти в курс. Полная карта — [docs/README.md](README.md) · правила для AI — [/CLAUDE.md](../CLAUDE.md).
 >
-> **Обновлено: 2026-06-25.** Ветка `main` — актуальная, деплоится на Cloudflare автоматически.
+> **Обновлено: 2026-07-01.** Ветка `main` — актуальная, деплоится на Cloudflare автоматически.
 >
 > 🔧 **Аудит сайта (2026-06-22):** [`audit-2026-06-22.md`](audit-2026-06-22.md) — оценки и находки по визуалу/UX/продажам/SEO/репо. План устранения с файлами и проверкой — [`fix-plan-2026-06-22.md`](fix-plan-2026-06-22.md) (точка входа для работ).
 > 🧪 **QA-прогон (2026-06-25):** [`qa-2026-06-25.md`](qa-2026-06-25.md) — функциональный прогон LIVE, 7 находок исправлено (бюджет-плацебо, og.jpg, крошки, Метрика, форма checkout, санитайз корзины).
@@ -19,7 +19,7 @@
 - **Деплой:** Cloudflare assets-only Worker (`wrangler.toml` → `apps/web/out`), **авто на каждый push в main**. Превью-MCP привязан к medlog — проверять надо `build` + `curl` живого URL.
 
 ## Стек
-Next.js 15 (App Router, `output: "export"` — статика) · Turborepo (npm workspaces) · Tailwind на дизайн-токенах (Style Dictionary) · Storybook · lucide-react · lottie-react · шрифты Manrope + Unbounded. **77 статических страниц** (26 блог-статей + 18 товаров + служебные). Тесты Vitest: web 15 (calculator 12 + seo 3) + ui 2.
+Next.js 15 (App Router, `output: "export"` — статика) · Turborepo (npm workspaces) · Tailwind на дизайн-токенах (Style Dictionary) · Storybook · lucide-react · lottie-react · шрифты Manrope + Unbounded. **77 статических страниц** (26 блог-статей + 18 товаров + служебные). Тесты Vitest: web 19 (calculator 12 + seo 3 + quiz 4) + ui 2.
 
 ## Сборка / проверка
 ```
@@ -33,6 +33,17 @@ npm test -w web           # тесты
 - `apps/web/src/lib/components.ts` — цены оборудования в калькуляторе сметы.
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
+
+## Сессия 2026-07-01 — главная пересобрана под «подбор-как-услугу»
+
+Брейнсторм → спек → план → реализация (ветка `redesign-home-usluga`, мердж в `main`). Главная теперь продаёт экспертный подбор, а не «коробку».
+
+- **Hero = квиз-подбор** (A1): тонкий слоган «Караоке без ошибки в выборе» + чипы доверия + `QuizWidget` в первом экране. Старый bento-hero (`LottieHero`/`HeroWave`), отдельная квиз-секция и блок «С чего начать» удалены.
+- **`QuizWidget` → инлайн-результат:** после 3 вопросов показывает карточку (рекомендованная база + ориентир цены) на базе `configureWithinBudget`, затем «Заявка в WhatsApp» / «Открыть полную смету» ([QuizWidget.tsx](../apps/web/src/components/QuizWidget.tsx)).
+- **`lib/quiz.ts`** (новый) — маппинг ответов квиза → вход калькулятора (площадь/бюджет/venue), покрыт тестами (+4). Тесты web 15→**19**.
+- **Порядок секций:** hero-квиз → Как мы работаем → доверие (дилер/цифры/лого/отзывы/почему) → «На чём собираем» (оборудование как доказательство) → Разделы → финальный CTA.
+- Спек: [specs/2026-07-01-glavnaya-podbor-usluga-design.md](superpowers/specs/2026-07-01-glavnaya-podbor-usluga-design.md) · План: [plans/2026-07-01-glavnaya-podbor-usluga.md](superpowers/plans/2026-07-01-glavnaya-podbor-usluga.md).
+- **Фаза 2 (не сделано):** отдельная услуговая страница (Вариант C — сервис-лендинг). Отдельным спеком.
 
 ## Сессия 2026-06-25 — QA-прогон LIVE + фиксы находок
 

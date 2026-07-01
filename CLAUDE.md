@@ -52,7 +52,7 @@ npm run test                 # turbo run test
 npm run tokens               # пересобрать @kk/tokens
 
 npm run build -w web         # сборка сайта → apps/web/out (статика)
-npm test -w web              # тесты web (Vitest): 15 (calculator 12 + seo 3)
+npm test -w web              # тесты web (Vitest): 19 (calculator 12 + seo 3 + quiz 4)
 npm test -w @kk/ui           # тесты UI-кита: 2
 npm run storybook -w @kk/ui  # Storybook на :6006
 ```
