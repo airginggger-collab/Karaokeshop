@@ -36,6 +36,8 @@
   --color-accent:       #b45309;
   --color-accent-fg:    #7c2d12;
   --color-accent-soft:  #ffedd5;
+  --color-cta:          #f59e0b;   /* яркий янтарь — фон primary-кнопок */
+  --color-cta-fg:       #3a2a06;   /* тёмный текст на золоте ✓ AA */
 }
 
 /* ─── Тёмная тема ─── */
@@ -60,6 +62,8 @@
   --color-accent:       #f59e0b;   /* янтарь:          ~9:1 на bg    ✓ AAA */
   --color-accent-fg:    #ffe9c2;   /*                  на soft ✓ AAA */
   --color-accent-soft:  #2a1c08;
+  --color-cta:          #f59e0b;
+  --color-cta-fg:       #1a1204;
 }
 
 /* ─── Тёплое настроение (страницы «для дома») ─── */
