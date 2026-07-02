@@ -8,6 +8,7 @@ import { ArrowRight, Sparkles, MapPin } from "lucide-react";
 import { Container } from "@/components/Container";
 import { ProductImage } from "@/components/ProductImage";
 import { QuizWidget } from "@/components/QuizWidget";
+import { CountUp } from "@/components/CountUp";
 import { ClientLogos } from "@/components/ClientLogos";
 import { products, priceFmt, siteConfig } from "@/lib/site";
 
@@ -146,7 +147,7 @@ export default function HomePage() {
           { value: "2 года", label: "гарантия", sub: "и сервис-центр" },
         ].map((s) => (
           <div key={s.value} className="group flex flex-col items-center rounded-2xl border border-border bg-background py-5 text-center transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md">
-            <span className="font-display text-3xl font-bold text-primary transition group-hover:scale-110">{s.value}</span>
+            <span className="font-display text-3xl font-bold text-primary transition group-hover:scale-110"><CountUp value={s.value} /></span>
             <span className="mt-1 text-sm font-medium">{s.label}</span>
             <span className="text-xs text-muted-foreground">{s.sub}</span>
           </div>

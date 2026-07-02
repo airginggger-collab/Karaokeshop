@@ -75,7 +75,6 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   const heroStyle: React.CSSProperties = {
     background: content.night ? "var(--night-bg)" : "var(--color-surface)",
-    borderTop: `3px solid ${content.accentVar}`,
   };
 
   return (

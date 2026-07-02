@@ -5,6 +5,7 @@ import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ProductCard } from "@/components/ProductCard";
 import { FaqAccordion } from "@/components/FaqAccordion";
+import { CountUp } from "@/components/CountUp";
 import { products, siteConfig } from "@/lib/site";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -74,9 +75,8 @@ export default function Page() {
         <section
           className="mt-4 rounded-3xl p-8 sm:p-10"
           style={{
-            background: "var(--night-bg)",
+            background: "linear-gradient(135deg, #1e2b40 0%, #131b29 100%)",
             color: "var(--night-fg)",
-            borderTop: "3px solid var(--night-accent)",
           }}
         >
           <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-center">
@@ -102,7 +102,7 @@ export default function Page() {
             </a>
           </div>
           <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1.5 text-sm" style={{ color: "var(--night-muted)" }}>
-            <span className="flex items-center gap-1.5"><TrendingUp className="h-4 w-4" style={{ color: "var(--night-accent)" }} /> 200+ проектов</span>
+            <span className="flex items-center gap-1.5"><TrendingUp className="h-4 w-4" style={{ color: "var(--night-accent)" }} /> <CountUp value="200+" />&nbsp;проектов</span>
             <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" style={{ color: "var(--night-accent)" }} /> Гарантия и сервис</span>
             <span className="flex items-center gap-1.5"><Wrench className="h-4 w-4" style={{ color: "var(--night-accent)" }} /> Монтаж 1–2 дня</span>
           </div>
@@ -121,7 +121,7 @@ export default function Page() {
               <div
                 key={label}
                 className="flex flex-col rounded-2xl border border-border p-5"
-                style={{ borderTopColor: "var(--night-accent)", borderTopWidth: 3, background: "var(--night-bg)", color: "var(--night-fg)" }}
+                style={{ background: "var(--night-bg)", color: "var(--night-fg)" }}
               >
                 {Icon && (
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-full" style={{ background: "var(--night-soft)", color: "var(--night-accent)" }}>
