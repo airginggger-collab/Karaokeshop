@@ -5,6 +5,7 @@ import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ProductCard } from "@/components/ProductCard";
 import { FaqAccordion } from "@/components/FaqAccordion";
+import { CountUp } from "@/components/CountUp";
 import { products, siteConfig } from "@/lib/site";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -75,7 +76,7 @@ export default function Page() {
           <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-[#5b6675]">
             <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" style={{ color: "var(--warm-accent)" }} /> Гарантия 1 год</span>
             <span className="flex items-center gap-1.5"><Wrench className="h-4 w-4" style={{ color: "var(--warm-accent)" }} /> Монтаж включён</span>
-            <span className="flex items-center gap-1.5"><Music className="h-4 w-4" style={{ color: "var(--warm-accent)" }} /> 60 000+ песен</span>
+            <span className="flex items-center gap-1.5"><Music className="h-4 w-4" style={{ color: "var(--warm-accent)" }} /> <CountUp value="60 000+ песен" /></span>
           </div>
           </div>
           <div className="hidden overflow-hidden rounded-2xl md:block">
