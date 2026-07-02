@@ -49,7 +49,7 @@ export default function Page() {
         <Breadcrumb items={[{ label: "Домашнее карао­ке" }]} />
 
         {/* Герой */}
-        <section className="mt-4 rounded-3xl bg-gradient-to-br from-white to-[#eeeeec] p-8 sm:p-10">
+        <section className="mt-4 rounded-3xl bg-gradient-to-br from-white to-[#eeeeec] p-8 sm:p-10" style={{ color: "#141b26" }}>
           <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-center">
           <div>
           <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--warm-accent)" }}>
@@ -58,7 +58,7 @@ export default function Page() {
           <h1 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">
             Домашнее карао­ке<br />с гарантией и монтажом
           </h1>
-          <p className="mt-3 max-w-xl text-muted-foreground">
+          <p className="mt-3 max-w-xl text-[#5b6675]">
             Гостиная, баня или гостевой дом. Подберём систему AST или Studio Evolution под вашу комнату и бюджет — привезём, подключим, настроим.
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4">
@@ -72,10 +72,10 @@ export default function Page() {
               Подобрать в WhatsApp <ArrowRight className="h-4 w-4" />
             </a>
           </div>
-          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-muted-foreground">
-            <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-primary" /> Гарантия 1 год</span>
-            <span className="flex items-center gap-1.5"><Wrench className="h-4 w-4 text-primary" /> Монтаж включён</span>
-            <span className="flex items-center gap-1.5"><Music className="h-4 w-4 text-primary" /> 60 000+ песен</span>
+          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-[#5b6675]">
+            <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" style={{ color: "var(--warm-accent)" }} /> Гарантия 1 год</span>
+            <span className="flex items-center gap-1.5"><Wrench className="h-4 w-4" style={{ color: "var(--warm-accent)" }} /> Монтаж включён</span>
+            <span className="flex items-center gap-1.5"><Music className="h-4 w-4" style={{ color: "var(--warm-accent)" }} /> 60 000+ песен</span>
           </div>
           </div>
           <div className="hidden overflow-hidden rounded-2xl md:block">
