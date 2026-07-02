@@ -293,13 +293,10 @@ export default function HomePage() {
 
                   {/* Цена + CTA */}
                   <div className="mt-auto flex items-center justify-between pt-4">
-                    <span className="font-display text-xl font-bold" style={{ color: accentColor }}>
+                    <span className="font-display text-xl font-bold text-primary">
                       {priceFmt(p.price)}
                     </span>
-                    <span
-                      className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-medium transition-all group-hover:gap-2.5"
-                      style={{ background: accentColor, color: isHome ? "#fff" : "#04241e" }}
-                    >
+                    <span className="inline-flex items-center gap-1.5 rounded-xl bg-cta px-4 py-2 text-sm font-medium text-cta-fg transition-all group-hover:gap-2.5">
                       Подробнее <ArrowRight className="h-3.5 w-3.5" />
                     </span>
                   </div>

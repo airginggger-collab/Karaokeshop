@@ -75,7 +75,7 @@ export default function Page() {
         <section
           className="mt-4 rounded-3xl p-8 sm:p-10"
           style={{
-            background: "linear-gradient(135deg, #1e2b40 0%, #131b29 100%)",
+            background: "linear-gradient(180deg, #1b2438 0%, #0e131c 100%)",
             color: "var(--night-fg)",
           }}
         >
