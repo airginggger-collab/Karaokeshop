@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { MessageCircle } from "lucide-react";
-import { Button } from "@kk/ui";
 import { siteConfig } from "@/lib/site";
 
 const areas = [
@@ -59,9 +58,14 @@ export function AreaCalculator() {
         <p className="mt-0.5 font-medium text-primary">{a.kit}</p>
         <p className="text-sm text-primary">{a.price}</p>
         <div className="mt-3">
-          <Button onClick={() => window.open(waUrl, "_blank", "noopener")}>
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
+          >
             <MessageCircle className="h-4 w-4" /> Оставить заявку в WhatsApp
-          </Button>
+          </a>
         </div>
       </div>
     </div>
