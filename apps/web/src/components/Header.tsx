@@ -21,8 +21,10 @@ export function Header() {
     <header className="sticky top-0 z-30 border-b border-border bg-background dark:border-white/[0.08] dark:bg-page">
       <Container className="flex h-14 items-center gap-4">
         <MobileNav />
-        <Link href="/" className="flex items-center gap-1.5 font-semibold tracking-tight">
-          <Mic2 className="h-5 w-5 text-primary" />
+        <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
+          <span className="flex h-7 w-7 items-center justify-center rounded-[8px] text-white" style={{ background: "#7c5cff" }}>
+            <Mic2 className="h-4 w-4" />
+          </span>
           karaokeshop
         </Link>
         <nav className="hidden flex-1 items-center gap-5 text-sm md:flex">
