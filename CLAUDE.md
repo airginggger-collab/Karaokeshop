@@ -73,6 +73,7 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 
 ## Ловушки
 
+0. **`apps/web/public/_redirects` — ТОЛЬКО относительные URL, и всегда проверяй CI-деплой после пуша.** Cloudflare Workers Static Assets валидирует `_redirects` на шаге `wrangler deploy` (не при `next build`): абсолютный URL (с хостом) → `Only relative URLs are allowed` → **деплой падает, а прод молча застревает на прошлой версии**. Так и случилось 2026-07-02 (правило www-канонизации). Защита: `postbuild`-хук `scripts/check-redirects.mjs` роняет **локальную сборку** на абсолютных URL. Хост-канонизацию (www) делать через **Cloudflare Redirect Rules** (дашборд), не в `_redirects`. **Правило: после каждого push в `main` проверяй `gh run list` — деплой мог упасть, локальный build это не покажет.**
 1. **`next start` не работает с `output: export`.** Для локального просмотра — `npx serve apps/web/out`, не `next start`.
 2. **HEX-палитра PDF / токены.** Цвета — только через токены `@kk/tokens`; не хардкодь.
 3. **`docs/deploy.md` исторически писался под Cloudflare Pages (Connect-to-Git).** Реальный продакшен — assets-only **Worker** через `wrangler.toml`, URL `*.workers.dev`. Опирайся на `wrangler.toml`, не на «вариант Pages-дашборда».

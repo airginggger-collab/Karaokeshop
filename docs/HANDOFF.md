@@ -35,6 +35,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Сессия 2026-07-02 (3) — постмортем: `_redirects` уронил деплой
+
+**Причина:** абсолютный URL в `apps/web/public/_redirects` (www-канонизация) → Cloudflare отклоняет на `wrangler deploy` («Only relative URLs are allowed») → **деплой падал, прод молча застрял** на терракоте (синий апдейт не выкатился). Локальный `next build` файл не валидирует — баг всплыл только в CI-деплое, а CI после пуша я не проверял.
+**Фикс:** убрал абсолютное правило (относительные only); www-канон → Cloudflare Redirect Rules (дашборд). **Защита:** `postbuild`-хук [`scripts/check-redirects.mjs`](../scripts/check-redirects.mjs) роняет локальную сборку на абсолютных URL. Ловушка №0 в [/CLAUDE.md](../CLAUDE.md): после пуша в `main` **всегда `gh run list`** — деплой мог упасть.
+
 ## Сессия 2026-07-02 (2) — светлая тема: сине-стальной акцент + тёмный финальный блок
 
 Ветка `light-blue-accent`.
