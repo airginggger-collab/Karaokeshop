@@ -35,6 +35,11 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Сессия 2026-07-02 (4) — тёмная тема по умолчанию + доки для заказчика
+
+- **Тёмная тема — основная:** класс `dark` на `<html>` из SSR ([layout.tsx](../apps/web/src/app/layout.tsx)); скрипт снимает его только при явном выборе светлой (`kk-theme==='light'`). Дефолт (без сохранённой темы) = тёмная, без вспышки. Переключатель работает.
+- **Доки для заказчика:** [client/chto-nuzhno-ot-vas.md](client/chto-nuzhno-ot-vas.md) — простым языком, что нужно от владельца и зачем (домен, старый сайт, GSC, Metrica-ID, GBP/2ГИС, фото) + рекомендация остаться на `karaokeshop.kz`. Технический план — `docs/strategy/domain-launch.md`.
+
 ## Сессия 2026-07-02 (3) — постмортем: `_redirects` уронил деплой
 
 **Причина:** абсолютный URL в `apps/web/public/_redirects` (www-канонизация) → Cloudflare отклоняет на `wrangler deploy` («Only relative URLs are allowed») → **деплой падал, прод молча застрял** на терракоте (синий апдейт не выкатился). Локальный `next build` файл не валидирует — баг всплыл только в CI-деплое, а CI после пуша я не проверял.

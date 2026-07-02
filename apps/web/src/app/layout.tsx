@@ -30,7 +30,9 @@ const display = Unbounded({
   display: "swap",
 });
 
-const themeScript = `try{var t=localStorage.getItem('kk-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}`;
+// Тёмная тема — основная (класс `dark` стоит на <html> из SSR). Скрипт снимает
+// его ТОЛЬКО если пользователь явно выбрал светлую (kk-theme==='light').
+const themeScript = `try{if(localStorage.getItem('kk-theme')==='light'){document.documentElement.classList.remove('dark')}}catch(e){}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -93,7 +95,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" className={`${sans.variable} ${display.variable}`}>
+    <html lang="ru" className={`${sans.variable} ${display.variable} dark`}>
       <body className="min-h-screen font-sans antialiased">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }} />
