@@ -6,7 +6,8 @@
 **Остаёмся на `karaokeshop.kz`** (без дефиса — сильнее ворованного `karaoke-shop.kz`, есть история в Google). Новый домен = обнулить SEO-авторитет. Переезд — в пределах того же домена, значит «смена адреса» в GSC НЕ нужна, ранжирование сохраняется при корректных 301.
 
 ## Канон: www
-`siteConfig.url = https://www.karaokeshop.kz` → канон = **www**. Все `canonical`/`og`/`sitemap` уже на www. Без-www 301-ится на www (правило уже в [`apps/web/public/_redirects`](../../apps/web/public/_redirects)).
+`siteConfig.url = https://www.karaokeshop.kz` → канон = **www**. Все `canonical`/`og`/`sitemap` уже на www.
+⚠️ **Без-www → www нельзя сделать в `_redirects`** (Cloudflare Workers Static Assets разрешает только относительные пути; абсолютный URL → деплой падает: «Only relative URLs are allowed»). Хост-канонизацию настроить **Redirect Rule** в дашборде Cloudflare (домен → Rules → Redirect Rules): source `www.karaokeshop.kz/*` → нет; наоборот — `karaokeshop.kz/*` → `https://www.karaokeshop.kz/${1}` 301. `_redirects` — только для относительных старый→новый путей.
 
 ---
 
