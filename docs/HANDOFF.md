@@ -34,6 +34,16 @@ npm test -w web           # тесты
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
 
+## Сессия 2026-07-02 — оранж в тёмном, счётчики, фоны hero, без верх. обводки
+
+Итерация после янтарного апдейта (ветка `redesign-amber-2`). Спек: [specs/2026-07-02-vizual-2-oranzh-schetchiki-design.md](superpowers/specs/2026-07-02-vizual-2-oranzh-schetchiki-design.md).
+
+- **Акцент менее жёлтый в ТЁМНОМ:** `.dark` primary/accent/cta + `:root --night-accent` `#f59e0b` → **`#f97316`** (оранж). Светлая тема (глубокий янтарь текст `#b45309` + золотые кнопки `#f59e0b`) — НЕ тронута. [theme.css](../packages/tokens/css/theme.css).
+- **Hero «Для бизнеса»** — фон не чёрный: `var(--night-bg)` → градиент `#1e2b40 → #131b29`.
+- **Hero «Для дома»** — тёплый серый: `from-surface to-muted` → `from-white to-[#eeeeec]`.
+- **Анимация счётчиков:** новый [CountUp.tsx](../apps/web/src/components/CountUp.tsx) — числа растут от 0 при появлении в вьюпорте (IntersectionObserver + rAF, ease-out ~1.1с), уважает `prefers-reduced-motion`, SSR-safe (финальное значение до анимации). Применён к trust-блоку главной + «200+» в hero бизнеса. Парсер `parseValue` покрыт тестами (+5). Тесты web 19→**24**. ⚠️ vitest include = `src/**/*.test.ts` (только `.ts`, не `.tsx`) — тесты класть в `.ts`.
+- **Убрана верхняя 3px-обводка** во всех hero/карточках: dlya-doma, dlya-biznesa (×2), pod-klyuch, brand/[slug], o-nas.
+
 ## Сессия 2026-07-01 (2) — янтарный ре-колор + фото
 
 Визуальный апдейт по референсу (тёмный + янтарь). Ветка `redesign-amber`.

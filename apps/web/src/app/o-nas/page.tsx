@@ -75,7 +75,7 @@ export default function Page() {
         {/* Герой */}
         <section
           className="mt-4 rounded-3xl p-8 sm:p-10"
-          style={{ background: "var(--color-surface)", borderTop: "3px solid var(--color-primary)" }}
+          style={{ background: "var(--color-surface)" }}
         >
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">О компании</p>
           <h1 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">{oNasMeta.h1}</h1>

@@ -49,9 +49,7 @@ export default function Page() {
         <Breadcrumb items={[{ label: "Домашнее карао­ке" }]} />
 
         {/* Герой */}
-        <section className="mt-4 rounded-3xl bg-gradient-to-br from-surface to-muted p-8 sm:p-10"
-          style={{ borderTop: "3px solid var(--warm-accent)" }}
-        >
+        <section className="mt-4 rounded-3xl bg-gradient-to-br from-white to-[#eeeeec] p-8 sm:p-10">
           <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-center">
           <div>
           <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--warm-accent)" }}>

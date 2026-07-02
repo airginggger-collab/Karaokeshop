@@ -18,7 +18,7 @@
   --night-bg:    #0b1220;
   --night-fg:    #e7eef8;
   --night-muted: #9fb3cc;
-  --night-accent:#f59e0b;
+  --night-accent:#f97316;
   --night-soft:  #14243a;
 
   /* ─── Светлая тема ─── */
@@ -56,14 +56,14 @@
   --color-muted:        #1a2438;   /* тонкий фон */
   --color-muted-fg:     #aac0d6;   /* второй. текст:    8.2:1 на bg  ✓ AAA */
   --color-border:       #344a68;   /* декоративный бордер */
-  --color-primary:      #f59e0b;   /* янтарь яркий:    ~9:1 на bg    ✓ AAA */
-  --color-primary-fg:   #1a1204;   /* тёмный на янтаре ✓ AAA */
-  --color-primary-soft: #2a1c08;
-  --color-accent:       #f59e0b;   /* янтарь:          ~9:1 на bg    ✓ AAA */
-  --color-accent-fg:    #ffe9c2;   /*                  на soft ✓ AAA */
-  --color-accent-soft:  #2a1c08;
-  --color-cta:          #f59e0b;
-  --color-cta-fg:       #1a1204;
+  --color-primary:      #f97316;   /* оранж яркий:     ~7:1 на bg    ✓ AAA */
+  --color-primary-fg:   #1a0f04;   /* тёмный на оранже ✓ */
+  --color-primary-soft: #2a1808;
+  --color-accent:       #f97316;   /* оранж */
+  --color-accent-fg:    #ffe0c2;
+  --color-accent-soft:  #2a1808;
+  --color-cta:          #f97316;
+  --color-cta-fg:       #1a0f04;
 }
 
 /* ─── Тёплое настроение (страницы «для дома») ─── */

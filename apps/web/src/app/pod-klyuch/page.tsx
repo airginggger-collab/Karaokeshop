@@ -81,7 +81,7 @@ export default function Page() {
         {/* Герой */}
         <section
           className="mt-4 rounded-3xl p-8 sm:p-10"
-          style={{ background: "var(--night-bg)", borderTop: "3px solid var(--night-accent)", color: "var(--night-fg)" }}
+          style={{ background: "var(--night-bg)", color: "var(--night-fg)" }}
         >
           <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--night-accent)" }}>
             Под ключ
