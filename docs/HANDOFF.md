@@ -38,7 +38,7 @@ npm test -w web           # тесты
 
 Итерация после янтарного апдейта (ветка `redesign-amber-2`). Спек: [specs/2026-07-02-vizual-2-oranzh-schetchiki-design.md](superpowers/specs/2026-07-02-vizual-2-oranzh-schetchiki-design.md).
 
-- **Акцент менее жёлтый в ТЁМНОМ:** `.dark` primary/accent/cta + `:root --night-accent` `#f59e0b` → **`#f97316`** (оранж). Светлая тема (глубокий янтарь текст `#b45309` + золотые кнопки `#f59e0b`) — НЕ тронута. [theme.css](../packages/tokens/css/theme.css).
+- **Акцент менее жёлтый в ТЁМНОМ:** `.dark` primary/accent/cta + `:root --night-accent` `#f59e0b` → **`#d9682e`** (терракота — гармонирует с тёплым серым). Светлая тема (глубокий янтарь текст `#b45309` + золотые кнопки `#f59e0b`) — НЕ тронута. [theme.css](../packages/tokens/css/theme.css).
 - **Hero «Для бизнеса»** — фон не чёрный: `var(--night-bg)` → градиент `#1e2b40 → #131b29`.
 - **Hero «Для дома»** — тёплый серый: `from-surface to-muted` → `from-white to-[#eeeeec]`.
 - **Анимация счётчиков:** новый [CountUp.tsx](../apps/web/src/components/CountUp.tsx) — числа растут от 0 при появлении в вьюпорте (IntersectionObserver + rAF, ease-out ~1.1с), уважает `prefers-reduced-motion`, SSR-safe (финальное значение до анимации). Применён к trust-блоку главной + «200+» в hero бизнеса. Парсер `parseValue` покрыт тестами (+5). Тесты web 19→**24**. ⚠️ vitest include = `src/**/*.test.ts` (только `.ts`, не `.tsx`) — тесты класть в `.ts`.

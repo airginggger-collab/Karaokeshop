@@ -18,7 +18,7 @@
   --night-bg:    #0b1220;
   --night-fg:    #e7eef8;
   --night-muted: #9fb3cc;
-  --night-accent:#f97316;
+  --night-accent:#d9682e;
   --night-soft:  #14243a;
 
   /* ─── Светлая тема ─── */
@@ -56,13 +56,13 @@
   --color-muted:        #1a2438;   /* тонкий фон */
   --color-muted-fg:     #aac0d6;   /* второй. текст:    8.2:1 на bg  ✓ AAA */
   --color-border:       #344a68;   /* декоративный бордер */
-  --color-primary:      #f97316;   /* оранж яркий:     ~7:1 на bg    ✓ AAA */
+  --color-primary:      #d9682e;   /* оранж яркий:     ~7:1 на bg    ✓ AAA */
   --color-primary-fg:   #1a0f04;   /* тёмный на оранже ✓ */
   --color-primary-soft: #2a1808;
-  --color-accent:       #f97316;   /* оранж */
+  --color-accent:       #d9682e;   /* оранж */
   --color-accent-fg:    #ffe0c2;
   --color-accent-soft:  #2a1808;
-  --color-cta:          #f97316;
+  --color-cta:          #d9682e;
   --color-cta-fg:       #1a0f04;
 }
 
