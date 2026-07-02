@@ -1,0 +1,22 @@
+# _redirects — правила 301 для karaokeshop.kz
+# Cloudflare Workers Static Assets читает этот файл из корня out/.
+# ВАЖНО: правила срабатывают ТОЛЬКО когда домен karaokeshop.kz привязан к Worker'у.
+# На боевом *.workers.dev не влияют (хосты в правилах не совпадают).
+# Формат: /старый /новый 301   ·   полный URL с хостом — для канонизации.
+# «!» — принудительный редирект (даже если по пути есть статический файл).
+
+# 1) Канонический хост: без-www → www (canonical у сайта = https://www.karaokeshop.kz)
+https://karaokeshop.kz/* https://www.karaokeshop.kz/:splat 301!
+
+# 2) Старые URL Wix → новые. ЗАПОЛНИТЬ после краула старого сайта
+#    (GSC → Pages / Screaming Frog: список проиндексированных URL).
+#    Каждый старый индексируемый URL обязан 301-иться на релевантный новый,
+#    иначе потеряем позиции и получим 404 в индексе.
+#    Примеры (заменить на реальные пути Wix):
+# /shop /catalog 301
+# /shop/ast-250 /product/ast-250 301
+# /o-kompanii /o-nas 301
+# /kontakty-1 /kontakty 301
+# /blog-1/* /blog/:splat 301
+#    Нет точного аналога → на ближайший раздел или главную:
+# /staraya-stranica / 301
