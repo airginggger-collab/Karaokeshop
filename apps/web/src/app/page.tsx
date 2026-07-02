@@ -339,10 +339,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Финальный CTA */}
-      <section className="mt-12 rounded-3xl bg-primary-soft p-8 text-center">
+      {/* Финальный CTA — тёмная секция */}
+      <section
+        className="mt-12 rounded-3xl p-8 text-center"
+        style={{ background: "linear-gradient(135deg, #1e2b40 0%, #131b29 100%)", color: "var(--night-fg)" }}
+      >
         <h2 className="font-display text-2xl font-semibold sm:text-3xl">Подберём за минуту — бесплатно</h2>
-        <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
+        <p className="mx-auto mt-2 max-w-xl text-sm" style={{ color: "var(--night-muted)" }}>
           Пройдите квиз выше или напишите нам — ответим и предложим то, что реально подходит под вашу задачу и бюджет.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
@@ -354,7 +357,11 @@ export default function HomePage() {
           >
             Написать в WhatsApp
           </a>
-          <Link href="/kalkulyator" className="inline-flex items-center rounded-xl border border-border px-5 py-3 text-sm font-medium transition hover:border-primary hover:text-primary">
+          <Link
+            href="/kalkulyator"
+            className="inline-flex items-center rounded-xl border px-5 py-3 text-sm font-medium transition hover:bg-white/10"
+            style={{ borderColor: "rgba(255,255,255,0.25)", color: "var(--night-fg)" }}
+          >
             Открыть калькулятор
           </Link>
         </div>

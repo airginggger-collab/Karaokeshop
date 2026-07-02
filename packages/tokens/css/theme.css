@@ -30,14 +30,14 @@
   --color-muted:        #e6eaf1;   /* тонкий фон */
   --color-muted-fg:     #586070;   /* второй. текст:    5.4:1 на bg  ✓ AA  (было #64748B = 4.6:1, критично) */
   --color-border:       #dde3ea;   /* декоративный бордер */
-  --color-primary:      #b45309;   /* янтарь-текст:     ~5:1 на bg   ✓ AA  */
-  --color-primary-fg:   #fff7ed;   /* текст на primary: AA           ✓ AA  */
-  --color-primary-soft: #fef3c7;   /* золотой тинт фон */
-  --color-accent:       #b45309;
-  --color-accent-fg:    #7c2d12;
-  --color-accent-soft:  #ffedd5;
-  --color-cta:          #f59e0b;   /* яркий янтарь — фон primary-кнопок */
-  --color-cta-fg:       #3a2a06;   /* тёмный текст на золоте ✓ AA */
+  --color-primary:      #1e40af;   /* сине-стальной:    ~9:1 на bg   ✓ AAA */
+  --color-primary-fg:   #ffffff;   /* белый на синем    ✓ AAA */
+  --color-primary-soft: #e3e9f7;   /* синий тинт фон */
+  --color-accent:       #1e40af;
+  --color-accent-fg:    #1e3a8a;
+  --color-accent-soft:  #e3e9f7;
+  --color-cta:          #1e40af;   /* синие primary-кнопки (светлая тема) */
+  --color-cta-fg:       #ffffff;   /* белый текст на синем ✓ AAA */
 }
 
 /* ─── Тёмная тема ─── */
