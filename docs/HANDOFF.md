@@ -2,7 +2,9 @@
 
 > Краткий контекст проекта karaokeshop.kz, чтобы быстро войти в курс. Полная карта — [docs/README.md](README.md) · правила для AI — [/CLAUDE.md](../CLAUDE.md).
 >
-> **Обновлено: 2026-07-02.** Ветка `main` — актуальная, деплоится на Cloudflare автоматически.
+> **Обновлено: 2026-07-04.** Ветка `main` — актуальная, деплоится на Cloudflare автоматически. HEAD = `9b78270`. Сборка чистая, тесты зелёные (web 24 + ui 2), CI/деплой зелёный.
+>
+> 🎨 **Текущий облик (2026-07-04):** тема по умолчанию — тёмная. Акцент: светлая = графит `#15181e`, тёмная = неон-жёлтый `#facc15` (токены `--color-primary`/`--color-cta`, флипаются по теме). Фон страницы `--color-page` (прохладный `#e3e7ee` / тёмный `#0e131c`), карточки — белые с тенью (light) / сине-стальной градиент (dark). Логотип-марка: фиолетовый квадрат `#7c5cff` + белый микрофон (Header + фавикон). WhatsApp-CTA — зелёный `#25D366` (фиксированный). Счётчики CountUp на главной и /dlya-doma («60 000+»), /dlya-biznesa («200+»).
 >
 > 🔧 **Аудит сайта (2026-06-22):** [`audit-2026-06-22.md`](audit-2026-06-22.md) — оценки и находки по визуалу/UX/продажам/SEO/репо. План устранения с файлами и проверкой — [`fix-plan-2026-06-22.md`](fix-plan-2026-06-22.md) (точка входа для работ).
 > 🚀 **Запуск домена (2026-07-02):** [`strategy/domain-launch.md`](strategy/domain-launch.md) — перенос `karaokeshop.kz` с Wix на Cloudflare без потери Google, GSC, аналитика, локальное SEO, SEO-селф-чек. 301-правила — в [`apps/web/public/_redirects`](../apps/web/public/_redirects) (заполнить старые URL перед cutover; роут домена в `wrangler.toml` добавлять ТОЛЬКО на момент привязки — иначе CI упадёт).
@@ -20,7 +22,7 @@
 - **Деплой:** Cloudflare assets-only Worker (`wrangler.toml` → `apps/web/out`), **авто на каждый push в main**. Превью-MCP привязан к medlog — проверять надо `build` + `curl` живого URL.
 
 ## Стек
-Next.js 15 (App Router, `output: "export"` — статика) · Turborepo (npm workspaces) · Tailwind на дизайн-токенах (Style Dictionary) · Storybook · lucide-react · lottie-react · шрифты Manrope + Unbounded. **77 статических страниц** (26 блог-статей + 18 товаров + служебные). Тесты Vitest: web 19 (calculator 12 + seo 3 + quiz 4) + ui 2.
+Next.js 15 (App Router, `output: "export"` — статика) · Turborepo (npm workspaces) · Tailwind на дизайн-токенах (Style Dictionary) · Storybook · lucide-react · lottie-react · шрифты Manrope + Unbounded. **77 статических страниц** (26 блог-статей + 18 товаров + служебные). Тесты Vitest: web 24 (calculator 12 + seo 3 + quiz 4 + CountUp 5) + ui 2.
 
 ## Сборка / проверка
 ```
@@ -584,7 +586,11 @@ dlya-doma, dlya-biznesa, gotovye-resheniya, servis, pod-klyuch.
 4. **CMS** (Sanity vs Strapi) — ждёт ответ заказчика про резидентность данных (ADR-0001). Сейчас контент захардкожен в `site.ts`.
 5. **Бриф заказчика** — частоты Wordstat (семантическое ядро), аналитика, доступы. См. [docs/client/client-brief.md](client/client-brief.md).
 6. **Кастомный домен** `new.karaokeshop.kz` — ждёт доступ владельца к DNS (потом 2 клика в Cloudflare).
-7. **`/sravnit` не в sitemap** — страница сравнения оборудования есть как роут, но не добавлена в `allPaths()` в `site.ts` → Google её не видит. Фикс: добавить `"/sravnit"` в `allPaths()`.
+7. **Бейджи сценария в featured-карточках главной** — всё ещё в mood-цвете (терракот/жёлтый), а не в акцент-токене (цена+кнопка уже переведены 2026-07-02). Привести к акценту — по желанию.
+8. **`YM_ID` = placeholder** (`XXXXXXXX`) — Яндекс.Метрика под гардом `YM_ENABLED`, реально не грузится. Подставить реальный ID от владельца (см. `client/chto-nuzhno-ot-vas.md`).
+9. **`siteConfig.url` ведёт на непривязанный `www.karaokeshop.kz`** — canonical/og указывают на старый Wix. Закроется при привязке домена; до тех пор не трогать.
+
+_(Закрыто: `/sravnenie` уже в `allPaths()` → в sitemap — прежний хвост про «/sravnit» неактуален.)_
 
 ## Подводные камни
 - ⚠️ Это **не medlog** — коммить через `git -C ~/Desktop/karaokeshop` (был случай ошибочного коммита в medlog).
