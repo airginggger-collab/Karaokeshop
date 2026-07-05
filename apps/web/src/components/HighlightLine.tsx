@@ -26,7 +26,7 @@ export function HighlightLine({ children, className }: { children: React.ReactNo
           setArmed(true);
           return;
         }
-        if (e.isIntersecting) {
+        if (e.intersectionRatio >= 0.35) {
           setOn(true);
           io.disconnect();
         }
