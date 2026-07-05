@@ -11,6 +11,10 @@ import { ProductStickyBar } from "@/components/ProductStickyBar";
 import { products, priceFmt, discountPct, typeLabels, siteConfig } from "@/lib/site";
 import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
+// Рейтинг/отзывы в data-массиве не верифицированы (нет реальных отзывов от заказчика) —
+// строка «4.9 · N отзывов» и aggregateRating в JSON-LD скрыты флагом, данные не удалять.
+const SHOW_UNVERIFIED_RATINGS = false; // включить после реальных отзывов от заказчика
+
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
@@ -47,7 +51,15 @@ export default async function Page({
     .slice(0, Math.max(0, 6 - sameBrand.length));
   const related = [...sameBrand, ...altBrand];
 
-  const ld = productJsonLd({ name: p.model, price: p.price, slug: p.slug, brand: p.brand, inStock: p.inStock, image: p.image, rating: p.rating, reviewsCount: p.reviewsCount });
+  const ld = productJsonLd({
+    name: p.model,
+    price: p.price,
+    slug: p.slug,
+    brand: p.brand,
+    inStock: p.inStock,
+    image: p.image,
+    ...(SHOW_UNVERIFIED_RATINGS ? { rating: p.rating, reviewsCount: p.reviewsCount } : {}),
+  });
   const breadcrumbLd = breadcrumbJsonLd([
     { name: "Главная", path: "/" },
     { name: "Каталог", path: "/catalog" },
@@ -69,7 +81,7 @@ export default async function Page({
       <div className="mt-6 lg:grid lg:grid-cols-[1fr_420px] lg:gap-12">
 
         {/* Фото — слева */}
-        <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-surface to-muted" style={{ minHeight: 360 }}>
+        <div className="overflow-hidden rounded-xl bg-scene" style={{ minHeight: 360 }}>
           <div className="aspect-square w-full lg:aspect-auto lg:h-[520px]">
             <ProductImage src={p.image} model={p.model} className="h-full w-full" />
           </div>
@@ -82,7 +94,7 @@ export default async function Page({
             {p.model}
           </h1>
 
-          {p.rating ? (
+          {SHOW_UNVERIFIED_RATINGS && p.rating ? (
             <p className="mt-1 flex items-center gap-1 text-sm text-accent-fg">
               <Star className="h-4 w-4" /> {p.rating} · {p.reviewsCount} отзыва ·{" "}
               <span className={p.inStock ? "text-green-600 dark:text-green-400" : "text-muted-foreground"}>
@@ -98,7 +110,9 @@ export default async function Page({
             {p.priceOld ? (
               <span className="text-sm text-muted-foreground line-through">{priceFmt(p.priceOld)}</span>
             ) : null}
-            {pct ? <Badge tone="accent">−{pct}%</Badge> : null}
+            {pct ? (
+              <span className="rounded-md bg-hot px-2 py-0.5 text-xs font-medium text-white">−{pct}%</span>
+            ) : null}
           </div>
 
           {/* CTA — только десктоп (mobile sticky bar ниже) */}

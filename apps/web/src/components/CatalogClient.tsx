@@ -7,17 +7,16 @@ import { typeLabels, type Product, type ProductType } from "@/lib/site";
 
 const typeOpts: [ProductType, string][] = Object.entries(typeLabels) as [ProductType, string][];
 
-function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+function Tab({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={[
-        "inline-flex shrink-0 items-center gap-1 rounded-full border px-3.5 py-1.5 text-sm font-medium transition",
+      className={
         active
-          ? "border-cta bg-cta text-cta-fg"
-          : "border-border bg-background text-muted-foreground hover:border-primary hover:text-foreground",
-      ].join(" ")}
+          ? "hl shrink-0 px-3 py-1.5 text-sm font-medium"
+          : "shrink-0 px-3 py-1.5 text-sm text-muted-foreground transition hover:text-foreground"
+      }
     >
       {children}
     </button>
@@ -26,7 +25,7 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
 
 function SkeletonCard() {
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-border bg-background">
+    <div className="flex flex-col overflow-hidden rounded-xl border border-border bg-background">
       <div className="h-36 animate-pulse bg-muted" />
       <div className="flex flex-col gap-2 p-3.5">
         <div className="h-4 w-16 animate-pulse rounded bg-muted" />
@@ -74,7 +73,7 @@ export function CatalogClient({ items }: { items: Product[] }) {
           value={q}
           onChange={(e) => handleQ(e.target.value)}
           placeholder="Поиск по модели или бренду…"
-          className="h-11 w-full rounded-xl border border-border bg-background pl-9 pr-9 text-sm outline-none focus:border-primary"
+          className="h-11 w-full rounded-lg border border-border bg-background pl-9 pr-9 text-sm outline-none focus:border-primary"
         />
         {q && (
           <button
@@ -87,11 +86,11 @@ export function CatalogClient({ items }: { items: Product[] }) {
         )}
       </div>
 
-      {/* Чипы-фильтры */}
-      <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
-        <Chip active={activeType === "all"} onClick={() => handleType("all")}>Все</Chip>
+      {/* Табы-фильтры */}
+      <div className="flex gap-1 overflow-x-auto border-b border-border pb-1 scrollbar-none">
+        <Tab active={activeType === "all"} onClick={() => handleType("all")}>Все</Tab>
         {typeOpts.map(([key, label]) => (
-          <Chip key={key} active={activeType === key} onClick={() => handleType(key)}>{label}</Chip>
+          <Tab key={key} active={activeType === key} onClick={() => handleType(key)}>{label}</Tab>
         ))}
       </div>
 
