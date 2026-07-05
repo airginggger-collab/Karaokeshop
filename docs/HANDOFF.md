@@ -2,7 +2,7 @@
 
 > Краткий контекст проекта karaokeshop.kz, чтобы быстро войти в курс. Полная карта — [docs/README.md](README.md) · правила для AI — [/CLAUDE.md](../CLAUDE.md).
 >
-> **Обновлено: 2026-07-04 (3) — Task 4 дизайн-спринта «Сцена» (каталог+товар).** Ветка `main` — актуальная, деплоится на Cloudflare автоматически. Сборка чистая, тесты зелёные (web 24 + ui 2), CI/деплой зелёный.
+> **Обновлено: 2026-07-05 — фикс opacity-модификаторов Tailwind; до этого 2026-07-04 (3) — Task 4 дизайн-спринта «Сцена» (каталог+товар).** Ветка `main` — актуальная, деплоится на Cloudflare автоматически. Сборка чистая, тесты зелёные (web 24 + ui 2), CI/деплой зелёный.
 >
 > 🎭 **Дизайн-спринт «Сцена» (2026-07-04, ТЕКУЩАЯ РАБОТА):** утверждён спек полного редизайна — [`superpowers/specs/2026-07-04-dizayn-sprint-stsena-design.md`](superpowers/specs/2026-07-04-dizayn-sprint-stsena-design.md). Палитра от фиолетовой марки лого (`#7c5cff`), фирменный приём «подсветка строки», анти-AI правила (без pill-чипов/CountUp/стока), 6 шагов реализации. Неон-жёлтый акцент и блок «Текущий облик» ниже устареют по ходу спринта.
 >
@@ -38,6 +38,12 @@ npm test -w web           # тесты
 - `apps/web/src/lib/components.ts` — цены оборудования в калькуляторе сметы.
 - `apps/web/public/products/` — фото товаров (поле `image` у товара).
 - Инструкция для владельца (новичок, через браузер): [docs/redaktirovanie-sajta.md](redaktirovanie-sajta.md) (+ .docx).
+
+## Сессия 2026-07-05 — фикс: opacity-модификаторы Tailwind не генерировали CSS
+
+- **Баг:** цвета в `tailwind.config.ts` были заданы простыми строками `"var(--color-*)"` — Tailwind 3 не умеет вычислить из такой строки прозрачность (`parseColor` → null), и классы вида `text-primary/40`, `bg-foreground/40`, `bg-primary/5`, `focus:ring-primary/30` **молча выпадали из сборки** (в `out/…css` не было ни одного правила). Затронуты были: главная (номера секций, плашка «AST · EVOBOX»), pod-klyuch, keysy, sravnenie (зебра `bg-surface/40`), blog, servis, плейсхолдер ProductImage, подложка SearchOverlay (`bg-foreground/40` — оверлей был вовсе без затемнения), CalculatorClient, focus-ring в CheckoutClient.
+- **Фикс:** в `apps/web/tailwind.config.ts` и `packages/ui/tailwind.config.ts` цвета отдаются как `color-mix(in srgb, var(--color-*) calc(<alpha-value> * 100%), transparent)` (хелпер `token()`). Токены `theme.css` **не тронуты** — hex остаётся единственным источником, прямые потребители `var(--color-*)` (globals.css, инлайн-стили brand/o-nas) не затронуты; RGB-триплеты не заводили (дублирование палитры ×2 темы = риск рассинхрона). Без модификатора получается `calc(1 * 100%)` — исходный цвет, регрессий нет (проверено computed-стилями: `text-primary` = тот же hex с альфой 1).
+- Проверка: build чистый, тесты web 24 + ui 2 зелёные, превью обеих тем: `text-primary/40` = `#9d8bf0`/40% (dark) и `#4c30b8`/40% (light).
 
 ## Сессия 2026-07-04 — полный аудит + спек дизайн-спринта «Сцена»
 

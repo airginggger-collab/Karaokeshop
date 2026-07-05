@@ -1,5 +1,13 @@
 import type { Config } from "tailwindcss";
 
+/* Hex-токены из @kk/tokens нельзя отдавать как простое "var(--…)": Tailwind
+   не может вычислить из него прозрачность, и классы вида text-primary/40
+   молча выпадают из сборки. color-mix с <alpha-value> даёт модификаторам
+   непрозрачности работать поверх hex-переменных; без модификатора
+   calc(1 * 100%) — исходный цвет без изменений. */
+const token = (name: string) =>
+  `color-mix(in srgb, var(${name}) calc(<alpha-value> * 100%), transparent)`;
+
 export default {
   darkMode: "class",
   content: [
@@ -9,23 +17,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "var(--color-primary)",
-        "primary-fg": "var(--color-primary-fg)",
-        cta: "var(--color-cta)",
-        "cta-fg": "var(--color-cta-fg)",
-        background: "var(--color-bg)",
-        foreground: "var(--color-fg)",
-        page: "var(--color-page)",
-        muted: "var(--color-muted)",
-        "muted-foreground": "var(--color-muted-fg)",
-        border: "var(--color-border)",
-        accent: "var(--color-accent)",
-        "accent-fg": "var(--color-accent-fg)",
-        "primary-soft": "var(--color-primary-soft)",
-        "accent-soft": "var(--color-accent-soft)",
-        surface: "var(--color-surface)",
-        hot: "var(--color-hot)",
-        scene: "var(--color-scene)",
+        primary: token("--color-primary"),
+        "primary-fg": token("--color-primary-fg"),
+        cta: token("--color-cta"),
+        "cta-fg": token("--color-cta-fg"),
+        background: token("--color-bg"),
+        foreground: token("--color-fg"),
+        page: token("--color-page"),
+        muted: token("--color-muted"),
+        "muted-foreground": token("--color-muted-fg"),
+        border: token("--color-border"),
+        accent: token("--color-accent"),
+        "accent-fg": token("--color-accent-fg"),
+        "primary-soft": token("--color-primary-soft"),
+        "accent-soft": token("--color-accent-soft"),
+        surface: token("--color-surface"),
+        hot: token("--color-hot"),
+        scene: token("--color-scene"),
       },
       borderRadius: {
         sm: "var(--radius-sm)",
