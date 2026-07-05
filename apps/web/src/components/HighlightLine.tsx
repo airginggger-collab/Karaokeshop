@@ -16,7 +16,8 @@ export function HighlightLine({ children, className }: { children: React.ReactNo
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([e]) => {
+      (entries) => {
+        const e = entries[entries.length - 1]; // последняя запись батча = актуальное состояние
         if (!measured.current) {
           measured.current = true;
           if (e.intersectionRatio > 0) {

@@ -21,7 +21,7 @@ const featuredProducts = products.filter((p) => p.type === "sistema").slice(0, 4
 function SectionTitle({ num, children }: { num: string; children: ReactNode }) {
   return (
     <div className="flex items-baseline gap-4">
-      <span className="font-display text-sm font-bold text-primary/40">{num}</span>
+      <span aria-hidden="true" className="font-display text-sm font-bold text-primary/40">{num}</span>
       <h2 className="font-display text-2xl font-bold sm:text-3xl">{children}</h2>
     </div>
   );
@@ -115,7 +115,7 @@ export default function HomePage() {
           <div className="lg:col-span-7">
             <QuizWidget />
           </div>
-          <div className="hidden items-center justify-center rounded-xl bg-scene lg:col-span-5 lg:flex">
+          <div aria-hidden="true" className="hidden items-center justify-center rounded-xl bg-scene lg:col-span-5 lg:flex">
             <span className="font-display text-2xl font-medium text-primary/40">AST · EVOBOX</span>
           </div>
         </div>
