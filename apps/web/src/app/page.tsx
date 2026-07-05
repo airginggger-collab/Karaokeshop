@@ -62,7 +62,7 @@ export default function HomePage() {
             { step: "04", title: "Настройка", body: "Откалибруем звук, загрузим базу и проверим всё вместе с вами." },
             { step: "05", title: "Поддержка", body: "Гарантия, сервис-центр и обновление репертуара по договору." },
           ].map((s) => (
-            <div key={s.step} className="flex flex-col rounded-2xl bg-background p-5">
+            <div key={s.step} className="flex flex-col rounded-2xl border border-border bg-background p-5">
               <span className="font-display text-3xl font-bold text-primary/40">{s.step}</span>
               <p className="mt-2 font-medium">{s.title}</p>
               <p className="mt-1 text-sm text-muted-foreground">{s.body}</p>
@@ -77,7 +77,7 @@ export default function HomePage() {
           { href: "/dlya-doma", img: "/scenariy/dom.jpg", title: "Караоке для дома", sub: "Гостиная, баня, гостевой дом. Тёплые вечера с песнями.", cta: "Выбрать домой" },
           { href: "/dlya-biznesa", img: "/scenariy/biznes.jpg", title: "Караоке для бизнеса", sub: "Кафе, бар, ресторан, клуб. Проект звука и монтаж под ключ.", cta: "Оснастить заведение" },
         ].map((c) => (
-          <Link key={c.href} href={c.href} className="group flex flex-col overflow-hidden rounded-3xl bg-background">
+          <Link key={c.href} href={c.href} className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-background">
             <div className="relative h-48 overflow-hidden sm:h-56">
               <img src={c.img} alt={c.title} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" />
             </div>
@@ -253,7 +253,7 @@ export default function HomePage() {
               <Link
                 key={p.slug}
                 href={`/product/${p.slug}`}
-                className="group flex flex-col overflow-hidden rounded-3xl bg-background"
+                className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-background"
               >
                 {/* Фото-зона */}
                 <div

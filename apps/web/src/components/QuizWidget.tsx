@@ -64,7 +64,7 @@ export function QuizWidget() {
   const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(waText)}`;
 
   return (
-    <div className="rounded-3xl bg-background p-6 sm:p-8">
+    <div className="rounded-3xl border border-border bg-background p-6 sm:p-8">
       {/* Прогресс */}
       <div className="mb-6 flex gap-1.5">
         {steps.map((_, i) => (

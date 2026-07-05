@@ -6,7 +6,7 @@ export function Hero() {
   return (
     <section className="border-b border-border bg-gradient-to-b from-primary-soft to-background">
       <Container className="py-14">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-background px-3 py-1 text-xs font-medium text-primary shadow-sm">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-primary shadow-sm">
           <Sparkles className="h-3.5 w-3.5" />
           Эксперты по караоке с 2012 года
         </span>
