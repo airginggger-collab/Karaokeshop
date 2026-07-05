@@ -63,7 +63,7 @@
   --color-accent:       #9d8bf0;
   --color-accent-fg:    #c9c2e8;
   --color-accent-soft:  #251c44;
-  --color-cta:          #7c5cff;   /* марка лого; белый текст 4.9:1 ✓ AA */
+  --color-cta:          #7250f8;   /* чуть темнее марки #7c5cff ради AA (белый текст 5.0:1); марка в Header остаётся #7c5cff */
   --color-cta-fg:       #ffffff;
   --color-hot:          #ff5c8a;   /* 6.4:1 на bg ✓ AA+ */
   --color-scene:        #1f1832;   /* сцена-подложка фото товара */
