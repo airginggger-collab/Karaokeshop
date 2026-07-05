@@ -72,7 +72,7 @@ export function MobileNav() {
                     className={[
                       "flex items-center rounded-xl px-4 py-3.5 text-lg font-medium transition",
                       active
-                        ? "bg-primary/10 text-primary"
+                        ? "hl !px-4 !py-3.5 rounded-[4px]"
                         : "text-foreground hover:bg-muted",
                     ].join(" ")}
                   >

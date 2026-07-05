@@ -12,8 +12,8 @@ const sizes: Record<NonNullable<ButtonProps["size"]>, string> = {
 };
 
 const byVariant: Record<NonNullable<ButtonProps["variant"]>, string> = {
-  primary: "bg-cta text-cta-fg shadow-sm hover:brightness-90 active:brightness-[.82] active:scale-[.98]",
-  ghost: "border border-border bg-background text-foreground hover:border-primary hover:bg-muted active:bg-surface active:scale-[.98]",
+  primary: "bg-cta text-cta-fg hover:brightness-110 active:brightness-95 active:scale-[.98]",
+  ghost: "border border-border bg-transparent text-foreground hover:border-primary hover:text-primary active:scale-[.98]",
 };
 
 export function Button({ variant = "primary", size = "md", className, ...rest }: ButtonProps) {

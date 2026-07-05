@@ -36,7 +36,7 @@ export function Header() {
                 href={n.href}
                 className={
                   active
-                    ? "border-b-2 border-primary pb-0.5 text-foreground"
+                    ? "hl rounded-[4px] text-sm font-medium"
                     : "text-muted-foreground hover:text-foreground"
                 }
               >
