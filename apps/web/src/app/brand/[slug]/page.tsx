@@ -4,6 +4,7 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BrandProductFilter } from "@/components/BrandProductFilter";
+import { HighlightLine } from "@/components/HighlightLine";
 import { brands, products, siteConfig } from "@/lib/site";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
@@ -28,7 +29,7 @@ export async function generateMetadata({
 
 const brandContent: Record<
   string,
-  { tagline: string; priceFrom: string; highlights: string[]; waText: string; accentVar: string; night: boolean }
+  { tagline: string; priceFrom: string; highlights: string[]; waText: string }
 > = {
   ast: {
     tagline: "Широкая линейка — от домашнего Mini до клубного AST-350. Надёжный выбор для любого сценария.",
@@ -39,8 +40,6 @@ const brandContent: Record<
       "Монтаж и гарантия от официального дилера",
     ],
     waText: "Здравствуйте! Интересует система AST, хочу подобрать модель.",
-    accentVar: "var(--warm-accent)",
-    night: false,
   },
   "studio-evolution": {
     tagline: "Evobox — современный медиаплеер с планшетным управлением и облачным контентом.",
@@ -51,8 +50,6 @@ const brandContent: Record<
       "Evobox для дома, Evobox Plus и Pro2 для заведений",
     ],
     waText: "Здравствуйте! Интересует система Studio Evolution Evobox, хочу подробности.",
-    accentVar: "var(--night-accent)",
-    night: true,
   },
 };
 
@@ -66,16 +63,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     priceFrom: "",
     highlights: [],
     waText: `Здравствуйте! Интересует ${b.name}.`,
-    accentVar: "var(--color-primary)",
-    night: false,
   };
 
   const items = products.filter((p) => p.brand === b.name);
   const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(content.waText)}`;
 
-  const heroStyle: React.CSSProperties = {
-    background: content.night ? "var(--night-bg)" : "var(--color-surface)",
-  };
+  // h1 = "Караоке {b.name}[…]" — подсвечиваем название бренда там, где оно встречается в тексте.
+  const nameIdx = b.h1.indexOf(b.name);
+  const h1Before = nameIdx >= 0 ? b.h1.slice(0, nameIdx) : "";
+  const h1After = nameIdx >= 0 ? b.h1.slice(nameIdx + b.name.length) : "";
 
   return (
     <>
@@ -94,42 +90,31 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <Container className="py-10">
         <Breadcrumb items={[{ label: "Каталог", href: "/catalog" }, { label: b.name }]} />
 
-        <section className="mt-4 rounded-3xl p-8 sm:p-10" style={heroStyle}>
-          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: content.accentVar }}>
-            {b.name}
-          </p>
-          <h1
-            className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl"
-            style={content.night ? { color: "var(--night-fg)" } : undefined}
-          >
-            {b.h1}
+        <section className="mt-4 rounded-3xl border border-border bg-background p-8 sm:p-10">
+          <p className="ticker">{b.name}</p>
+          <h1 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl">
+            {nameIdx >= 0 ? (
+              <>
+                {h1Before}
+                <HighlightLine>{b.name}</HighlightLine>
+                {h1After}
+              </>
+            ) : (
+              b.h1
+            )}
           </h1>
-          <p
-            className="mt-3 max-w-xl text-sm"
-            style={{ color: content.night ? "var(--night-muted)" : "var(--color-muted-foreground)" }}
-          >
-            {content.tagline}
-          </p>
+          <p className="mt-3 max-w-xl text-sm text-muted-foreground">{content.tagline}</p>
           <ul className="mt-4 space-y-1.5">
             {content.highlights.map((h) => (
-              <li
-                key={h}
-                className="flex items-start gap-2 text-sm"
-                style={{ color: content.night ? "var(--night-muted)" : "var(--color-muted-foreground)" }}
-              >
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" style={{ color: content.accentVar }} />
+              <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 {h}
               </li>
             ))}
           </ul>
           <div className="mt-5 flex flex-wrap items-center gap-4">
             {content.priceFrom && (
-              <span
-                className="font-display text-2xl font-bold"
-                style={content.night ? { color: "var(--night-fg)" } : undefined}
-              >
-                {content.priceFrom}
-              </span>
+              <span className="font-display text-2xl font-bold">{content.priceFrom}</span>
             )}
             <a
               href={waUrl}

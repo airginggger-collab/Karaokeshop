@@ -5,6 +5,7 @@ import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { AreaCalculator } from "@/components/AreaCalculator";
+import { HighlightLine } from "@/components/HighlightLine";
 import { podKlyuchMeta, siteConfig } from "@/lib/site";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -63,6 +64,12 @@ const faq = [
 
 const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Интересует монтаж под ключ.")}`;
 
+// h1 из podKlyuchMeta.h1 = "Оснащение караоке под ключ" — подсвечиваем ключевую фразу, текст не меняем.
+const H1_HIGHLIGHT = "под ключ";
+const h1Prefix = podKlyuchMeta.h1.endsWith(H1_HIGHLIGHT)
+  ? podKlyuchMeta.h1.slice(0, -H1_HIGHLIGHT.length)
+  : podKlyuchMeta.h1 + " ";
+
 export default function Page() {
   return (
     <>
@@ -79,17 +86,12 @@ export default function Page() {
         <Breadcrumb items={[{ label: "Монтаж под ключ" }]} />
 
         {/* Герой */}
-        <section
-          className="mt-4 rounded-3xl p-8 sm:p-10"
-          style={{ background: "var(--night-bg)", color: "var(--night-fg)" }}
-        >
-          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--night-accent)" }}>
-            Под ключ
-          </p>
-          <h1 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">
-            {podKlyuchMeta.h1}
+        <section className="mt-4 rounded-3xl border border-border bg-background p-8 sm:p-10">
+          <p className="ticker">Под ключ</p>
+          <h1 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl">
+            {h1Prefix}<HighlightLine>{H1_HIGHLIGHT}</HighlightLine>
           </h1>
-          <p className="mt-3 max-w-xl text-sm" style={{ color: "var(--night-muted)" }}>
+          <p className="mt-3 max-w-xl text-sm text-muted-foreground">
             Кафе, ресторан, бар или клуб. Один договор — проект, монтаж, обучение и гарантия.
             С 2012 года, 200+ объектов, Алматы и весь Казахстан.
           </p>
@@ -172,12 +174,9 @@ export default function Page() {
         </section>
 
         {/* CTA */}
-        <div
-          className="mt-10 rounded-2xl p-6"
-          style={{ background: "var(--night-bg)", color: "var(--night-fg)" }}
-        >
+        <div className="mt-10 rounded-2xl bg-surface p-6">
           <h2 className="font-medium">Готовы обсудить проект?</h2>
-          <p className="mt-1 text-sm" style={{ color: "var(--night-muted)" }}>
+          <p className="mt-1 text-sm text-muted-foreground">
             Расскажите про объект — подберём решение и пришлём смету.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
@@ -191,13 +190,12 @@ export default function Page() {
             </a>
             <Link
               href="/kalkulyator"
-              className="inline-flex items-center gap-1 rounded-xl border px-4 py-2.5 text-sm font-medium"
-              style={{ borderColor: "var(--night-soft)", color: "var(--night-fg)" }}
+              className="inline-flex items-center gap-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium hover:border-primary"
             >
               Калькулятор сметы <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <p className="mt-3 text-xs" style={{ color: "var(--night-muted)" }}>Ответим в течение часа · Без обязательств</p>
+          <p className="mt-3 text-xs text-muted-foreground">Ответим в течение часа · Без обязательств</p>
         </div>
       </Container>
     </>

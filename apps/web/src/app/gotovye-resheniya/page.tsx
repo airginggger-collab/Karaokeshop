@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Home, Building2, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { HighlightLine } from "@/components/HighlightLine";
 import { gotovyeResheniyaMeta, priceFmt, siteConfig } from "@/lib/site";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
@@ -86,7 +87,9 @@ export default function Page() {
       />
       <Container className="py-10">
         <Breadcrumb items={[{ label: "Готовые решения" }]} />
-        <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">{gotovyeResheniyaMeta.h1}</h1>
+        <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">
+          Готовые <HighlightLine>решения</HighlightLine>
+        </h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
           Подобранные комплекты под конкретный сценарий. Цена, состав, что входит — всё сразу. Уточним детали под ваш объект.
         </p>
@@ -98,7 +101,7 @@ export default function Page() {
             <h2 className="font-display text-xl font-semibold">Для дома</h2>
           </div>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            {home.map((s) => <SolutionCard key={s.id} solution={s} warm />)}
+            {home.map((s) => <SolutionCard key={s.id} solution={s} />)}
           </div>
         </section>
 
@@ -109,7 +112,7 @@ export default function Page() {
             <h2 className="font-display text-xl font-semibold">Для заведений</h2>
           </div>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {business.map((s) => <SolutionCard key={s.id} solution={s} warm={false} />)}
+            {business.map((s) => <SolutionCard key={s.id} solution={s} />)}
           </div>
         </section>
 
@@ -142,53 +145,25 @@ export default function Page() {
   );
 }
 
-function SolutionCard({ solution, warm }: { solution: Solution; warm: boolean }) {
+function SolutionCard({ solution }: { solution: Solution }) {
   const { label, scenario, price, system, includes } = solution;
   const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(`Здравствуйте! Интересует готовое решение «${label}».`)}`;
 
-  if (warm) {
-    return (
-      <div
-        className="flex flex-col rounded-2xl p-5"
-        style={{ backgroundColor: "var(--warm-bg)", border: "1px solid var(--warm-soft)", color: "var(--warm-fg)" }}
-      >
-        <p className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--warm-muted)" }}>{scenario}</p>
-        <p className="mt-1 font-display text-lg font-semibold">{label}</p>
-        <p className="mt-0.5 text-sm" style={{ color: "var(--warm-muted)" }}>{system}</p>
-        <p className="mt-3 text-xl font-bold" style={{ color: "var(--warm-accent)" }}>{priceFmt(price)}</p>
-        <ul className="mt-3 space-y-1">
-          {includes.map((item) => (
-            <li key={item} className="flex items-center gap-2 text-sm">
-              <CheckCircle2 className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--warm-accent)" }} />
-              {item}
-            </li>
-          ))}
-        </ul>
-        <a href={waUrl} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-medium" style={{ color: "var(--warm-accent)" }}>
-          Обсудить <ArrowRight className="h-3.5 w-3.5" />
-        </a>
-      </div>
-    );
-  }
-
   return (
-    <div
-      className="flex flex-col rounded-2xl p-5"
-      style={{ backgroundColor: "var(--night-bg)", border: "1px solid var(--night-soft)", color: "var(--night-fg)" }}
-    >
-      <p className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--night-muted)" }}>{scenario}</p>
+    <div className="flex flex-col rounded-2xl border border-border bg-background p-5">
+      <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{scenario}</p>
       <p className="mt-1 font-display text-lg font-semibold">{label}</p>
-      <p className="mt-0.5 text-sm" style={{ color: "var(--night-muted)" }}>{system}</p>
-      <p className="mt-3 text-xl font-bold" style={{ color: "var(--night-accent)" }}>{priceFmt(price)}</p>
+      <p className="mt-0.5 text-sm text-muted-foreground">{system}</p>
+      <p className="mt-3 text-xl font-bold text-primary">{priceFmt(price)}</p>
       <ul className="mt-3 space-y-1">
         {includes.map((item) => (
           <li key={item} className="flex items-center gap-2 text-sm">
-            <CheckCircle2 className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--night-accent)" }} />
+            <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-primary" />
             {item}
           </li>
         ))}
       </ul>
-      <a href={waUrl} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-medium" style={{ color: "var(--night-accent)" }}>
+      <a href={waUrl} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-medium text-primary">
         Обсудить <ArrowRight className="h-3.5 w-3.5" />
       </a>
     </div>

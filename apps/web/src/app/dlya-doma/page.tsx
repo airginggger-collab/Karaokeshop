@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Home, Music, ShieldCheck, Wrench, ArrowRight, CheckCircle2, type LucideIcon } from "lucide-react";
+import { Home, Music, ArrowRight, CheckCircle2, type LucideIcon } from "lucide-react";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ProductCard } from "@/components/ProductCard";
 import { FaqAccordion } from "@/components/FaqAccordion";
-import { CountUp } from "@/components/CountUp";
+import { HighlightLine } from "@/components/HighlightLine";
 import { products, siteConfig } from "@/lib/site";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -50,16 +50,14 @@ export default function Page() {
         <Breadcrumb items={[{ label: "Домашнее карао­ке" }]} />
 
         {/* Герой */}
-        <section className="mt-4 rounded-3xl bg-gradient-to-br from-white to-[#f7f8fa] p-8 sm:p-10" style={{ color: "#141b26" }}>
+        <section className="mt-4 rounded-3xl border border-border bg-background p-8 sm:p-10">
           <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-center">
           <div>
-          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--warm-accent)" }}>
-            Для дома
-          </p>
-          <h1 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">
-            Домашнее карао­ке<br />с гарантией и монтажом
+          <p className="ticker">Для дома</p>
+          <h1 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl">
+            <HighlightLine>Домашнее карао­ке</HighlightLine><br />с гарантией и монтажом
           </h1>
-          <p className="mt-3 max-w-xl text-[#5b6675]">
+          <p className="mt-3 max-w-xl text-muted-foreground">
             Гостиная, баня или гостевой дом. Подберём систему AST или Studio Evolution под вашу комнату и бюджет — привезём, подключим, настроим.
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4">
@@ -73,14 +71,10 @@ export default function Page() {
               Подобрать в WhatsApp <ArrowRight className="h-4 w-4" />
             </a>
           </div>
-          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-[#5b6675]">
-            <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" style={{ color: "var(--warm-accent)" }} /> Гарантия 1 год</span>
-            <span className="flex items-center gap-1.5"><Wrench className="h-4 w-4" style={{ color: "var(--warm-accent)" }} /> Монтаж включён</span>
-            <span className="flex items-center gap-1.5"><Music className="h-4 w-4" style={{ color: "var(--warm-accent)" }} /> <CountUp value="60 000+ песен" /></span>
+          <p className="ticker mt-5">Гарантия 1 год · Монтаж включён · 60 000+ песен</p>
           </div>
-          </div>
-          <div className="hidden overflow-hidden rounded-2xl md:block">
-            <img src="/scenariy/dom.jpg" alt="Домашнее караоке" loading="eager" className="h-full w-full object-cover" />
+          <div className="hidden aspect-[4/3] items-center justify-center rounded-2xl bg-scene md:flex">
+            <span aria-hidden="true" className="font-display text-2xl font-medium text-primary/40">ДЛЯ ДОМА</span>
           </div>
           </div>
         </section>

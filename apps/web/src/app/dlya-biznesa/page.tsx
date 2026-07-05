@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Building2, Users, Music, ShieldCheck, Wrench, ArrowRight, CheckCircle2, TrendingUp, type LucideIcon } from "lucide-react";
+import { Building2, Users, Music, ArrowRight, CheckCircle2, type LucideIcon } from "lucide-react";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ProductCard } from "@/components/ProductCard";
 import { FaqAccordion } from "@/components/FaqAccordion";
-import { CountUp } from "@/components/CountUp";
+import { HighlightLine } from "@/components/HighlightLine";
 import { products, siteConfig } from "@/lib/site";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -72,22 +72,14 @@ export default function Page() {
         <Breadcrumb items={[{ label: "Для бизнеса" }]} />
 
         {/* Герой */}
-        <section
-          className="mt-4 rounded-3xl p-8 sm:p-10"
-          style={{
-            background: "linear-gradient(180deg, #1b2438 0%, #0e131c 100%)",
-            color: "var(--night-fg)",
-          }}
-        >
+        <section className="mt-4 rounded-3xl border border-border bg-background p-8 sm:p-10">
           <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-center">
           <div>
-          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--night-accent)" }}>
-            Для бизнеса
-          </p>
-          <h1 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">
-            Оснастить заведение<br />под ключ — Алматы
+          <p className="ticker">Для бизнеса</p>
+          <h1 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl">
+            <HighlightLine>Оснастить заведение</HighlightLine><br />под ключ — Алматы
           </h1>
-          <p className="mt-3 max-w-xl" style={{ color: "var(--night-muted)" }}>
+          <p className="mt-3 max-w-xl text-muted-foreground">
             Кафе, ресторан, VIP-зал, клуб. Делаем проект звука, монтируем, настраиваем и обучаем персонал. 200+ проектов с 2012 года.
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4">
@@ -101,14 +93,10 @@ export default function Page() {
               Получить расчёт <ArrowRight className="h-4 w-4" />
             </a>
           </div>
-          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-1.5 text-sm" style={{ color: "var(--night-muted)" }}>
-            <span className="flex items-center gap-1.5"><TrendingUp className="h-4 w-4" style={{ color: "var(--night-accent)" }} /> <CountUp value="200+" />&nbsp;проектов</span>
-            <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" style={{ color: "var(--night-accent)" }} /> Гарантия и сервис</span>
-            <span className="flex items-center gap-1.5"><Wrench className="h-4 w-4" style={{ color: "var(--night-accent)" }} /> Монтаж 1–2 дня</span>
+          <p className="ticker mt-5">200+ проектов · Гарантия и сервис · Монтаж 1–2 дня</p>
           </div>
-          </div>
-          <div className="hidden overflow-hidden rounded-2xl md:block">
-            <img src="/scenariy/biznes.jpg" alt="Караоке в заведении" loading="eager" className="h-full w-full object-cover" />
+          <div className="hidden aspect-[4/3] items-center justify-center rounded-2xl bg-scene md:flex">
+            <span aria-hidden="true" className="font-display text-2xl font-medium text-primary/40">ДЛЯ БИЗНЕСА</span>
           </div>
           </div>
         </section>
@@ -118,20 +106,16 @@ export default function Page() {
           <h2 className="font-display text-xl font-semibold">Под какое заведение?</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             {venueTypes.map(({ icon: Icon, label, area, body, price }) => (
-              <div
-                key={label}
-                className="flex flex-col rounded-2xl border border-border p-5"
-                style={{ background: "var(--night-bg)", color: "var(--night-fg)" }}
-              >
+              <div key={label} className="flex flex-col rounded-2xl border border-border bg-background p-5">
                 {Icon && (
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full" style={{ background: "var(--night-soft)", color: "var(--night-accent)" }}>
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
                     <Icon className="h-5 w-5" />
                   </span>
                 )}
                 <p className="mt-3 font-medium">{label}</p>
-                <p className="text-xs" style={{ color: "var(--night-muted)" }}>{area}</p>
-                <p className="mt-2 text-sm" style={{ color: "var(--night-muted)" }}>{body}</p>
-                <p className="mt-auto pt-3 text-sm font-semibold" style={{ color: "var(--night-accent)" }}>{price}</p>
+                <p className="text-xs text-muted-foreground">{area}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{body}</p>
+                <p className="mt-auto pt-3 text-sm font-semibold text-primary">{price}</p>
               </div>
             ))}
           </div>
@@ -172,9 +156,9 @@ export default function Page() {
         </section>
 
         {/* CTA */}
-        <div className="mt-10 rounded-2xl p-6" style={{ background: "var(--night-bg)", color: "var(--night-fg)" }}>
+        <div className="mt-10 rounded-2xl bg-surface p-6">
           <h2 className="font-medium">Расскажите про ваш объект</h2>
-          <p className="mt-1 text-sm" style={{ color: "var(--night-muted)" }}>
+          <p className="mt-1 text-sm text-muted-foreground">
             Напишите площадь зала и задачу — подберём систему и пришлём ориентировочную смету за день.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
@@ -188,13 +172,12 @@ export default function Page() {
             </a>
             <Link
               href="/kalkulyator"
-              className="inline-flex items-center gap-1 rounded-xl border px-4 py-2.5 text-sm font-medium"
-              style={{ borderColor: "var(--night-soft)", color: "var(--night-fg)" }}
+              className="inline-flex items-center gap-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium hover:border-primary"
             >
               Калькулятор сметы <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <p className="mt-3 text-xs" style={{ color: "var(--night-muted)" }}>Ответим в течение часа · Без обязательств</p>
+          <p className="mt-3 text-xs text-muted-foreground">Ответим в течение часа · Без обязательств</p>
         </div>
       </Container>
     </>

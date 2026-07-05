@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Check, X, Minus, ArrowRight, Star } from "lucide-react";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { HighlightLine } from "@/components/HighlightLine";
 import { sravnenieMeta, products, priceFmt, siteConfig } from "@/lib/site";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
@@ -138,7 +139,9 @@ export default function Page() {
       <Container className="py-10">
         <Breadcrumb items={[{ label: "Сравнение брендов" }]} />
 
-        <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">{sravnenieMeta.h1}</h1>
+        <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">
+          AST <HighlightLine>или</HighlightLine> Studio Evolution
+        </h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
           Оба бренда представлены у нас официально. Ниже — честное сравнение без давления на продажу.
         </p>
