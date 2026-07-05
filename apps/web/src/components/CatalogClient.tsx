@@ -12,6 +12,7 @@ function Tab({ active, onClick, children }: { active: boolean; onClick: () => vo
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={
         active
           ? "hl shrink-0 px-3 py-1.5 text-sm font-medium"
@@ -87,7 +88,7 @@ export function CatalogClient({ items }: { items: Product[] }) {
       </div>
 
       {/* Табы-фильтры */}
-      <div className="flex gap-1 overflow-x-auto border-b border-border pb-1 scrollbar-none">
+      <div aria-label="Фильтр по типу" className="flex gap-1 overflow-x-auto border-b border-border pb-1 scrollbar-none">
         <Tab active={activeType === "all"} onClick={() => handleType("all")}>Все</Tab>
         {typeOpts.map(([key, label]) => (
           <Tab key={key} active={activeType === key} onClick={() => handleType(key)}>{label}</Tab>

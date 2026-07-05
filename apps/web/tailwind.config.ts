@@ -33,6 +33,7 @@ export default {
         "accent-soft": token("--color-accent-soft"),
         surface: token("--color-surface"),
         hot: token("--color-hot"),
+        "hot-fg": token("--color-hot-fg"),
         scene: token("--color-scene"),
       },
       borderRadius: {

@@ -111,7 +111,7 @@ export default async function Page({
               <span className="text-sm text-muted-foreground line-through">{priceFmt(p.priceOld)}</span>
             ) : null}
             {pct ? (
-              <span className="rounded-md bg-hot px-2 py-0.5 text-xs font-medium text-white">−{pct}%</span>
+              <span className="rounded-md bg-hot px-2 py-0.5 text-xs font-medium text-hot-fg">−{pct}%</span>
             ) : null}
           </div>
 

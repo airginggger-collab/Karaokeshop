@@ -40,6 +40,7 @@
   --color-cta:          #6742e8;   /* кнопки: белый текст 5.0:1 ✓ AA */
   --color-cta-fg:       #ffffff;
   --color-hot:          #d6296b;   /* 5.2:1 на bg ✓ AA */
+  --color-hot-fg:       #ffffff;   /* текст НА hot: 4.79:1 на #d6296b ✓ AA */
   --color-scene:        #f0eef8;   /* сцена-подложка фото товара */
 }
 
@@ -66,5 +67,6 @@
   --color-cta:          #7250f8;   /* чуть темнее марки #7c5cff ради AA (белый текст 5.0:1); марка в Header остаётся #7c5cff */
   --color-cta-fg:       #ffffff;
   --color-hot:          #ff5c8a;   /* 6.4:1 на bg ✓ AA+ */
+  --color-hot-fg:       #2a0a14;   /* текст НА hot: 6.21:1 на #ff5c8a ✓ AA+ (белый давал 2.94:1 FAIL) */
   --color-scene:        #1f1832;   /* сцена-подложка фото товара */
 }

@@ -16,7 +16,7 @@ export function ProductCard({ p }: { p: Product }) {
       <div className="relative flex h-36 items-center justify-center overflow-hidden">
         <ProductImage src={p.image} model={p.model} />
         {pct ? (
-          <span className="absolute left-2 top-2 rounded-md bg-hot px-2 py-0.5 text-[11px] font-medium text-white">
+          <span className="absolute left-2 top-2 rounded-md bg-hot px-2 py-0.5 text-[11px] font-medium text-hot-fg">
             −{pct}%
           </span>
         ) : null}
