@@ -70,10 +70,10 @@ export function MobileNav() {
                     href={n.href}
                     onClick={() => setOpen(false)}
                     className={[
-                      "flex items-center rounded-xl px-4 py-3.5 text-lg font-medium transition",
+                      "flex items-center px-4 py-3.5 text-lg font-medium transition",
                       active
                         ? "hl !px-4 !py-3.5 rounded-[4px]"
-                        : "text-foreground hover:bg-muted",
+                        : "rounded-xl text-foreground hover:bg-muted",
                     ].join(" ")}
                   >
                     {n.label}
