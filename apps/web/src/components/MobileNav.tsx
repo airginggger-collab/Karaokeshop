@@ -69,10 +69,11 @@ export function MobileNav() {
                   <Link
                     href={n.href}
                     onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
                     className={[
                       "flex items-center px-4 py-3.5 text-lg font-medium transition",
                       active
-                        ? "hl !px-4 !py-3.5 rounded-[4px]"
+                        ? "hl"
                         : "rounded-xl text-foreground hover:bg-muted",
                     ].join(" ")}
                   >

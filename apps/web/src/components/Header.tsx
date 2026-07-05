@@ -34,9 +34,10 @@ export function Header() {
               <Link
                 key={n.href}
                 href={n.href}
+                aria-current={active ? "page" : undefined}
                 className={
                   active
-                    ? "hl rounded-[4px] text-sm font-medium"
+                    ? "hl font-medium"
                     : "text-muted-foreground hover:text-foreground"
                 }
               >
