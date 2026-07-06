@@ -1,4 +1,9 @@
 import siteConfigData from "../../content/site-config.json";
+import scenariosData from "../../content/scenarios.json";
+import bundlesData from "../../content/bundles.json";
+import brandsData from "../../content/brands.json";
+import staticPagesData from "../../content/static-pages.json";
+import pageMeta from "../../content/page-meta.json";
 
 export type SiteConfig = {
   name: string; url: string; city: string; phone: string; whatsapp: string;
@@ -10,27 +15,13 @@ export const siteConfig: SiteConfig = siteConfigData;
 export type Landing = { slug: string; h1: string; title: string; description: string };
 
 // Сценарные лендинги (кластеры A/B из docs/strategy/url-map.md)
-export const scenarios: Landing[] = [
-  { slug: "dlya-doma", h1: "Караоке для дома", title: "Караоке для дома — купить домашнюю систему, Алматы", description: "Домашние караоке-системы от 415 000 ₸. Доставка, гарантия, подбор по бюджету." },
-  { slug: "dlya-kafe", h1: "Караоке для кафе", title: "Караоке для кафе — система под ключ, Алматы", description: "Караоке для кафе: компактные системы, монтаж и настройка под ключ." },
-  { slug: "dlya-bara", h1: "Караоке для бара", title: "Караоке для бара — оборудование под ключ, Алматы", description: "Профессиональные караоке-системы для бара. Проект звука, монтаж, обучение. Расчёт по площади зала." },
-  { slug: "dlya-restorana", h1: "Караоке для ресторана", title: "Караоке для ресторана — оснащение под ключ", description: "Караоке-комплекты для ресторана: звук, свет, монтаж, обновление песен. Расчёт по площади." },
-  { slug: "dlya-kluba", h1: "Караоке для клуба", title: "Караоке для клуба — профессиональное оборудование", description: "Оснащение караоке-клуба под ключ: AST-250/350, акустика RCF, свет. Проект и монтаж." },
-];
+export const scenarios: Landing[] = scenariosData;
 
 // Комплекты по площади (кластер H)
-export const bundles: Landing[] = [
-  { slug: "do-30", h1: "Караоке для зала до 30 м²", title: "Караоке для зала до 30 м² — готовый комплект", description: "Готовый комплект караоке для кафе до 30 м². Под ключ: монтаж, настройка, обучение." },
-  { slug: "do-50", h1: "Караоке для зала до 50 м²", title: "Караоке для зала до 50 м² — готовый комплект", description: "Готовый комплект караоке для зала до 50 м². Под ключ: монтаж, настройка, обучение." },
-  { slug: "do-80", h1: "Караоке для бара до 80 м²", title: "Караоке для бара до 80 м² — комплект AST-350", description: "Готовое решение на базе AST-350 для бара до 80 м². Проект, монтаж, обучение." },
-  { slug: "do-100", h1: "Караоке для клуба до 100+ м²", title: "Караоке для клуба до 100+ м² — премиум-комплект", description: "Премиум-комплект для клуба от 100 м²: AST-350 + RCF, свет, монтаж под ключ." },
-];
+export const bundles: Landing[] = bundlesData;
 
 export type Brand = { slug: string; name: string; h1: string; title: string; description: string };
-export const brands: Brand[] = [
-  { slug: "ast", name: "AST", h1: "Караоке AST (Art System)", title: "Караоке AST (Art System) — модели и цены", description: "Караоке-системы AST: HOME, Mini, AST-50/250/350. Для дома и заведений." },
-  { slug: "studio-evolution", name: "Studio Evolution", h1: "Караоке Studio Evolution", title: "Караоке Studio Evolution / Evobox — купить", description: "Системы Studio Evolution: Evobox, Evobox Plus, Pro2. Для дома, баров и клубов." },
-];
+export const brands: Brand[] = brandsData;
 
 export type ProductType = "sistema" | "akustika" | "mikrofon" | "sub" | "miksher";
 
@@ -119,51 +110,14 @@ export const products: Product[] = [
 ];
 
 // Одиночные generic-страницы (рендерятся через (pages)/[page])
-export const staticPages: Landing[] = [
-  { slug: "servis", h1: "Сервис и гарантия", title: "Сервис, настройка и ремонт караоке", description: "Подключение, настройка под помещение, гарантия и ремонт караоке-систем." },
-];
+export const staticPages: Landing[] = staticPagesData;
 
-export const oNasMeta: Landing = {
-  slug: "o-nas",
-  h1: "О компании",
-  title: "О компании — эксперты по караоке с 2012",
-  description: "Поставка, монтаж и обслуживание караоке (AST и Studio Evolution) в Алматы с 2012 года. Индивидуальный подход и сервис под ключ.",
-};
-
-export const kontaktyMeta: Landing = {
-  slug: "kontakty",
-  h1: "Контакты",
-  title: "Контакты — Алматы, шоурум и сервис-центр",
-  description: "Адрес, телефоны, WhatsApp и карта. Шоурум и сервис-центр караоке в Алматы.",
-};
-
-export const sravnenieMeta: Landing = {
-  slug: "sravnenie",
-  h1: "AST или Studio Evolution",
-  title: "AST или Studio Evolution — сравнение брендов караоке",
-  description: "Сравнение двух ведущих брендов караоке: модели, сценарии, цены и сильные стороны. Поможем выбрать и подберём индивидуально.",
-};
-
-export const catalogMeta: Landing = {
-  slug: "catalog",
-  h1: "Каталог",
-  title: "Купить системы AST и Studio Evolution — каталог с ценами | Алматы",
-  description: "18 моделей: системы AST и Studio Evolution, акустика RCF, микрофоны Shure. Официальный дилер в Казахстане. Фильтр по типу и бренду. Монтаж и гарантия.",
-};
-
-export const podKlyuchMeta: Landing = {
-  slug: "pod-klyuch",
-  h1: "Оснащение караоке под ключ",
-  title: "Оснащение караоке под ключ — проект, монтаж, обучение",
-  description: "Спроектируем звук под помещение, смонтируем, обучим персонал. Один договор. Расчёт по площади.",
-};
-
-export const komplektyIndexMeta: Landing = {
-  slug: "komplekty",
-  h1: "Готовые комплекты по площади",
-  title: "Готовые комплекты караоке — по площади заведения",
-  description: "Готовые решения под площадь зала: до 30, 50, 80 и 100+ м². Под ключ: монтаж и настройка.",
-};
+export const oNasMeta: Landing = pageMeta.oNas;
+export const kontaktyMeta: Landing = pageMeta.kontakty;
+export const sravnenieMeta: Landing = pageMeta.sravnenie;
+export const catalogMeta: Landing = pageMeta.catalog;
+export const podKlyuchMeta: Landing = pageMeta.podKlyuch;
+export const komplektyIndexMeta: Landing = pageMeta.komplektyIndex;
 
 export function priceFmt(n: number): string {
   return new Intl.NumberFormat("ru-RU").format(n) + " ₸";
@@ -183,19 +137,8 @@ export const mainNav = [
   { href: "/kontakty", label: "Контакты" },
 ];
 
-export const kalkulyatorMeta: Landing = {
-  slug: "kalkulyator",
-  h1: "Онлайн-калькулятор караоке",
-  title: "Калькулятор караоке — смета под ключ онлайн",
-  description: "Соберите смету на оснащение караоке под ключ: по параметрам зала или по бюджету. Итог сметы, заявка в один клик.",
-};
-
-export const pesniMeta: Landing = {
-  slug: "pesni",
-  h1: "Каталог песен",
-  title: "Каталог песен и обновление репертуара",
-  description: "База из 60 000+ песен на разных языках. Регулярное обновление репертуара по договору.",
-};
+export const kalkulyatorMeta: Landing = pageMeta.kalkulyator;
+export const pesniMeta: Landing = pageMeta.pesni;
 
 export const songsTotal = siteConfig.songsTotal;
 
@@ -227,12 +170,7 @@ export const cases: Case[] = [
   { slug: "otel-shymkent", venue: "Отель, банкетный зал", city: "Шымкент", area: "150 м²", system: "AST-350", quote: "Сделали проект под акустику зала — всё работает идеально на банкетах.", author: "Тимур А." },
 ];
 
-export const keysyMeta: Landing = {
-  slug: "keysy",
-  h1: "Кейсы: оснащённые заведения",
-  title: "Кейсы: оснащённые бары, рестораны и клубы",
-  description: "Примеры оснащения караоке под ключ в Казахстане: бары, рестораны, отели. Системы AST и Studio Evolution.",
-};
+export const keysyMeta: Landing = pageMeta.keysy;
 
 // Блог (E-E-A-T, SEO-кластеры F/I)
 export type BlogPost = {
@@ -721,12 +659,7 @@ export const blogPosts: BlogPost[] = [
   },
 ];
 
-export const blogMeta: Landing = {
-  slug: "blog",
-  h1: "Блог о караоке-оборудовании",
-  title: "Блог о караоке-оборудовании",
-  description: "Гайды по выбору и оснащению караоке: для дома, бара, клуба. Сравнения брендов и расчёты.",
-};
+export const blogMeta: Landing = pageMeta.blog;
 
 // Лента историй — реальный опыт клиентов с установкой
 export type StoryPost = {
@@ -832,26 +765,9 @@ export const storyPosts: StoryPost[] = [
   },
 ];
 
-export const dlyaDomaMetaV2: Landing = {
-  slug: "dlya-doma",
-  h1: "Домашнее караоке",
-  title: "Купить домашнее караоке в Алматы — AST Mini и Evobox от 749 000 ₸",
-  description: "Системы AST Mini и Studio Evolution Evobox для гостиной, бани и гостевого дома. Подберём под комнату и бюджет. Монтаж, настройка и гарантия 1 год.",
-};
-
-export const dlyaBiznesaMeta: Landing = {
-  slug: "dlya-biznesa",
-  h1: "Оснастить заведение под ключ",
-  title: "Оснастить бар, ресторан, клуб под ключ — Алматы | karaokeshop",
-  description: "Проект звука, монтаж и обучение для кафе, баров, ресторанов и клубов. AST-250/350, Studio Evolution, акустика RCF. 200+ проектов с 2012. Расчёт бесплатно.",
-};
-
-export const gotovyeResheniyaMeta: Landing = {
-  slug: "gotovye-resheniya",
-  h1: "Готовые решения",
-  title: "Готовые решения для домашнего и коммерческого караоке",
-  description: "Подобранные комплекты под сценарий: гостиная, баня, кафе, клуб. Цена, состав и всё включено.",
-};
+export const dlyaDomaMetaV2: Landing = pageMeta.dlyaDomaV2;
+export const dlyaBiznesaMeta: Landing = pageMeta.dlyaBiznesa;
+export const gotovyeResheniyaMeta: Landing = pageMeta.gotovyeResheniya;
 
 export function allPaths(): string[] {
   return [
