@@ -17,7 +17,7 @@ html {
 }
 
 /* Фон страницы и текст — через токены (флипаются в theme.css: light/.dark).
-   Один источник: --color-page (#f5f5f5 / #0e131c), --color-fg. */
+   Один источник: --color-page (#f4f2fa / #0b0913), --color-fg. */
 body {
   background: var(--color-page);
   color: var(--color-fg);

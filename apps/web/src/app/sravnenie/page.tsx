@@ -147,7 +147,7 @@ export default function Page() {
         </p>
 
         {/* Сравнительная таблица */}
-        <div className="mt-8 overflow-x-auto rounded-2xl border border-border">
+        <div className="mt-8 overflow-x-auto rounded-xl border border-border">
           <table className="w-full min-w-[480px] text-sm">
             <thead>
               <tr className="border-b border-border bg-surface">
@@ -185,7 +185,7 @@ export default function Page() {
 
         {/* Сильные стороны */}
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-background p-5">
+          <div className="rounded-xl border border-border bg-background p-5">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">AST — сильная сторона</p>
             <p className="mt-2 font-display text-lg font-semibold">Широкая линейка и сервис</p>
             <p className="mt-2 text-sm text-muted-foreground">
@@ -195,7 +195,7 @@ export default function Page() {
               Модели AST <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="rounded-2xl border border-border bg-background p-5">
+          <div className="rounded-xl border border-border bg-background p-5">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Studio Evolution — сильная сторона</p>
             <p className="mt-2 font-display text-lg font-semibold">Интерфейс и облако</p>
             <p className="mt-2 text-sm text-muted-foreground">
@@ -212,7 +212,7 @@ export default function Page() {
           <h2 className="font-display text-xl font-semibold">Что выбрать под вашу задачу</h2>
           <div className="mt-4 space-y-3">
             {scenarios.map((s) => (
-              <div key={s.title} className="rounded-2xl border border-border bg-background p-5">
+              <div key={s.title} className="rounded-xl border border-border bg-background p-5">
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
                     <p className="text-xs text-muted-foreground">{s.title}</p>
@@ -231,7 +231,7 @@ export default function Page() {
         </section>
 
         {/* Итог */}
-        <div className="mt-10 rounded-2xl bg-surface p-6">
+        <div className="mt-10 rounded-xl bg-surface p-6">
           <h2 className="font-medium">Не уверены — мы подберём</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Чаще всего выбор между брендами решает не «лучше / хуже», а площадь зала, бюджет и сценарий использования. Напишите — разберём вашу ситуацию.

@@ -70,7 +70,7 @@ function SocialProof() {
               stars: 5,
             },
           ].map((r) => (
-            <div key={r.name} className="flex flex-col rounded-2xl border border-border bg-background p-5">
+            <div key={r.name} className="flex flex-col rounded-xl border border-border bg-background p-5">
               <div className="flex gap-0.5">
                 {Array.from({ length: r.stars }).map((_, i) => (
                   <svg key={i} viewBox="0 0 16 16" className="h-4 w-4 fill-primary text-primary" aria-hidden><path d="M8 1l1.854 3.756L14 5.528l-3 2.924.708 4.13L8 10.56l-3.708 2.02.708-4.13-3-2.923 4.146-.772z"/></svg>
@@ -135,7 +135,7 @@ export default function HomePage() {
             { step: "04", title: "Настройка", body: "Откалибруем звук, загрузим базу и проверим всё вместе с вами." },
             { step: "05", title: "Поддержка", body: "Гарантия, сервис-центр и обновление репертуара по договору." },
           ].map((s) => (
-            <div key={s.step} className="flex flex-col rounded-2xl border border-border bg-background p-5">
+            <div key={s.step} className="flex flex-col rounded-xl border border-border bg-background p-5">
               <span className="font-display text-3xl font-bold text-primary/40">{s.step}</span>
               <p className="mt-2 font-medium">{s.title}</p>
               <p className="mt-1 text-sm text-muted-foreground">{s.body}</p>
@@ -150,7 +150,7 @@ export default function HomePage() {
           { href: "/dlya-doma", plate: "ДЛЯ ДОМА", title: "Караоке для дома", sub: "Гостиная, баня, гостевой дом. Тёплые вечера с песнями.", cta: "Выбрать домой" },
           { href: "/dlya-biznesa", plate: "ДЛЯ БИЗНЕСА", title: "Караоке для бизнеса", sub: "Кафе, бар, ресторан, клуб. Проект звука и монтаж под ключ.", cta: "Оснастить заведение" },
         ].map((c) => (
-          <Link key={c.href} href={c.href} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background">
+          <Link key={c.href} href={c.href} className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background">
             <div className="flex h-40 items-center justify-center bg-scene sm:h-48">
               <span className="font-display text-2xl font-bold tracking-wide text-primary/40">{c.plate}</span>
             </div>
@@ -179,7 +179,7 @@ export default function HomePage() {
             <Link
               key={p.slug}
               href={`/product/${p.slug}`}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background"
+              className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background"
             >
               {/* Фото-зона — сцена-подложка */}
               <div className="relative h-56 overflow-hidden bg-scene sm:h-64">
@@ -242,7 +242,7 @@ export default function HomePage() {
             { title: "Под ключ", body: "Проект звука, монтаж, настройка, обучение — один договор." },
             { title: "Заказ через WhatsApp", body: "Напишите — ответим быстро, поможем выбрать и оформим заявку." },
           ].map((item) => (
-            <div key={item.title} className="rounded-2xl border border-border bg-background p-5">
+            <div key={item.title} className="rounded-xl border border-border bg-background p-5">
               <p className="font-medium">{item.title}</p>
               <p className="mt-1 text-sm text-muted-foreground">{item.body}</p>
             </div>
@@ -250,7 +250,7 @@ export default function HomePage() {
         </div>
 
         {/* Дилерская полоса */}
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-border bg-background px-6 py-4">
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-3 rounded-xl border border-border bg-background px-6 py-4">
           <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             Официальный дилер
           </span>
@@ -307,7 +307,7 @@ export default function HomePage() {
             { href: "/servis", title: "Сервис и гарантия", sub: "Настройка, ремонт, обновление репертуара.", cta: "Узнать" },
             { href: "/kontakty", title: "Контакты", sub: "Алматы, ул. Муканова 8 · WhatsApp, телефон, карта.", cta: "Написать" },
           ].map((item) => (
-            <Link key={item.href} href={item.href} className="group flex flex-col rounded-2xl border border-border bg-background p-5 transition hover:border-primary">
+            <Link key={item.href} href={item.href} className="group flex flex-col rounded-xl border border-border bg-background p-5 transition hover:border-primary">
               <p className="font-medium group-hover:text-primary">{item.title}</p>
               <p className="mt-1 text-sm text-muted-foreground">{item.sub}</p>
               <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary">

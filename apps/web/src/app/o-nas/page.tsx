@@ -92,7 +92,7 @@ export default function Page() {
         {/* 4 числа */}
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((s) => (
-            <div key={s.label} className="rounded-2xl bg-surface p-6 text-center">
+            <div key={s.label} className="rounded-xl bg-surface p-6 text-center">
               <p className="font-display text-3xl font-bold text-primary">{s.value}</p>
               <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
             </div>
@@ -128,7 +128,7 @@ export default function Page() {
           <h2 className="font-display text-2xl font-semibold">Команда</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-3">
             {team.map((m) => (
-              <div key={m.name} className="rounded-2xl border border-border bg-background p-5">
+              <div key={m.name} className="rounded-xl border border-border bg-background p-5">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-soft">
                   <span className="font-display text-sm font-bold text-primary">{m.initials}</span>
                 </div>

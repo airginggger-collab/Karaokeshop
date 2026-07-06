@@ -72,7 +72,7 @@ export default function Page() {
         <Breadcrumb items={[{ label: "Для бизнеса" }]} />
 
         {/* Герой */}
-        <section className="mt-4 rounded-3xl border border-border bg-background p-8 sm:p-10">
+        <section className="mt-4 rounded-xl border border-border bg-background p-8 sm:p-10">
           <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-center">
           <div>
           <p className="ticker">Для бизнеса</p>
@@ -95,7 +95,7 @@ export default function Page() {
           </div>
           <p className="ticker mt-5">200+ проектов · Гарантия и сервис · Монтаж 1–2 дня</p>
           </div>
-          <div className="hidden aspect-[4/3] items-center justify-center rounded-2xl bg-scene md:flex">
+          <div className="hidden aspect-[4/3] items-center justify-center rounded-xl bg-scene md:flex">
             <span aria-hidden="true" className="font-display text-2xl font-medium text-primary/40">ДЛЯ БИЗНЕСА</span>
           </div>
           </div>
@@ -106,7 +106,7 @@ export default function Page() {
           <h2 className="font-display text-xl font-semibold">Под какое заведение?</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             {venueTypes.map(({ icon: Icon, label, area, body, price }) => (
-              <div key={label} className="flex flex-col rounded-2xl border border-border bg-background p-5">
+              <div key={label} className="flex flex-col rounded-xl border border-border bg-background p-5">
                 {Icon && (
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
                     <Icon className="h-5 w-5" />
@@ -156,7 +156,7 @@ export default function Page() {
         </section>
 
         {/* CTA */}
-        <div className="mt-10 rounded-2xl bg-surface p-6">
+        <div className="mt-10 rounded-xl bg-surface p-6">
           <h2 className="font-medium">Расскажите про ваш объект</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Напишите площадь зала и задачу — подберём систему и пришлём ориентировочную смету за день.

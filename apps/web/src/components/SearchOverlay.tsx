@@ -71,7 +71,7 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
 
       {/* Panel */}
       <div className="relative mx-auto mt-16 w-full max-w-xl px-4">
-        <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-2xl">
+        <div className="overflow-hidden rounded-xl border border-border bg-background shadow-2xl">
           {/* Input */}
           <form onSubmit={handleSubmit} className="flex items-center gap-3 border-b border-border px-4 py-3">
             <Search className="h-4 w-4 shrink-0 text-muted-foreground" />

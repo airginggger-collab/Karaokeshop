@@ -18,7 +18,7 @@ const byVariant: Record<NonNullable<ButtonProps["variant"]>, string> = {
 
 export function Button({ variant = "primary", size = "md", className, ...rest }: ButtonProps) {
   const cls = [
-    "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition",
+    "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition disabled:opacity-50 disabled:pointer-events-none",
     sizes[size],
     byVariant[variant],
     className,

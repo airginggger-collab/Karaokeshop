@@ -86,7 +86,7 @@ export default function Page() {
         <Breadcrumb items={[{ label: "Монтаж под ключ" }]} />
 
         {/* Герой */}
-        <section className="mt-4 rounded-3xl border border-border bg-background p-8 sm:p-10">
+        <section className="mt-4 rounded-xl border border-border bg-background p-8 sm:p-10">
           <p className="ticker">Под ключ</p>
           <h1 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl">
             {h1Prefix}<HighlightLine>{H1_HIGHLIGHT}</HighlightLine>
@@ -113,7 +113,7 @@ export default function Page() {
           <h2 className="font-display text-xl font-semibold">Как это работает</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-3">
             {steps.map(({ n, icon: Icon, title, body }) => (
-              <div key={n} className="rounded-2xl border border-border bg-background p-6">
+              <div key={n} className="rounded-xl border border-border bg-background p-6">
                 <div className="flex items-start justify-between">
                   <span className="font-display text-3xl font-bold text-primary/20">{n}</span>
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
@@ -143,7 +143,7 @@ export default function Page() {
         {/* Числа доверия */}
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {trust.map(({ icon: Icon, value, label }) => (
-            <div key={label} className="flex items-center gap-3 rounded-2xl bg-surface p-4">
+            <div key={label} className="flex items-center gap-3 rounded-xl bg-surface p-4">
               <Icon className="h-5 w-5 shrink-0 text-primary" />
               <div>
                 <p className="font-semibold leading-tight">{value}</p>
@@ -174,7 +174,7 @@ export default function Page() {
         </section>
 
         {/* CTA */}
-        <div className="mt-10 rounded-2xl bg-surface p-6">
+        <div className="mt-10 rounded-xl bg-surface p-6">
           <h2 className="font-medium">Готовы обсудить проект?</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Расскажите про объект — подберём решение и пришлём смету.

@@ -50,7 +50,7 @@ export default function Page() {
         <Breadcrumb items={[{ label: "Домашнее карао­ке" }]} />
 
         {/* Герой */}
-        <section className="mt-4 rounded-3xl border border-border bg-background p-8 sm:p-10">
+        <section className="mt-4 rounded-xl border border-border bg-background p-8 sm:p-10">
           <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-center">
           <div>
           <p className="ticker">Для дома</p>
@@ -73,7 +73,7 @@ export default function Page() {
           </div>
           <p className="ticker mt-5">Гарантия 1 год · Монтаж включён · 60 000+ песен</p>
           </div>
-          <div className="hidden aspect-[4/3] items-center justify-center rounded-2xl bg-scene md:flex">
+          <div className="hidden aspect-[4/3] items-center justify-center rounded-xl bg-scene md:flex">
             <span aria-hidden="true" className="font-display text-2xl font-medium text-primary/40">ДЛЯ ДОМА</span>
           </div>
           </div>
@@ -84,7 +84,7 @@ export default function Page() {
           <h2 className="font-display text-xl font-semibold">Где будет стоять?</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             {scenarios.map(({ icon: Icon, label, body }) => (
-              <div key={label} className="rounded-2xl border border-border bg-background p-5">
+              <div key={label} className="rounded-xl border border-border bg-background p-5">
                 {Icon && (
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
                     <Icon className="h-5 w-5" />
@@ -132,7 +132,7 @@ export default function Page() {
         </section>
 
         {/* CTA */}
-        <div className="mt-10 rounded-2xl bg-surface p-6">
+        <div className="mt-10 rounded-xl bg-surface p-6">
           <h2 className="font-medium">Не знаете, что выбрать?</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Напишите в WhatsApp — расскажем, что подойдёт для вашей комнаты и бюджета.

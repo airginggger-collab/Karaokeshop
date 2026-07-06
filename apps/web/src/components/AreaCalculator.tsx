@@ -27,7 +27,7 @@ export function AreaCalculator() {
   const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(waText)}`;
 
   return (
-    <div className="rounded-2xl border border-border p-5 shadow-sm">
+    <div className="rounded-xl border border-border p-5">
       <h3 className="font-medium">Подберём комплект под площадь</h3>
       <p className="mt-1 text-sm text-muted-foreground">
         Выберите площадь и тип заведения — покажем готовое решение.

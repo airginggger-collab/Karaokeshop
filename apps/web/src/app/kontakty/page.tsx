@@ -36,7 +36,7 @@ export default function Page() {
 
         {/* Алматы-баннер */}
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          <div className="flex items-start gap-4 rounded-2xl border border-border bg-background p-5">
+          <div className="flex items-start gap-4 rounded-xl border border-border bg-background p-5">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-fg">
               <MapPin className="h-5 w-5" />
             </div>
@@ -48,7 +48,7 @@ export default function Page() {
               </p>
             </div>
           </div>
-          <div className="flex items-start gap-4 rounded-2xl border border-border bg-background p-5">
+          <div className="flex items-start gap-4 rounded-xl border border-border bg-background p-5">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-fg">
               <Clock className="h-5 w-5" />
             </div>
@@ -65,7 +65,7 @@ export default function Page() {
         <div className="mt-6 grid gap-6 lg:grid-cols-[380px_1fr]">
           {/* Контактные данные */}
           <div className="space-y-4">
-            <div className="rounded-2xl border border-border bg-background p-6">
+            <div className="rounded-xl border border-border bg-background p-6">
               <h2 className="mb-4 font-semibold">Как с нами связаться</h2>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-3">
@@ -96,14 +96,14 @@ export default function Page() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-2xl bg-[#25D366] py-4 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
+              className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-4 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
             >
               <MessageCircle className="h-5 w-5" />
               Написать в WhatsApp
             </a>
 
             {/* Быстрые ссылки */}
-            <div className="rounded-2xl bg-surface p-5 text-sm">
+            <div className="rounded-xl bg-surface p-5 text-sm">
               <p className="mb-3 font-medium text-muted-foreground">Частые запросы</p>
               <ul className="space-y-2">
                 {[
@@ -122,7 +122,7 @@ export default function Page() {
           </div>
 
           {/* Карта */}
-          <div className="overflow-hidden rounded-2xl border border-border">
+          <div className="overflow-hidden rounded-xl border border-border">
             <iframe
               src={mapSrc}
               title="Карта — karaokeshop, Алматы"

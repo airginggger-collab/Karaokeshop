@@ -11,7 +11,7 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
   return (
     <div className="space-y-2">
       {items.map((item, i) => (
-        <div key={i} className="overflow-hidden rounded-2xl border border-border bg-background">
+        <div key={i} className="overflow-hidden rounded-xl border border-border bg-background">
           <button
             type="button"
             onClick={() => setOpen(open === i ? null : i)}

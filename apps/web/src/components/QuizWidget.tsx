@@ -84,7 +84,7 @@ export function QuizWidget() {
             <p className="font-display text-lg font-semibold">Готово — вот ориентир</p>
           </div>
 
-          <div className="rounded-2xl border border-border p-4">
+          <div className="rounded-xl border border-border p-4">
             <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
               Рекомендуемая база
             </p>

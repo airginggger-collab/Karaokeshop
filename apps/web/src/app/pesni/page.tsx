@@ -41,7 +41,7 @@ export default function Page() {
 
       <SongsClient />
 
-      <div className="mt-8 flex flex-col items-start gap-3 rounded-2xl bg-primary-soft p-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-8 flex flex-col items-start gap-3 rounded-xl bg-primary-soft p-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="font-medium text-primary">Обновление репертуара по договору</p>
           <p className="text-sm text-primary">Регулярно добавляем новинки в вашу систему.</p>

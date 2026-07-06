@@ -105,7 +105,7 @@ export function CalculatorClient() {
                 type="button"
                 onClick={() => handleScenario(s.id)}
                 className={[
-                  "rounded-2xl border p-4 text-left transition",
+                  "rounded-xl border p-4 text-left transition",
                   scenario === s.id
                     ? "border-primary bg-primary/5"
                     : "border-border bg-background hover:border-primary",
@@ -128,7 +128,7 @@ export function CalculatorClient() {
       {step === 2 && (
         <div>
           <h2 className="mb-4 font-display text-lg font-semibold">Шаг 2 — Площадь помещения</h2>
-          <div className="rounded-2xl border border-border bg-background p-6">
+          <div className="rounded-xl border border-border bg-background p-6">
             <p className="mb-2 text-sm font-medium">
               Площадь зала: <span className="text-primary font-semibold">{area} м²</span>
             </p>
@@ -182,7 +182,7 @@ export function CalculatorClient() {
                 type="button"
                 onClick={() => setBudgetIdx(i)}
                 className={[
-                  "rounded-2xl border p-4 text-left transition",
+                  "rounded-xl border p-4 text-left transition",
                   budgetIdx === i
                     ? "border-primary bg-primary/5"
                     : "border-border bg-background hover:border-primary",
@@ -217,7 +217,7 @@ export function CalculatorClient() {
             </button>
           </div>
 
-          <div className="rounded-2xl border border-border bg-background p-5">
+          <div className="rounded-xl border border-border bg-background p-5">
             <div className="divide-y divide-border text-sm">
               {calc.lines.map((l) => (
                 <div key={l.name} className="py-2.5">

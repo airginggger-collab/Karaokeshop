@@ -76,7 +76,7 @@ export default function Page() {
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {services.map(({ icon: Icon, title, body }) => (
-          <div key={title} className="rounded-2xl border border-border bg-background p-5 shadow-sm">
+          <div key={title} className="rounded-xl border border-border bg-background p-5">
             {Icon && (
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-soft text-primary">
                 <Icon className="h-5 w-5" />
@@ -93,7 +93,7 @@ export default function Page() {
         <h2 className="font-display text-xl font-semibold">Что покрывает гарантия</h2>
         <p className="mt-1 text-sm text-muted-foreground">Срок гарантии — от 1 года на всё оборудование.</p>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-background p-5">
+          <div className="rounded-xl border border-border bg-background p-5">
             <p className="mb-3 flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-400">
               <CheckCircle2 className="h-4 w-4" /> Покрывается гарантией
             </p>
@@ -106,7 +106,7 @@ export default function Page() {
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl border border-border bg-background p-5">
+          <div className="rounded-xl border border-border bg-background p-5">
             <p className="mb-3 flex items-center gap-2 text-sm font-semibold text-destructive">
               <XCircle className="h-4 w-4" /> Не покрывается
             </p>
@@ -129,7 +129,7 @@ export default function Page() {
         <FaqAccordion items={faq} />
       </section>
 
-      <div className="mt-10 rounded-2xl bg-surface p-6">
+      <div className="mt-10 rounded-xl bg-surface p-6">
         <h2 className="font-medium">Нужна помощь или консультация?</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Напишите в WhatsApp — ответим быстро и согласуем удобное время выезда.

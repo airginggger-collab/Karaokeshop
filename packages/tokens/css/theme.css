@@ -10,36 +10,23 @@
 :root {
   color-scheme: light;
 
-  /* ─── Переходные mood-токены (используются инлайн на главной,
-     dlya-biznesa, gotovye-resheniya; удаляются в Task 5-6) ─── */
-  --warm-bg:     #fff7ed;
-  --warm-fg:     #2a1606;
-  --warm-muted:  #7c5b3f;
-  --warm-accent: #9a3412;
-  --warm-soft:   #ffe7ce;
-  --night-bg:    #171226;
-  --night-fg:    #f2effc;
-  --night-muted: #a89fd0;
-  --night-accent:#9d8bf0;
-  --night-soft:  #221a38;
-
   /* ─── Светлая тема: «дневная сцена» ─── */
   --color-page:         #f4f2fa;   /* лавандовая бумага */
   --color-bg:           #ffffff;   /* карточка */
   --color-surface:      #eceaf5;   /* чипы, подложки */
-  --color-fg:           #1a1430;   /* 16.7:1 на bg ✓ AAA */
+  --color-fg:           #1a1430;   /* 17.7:1 на bg ✓ AAA */
   --color-muted:        #e5e0f2;   /* тонкий фон */
-  --color-muted-fg:     #5d5578;   /* 6.1:1 на bg ✓ AA+ */
+  --color-muted-fg:     #5d5578;   /* 6.92:1 на bg ✓ AA+ */
   --color-border:       #d9d3ea;   /* hairline */
-  --color-primary:      #4c30b8;   /* ссылки/акцент-текст: 8.0:1 на bg ✓ AAA */
+  --color-primary:      #4c30b8;   /* ссылки/акцент-текст: 8.67:1 на bg ✓ AAA */
   --color-primary-fg:   #ffffff;
   --color-primary-soft: #e9e4fb;
   --color-accent:       #4c30b8;
   --color-accent-fg:    #35208c;
   --color-accent-soft:  #e9e4fb;
-  --color-cta:          #6742e8;   /* кнопки: белый текст 5.0:1 ✓ AA */
+  --color-cta:          #6742e8;   /* кнопки: белый текст 5.96:1 ✓ AA */
   --color-cta-fg:       #ffffff;
-  --color-hot:          #d6296b;   /* 5.2:1 на bg ✓ AA */
+  --color-hot:          #d6296b;   /* 4.79:1 на bg ✓ AA */
   --color-hot-fg:       #ffffff;   /* текст НА hot: 4.79:1 на #d6296b ✓ AA */
   --color-scene:        #f0eef8;   /* сцена-подложка фото товара */
 }
@@ -48,17 +35,14 @@
 .dark {
   color-scheme: dark;
 
-  --night-bg:    #171226;
-  --night-soft:  #221a38;
-
   --color-page:         #0b0913;   /* фиолетово-чёрная сцена */
   --color-bg:           #171226;   /* карточка */
   --color-surface:      #221a38;   /* чипы, подложки */
-  --color-fg:           #f2effc;   /* 17.4:1 на bg ✓ AAA */
+  --color-fg:           #f2effc;   /* 16.1:1 на bg ✓ AAA */
   --color-muted:        #141021;   /* тонкий фон */
-  --color-muted-fg:     #a89fd0;   /* 7.6:1 на bg ✓ AAA */
+  --color-muted-fg:     #a89fd0;   /* 7.42:1 на bg ✓ AAA */
   --color-border:       #2c2347;   /* hairline */
-  --color-primary:      #9d8bf0;   /* ссылки/акцент-текст: 6.6:1 на bg ✓ AA+ */
+  --color-primary:      #9d8bf0;   /* ссылки/акцент-текст: 6.42:1 на bg ✓ AA+ */
   --color-primary-fg:   #170f38;
   --color-primary-soft: #251c44;
   --color-accent:       #9d8bf0;

@@ -2,7 +2,7 @@
 
 > Краткий контекст проекта karaokeshop.kz, чтобы быстро войти в курс. Полная карта — [docs/README.md](README.md) · правила для AI — [/CLAUDE.md](../CLAUDE.md).
 >
-> **Обновлено: 2026-07-06 — Task 6a дизайн-спринта «Сцена» (визуальные must-фиксы: блог/служебные/шелл); до этого Task 5 (лендинги, 2026-07-05).** Ветка `main` — актуальная, деплоится на Cloudflare автоматически. Сборка чистая, тесты зелёные (web 24 + ui 2), CI/деплой зелёный.
+> **Обновлено: 2026-07-06 — Task 6b дизайн-спринта «Сцена» (чистка: мёртвые токены/lottie, свод радиусов, тени-клей, Button disabled); до этого Task 6a (визуальные must-фиксы, 2026-07-06), Task 5 (лендинги, 2026-07-05).** Ветка `main` — актуальная, деплоится на Cloudflare автоматически. Сборка чистая, тесты зелёные (web 24 + ui 2), CI/деплой зелёный.
 >
 > 🎭 **Дизайн-спринт «Сцена» (2026-07-04, ТЕКУЩАЯ РАБОТА):** утверждён спек полного редизайна — [`superpowers/specs/2026-07-04-dizayn-sprint-stsena-design.md`](superpowers/specs/2026-07-04-dizayn-sprint-stsena-design.md). Палитра от фиолетовой марки лого (`#7c5cff`), фирменный приём «подсветка строки», анти-AI правила (без pill-чипов/CountUp/стока), 6 шагов реализации. Неон-жёлтый акцент и блок «Текущий облик» ниже устареют по ходу спринта.
 >
@@ -11,6 +11,18 @@
 > 🔧 **Аудит сайта (2026-06-22):** [`audit-2026-06-22.md`](audit-2026-06-22.md) — оценки и находки по визуалу/UX/продажам/SEO/репо. План устранения с файлами и проверкой — [`fix-plan-2026-06-22.md`](fix-plan-2026-06-22.md) (точка входа для работ).
 > 🚀 **Запуск домена (2026-07-02):** [`strategy/domain-launch.md`](strategy/domain-launch.md) — перенос `karaokeshop.kz` с Wix на Cloudflare без потери Google, GSC, аналитика, локальное SEO, SEO-селф-чек. 301-правила — в [`apps/web/public/_redirects`](../apps/web/public/_redirects) (заполнить старые URL перед cutover; роут домена в `wrangler.toml` добавлять ТОЛЬКО на момент привязки — иначе CI упадёт).
 > 🧪 **QA-прогон (2026-06-25):** [`qa-2026-06-25.md`](qa-2026-06-25.md) — функциональный прогон LIVE, 7 находок исправлено (бюджет-плацебо, og.jpg, крошки, Метрика, форма checkout, санитайз корзины).
+
+## Последняя сессия (2026-07-06) — Task 6b дизайн-спринта «Сцена»: чистка мёртвого кода
+
+- **Task 6b (чистка) выполнен:** удалены мёртвые `--warm-*`/`--night-*` из `theme.css` и зависимость `lottie-react`, `Button` получил disabled-стили, свод `rounded-2xl`/`rounded-3xl` → `rounded-xl` по всему сайту, тени-«клей» убраны с in-flow карточек (высота сохранена у FAB/оверлеев/sticky), контраст-комментарии выправлены.
+- `packages/tokens/css/theme.css` — удалён блок переходных mood-токенов (`--warm-bg/fg/muted/accent/soft`, `--night-bg/fg/muted/accent/soft` в `:root`; переобъявления `--night-bg`/`--night-soft` в `.dark`) — Task 5 убрал все инлайн-использования, grep подтвердил 0 в `apps/web/src`. Заодно поправлены контраст-цифры в комментариях на фактические WCAG-значения (light: fg 17.7, muted-fg 6.92, primary 8.67, cta 5.96, hot 4.79; dark: fg 16.1, muted-fg 7.42, primary 6.42).
+- `apps/web/src/app/globals.css` — комментарий про `--color-page` обновлён на актуальные `#f4f2fa` (light) / `#0b0913` (dark) (были устаревшие `#f5f5f5`/`#0e131c`).
+- `apps/web/package.json` — убрана неиспользуемая `lottie-react` (LottieHero удалён в Task 3, grep=0 в `apps/web/src`), `npm install` обновил `package-lock.json`.
+- `packages/ui/src/Button.tsx` — базовый класс дополнен `disabled:opacity-50 disabled:pointer-events-none` (a11y: `CalculatorClient.tsx` рендерит `<Button disabled>` на шаге без выбора).
+- Свод радиусов: `grep -rnE "rounded-2xl|rounded-3xl"` → было 51 вхождение в 16 файлах (`page.tsx`, `dlya-biznesa`, `dlya-doma`, `kontakty`, `brand/[slug]`, `pod-klyuch`, `keysy`, `sravnenie`, `pesni`, `gotovye-resheniya`, `servis`, `o-nas`, `AreaCalculator`, `FaqAccordion`, `CalculatorClient`, `SearchOverlay`, `QuizWidget`) — все заменены на `rounded-xl` (шкала токенов до 12px, банит 2xl/3xl). После — 0.
+- Тени: `grep -rnE "shadow-"` дал 5 вхождений. Убрано 2 (in-flow карточки с `border border-border` — тень-«клей»): `servis/page.tsx` (карточка услуги), `AreaCalculator.tsx` (карточка калькулятора площади). Сохранено 3 (функциональная высота): `WhatsAppFAB.tsx` (`shadow-lg`, `fixed` FAB), `ScrollToTop.tsx` (`shadow-md`, `fixed` кнопка), `SearchOverlay.tsx` (`shadow-2xl`, выпадающая оверлей-панель).
+- Проверено: `npm run build -w web` чисто (77 роутов), `npm test -w web` (24) + `npm test -w @kk/ui` (2) зелёные; grep-своды `rounded-2xl|rounded-3xl` = 0, `--warm-|--night-` в `apps/web/src` = 0 (кроме доккомментария в `globals.css`), `lottie` в `apps/web/src`/`package.json` = 0; превью light/dark на главной, `/servis`, `/catalog`, `/product/ast-250`, `/kalkulyator` — карточки единый `rounded-xl` без теней-клея, WhatsAppFAB/ScrollToTop сохранили `fixed`+тень+`rounded-full`, disabled-кнопка калькулятора (`opacity: 0.5`, `pointer-events: none`) подтверждена через computed style, палитра light/dark цела.
+- **Следующий шаг: Task 6c** (третий и последний коммит финального Task 6 дизайн-спринта «Сцена») — по оставшимся находкам аудита (115 находок, workflow), если такие остались после 6a/6b.
 
 ## Последняя сессия (2026-07-06) — Task 6a дизайн-спринта «Сцена»: визуальные must-фиксы
 
@@ -41,7 +53,7 @@
 - **Деплой:** Cloudflare assets-only Worker (`wrangler.toml` → `apps/web/out`), **авто на каждый push в main**. Превью-MCP привязан к medlog — проверять надо `build` + `curl` живого URL.
 
 ## Стек
-Next.js 15 (App Router, `output: "export"` — статика) · Turborepo (npm workspaces) · Tailwind на дизайн-токенах (Style Dictionary) · Storybook · lucide-react · lottie-react · шрифты Manrope + Unbounded. **77 статических страниц** (26 блог-статей + 18 товаров + служебные). Тесты Vitest: web 24 (calculator 12 + seo 3 + quiz 4 + CountUp 5) + ui 2.
+Next.js 15 (App Router, `output: "export"` — статика) · Turborepo (npm workspaces) · Tailwind на дизайн-токенах (Style Dictionary) · Storybook · lucide-react · шрифты Manrope + Unbounded. **77 статических страниц** (26 блог-статей + 18 товаров + служебные). Тесты Vitest: web 24 (calculator 12 + seo 3 + quiz 4 + CountUp 5) + ui 2. `lottie-react` удалён (Task 6b, 2026-07-06) — LottieHero был убран ещё в Task 3, зависимость висела мёртвой.
 
 ## Сборка / проверка
 ```

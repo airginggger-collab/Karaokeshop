@@ -90,7 +90,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <Container className="py-10">
         <Breadcrumb items={[{ label: "Каталог", href: "/catalog" }, { label: b.name }]} />
 
-        <section className="mt-4 rounded-3xl border border-border bg-background p-8 sm:p-10">
+        <section className="mt-4 rounded-xl border border-border bg-background p-8 sm:p-10">
           <p className="ticker">{b.name}</p>
           <h1 className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl">
             {nameIdx >= 0 ? (
