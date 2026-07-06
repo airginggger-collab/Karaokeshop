@@ -326,7 +326,7 @@ export default function HomePage() {
         <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
           Пройдите квиз выше или напишите нам — ответим и предложим то, что реально подходит под вашу задачу и бюджет.
         </p>
-        <p className="ticker mt-6 max-w-2xl">14 лет на рынке · 200+ объектов · 60 000+ песен · гарантия 2 года</p>
+        <p className="ticker mt-6 max-w-2xl">14 лет на рынке · 200+ объектов · 60 000+ песен · гарантия 2 года</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <a
             href={`https://wa.me/${siteConfig.whatsapp}`}

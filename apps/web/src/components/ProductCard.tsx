@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ProductImage } from "./ProductImage";
+import { DiscountBadge } from "./DiscountBadge";
 import { priceFmt, discountPct, typeLabels, type Product } from "@/lib/site";
 
 export function ProductCard({ p }: { p: Product }) {
@@ -11,15 +12,11 @@ export function ProductCard({ p }: { p: Product }) {
   return (
     <Link
       href={`/product/${p.slug}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background transition"
+      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background"
     >
       <div className="relative flex h-36 items-center justify-center overflow-hidden">
-        <ProductImage src={p.image} model={p.model} />
-        {pct ? (
-          <span className="absolute left-2 top-2 rounded-md bg-hot px-2 py-0.5 text-[11px] font-medium text-hot-fg">
-            −{pct}%
-          </span>
-        ) : null}
+        <ProductImage src={p.image} model={p.model} decorative />
+        {pct ? <DiscountBadge pct={pct} className="absolute left-2 top-2 text-[11px]" /> : null}
       </div>
       <div className="flex flex-1 flex-col p-3.5">
         <span className="text-xs text-muted-foreground">{label}</span>

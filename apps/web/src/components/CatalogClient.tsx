@@ -27,7 +27,7 @@ function Tab({ active, onClick, children }: { active: boolean; onClick: () => vo
 function SkeletonCard() {
   return (
     <div className="flex flex-col overflow-hidden rounded-xl border border-border bg-background">
-      <div className="h-36 animate-pulse bg-muted" />
+      <div className="h-36 animate-pulse bg-scene" />
       <div className="flex flex-col gap-2 p-3.5">
         <div className="h-4 w-16 animate-pulse rounded bg-muted" />
         <div className="h-4 w-32 animate-pulse rounded bg-muted" />

@@ -88,7 +88,7 @@ export default function Page() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
             >
               Получить расчёт <ArrowRight className="h-4 w-4" />
             </a>
@@ -166,7 +166,7 @@ export default function Page() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-sm font-medium text-white"
             >
               Написать в WhatsApp
             </a>

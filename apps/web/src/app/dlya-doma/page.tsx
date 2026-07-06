@@ -66,12 +66,12 @@ export default function Page() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
             >
               Подобрать в WhatsApp <ArrowRight className="h-4 w-4" />
             </a>
           </div>
-          <p className="ticker mt-5">Гарантия 1 год · Монтаж включён · 60 000+ песен</p>
+          <p className="ticker mt-5">Гарантия 1 год · Монтаж включён · 60 000+ песен</p>
           </div>
           <div className="hidden aspect-[4/3] items-center justify-center rounded-xl bg-scene md:flex">
             <span aria-hidden="true" className="font-display text-2xl font-medium text-primary/40">ДЛЯ ДОМА</span>
@@ -142,7 +142,7 @@ export default function Page() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-sm font-medium text-white"
             >
               Написать в WhatsApp
             </a>

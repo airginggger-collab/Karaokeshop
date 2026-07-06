@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { AddToCart } from "@/components/AddToCart";
 import { ProductImage } from "@/components/ProductImage";
 import { ProductCard } from "@/components/ProductCard";
+import { DiscountBadge } from "@/components/DiscountBadge";
 import { ProductStickyBar } from "@/components/ProductStickyBar";
 import { products, priceFmt, discountPct, typeLabels, siteConfig } from "@/lib/site";
 import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
@@ -83,7 +84,7 @@ export default async function Page({
         {/* Фото — слева */}
         <div className="overflow-hidden rounded-xl bg-scene" style={{ minHeight: 360 }}>
           <div className="aspect-square w-full lg:aspect-auto lg:h-[520px]">
-            <ProductImage src={p.image} model={p.model} className="h-full w-full" />
+            <ProductImage src={p.image} model={p.model} className="h-full w-full" priority />
           </div>
         </div>
 
@@ -112,9 +113,7 @@ export default async function Page({
             {p.priceOld ? (
               <span className="text-sm text-muted-foreground line-through">{priceFmt(p.priceOld)}</span>
             ) : null}
-            {pct ? (
-              <span className="rounded-md bg-hot px-2 py-0.5 text-xs font-medium text-hot-fg">−{pct}%</span>
-            ) : null}
+            {pct ? <DiscountBadge pct={pct} /> : null}
           </div>
 
           {/* CTA — только десктоп (mobile sticky bar ниже) */}
