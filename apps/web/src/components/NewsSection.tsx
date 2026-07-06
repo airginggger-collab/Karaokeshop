@@ -41,7 +41,7 @@ export async function NewsSection() {
             <Wrapper
               key={i}
               {...(wrapperProps as any)}
-              className="group flex flex-col rounded-2xl border border-border bg-background p-4 transition hover:border-primary hover:shadow-sm"
+              className="group flex flex-col rounded-xl border border-border bg-background p-4 transition hover:border-primary"
             >
               <p className="flex-1 text-sm font-medium leading-snug group-hover:text-primary">
                 {n.title}

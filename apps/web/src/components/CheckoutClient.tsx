@@ -19,7 +19,7 @@ export function CheckoutClient() {
 
   if (done) {
     return (
-      <div className="mt-8 rounded-2xl border border-border bg-background p-8 text-center">
+      <div className="mt-8 rounded-xl border border-border bg-background p-8 text-center">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-accent-soft text-accent-fg">
           <Check className="h-6 w-6" />
         </div>
@@ -36,7 +36,7 @@ export function CheckoutClient() {
 
   if (!items.length) {
     return (
-      <div className="mt-8 rounded-2xl border border-border bg-background p-8 text-center">
+      <div className="mt-8 rounded-xl border border-border bg-background p-8 text-center">
         <h2 className="text-lg font-medium">Корзина пуста</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Добавьте систему из каталога или соберите смету в калькуляторе.
@@ -110,7 +110,7 @@ export function CheckoutClient() {
       </div>
 
       {/* Итого */}
-      <aside className="h-fit rounded-2xl border border-border bg-background p-5">
+      <aside className="h-fit rounded-xl border border-border bg-background p-5">
         <h2 className="mb-3 text-sm font-medium">Ваш заказ</h2>
         {items.map((it) => (
           <div key={it.id} className="mb-3 flex gap-3">

@@ -73,10 +73,7 @@ export default function Page() {
         <Breadcrumb items={[{ label: "О компании" }]} />
 
         {/* Герой */}
-        <section
-          className="mt-4 rounded-3xl p-8 sm:p-10"
-          style={{ background: "var(--color-surface)" }}
-        >
+        <section className="mt-4 rounded-xl bg-surface p-8 sm:p-10">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">О компании</p>
           <h1 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">{oNasMeta.h1}</h1>
           <p className="mt-3 max-w-xl text-muted-foreground">
@@ -150,7 +147,7 @@ export default function Page() {
             {timeline.map((t, i) => (
               <div key={t.year} className="flex gap-4">
                 <div className="flex flex-col items-center">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-fg">
                     {t.year.slice(2)}
                   </div>
                   {i < timeline.length - 1 && <div className="w-px flex-1 bg-border" />}

@@ -102,7 +102,9 @@ export default async function Page({
               </span>
             </p>
           ) : (
-            <p className="mt-1 text-sm text-accent-fg">{p.inStock ? "в наличии" : "под заказ"}</p>
+            <p className={"mt-1 text-sm " + (p.inStock ? "text-[#25D366]" : "text-muted-foreground")}>
+              {p.inStock ? "в наличии" : "под заказ"}
+            </p>
           )}
 
           <div className="mt-4 flex items-baseline gap-2">

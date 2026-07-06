@@ -31,9 +31,10 @@ export default async function Page({
   const { scenario } = await params;
   const s = scenarios.find((x) => x.slug === scenario);
   if (!s) notFound();
-  // h1 сценария = "Караоке для кафе" и т.п. — подсвечиваем дифференциатор
-  // («для кафе»), т.е. хвост после общего слова «Караоке».
-  const highlight = s.h1.startsWith("Караоке ") ? s.h1.slice("Караоке ".length) : undefined;
+  // h1 сценария = "Караоке для кафе" и т.п. — подсвечиваем только последнее
+  // слово (заведение-дифференциатор: «кафе», «бара», «ресторана» и т.д.),
+  // чтобы подсветка всегда была меньше половины h1.
+  const highlight = s.h1.split(" ").pop();
   return (
     <LandingPage
       h1={s.h1}

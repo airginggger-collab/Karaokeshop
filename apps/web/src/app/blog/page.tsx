@@ -25,7 +25,7 @@ export default function Page() {
           <Link
             key={p.slug}
             href={`/blog/${p.slug}`}
-            className="group rounded-2xl border border-border bg-background p-5 shadow-sm transition hover:shadow-md"
+            className="group rounded-xl border border-border bg-background p-5 transition hover:border-primary"
           >
             <h2 className="font-medium">{p.title}</h2>
             <p className="mt-1 text-sm text-muted-foreground">{p.excerpt}</p>
@@ -54,7 +54,7 @@ export default function Page() {
           {storyPosts.map((s) => (
             <div
               key={s.id}
-              className="mb-4 break-inside-avoid rounded-2xl border border-border bg-background p-5 shadow-sm"
+              className="mb-4 break-inside-avoid rounded-xl border border-border bg-background p-5"
             >
               {/* Шапка */}
               <div className="flex items-center gap-3">

@@ -37,7 +37,7 @@ export default function Page() {
         {/* Алматы-баннер */}
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           <div className="flex items-start gap-4 rounded-2xl border border-border bg-background p-5">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-white">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-fg">
               <MapPin className="h-5 w-5" />
             </div>
             <div>
@@ -49,7 +49,7 @@ export default function Page() {
             </div>
           </div>
           <div className="flex items-start gap-4 rounded-2xl border border-border bg-background p-5">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-white">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-fg">
               <Clock className="h-5 w-5" />
             </div>
             <div>

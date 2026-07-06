@@ -49,9 +49,9 @@ export default function Page() {
           {cases.map((c) => {
             const m = metrics[c.slug];
             return (
-              <article key={c.slug} className="flex flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-sm">
+              <article key={c.slug} className="flex flex-col overflow-hidden rounded-xl border border-border bg-background">
                 {/* Фото-заглушка */}
-                <div className="relative flex h-48 items-center justify-center bg-gradient-to-br from-surface to-muted">
+                <div className="relative flex h-48 items-center justify-center bg-scene">
                   <Building2 className="h-12 w-12 text-muted-foreground/30" />
                   <div className="absolute bottom-3 left-3">
                     <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-fg">
