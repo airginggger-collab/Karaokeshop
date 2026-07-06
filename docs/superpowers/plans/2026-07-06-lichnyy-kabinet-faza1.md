@@ -8,7 +8,7 @@
 
 **Tech Stack:** Next.js 15 `output:export` · TypeScript strict (`resolveJsonModule`) · Vitest (⚠️ include только `src/**/*.test.ts`).
 
-**Решение по формату (уточнение спека):** в Фазе 1 ВСЕ коллекции — JSON (включая блог: `blog.json`, тело статьи — строковое поле `body`). Markdown-виджет CMS в Фазе 2 работает и поверх строкового поля JSON — конверсия блога в `*.md`-файлы отложена (снижает риск Фазы 1: без новой зависимости-парсера и churn «файл-на-пост»).
+**Решение по формату (уточнение спека):** в Фазе 1 ВСЕ коллекции — JSON (включая блог: `blog.json`). Формат `BlogPost` сохраняется как есть: `body: string[]` (массив абзацев), `faq: {q,a}[]` — переносятся VERBATIM, без конверсии в Markdown. Конверсия блога в `*.md`-файлы отложена в Фазу 2/3 (снижает риск Фазы 1: без новой зависимости-парсера и churn «файл-на-пост»; CMS-виджеты Фазы 2 работают и поверх JSON — `list` для абзацев/FAQ).
 
 **Правила каждой задачи (CLAUDE.md):**
 - `npm run build -w web` (+postbuild `check-redirects`) + `npm test -w web` + `npm test -w @kk/ui` (2) — зелёные. После Task 1 число web-тестов = 24 + 1 (integrity) = **25**.
@@ -256,7 +256,7 @@ Expected: build чист, 25/25 (integrity: products=18, уникальные sl
 - Modify: `apps/web/src/lib/site.ts` (блоки songsSample 208-218, cases 229-233, blogPosts 250-728, storyPosts 749-838)
 
 - [ ] **Step 5.1: Создать JSON-файлы** — VERBATIM перенос:
-  - `blog.json` ← `blogPosts` (site.ts:250-728), 26 объектов формы `BlogPost`. Тело статьи (`body`) — строковое поле как есть (со всеми `\n`). Внимание: точный перенос длинных строк без потери escape-последовательностей.
+  - `blog.json` ← `blogPosts` (site.ts:250-728), 26 объектов формы `BlogPost` (`slug`, `title`, `excerpt`, `body: string[]` — массив абзацев, `faq: {q,a}[]`). Внимание: `body` и `faq` — массивы, переносить структуру как есть; точный перенос длинных строк без потери спецсимволов/кавычек.
   - `stories.json` ← `storyPosts` (749-838), 8 объектов.
   - `cases.json` ← `cases` (229-233), 3 объекта.
   - `songs.json` ← `songsSample` (208-218), 8 объектов.
