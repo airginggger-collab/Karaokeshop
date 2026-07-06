@@ -1,16 +1,11 @@
-export const siteConfig = {
-  name: "karaokeshop",
-  url: "https://www.karaokeshop.kz",
-  city: "Алматы",
-  phone: "+7 707 579-99-95",
-  whatsapp: "77075799995",
-  address: "Алматы, ул. Муканова, офис 8",
-  hours: "Пн–Сб · 10:00–19:00",
-  email: "karaokeshop2015@gmail.com",
-  defaultTitle: "Караоке без ошибки в выборе — для дома и заведений | Алматы",
-  defaultDescription:
-    "Официальный дилер AST и Studio Evolution в Казахстане. Подбор, монтаж и настройка под ключ. Шоурум в Алматы, с 2012.",
-} as const;
+import siteConfigData from "../../content/site-config.json";
+
+export type SiteConfig = {
+  name: string; url: string; city: string; phone: string; whatsapp: string;
+  address: string; hours: string; email: string;
+  defaultTitle: string; defaultDescription: string; songsTotal: number;
+};
+export const siteConfig: SiteConfig = siteConfigData;
 
 export type Landing = { slug: string; h1: string; title: string; description: string };
 
@@ -202,7 +197,7 @@ export const pesniMeta: Landing = {
   description: "База из 60 000+ песен на разных языках. Регулярное обновление репертуара по договору.",
 };
 
-export const songsTotal = 60000;
+export const songsTotal = siteConfig.songsTotal;
 
 export type Song = { title: string; artist: string; lang: string };
 export const songsSample: Song[] = [
