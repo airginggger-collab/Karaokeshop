@@ -5,6 +5,7 @@ import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { FaqAccordion } from "@/components/FaqAccordion";
+import { HighlightLine } from "@/components/HighlightLine";
 import { siteConfig } from "@/lib/site";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -66,7 +67,9 @@ export default function Page() {
     <Container className="py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Сервис и гарантия", path: "/servis" }])) }} />
       <Breadcrumb items={[{ label: "Сервис и гарантия" }]} />
-      <h1 className="font-display text-2xl font-bold">Сервис и гарантия</h1>
+      <h1 className="font-display text-2xl font-bold">
+        <HighlightLine>Сервис</HighlightLine> и гарантия
+      </h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
         Полное сопровождение — от монтажа до регулярного обновления репертуара. Работаем в Алматы и области.
       </p>

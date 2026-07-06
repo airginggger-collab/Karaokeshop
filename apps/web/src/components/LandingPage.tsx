@@ -1,34 +1,37 @@
 import * as React from "react";
 import { HighlightLine } from "@/components/HighlightLine";
 
-/** Подсветка первого слова h1 общим шаблоном «Сцены»: остальной текст (обычно
-    "для …", "по площади" и т.п.) выделяется через HighlightLine. Если в h1
-    только одно слово — подсвечивается целиком. Текст h1 не меняется, только
-    визуальное разбиение. */
-function splitH1(h1: string): [string, string] {
-  const idx = h1.indexOf(" ");
-  if (idx === -1) return ["", h1];
-  return [h1.slice(0, idx + 1), h1.slice(idx + 1)];
-}
-
 export function LandingPage({
   h1,
   description,
   breadcrumb,
+  highlight,
   children,
 }: {
   h1: string;
   description: string;
   breadcrumb?: React.ReactNode;
+  /** Подстрока h1, которую залить «подсветкой строки» (HighlightLine).
+      Задаётся вызывающей страницей осмысленно (ключевое слово/фраза).
+      Если не передана или не найдена в h1 — заголовок рендерится целиком
+      без подсветки (безопасный дефолт). Текст h1 не меняется. */
+  highlight?: string;
   children?: React.ReactNode;
 }) {
-  const [first, rest] = splitH1(h1);
+  const idx = highlight ? h1.indexOf(highlight) : -1;
   return (
     <main className="mx-auto max-w-5xl px-4 py-12">
       {breadcrumb}
       <h1 className="font-display text-2xl font-bold sm:text-3xl">
-        {first}
-        <HighlightLine>{rest}</HighlightLine>
+        {highlight && idx >= 0 ? (
+          <>
+            {h1.slice(0, idx)}
+            <HighlightLine>{highlight}</HighlightLine>
+            {h1.slice(idx + highlight.length)}
+          </>
+        ) : (
+          h1
+        )}
       </h1>
       <p className="mt-2 text-sm text-muted-foreground">{description}</p>
       {children}

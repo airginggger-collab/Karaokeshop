@@ -5,6 +5,7 @@ import { Badge, Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BundleTiers } from "@/components/BundleTiers";
+import { HighlightLine } from "@/components/HighlightLine";
 import { bundles } from "@/lib/site";
 
 const serviceIncluded = [
@@ -43,11 +44,25 @@ export default async function Page({
   const b = bundles.find((x) => x.slug === area);
   if (!b) notFound();
 
+  // h1 = "Караоке для зала до 30 м²" и т.п. — подсвечиваем часть с площадью
+  // («до 30 м²»). Если хвост не найден — h1 целиком без подсветки.
+  const m = b.h1.match(/до .+$/);
+  const areaIdx = m ? b.h1.lastIndexOf(m[0]) : -1;
+
   return (
     <Container className="py-10">
       <Breadcrumb items={[{ label: "Готовые комплекты", href: "/komplekty" }, { label: b.h1 }]} />
       <Badge tone="primary">B2B · под ключ</Badge>
-      <h1 className="mt-3 text-2xl font-medium">{b.h1}</h1>
+      <h1 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
+        {areaIdx >= 0 && m ? (
+          <>
+            {b.h1.slice(0, areaIdx)}
+            <HighlightLine>{m[0]}</HighlightLine>
+          </>
+        ) : (
+          b.h1
+        )}
+      </h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">{b.description}</p>
 
       <div className="mt-6 flex flex-wrap gap-3">

@@ -32,5 +32,7 @@ export default async function Page({
   const { page } = await params;
   const p = staticPages.find((x) => x.slug === page);
   if (!p) notFound();
-  return <LandingPage h1={p.h1} description={p.description} />;
+  // Подсвечиваем первое смысловое слово h1 («Сервис и гарантия» → «Сервис»).
+  const highlight = p.h1.split(" ")[0];
+  return <LandingPage h1={p.h1} description={p.description} highlight={highlight} />;
 }

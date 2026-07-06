@@ -15,6 +15,7 @@ export default function Page() {
     <LandingPage
       h1={komplektyIndexMeta.h1}
       description={komplektyIndexMeta.description}
+      highlight="по площади"
       breadcrumb={<Breadcrumb items={[{ label: "Готовые комплекты" }]} />}
     >
       <ul className="mt-6 grid gap-3 sm:grid-cols-2">
