@@ -98,12 +98,12 @@ export default async function Page({
           {SHOW_UNVERIFIED_RATINGS && p.rating ? (
             <p className="mt-1 flex items-center gap-1 text-sm text-accent-fg">
               <Star className="h-4 w-4" /> {p.rating} · {p.reviewsCount} отзыва ·{" "}
-              <span className={p.inStock ? "text-green-600 dark:text-green-400" : "text-muted-foreground"}>
+              <span className={p.inStock ? "text-success" : "text-muted-foreground"}>
                 {p.inStock ? "в наличии" : "под заказ"}
               </span>
             </p>
           ) : (
-            <p className={"mt-1 text-sm " + (p.inStock ? "text-[#25D366]" : "text-muted-foreground")}>
+            <p className={"mt-1 text-sm " + (p.inStock ? "text-success" : "text-muted-foreground")}>
               {p.inStock ? "в наличии" : "под заказ"}
             </p>
           )}
@@ -113,7 +113,7 @@ export default async function Page({
             {p.priceOld ? (
               <span className="text-sm text-muted-foreground line-through">{priceFmt(p.priceOld)}</span>
             ) : null}
-            {pct ? <DiscountBadge pct={pct} /> : null}
+            {pct ? <DiscountBadge pct={pct} className="text-xs" /> : null}
           </div>
 
           {/* CTA — только десктоп (mobile sticky bar ниже) */}

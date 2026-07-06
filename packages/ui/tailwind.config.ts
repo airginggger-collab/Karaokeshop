@@ -21,6 +21,8 @@ export default {
         "accent-fg": token("--color-accent-fg"),
         "primary-soft": token("--color-primary-soft"),
         "accent-soft": token("--color-accent-soft"),
+        success: token("--color-success"),
+        danger: token("--color-danger"),
       },
       borderRadius: {
         lg: "var(--radius-lg)",

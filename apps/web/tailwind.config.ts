@@ -35,6 +35,8 @@ export default {
         hot: token("--color-hot"),
         "hot-fg": token("--color-hot-fg"),
         scene: token("--color-scene"),
+        success: token("--color-success"),
+        danger: token("--color-danger"),
       },
       borderRadius: {
         sm: "var(--radius-sm)",

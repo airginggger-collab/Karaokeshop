@@ -17,7 +17,7 @@ export default function Page() {
     <Container className="py-10">
       <Breadcrumb items={[{ label: blogMeta.h1 }]} />
 
-      <h1 className="mt-4 text-2xl font-medium">{blogMeta.h1}</h1>
+      <h1 className="mt-4 font-display text-2xl font-bold sm:text-3xl">{blogMeta.h1}</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{blogMeta.description}</p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">

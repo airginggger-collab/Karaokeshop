@@ -44,7 +44,7 @@ export default async function Page({
 
       <article className="mx-auto max-w-2xl">
         <Breadcrumb items={[{ label: "Блог", href: "/blog" }, { label: post.title }]} />
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight">{post.title}</h1>
+        <h1 className="mt-3 font-display text-3xl font-bold tracking-tight">{post.title}</h1>
         {post.body.map((para, i) => (
           <p key={i} className="mt-4 text-[15px] leading-7">
             {para}

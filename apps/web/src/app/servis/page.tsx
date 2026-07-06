@@ -94,26 +94,26 @@ export default function Page() {
         <p className="mt-1 text-sm text-muted-foreground">Срок гарантии — от 1 года на всё оборудование.</p>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl border border-border bg-background p-5">
-            <p className="mb-3 flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-400">
+            <p className="mb-3 flex items-center gap-2 text-sm font-semibold text-success">
               <CheckCircle2 className="h-4 w-4" /> Покрывается гарантией
             </p>
             <ul className="space-y-2">
               {covered.map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-success" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
           <div className="rounded-xl border border-border bg-background p-5">
-            <p className="mb-3 flex items-center gap-2 text-sm font-semibold text-destructive">
+            <p className="mb-3 flex items-center gap-2 text-sm font-semibold text-danger">
               <XCircle className="h-4 w-4" /> Не покрывается
             </p>
             <ul className="space-y-2">
               {notCovered.map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-destructive/60" />
+                  <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-danger/60" />
                   {item}
                 </li>
               ))}
