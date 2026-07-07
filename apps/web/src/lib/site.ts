@@ -20,13 +20,13 @@ export const siteConfig: SiteConfig = siteConfigData;
 export type Landing = { slug: string; h1: string; title: string; description: string };
 
 // Сценарные лендинги (кластеры A/B из docs/strategy/url-map.md)
-export const scenarios: Landing[] = scenariosData;
+export const scenarios: Landing[] = (scenariosData as { items: Landing[] }).items;
 
 // Комплекты по площади (кластер H)
-export const bundles: Landing[] = bundlesData;
+export const bundles: Landing[] = (bundlesData as { items: Landing[] }).items;
 
 export type Brand = { slug: string; name: string; h1: string; title: string; description: string };
-export const brands: Brand[] = brandsData;
+export const brands: Brand[] = (brandsData as { items: Brand[] }).items;
 
 export type ProductType = "sistema" | "akustika" | "mikrofon" | "sub" | "miksher";
 
@@ -60,10 +60,10 @@ export type Product = {
   kit?: string[];
 };
 
-export const products: Product[] = productsData as Product[];
+export const products: Product[] = (productsData as { items: Product[] }).items;
 
 // Одиночные generic-страницы (рендерятся через (pages)/[page])
-export const staticPages: Landing[] = staticPagesData;
+export const staticPages: Landing[] = (staticPagesData as { items: Landing[] }).items;
 
 export const oNasMeta: Landing = pageMeta.oNas;
 export const kontaktyMeta: Landing = pageMeta.kontakty;
@@ -96,7 +96,7 @@ export const pesniMeta: Landing = pageMeta.pesni;
 export const songsTotal = siteConfig.songsTotal;
 
 export type Song = { title: string; artist: string; lang: string };
-export const songsSample: Song[] = songsData as Song[];
+export const songsSample: Song[] = (songsData as { items: Song[] }).items;
 
 // Кейсы оснащённых заведений (B2B-доверие)
 export type Case = {
@@ -108,7 +108,7 @@ export type Case = {
   quote: string;
   author: string;
 };
-export const cases: Case[] = casesData as Case[];
+export const cases: Case[] = (casesData as { items: Case[] }).items;
 
 export const keysyMeta: Landing = pageMeta.keysy;
 
@@ -120,7 +120,7 @@ export type BlogPost = {
   body: string[];
   faq: { q: string; a: string }[];
 };
-export const blogPosts: BlogPost[] = blogData as BlogPost[];
+export const blogPosts: BlogPost[] = (blogData as { items: BlogPost[] }).items;
 
 export const blogMeta: Landing = pageMeta.blog;
 
@@ -137,7 +137,7 @@ export type StoryPost = {
   system?: string; // модель системы
 };
 
-export const storyPosts: StoryPost[] = storiesData as StoryPost[];
+export const storyPosts: StoryPost[] = (storiesData as { items: StoryPost[] }).items;
 
 export const dlyaDomaMetaV2: Landing = pageMeta.dlyaDomaV2;
 export const dlyaBiznesaMeta: Landing = pageMeta.dlyaBiznesa;
