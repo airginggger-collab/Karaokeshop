@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { ProductCard } from "@/components/ProductCard";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { HighlightLine } from "@/components/HighlightLine";
+import { CountUp } from "@/components/CountUp";
 import { products, siteConfig } from "@/lib/site";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -71,10 +72,16 @@ export default function Page() {
               Подобрать в WhatsApp <ArrowRight className="h-4 w-4" />
             </a>
           </div>
-          <p className="ticker mt-5">Гарантия 1 год · Монтаж включён · 60 000+ песен</p>
+          <p className="ticker mt-5">Гарантия 1 год · Монтаж включён · <CountUp value="60 000+ песен" /></p>
           </div>
-          <div className="hidden aspect-[4/3] items-center justify-center rounded-xl bg-scene md:flex">
-            <span aria-hidden="true" className="font-display text-2xl font-medium text-primary/40">ДЛЯ ДОМА</span>
+          <div className="hidden aspect-[4/3] overflow-hidden rounded-xl md:block">
+            <img
+              src="/scenariy/dom.jpg"
+              alt="Караоке для дома"
+              className="h-full w-full rounded-xl object-cover"
+              loading="eager"
+              decoding="async"
+            />
           </div>
           </div>
         </section>

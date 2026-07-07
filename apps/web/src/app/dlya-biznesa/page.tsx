@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { ProductCard } from "@/components/ProductCard";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { HighlightLine } from "@/components/HighlightLine";
+import { CountUp } from "@/components/CountUp";
 import { products, siteConfig } from "@/lib/site";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -80,7 +81,7 @@ export default function Page() {
             <HighlightLine>Оснастить заведение</HighlightLine><br />под ключ — Алматы
           </h1>
           <p className="mt-3 max-w-xl text-muted-foreground">
-            Кафе, ресторан, VIP-зал, клуб. Делаем проект звука, монтируем, настраиваем и обучаем персонал. 200+ проектов с 2012 года.
+            Кафе, ресторан, VIP-зал, клуб. Делаем проект звука, монтируем, настраиваем и обучаем персонал. <CountUp value="200+" /> проектов с 2012 года.
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4">
             <span className="font-display text-2xl font-bold">от 1 400 000 ₸</span>
@@ -95,8 +96,14 @@ export default function Page() {
           </div>
           <p className="ticker mt-5">200+ проектов · Гарантия и сервис · Монтаж 1–2 дня</p>
           </div>
-          <div className="hidden aspect-[4/3] items-center justify-center rounded-xl bg-scene md:flex">
-            <span aria-hidden="true" className="font-display text-2xl font-medium text-primary/40">ДЛЯ БИЗНЕСА</span>
+          <div className="hidden aspect-[4/3] overflow-hidden rounded-xl md:block">
+            <img
+              src="/scenariy/biznes.jpg"
+              alt="Караоке для бизнеса"
+              className="h-full w-full rounded-xl object-cover"
+              loading="eager"
+              decoding="async"
+            />
           </div>
           </div>
         </section>

@@ -11,6 +11,7 @@ import { ProductImage } from "@/components/ProductImage";
 import { QuizWidget } from "@/components/QuizWidget";
 import { HighlightLine } from "@/components/HighlightLine";
 import { ClientLogos } from "@/components/ClientLogos";
+import { CountUp } from "@/components/CountUp";
 import { products, priceFmt, siteConfig } from "@/lib/site";
 
 const SHOW_UNVERIFIED_SOCIAL_PROOF = false; // включить после реальных отзывов/лого от заказчика
@@ -115,10 +116,32 @@ export default function HomePage() {
           <div className="lg:col-span-7">
             <QuizWidget />
           </div>
-          <div aria-hidden="true" className="hidden items-center justify-center rounded-xl bg-scene lg:col-span-5 lg:flex">
-            <span className="font-display text-2xl font-medium text-primary/40">AST · EVOBOX</span>
+          <div aria-hidden="true" className="hidden overflow-hidden rounded-xl lg:col-span-5 lg:block">
+            <img
+              src="/scenariy/poyushchie.jpg"
+              alt="Караоке-вечер"
+              className="hidden h-full w-full rounded-xl object-cover lg:block"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
           </div>
         </div>
+      </section>
+
+      {/* Доверие цифрами — CountUp при появлении в вьюпорте */}
+      <section className="mt-12 grid grid-cols-2 gap-6 border-y border-border py-6 sm:grid-cols-4">
+        {[
+          { value: "14+", label: "лет на рынке" },
+          { value: "200+", label: "объектов" },
+          { value: "60 000+", label: "песен" },
+          { value: "2 года", label: "гарантия" },
+        ].map((s) => (
+          <div key={s.label} className="flex flex-col">
+            <CountUp value={s.value} className="font-display text-2xl font-bold text-primary sm:text-3xl" />
+            <span className="mt-1 text-xs text-muted-foreground sm:text-sm">{s.label}</span>
+          </div>
+        ))}
       </section>
 
       {/* 01 — Как мы работаем (услуга под ключ) */}
@@ -147,12 +170,12 @@ export default function HomePage() {
       {/* Дом и бизнес — сценарные входы */}
       <section className="mt-12 grid gap-4 sm:grid-cols-2">
         {[
-          { href: "/dlya-doma", plate: "ДЛЯ ДОМА", title: "Караоке для дома", sub: "Гостиная, баня, гостевой дом. Тёплые вечера с песнями.", cta: "Выбрать домой" },
-          { href: "/dlya-biznesa", plate: "ДЛЯ БИЗНЕСА", title: "Караоке для бизнеса", sub: "Кафе, бар, ресторан, клуб. Проект звука и монтаж под ключ.", cta: "Оснастить заведение" },
+          { href: "/dlya-doma", image: "/scenariy/dom.jpg", title: "Караоке для дома", sub: "Гостиная, баня, гостевой дом. Тёплые вечера с песнями.", cta: "Выбрать домой" },
+          { href: "/dlya-biznesa", image: "/scenariy/biznes.jpg", title: "Караоке для бизнеса", sub: "Кафе, бар, ресторан, клуб. Проект звука и монтаж под ключ.", cta: "Оснастить заведение" },
         ].map((c) => (
           <Link key={c.href} href={c.href} className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background">
-            <div className="flex h-40 items-center justify-center bg-scene sm:h-48">
-              <span className="font-display text-2xl font-bold tracking-wide text-primary/40">{c.plate}</span>
+            <div className="h-40 overflow-hidden sm:h-48">
+              <img src={c.image} alt={c.title} className="h-full w-full object-cover" loading="lazy" decoding="async" />
             </div>
             <div className="flex flex-1 flex-col p-5">
               <h3 className="font-display text-xl font-bold">{c.title}</h3>
