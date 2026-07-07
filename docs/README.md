@@ -28,6 +28,7 @@
 - 🧩 [Контент-модель текущая](context/content-model.md) (факты из `site.ts`) · [Плановая CMS-схема](context/data-model.md) (для Sanity, Фаза 2).
 - 🔄 [Миграция site.ts → Sanity](context/data-migration.md) · 📡 [API-контракт лидов](context/api-contracts/leads.md).
 - 🛠 [Dev How-To](dev-howto.md) — как добавить роут, товар, пост; git; деплой.
+- 🎨 [Дизайн-система «Сцена» (шпаргалка)](design/design-system.md) — все токены цвета (light+dark, HEX), типографика, радиусы, отступы, сетка + промпты для Google Stitch. Для переноса в Figma/Stitch.
 - 🎨 [UX-паттерны](ux-patterns.md) — лид-путь (WhatsApp FAB), навигация, тач-таргеты, CTA-текст.
 - 🏛️ ADR: [0001 CMS](adr/0001-cms.md) · [0002 Хостинг](adr/0002-hosting.md).
 - 🚀 [Деплой на Cloudflare](deploy.md) — **🟢 live: https://karaokeshop.airg-inggger.workers.dev/**
