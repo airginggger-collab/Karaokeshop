@@ -84,6 +84,8 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 
 ## UI-конвенции (обязательные)
 
+> **Переносимый стандарт визуализации/цвета** — [`docs/design/visualization/`](docs/design/visualization/) (роли-токены `--color-*`, контраст WCAG AA, light/dark, семантика состояний, анти-ИИ; конкретные цвета подбираются локально). Контраст-чек — [`docs/design/visualization/check.mjs`](docs/design/visualization/check.mjs) (`node check.mjs`). Стандарт универсален и раздаётся всем проектам; правила «Сцены» ниже — его конкретная реализация в этом репо.
+
 ### Анти-AI правила («Сцена», дизайн-директура 2026-07-04)
 
 Арт-директура — [specs/2026-07-04-dizayn-sprint-stsena-design.md](docs/superpowers/specs/2026-07-04-dizayn-sprint-stsena-design.md). Обязательно:
