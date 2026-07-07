@@ -104,22 +104,24 @@ export default function HomePage() {
     <Container className="py-3 sm:py-5">
       {/* Hero — «Сцена»: тикер, h1 с подсветкой строки, квиз + сцена-плашка */}
       <section className="animate-fade-up pt-0 lg:pt-2">
-        <p className="ticker max-w-md">официальный дилер AST · Studio Evolution · Алматы</p>
-        <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
-          Караоке-вечер <HighlightLine>у тебя дома</HighlightLine>
-        </h1>
-        <p className="mt-3 max-w-xl text-lg text-muted-foreground">
-          Бесплатный подбор под площадь и бюджет — за минуту. Дальше смета, монтаж, настройка и гарантия под ключ.
-        </p>
-        <div className="mt-6 grid gap-6 lg:grid-cols-12">
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-stretch">
           <div className="lg:col-span-7">
-            <QuizWidget />
+            <p className="ticker max-w-md">официальный дилер AST · Studio Evolution · Алматы</p>
+            <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
+              Караоке-вечер <HighlightLine>у тебя дома</HighlightLine>
+            </h1>
+            <p className="mt-3 max-w-xl text-lg text-muted-foreground">
+              Бесплатный подбор под площадь и бюджет — за минуту. Дальше смета, монтаж, настройка и гарантия под ключ.
+            </p>
+            <div className="mt-6">
+              <QuizWidget />
+            </div>
           </div>
-          <div aria-hidden="true" className="hidden self-stretch overflow-hidden rounded-xl border border-border lg:col-span-5 lg:block">
+          <div aria-hidden="true" className="relative hidden min-h-[280px] overflow-hidden rounded-xl border border-border lg:col-span-5 lg:block">
             <img
               src="/scenariy/poyushchie.jpg"
               alt="Караоке-вечер"
-              className="hidden h-full w-full rounded-xl object-cover object-[center_25%] lg:block"
+              className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
               loading="eager"
               fetchPriority="high"
               decoding="async"
