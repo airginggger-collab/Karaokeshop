@@ -1,6 +1,9 @@
 /* ═══════════════════════════════════════════════════
    ЕДИНЫЙ ИСТОЧНИК ПРАВДЫ: цветовые токены (light / dark)
-   Арт-директура «Сцена» (спек 2026-07-04): палитра от марки лого #7c5cff.
+   Арт-директура «Сцена» (спек 2026-07-04), структура сохранена.
+   Рецвет 2026-07-07 (решение владельца): тёмная — неон-жёлтый акцент,
+   светлая — чернильно-синий акцент. Лого-марка #7c5cff (Header/icon.svg)
+   и WhatsApp #25D366/#1ebe5d в этот рецвет НЕ входят.
    Импортируется И приложением (apps/web), И Storybook (@kk/ui) —
    НЕ дублировать в globals.css. Контраст: AA минимум (4.5:1 текст).
    Радиусы — в сгенерированном tokens.css (из tokens.json).
@@ -10,51 +13,51 @@
 :root {
   color-scheme: light;
 
-  /* ─── Светлая тема: «дневная сцена» ─── */
-  --color-page:         #f4f2fa;   /* лавандовая бумага */
+  /* ─── Светлая тема: «чернильно-синяя сцена» ─── */
+  --color-page:         #edf0f5;   /* холодная бумага */
   --color-bg:           #ffffff;   /* карточка */
-  --color-surface:      #eceaf5;   /* чипы, подложки */
-  --color-fg:           #1a1430;   /* 17.7:1 на bg ✓ AAA */
-  --color-muted:        #e5e0f2;   /* тонкий фон */
-  --color-muted-fg:     #5d5578;   /* 6.92:1 на bg ✓ AA+ */
-  --color-border:       #d9d3ea;   /* hairline */
-  --color-primary:      #4c30b8;   /* ссылки/акцент-текст: 8.67:1 на bg ✓ AAA */
-  --color-primary-fg:   #ffffff;
-  --color-primary-soft: #e9e4fb;
-  --color-accent:       #4c30b8;
-  --color-accent-fg:    #35208c;
-  --color-accent-soft:  #e9e4fb;
-  --color-cta:          #6742e8;   /* кнопки: белый текст 5.96:1 ✓ AA */
+  --color-surface:      #e4e9f0;   /* чипы, подложки */
+  --color-fg:           #16203a;   /* 16.13:1 на bg ✓ AAA */
+  --color-muted:        #e4e9f0;   /* тонкий фон */
+  --color-muted-fg:     #566178;   /* 6.22:1 на bg / 5.44:1 на page ✓ AA+ */
+  --color-border:       #d3dae5;   /* hairline */
+  --color-primary:      #17233f;   /* чернильно-синий: 15.57:1 на bg ✓ AAA */
+  --color-primary-fg:   #ffffff;   /* 15.57:1 на primary ✓ AAA */
+  --color-primary-soft: #e2e7f0;
+  --color-accent:       #17233f;
+  --color-accent-fg:    #17233f;   /* 12.55:1 на accent-soft ✓ AAA */
+  --color-accent-soft:  #e2e7f0;
+  --color-cta:          #17233f;   /* кнопки: белый текст 15.57:1 ✓ AAA */
   --color-cta-fg:       #ffffff;
   --color-hot:          #d6296b;   /* 4.79:1 на bg ✓ AA */
   --color-hot-fg:       #ffffff;   /* текст НА hot: 4.79:1 на #d6296b ✓ AA */
-  --color-scene:        #f0eef8;   /* сцена-подложка фото товара */
+  --color-scene:        #eef1f6;   /* сцена-подложка фото товара */
   --color-success:      #15803d;   /* 5.02:1 на #ffffff ✓ AA */
   --color-danger:       #c02637;   /* 5.88:1 на #ffffff ✓ AA */
 }
 
-/* ─── Тёмная тема (по умолчанию): «ночь концерта» ─── */
+/* ─── Тёмная тема (по умолчанию): «неоновая сцена» ─── */
 .dark {
   color-scheme: dark;
 
-  --color-page:         #0b0913;   /* фиолетово-чёрная сцена */
-  --color-bg:           #171226;   /* карточка */
-  --color-surface:      #221a38;   /* чипы, подложки */
-  --color-fg:           #f2effc;   /* 16.1:1 на bg ✓ AAA */
-  --color-muted:        #141021;   /* тонкий фон */
-  --color-muted-fg:     #a89fd0;   /* 7.42:1 на bg ✓ AAA */
-  --color-border:       #2c2347;   /* hairline */
-  --color-primary:      #9d8bf0;   /* ссылки/акцент-текст: 6.42:1 на bg ✓ AA+ */
-  --color-primary-fg:   #170f38;
-  --color-primary-soft: #251c44;
-  --color-accent:       #9d8bf0;
-  --color-accent-fg:    #c9c2e8;
-  --color-accent-soft:  #251c44;
-  --color-cta:          #7250f8;   /* чуть темнее марки #7c5cff ради AA (белый текст 5.0:1); марка в Header остаётся #7c5cff */
-  --color-cta-fg:       #ffffff;
-  --color-hot:          #ff5c8a;   /* 6.4:1 на bg ✓ AA+ */
-  --color-hot-fg:       #2a0a14;   /* текст НА hot: 6.21:1 на #ff5c8a ✓ AA+ (белый давал 2.94:1 FAIL) */
-  --color-scene:        #1f1832;   /* сцена-подложка фото товара */
-  --color-success:      #4ade80;   /* 10.47:1 на #171226 ✓ AAA */
-  --color-danger:       #ff6b6b;   /* 6.57:1 на #171226 ✓ AA+ */
+  --color-page:         #0e131c;   /* холодная тёмная сцена */
+  --color-bg:           #172130;   /* карточка */
+  --color-surface:      #22304a;   /* чипы, подложки */
+  --color-fg:           #f0f4fc;   /* 14.69:1 на bg / 16.88:1 на page ✓ AAA */
+  --color-muted:        #141b28;   /* тонкий фон */
+  --color-muted-fg:     #aac0d6;   /* 8.65:1 на bg / 9.94:1 на page ✓ AAA */
+  --color-border:       #2a3852;   /* hairline */
+  --color-primary:      #facc15;   /* неон-жёлтый: 10.58:1 на bg ✓ AAA */
+  --color-primary-fg:   #2a2400;   /* тёмный текст на жёлтом: 10.15:1 ✓ AAA */
+  --color-primary-soft: #2a2408;
+  --color-accent:       #facc15;
+  --color-accent-fg:    #fef3c7;   /* 13.93:1 на accent-soft ✓ AAA */
+  --color-accent-soft:  #2a2408;
+  --color-cta:          #facc15;   /* кнопки: тёмный текст 10.15:1 ✓ AAA */
+  --color-cta-fg:       #2a2400;
+  --color-hot:          #ff5c8a;   /* 5.51:1 на bg ✓ AA+ */
+  --color-hot-fg:       #2a0a14;   /* текст НА hot: 6.21:1 на #ff5c8a ✓ AA+ */
+  --color-scene:        #1a2233;   /* сцена-подложка фото товара */
+  --color-success:      #4ade80;   /* 9.29:1 на bg ✓ AAA */
+  --color-danger:       #ff6b6b;   /* 5.84:1 на bg ✓ AA+ */
 }
