@@ -22,8 +22,11 @@ export function Header() {
       <Container className="flex h-14 items-center gap-4">
         <MobileNav />
         <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="flex h-7 w-7 items-center justify-center rounded-[8px] text-white" style={{ background: "#7c5cff" }}>
-            <Mic2 className="h-4 w-4" />
+          <span
+            className="box-border flex h-7 w-7 items-center justify-center rounded-[8px]"
+            style={{ background: "#17233f", border: "1px solid #2a3852" }}
+          >
+            <Mic2 className="h-4 w-4" style={{ color: "#facc15" }} />
           </span>
           karaokeshop
         </Link>

@@ -40,7 +40,7 @@ On-текст (текст поверх заливки) даётся отдель
 | `accent-fg` | `--color-accent-fg` | `#17233f` | `#fef3c7` |
 | `accent-soft` | `--color-accent-soft` | `#e2e7f0` | `#2a2408` |
 
-Марка логотипа (не токенизирована, фиксирована в Header + фавикон): **`#7c5cff`** — рецвет 2026-07-07 её не затронул.
+Марка логотипа (не токенизирована, фиксирована в Header + фавикон, не флипается по теме): квадрат **`#17233f`** (тёмно-синий) с тонким бордером **`#2a3852`** + микрофон **`#facc15`** (жёлтый) — перекрашена 2026-07-07 под новую палитру (была фиолетовая `#7c5cff` + белый мик).
 
 ### Действия (кнопки, горячий бейдж)
 | Утилита | CSS-переменная | Light | Dark |
@@ -158,7 +158,7 @@ Sections to lay out, in order:
    below: page #0E131C, card #172130, surface #22304A, border #2A3852,
    text #F0F4FC, muted #AAC0D6, accent/primary/CTA #FACC15 (dark text on it),
    sale #FF5C8A, success #4ADE80, error #FF6B6B, photo backdrop #1A2233,
-   brand #7C5CFF.
+   brand #17233F with #FACC15 mic.
 2. TYPOGRAPHY — a type specimen: headings in "Unbounded" bold and body in
    "Manrope", showing the scale 12/14/16/18/20/24/30/36/48/60 px with labels.
 3. BUTTONS — all variants and states in a row: primary solid #FACC15 (dark
@@ -193,7 +193,7 @@ component library sheet for handoff to Figma.
    фон #0E131C, карточка #172130, подложка #22304A, граница #2A3852,
    текст #F0F4FC, приглушённый #AAC0D6, акцент/кнопка #FACC15 (тёмный текст
    на нём), скидка #FF5C8A, успех #4ADE80, ошибка #FF6B6B, подложка фото
-   #1A2233, марка #7C5CFF.
+   #1A2233, марка #17233F с микрофоном #FACC15.
 2. ТИПОГРАФИКА — образец шрифтов: заголовки «Unbounded» жирный, текст
    «Manrope», со шкалой 12/14/16/18/20/24/30/36/48/60 px и подписями.
 3. КНОПКИ — все варианты и состояния в ряд: основная заливка #FACC15 (тёмный
