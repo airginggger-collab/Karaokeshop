@@ -18,7 +18,7 @@
 
 Sveltia/Decap file-коллекция требует объект в корне JSON, не голый массив. Оборачиваем 9 файлов-массивов в `{ "items": [ … ] }`, загрузчик читает `.items`. `site-config.json` и `page-meta.json` — уже объекты, НЕ трогать. Тест-сеть `site.test.ts` (29) стережёт: счётчики и поля не должны измениться.
 
-- [ ] **Step 1.1: Обернуть каждый из 9 файлов-массивов.** Для каждого `content/<name>.json` вида `[ … ]` → `{ "items": [ … ] }` (VERBATIM элементы, только оборачиваем в объект с ключом `items`). Проще всего скриптом, чтобы не трогать содержимое руками:
+- [x] **Step 1.1: Обернуть каждый из 9 файлов-массивов.** Для каждого `content/<name>.json` вида `[ … ]` → `{ "items": [ … ] }` (VERBATIM элементы, только оборачиваем в объект с ключом `items`). Проще всего скриптом, чтобы не трогать содержимое руками:
 ```bash
 cd ~/Desktop/karaokeshop/apps/web/content
 for f in products blog stories cases songs scenarios bundles brands static-pages; do
@@ -27,7 +27,7 @@ done
 ```
 Проверь: каждый файл теперь `{"items":[...]}`; `site-config.json`/`page-meta.json` не тронуты.
 
-- [ ] **Step 1.2: Обновить загрузчик `apps/web/src/lib/site.ts`.** Импорты остаются, но экспорты читают `.items`. Найди строки-загрузчики и приведи к виду (типы-касты сохрани):
+- [x] **Step 1.2: Обновить загрузчик `apps/web/src/lib/site.ts`.** Импорты остаются, но экспорты читают `.items`. Найди строки-загрузчики и приведи к виду (типы-касты сохрани):
 ```ts
 export const products: Product[] = (productsData as { items: Product[] }).items;
 export const blogPosts: BlogPost[] = (blogData as { items: BlogPost[] }).items;
@@ -41,9 +41,9 @@ export const staticPages: Landing[] = (staticPagesData as { items: Landing[] }).
 ```
 `siteConfig`, `pageMeta`-загрузчики (site-config.json/page-meta.json) — НЕ трогать (объекты). Типы — не трогать.
 
-- [ ] **Step 1.3: Build + тесты.** `npm run build -w web && npm test -w web && npm test -w @kk/ui` — build чист (77 роутов), web **29/29** (integrity доказывает: products=18, blog=26, все поля целы — обёртка ничего не потеряла), ui 2/2. Если тест упал — обёртка задела данные, сверь.
+- [x] **Step 1.3: Build + тесты.** `npm run build -w web && npm test -w web && npm test -w @kk/ui` — build чист (77 роутов), web **29/29** (integrity доказывает: products=18, blog=26, все поля целы — обёртка ничего не потеряла), ui 2/2. Если тест упал — обёртка задела данные, сверь.
 
-- [ ] **Step 1.4: Коммит + HANDOFF + пуш + CI.** HANDOFF-строка: `- **ЛК Фаза 2, Task 1:** файлы-массивы обёрнуты в {items:[…]} под file-коллекции CMS, загрузчик site.ts читает .items; 29 тестов зелёные, сайт идентичен.` Коммит `refactor(контент): обёртка content/*.json в {items:[]} под Sveltia file-коллекции` (+Co-Authored-By Claude Opus 4.8 <noreply@anthropic.com>). Пуш, `gh run list` до `success`.
+- [x] **Step 1.4: Коммит + HANDOFF + пуш + CI.** HANDOFF-строка: `- **ЛК Фаза 2, Task 1:** файлы-массивы обёрнуты в {items:[…]} под file-коллекции CMS, загрузчик site.ts читает .items; 29 тестов зелёные, сайт идентичен.` Коммит `refactor(контент): обёртка content/*.json в {items:[]} под Sveltia file-коллекции` (+Co-Authored-By Claude Opus 4.8 <noreply@anthropic.com>). Пуш, `gh run list` до `success`.
 
 ---
 
@@ -53,7 +53,7 @@ export const staticPages: Landing[] = (staticPagesData as { items: Landing[] }).
 
 `public/admin/*` копируются `next build` в `out/admin/*` как есть → Cloudflare отдаёт `/admin/`. Sveltia SPA грузится с CDN, читает `config.yml` рядом.
 
-- [ ] **Step 2.1: `apps/web/public/admin/index.html`** (актуальный CDN-сниппет Sveltia — сверь с https://sveltiacms.app/en/docs/start):
+- [x] **Step 2.1: `apps/web/public/admin/index.html`** (актуальный CDN-сниппет Sveltia — сверь с https://sveltiacms.app/en/docs/start):
 ```html
 <!doctype html>
 <html lang="ru">
@@ -70,7 +70,7 @@ export const staticPages: Landing[] = (staticPagesData as { items: Landing[] }).
 ```
 ⚠️ Проверь актуальный URL пакета в доках Sveltia (Getting Started) — версия/путь CDN могли измениться; используй рекомендованный доками.
 
-- [ ] **Step 2.2: `apps/web/public/admin/config.yml`** — backend + media + коллекции. Каркас (backend PAT-режим не требует `base_url`):
+- [x] **Step 2.2: `apps/web/public/admin/config.yml`** — backend + media + коллекции. ⚠️ **Факт-чек по докам Sveltia (2026-07-07) показал 2 неточности в каркасе ниже — исправлены в реализации:** (1) `summary` — правильно `{{model}}` / `{{price}}` БЕЗ префикса `fields.` (каркас ниже писал `{{fields.model}}` — устарело/неверно, не использовать как есть). (2) file-коллекция должна быть обёрнута `collections: [{name, label, files: [{...}]}]` — в каркасе это соблюдено верно, но проверяй при копировании. Реализация — `apps/web/public/admin/config.yml`, не переносить `{{fields.x}}` из каркаса ниже. Каркас (backend PAT-режим не требует `base_url`):
 ```yaml
 backend:
   name: github
@@ -169,9 +169,9 @@ collections:
 ```
 Затем **аналогично добавь остальные file-коллекции** (по образцу выше, `file:` + `items`-`list`): `stories.json` (StoryPost: id/author/initials/venue/date/text/tags[]/likes/system?), `cases.json` (Case: slug/venue/city/area/system/quote/author), `songs.json` (Song: title/artist/lang), `scenarios.json`/`bundles.json`/`static-pages.json` (Landing: slug/h1/title/description), `brands.json` (Brand: slug/name/h1/title/description), `page-meta.json` (объект из 13 ключей — file-коллекция с 13 объектными полями Landing). ⚠️ Поля коллекций ДОЛЖНЫ точно соответствовать типам из `site.ts` — иначе CMS перезапишет файл с потерей/переименованием полей. Сверь каждое поле с `export type …` в `site.ts`.
 
-- [ ] **Step 2.3: Build + проверка, что /admin отдаётся.** `npm run build -w web` — чисто; проверь `ls apps/web/out/admin/` → `index.html` + `config.yml` на месте. Превью (preview_start karaoke-static :4321) → открой `/admin/` (preview_eval `location.href='/admin/'`): должен загрузиться экран входа Sveltia с кнопкой входа по токену (без реального входа — токена пока нет; главное, что SPA грузится и парсит config без ошибок; проверь preview_console_logs на ошибки config). Если config.yml с синтаксической ошибкой — Sveltia покажет её на экране; почини.
+- [x] **Step 2.3: Build + проверка, что /admin отдаётся.** `npm run build -w web` — чисто; проверь `ls apps/web/out/admin/` → `index.html` + `config.yml` на месте. Превью (preview_start karaoke-static :4321) → открой `/admin/` (preview_eval `location.href='/admin/'`): должен загрузиться экран входа Sveltia с кнопкой входа по токену (без реального входа — токена пока нет; главное, что SPA грузится и парсит config без ошибок; проверь preview_console_logs на ошибки config). Если config.yml с синтаксической ошибкой — Sveltia покажет её на экране; почини.
 
-- [ ] **Step 2.4: Коммит + HANDOFF + пуш + CI.** HANDOFF-строка про `/admin` (Sveltia, PAT, все коллекции). Коммит `feat(admin): Sveltia CMS на /admin — file-коллекции всего контента, вход по GitHub-токену`. Пуш, `gh run list` до `success`. После деплоя — `curl -sL -o /dev/null -w "%{http_code}" https://karaokeshop.airg-inggger.workers.dev/admin/` (200).
+- [x] **Step 2.4: Коммит + HANDOFF + пуш + CI.** HANDOFF-строка про `/admin` (Sveltia, PAT, все коллекции). Коммит `feat(admin): Sveltia CMS на /admin — file-коллекции всего контента, вход по GitHub-токену`. Пуш, `gh run list` до `success`. После деплоя — `curl -sL -o /dev/null -w "%{http_code}" https://karaokeshop.airg-inggger.workers.dev/admin/` (200).
 
 ---
 

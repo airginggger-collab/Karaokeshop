@@ -1,0 +1,341 @@
+backend:
+  name: github
+  repo: airginggger-collab/Karaokeshop
+  branch: main
+
+media_folder: "apps/web/public/products"
+public_folder: "/products"
+
+locale: ru
+
+collections:
+  - name: products
+    label: "Товары и цены"
+    files:
+      - name: products
+        label: "Товары и цены"
+        file: apps/web/content/products.json
+        fields:
+          - name: items
+            label: "Товары"
+            widget: list
+            summary: "{{model}} — {{price}} ₸"
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - name: type
+                label: "Тип"
+                widget: select
+                options:
+                  - { label: "Караоке-система", value: sistema }
+                  - { label: "Акустика", value: akustika }
+                  - { label: "Микрофон", value: mikrofon }
+                  - { label: "Сабвуфер", value: sub }
+                  - { label: "Микшер", value: miksher }
+              - { name: model, label: "Модель", widget: string }
+              - { name: brand, label: "Бренд", widget: string }
+              - { name: price, label: "Цена, ₸", widget: number, value_type: int }
+              - { name: priceOld, label: "Старая цена, ₸", widget: number, value_type: int, required: false }
+              - { name: inStock, label: "В наличии", widget: boolean, default: true }
+              - { name: image, label: "Фото", widget: image, required: false }
+              - { name: featured, label: "Рекомендуемый", widget: boolean, required: false, default: false }
+              - { name: rating, label: "Рейтинг", widget: number, value_type: float, required: false }
+              - { name: reviewsCount, label: "Кол-во отзывов", widget: number, value_type: int, required: false }
+              - { name: power, label: "Мощность", widget: string, required: false }
+              - { name: note, label: "Примечание", widget: string, required: false }
+              - { name: scenario, label: "Сценарий (slug)", widget: string, required: false }
+              - { name: scenarioLabel, label: "Сценарий (текст)", widget: string, required: false }
+              - { name: areaMax, label: "Площадь, до м²", widget: number, value_type: int, required: false }
+              - { name: songsCount, label: "Кол-во песен в базе", widget: number, value_type: int, required: false }
+              - name: kit
+                label: "Комплектация"
+                widget: list
+                field: { name: item, label: "Пункт", widget: string }
+                required: false
+
+  - name: site-config
+    label: "Контакты и сайт"
+    files:
+      - name: site-config
+        label: "Контакты и сайт"
+        file: apps/web/content/site-config.json
+        fields:
+          - { name: name, label: "Название сайта", widget: string }
+          - { name: url, label: "URL сайта", widget: string }
+          - { name: city, label: "Город", widget: string }
+          - { name: phone, label: "Телефон", widget: string }
+          - { name: whatsapp, label: "WhatsApp (только цифры)", widget: string }
+          - { name: address, label: "Адрес", widget: string }
+          - { name: hours, label: "Часы работы", widget: string }
+          - { name: email, label: "Email", widget: string }
+          - { name: defaultTitle, label: "Title по умолчанию", widget: string }
+          - { name: defaultDescription, label: "Description по умолчанию", widget: text }
+          - { name: songsTotal, label: "Всего песен в базе", widget: number, value_type: int }
+
+  - name: blog
+    label: "Блог"
+    files:
+      - name: blog
+        label: "Блог"
+        file: apps/web/content/blog.json
+        fields:
+          - name: items
+            label: "Статьи"
+            widget: list
+            summary: "{{title}}"
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: title, label: "Заголовок", widget: string }
+              - { name: excerpt, label: "Краткое описание", widget: text }
+              - name: body
+                label: "Текст (абзацы)"
+                widget: list
+                field: { name: paragraph, label: "Абзац", widget: text }
+              - name: faq
+                label: "Вопрос-ответ"
+                widget: list
+                required: false
+                fields:
+                  - { name: q, label: "Вопрос", widget: string }
+                  - { name: a, label: "Ответ", widget: text }
+
+  - name: stories
+    label: "Истории установок"
+    files:
+      - name: stories
+        label: "Истории установок"
+        file: apps/web/content/stories.json
+        fields:
+          - name: items
+            label: "Истории"
+            widget: list
+            summary: "{{author}} — {{venue}}"
+            fields:
+              - { name: id, label: "ID", widget: string }
+              - { name: author, label: "Автор", widget: string }
+              - { name: initials, label: "Инициалы", widget: string }
+              - { name: venue, label: "Место", widget: string }
+              - { name: date, label: "Дата", widget: string }
+              - { name: text, label: "Текст", widget: text }
+              - name: tags
+                label: "Теги"
+                widget: list
+                field: { name: tag, label: "Тег", widget: string }
+              - { name: likes, label: "Лайки", widget: number, value_type: int }
+              - { name: system, label: "Модель системы", widget: string, required: false }
+
+  - name: cases
+    label: "Кейсы"
+    files:
+      - name: cases
+        label: "Кейсы"
+        file: apps/web/content/cases.json
+        fields:
+          - name: items
+            label: "Кейсы"
+            widget: list
+            summary: "{{venue}} — {{city}}"
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: venue, label: "Заведение", widget: string }
+              - { name: city, label: "Город", widget: string }
+              - { name: area, label: "Площадь", widget: string }
+              - { name: system, label: "Система", widget: string }
+              - { name: quote, label: "Цитата", widget: text }
+              - { name: author, label: "Автор цитаты", widget: string }
+
+  - name: songs
+    label: "Песни (образец)"
+    files:
+      - name: songs
+        label: "Песни (образец)"
+        file: apps/web/content/songs.json
+        fields:
+          - name: items
+            label: "Песни"
+            widget: list
+            summary: "{{title}} — {{artist}}"
+            fields:
+              - { name: title, label: "Название", widget: string }
+              - { name: artist, label: "Исполнитель", widget: string }
+              - { name: lang, label: "Язык", widget: string }
+
+  - name: scenarios
+    label: "Сценарии"
+    files:
+      - name: scenarios
+        label: "Сценарии"
+        file: apps/web/content/scenarios.json
+        fields:
+          - name: items
+            label: "Сценарии"
+            widget: list
+            summary: "{{h1}}"
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+
+  - name: bundles
+    label: "Комплекты по площади"
+    files:
+      - name: bundles
+        label: "Комплекты по площади"
+        file: apps/web/content/bundles.json
+        fields:
+          - name: items
+            label: "Комплекты"
+            widget: list
+            summary: "{{h1}}"
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+
+  - name: brands
+    label: "Бренды"
+    files:
+      - name: brands
+        label: "Бренды"
+        file: apps/web/content/brands.json
+        fields:
+          - name: items
+            label: "Бренды"
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: name, label: "Название бренда", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+
+  - name: static-pages
+    label: "Служебные страницы"
+    files:
+      - name: static-pages
+        label: "Служебные страницы"
+        file: apps/web/content/static-pages.json
+        fields:
+          - name: items
+            label: "Страницы"
+            widget: list
+            summary: "{{h1}}"
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+
+  - name: page-meta
+    label: "SEO страниц"
+    files:
+      - name: page-meta
+        label: "SEO страниц"
+        file: apps/web/content/page-meta.json
+        fields:
+          - name: oNas
+            label: "О компании"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: kontakty
+            label: "Контакты"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: sravnenie
+            label: "AST или Studio Evolution"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: catalog
+            label: "Каталог"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: podKlyuch
+            label: "Под ключ"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: komplektyIndex
+            label: "Комплекты (индекс)"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: kalkulyator
+            label: "Калькулятор"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: pesni
+            label: "Песни (каталог)"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: keysy
+            label: "Кейсы"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: blog
+            label: "Блог (индекс)"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: dlyaDomaV2
+            label: "Для дома"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: dlyaBiznesa
+            label: "Для бизнеса"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
+          - name: gotovyeResheniya
+            label: "Готовые решения"
+            widget: object
+            fields:
+              - { name: slug, label: "Slug (URL)", widget: string }
+              - { name: h1, label: "H1", widget: string }
+              - { name: title, label: "Title (SEO)", widget: string }
+              - { name: description, label: "Description (SEO)", widget: text }
