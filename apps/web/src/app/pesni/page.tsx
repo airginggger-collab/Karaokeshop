@@ -22,17 +22,17 @@ export default function Page() {
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{pesniMeta.description}</p>
 
       <div className="mb-8 mt-6 grid gap-3 sm:grid-cols-3">
-        <div className="rounded-xl bg-surface p-4">
+        <div className="rounded-xl border border-border bg-background p-4">
           <Music className="h-5 w-5 text-primary" />
           <p className="mt-2 text-2xl font-semibold">{total}+</p>
           <p className="text-xs text-muted-foreground">песен в базе</p>
         </div>
-        <div className="rounded-xl bg-surface p-4">
+        <div className="rounded-xl border border-border bg-background p-4">
           <Globe className="h-5 w-5 text-primary" />
           <p className="mt-2 text-2xl font-semibold">4 языка</p>
           <p className="text-xs text-muted-foreground">KZ · RU · EN и другие</p>
         </div>
-        <div className="rounded-xl bg-surface p-4">
+        <div className="rounded-xl border border-border bg-background p-4">
           <RefreshCw className="h-5 w-5 text-primary" />
           <p className="mt-2 text-2xl font-semibold">Ежемесячно</p>
           <p className="text-xs text-muted-foreground">обновление репертуара</p>

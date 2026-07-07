@@ -91,7 +91,7 @@ export default function Page() {
         </section>
 
         {/* CTA */}
-        <div className="mt-10 rounded-xl bg-surface p-6">
+        <div className="mt-10 rounded-xl border border-border bg-background p-6">
           <h2 className="font-medium">Хотите так же?</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Расскажите про ваш объект — подберём систему и пришлём смету.

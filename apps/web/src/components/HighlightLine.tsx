@@ -1,47 +1,6 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-
-/** «Подсветка строки» как в караоке: заливка слева направо при появлении.
-    SSR/без JS — сразу залито (класс .hl). Уважает prefers-reduced-motion (CSS).
-    FOUC-гард: элемент, уже видимый при гидрации (above-the-fold), остаётся
-    залитым без анимации — первый IO-колбэк только измеряет видимость. */
+/** «Подсветка строки»: акцентный текст (цвет --color-cta + тонкое подчёркивание),
+    без анимации и без заливки-блока. Класс .hl — см. globals.css. SSR-safe. */
 export function HighlightLine({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [armed, setArmed] = useState(false);
-  const [on, setOn] = useState(false);
-  const measured = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        const e = entries[entries.length - 1]; // последняя запись батча = актуальное состояние
-        if (!measured.current) {
-          measured.current = true;
-          if (e.intersectionRatio > 0) {
-            io.disconnect();
-            return;
-          }
-          setArmed(true);
-          return;
-        }
-        if (e.intersectionRatio >= 0.35) {
-          setOn(true);
-          io.disconnect();
-        }
-      },
-      { threshold: [0, 0.4] }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  const cls = ["hl", armed && "hl-armed", on && "hl-on", className].filter(Boolean).join(" ");
-  return (
-    <span ref={ref} className={cls}>
-      {children}
-    </span>
-  );
+  const cls = ["hl", className].filter(Boolean).join(" ");
+  return <span className={cls}>{children}</span>;
 }

@@ -6,7 +6,7 @@
 
 Karaokeshop.kz — ребилд интернет-магазина караоке-оборудования (Алматы; бренды AST + Studio Evolution). **Монорепо Turborepo + npm workspaces.** Сайт — Next.js 15 (App Router, `output: "export"` — чистая статика), захостен на Cloudflare как assets-only Worker. Контент пока захардкожен в `apps/web/src/lib/site.ts` (CMS не подключена). SEO — главный приоритет проекта.
 
-- Стек: Next.js ^15.1.2 · React ^19 · TypeScript ^5.6.3 strict · Turborepo ^2.3.3 · Tailwind ^3.4.17 на токенах · Style Dictionary ^4.3.0 · Storybook ^8.4.7 · Vitest ^2.1.8 · lucide-react. Шрифты Manrope + Unbounded (`next/font/google`).
+- Стек: Next.js ^15.1.2 · React ^19 · TypeScript ^5.6.3 strict · Turborepo ^2.3.3 · Tailwind ^3.4.17 на токенах · Style Dictionary ^4.3.0 · Storybook ^8.4.7 · Vitest ^2.1.8 · lucide-react. Шрифты Manrope + Onest (`next/font/google`; Onest — заголовки, заменил Unbounded 2026-07-07).
 - Структура: `apps/web` (сайт), `packages/tokens` (`@kk/tokens`), `packages/ui` (`@kk/ui`), `docs/` (контекст-пак).
 
 ## ⚠️ Это ОТДЕЛЬНЫЙ проект
@@ -89,11 +89,11 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 Арт-директура — [specs/2026-07-04-dizayn-sprint-stsena-design.md](docs/superpowers/specs/2026-07-04-dizayn-sprint-stsena-design.md). Обязательно:
 1. **Никаких рядов pill-чипов.** Факты доверия — строкой-тикером (`.ticker`) вдоль тонкой линии.
 2. **CountUp-счётчики не на витринах.** Компонент и тесты в репо остаются; в UI цифры — статикой (тикер), без анимации роста.
-3. **Сетка «иконка+заголовок+текст» — максимум одна на страницу**; заголовки секций через нумерацию 01/02, не lucide-кружки.
-4. **Тени-«клей» запрещены.** Разделение поверхностей — цвет (`bg-background` на `bg-page`) + hairline `border border-border`. Тень только у плавающих элементов (FAB, оверлеи, sticky, drawer).
+3. **Сетка «иконка+заголовок+текст» — максимум одна на страницу**; заголовки секций — просто текст, без нумерации 01/02 и без lucide-кружков (нумерация убрана по решению владельца 2026-07-07).
+4. **Тени-«клей» запрещены.** Разделение поверхностей — цвет (`bg-background` на `bg-page`) + hairline `border border-border`. Тень только у плавающих элементов (FAB, оверлеи, sticky, drawer). Крупные карточки-контейнеры — единый фон `bg-background` (не `bg-surface`/градиент) во всех темах.
 5. **Сток-фото запрещён.** До реальных фото — типографический плейсхолдер на `bg-scene` (имя модели/сцены в `font-display text-primary/40`).
 6. **Фото товаров** — на подложке `bg-scene` с паддингом; белые плашки в тёмной теме запрещены.
-7. **Фирменный приём «подсветка строки»** — `<HighlightLine>` / класс `.hl` на ключевом слове заголовка (≤ половины h1), активном пункте nav. SSR-safe.
+7. **Фирменный приём «подсветка строки»** — `<HighlightLine>` / класс `.hl` на ключевом слове заголовка (≤ половины h1), активном пункте nav. С 2026-07-07 — акцентный текст (`color: var(--color-cta)` + тонкое подчёркивание), НЕ заливка-блок; `HighlightLine` — чистый SSR-компонент без анимации.
 8. **Один WhatsApp-CTA на вьюпорт.** Иерархия: зелёный WhatsApp → акцентный CTA (`bg-cta`, неон-жёлтый в тёмной теме / чернильно-синий в светлой) → ghost.
 9. **Радиусы только из шкалы** (`rounded-sm/md/lg/xl` = 6/8/10/12px). `rounded-2xl`/`rounded-3xl` запрещены. On-primary текст — `text-primary-fg`, НЕ `text-white` (в тёмной primary светлый).
 

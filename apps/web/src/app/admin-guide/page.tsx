@@ -162,7 +162,7 @@ export default function Page() {
         })}
       </div>
 
-      <div className="mt-10 rounded-xl bg-surface p-6 text-center">
+      <div className="mt-10 rounded-xl border border-border bg-background p-6 text-center">
         <p className="font-medium">Готовы внести правку?</p>
         <p className="mt-1 text-sm text-muted-foreground">
           Кабинет открывается прямо в браузере — код трогать не нужно.

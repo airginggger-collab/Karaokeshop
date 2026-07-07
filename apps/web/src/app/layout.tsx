@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Unbounded } from "next/font/google";
+import { Manrope, Onest } from "next/font/google";
 import "@kk/tokens/tokens.css";
 import "@kk/tokens/theme.css";
 import "./globals.css";
@@ -22,10 +22,10 @@ const sans = Manrope({
   display: "swap",
 });
 
-const display = Unbounded({
+const display = Onest({
   subsets: ["latin", "cyrillic"],
+  weight: ["700", "800"],
   variable: "--font-display",
-  weight: ["600", "700"],
   display: "swap",
 });
 

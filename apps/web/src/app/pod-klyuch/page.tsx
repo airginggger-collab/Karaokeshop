@@ -143,7 +143,7 @@ export default function Page() {
         {/* Числа доверия */}
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {trust.map(({ icon: Icon, value, label }) => (
-            <div key={label} className="flex items-center gap-3 rounded-xl bg-surface p-4">
+            <div key={label} className="flex items-center gap-3 rounded-xl border border-border bg-background p-4">
               <Icon className="h-5 w-5 shrink-0 text-primary" />
               <div>
                 <p className="font-semibold leading-tight">{value}</p>
@@ -174,7 +174,7 @@ export default function Page() {
         </section>
 
         {/* CTA */}
-        <div className="mt-10 rounded-xl bg-surface p-6">
+        <div className="mt-10 rounded-xl border border-border bg-background p-6">
           <h2 className="font-medium">Готовы обсудить проект?</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Расскажите про объект — подберём решение и пришлём смету.

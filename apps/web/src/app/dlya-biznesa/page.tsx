@@ -163,7 +163,7 @@ export default function Page() {
         </section>
 
         {/* CTA */}
-        <div className="mt-10 rounded-xl bg-surface p-6">
+        <div className="mt-10 rounded-xl border border-border bg-background p-6">
           <h2 className="font-medium">Расскажите про ваш объект</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Напишите площадь зала и задачу — подберём систему и пришлём ориентировочную смету за день.

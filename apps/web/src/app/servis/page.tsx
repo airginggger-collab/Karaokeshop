@@ -129,7 +129,7 @@ export default function Page() {
         <FaqAccordion items={faq} />
       </section>
 
-      <div className="mt-10 rounded-xl bg-surface p-6">
+      <div className="mt-10 rounded-xl border border-border bg-background p-6">
         <h2 className="font-medium">Нужна помощь или консультация?</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Напишите в WhatsApp — ответим быстро и согласуем удобное время выезда.

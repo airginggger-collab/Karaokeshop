@@ -231,7 +231,7 @@ export default function Page() {
         </section>
 
         {/* Итог */}
-        <div className="mt-10 rounded-xl bg-surface p-6">
+        <div className="mt-10 rounded-xl border border-border bg-background p-6">
           <h2 className="font-medium">Не уверены — мы подберём</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Чаще всего выбор между брендами решает не «лучше / хуже», а площадь зала, бюджет и сценарий использования. Напишите — разберём вашу ситуацию.

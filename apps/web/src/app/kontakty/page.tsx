@@ -103,7 +103,7 @@ export default function Page() {
             </a>
 
             {/* Быстрые ссылки */}
-            <div className="rounded-xl bg-surface p-5 text-sm">
+            <div className="rounded-xl border border-border bg-background p-5 text-sm">
               <p className="mb-3 font-medium text-muted-foreground">Частые запросы</p>
               <ul className="space-y-2">
                 {[

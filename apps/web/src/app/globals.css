@@ -30,31 +30,20 @@ body {
    (border-2 border-primary в Hero, зебра sravnenie, рамка у шапки). */
 
 /* ─── Фирменный приём: «подсветка строки» (karaoke line) ───
-   SSR/без JS: заливка видна сразу (background-size 100%).
-   С JS: HighlightLine добавляет .hl-armed (0%) при монтировании,
-   затем .hl-on в вьюпорте — заливка едет слева направо.
+   Акцентный текст без заливки-блока: цвет --color-cta + тонкое подчёркивание.
+   Тёмная тема: --color-cta = неон-жёлтый → текст ярко выделяется на тёмном.
+   Светлая тема: --color-cta = чернильно-синий ≈ цвет заголовка → просто
+   цвет был бы неразличим, подчёркивание акцентом делает слово заметным.
    В @layer components: Tailwind ставит слой ДО utilities —
    любая утилита на элементе побеждает без !important. */
 @layer components {
   .hl {
-    background-image: linear-gradient(var(--color-cta), var(--color-cta));
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    color: var(--color-cta-fg);
-    padding: 0.02em 0.18em;
-    border-radius: 4px;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-  }
-  .hl.hl-armed { background-size: 0% 100%; color: var(--color-fg); }
-  .hl.hl-armed.hl-on {
-    background-size: 100% 100%;
-    color: var(--color-cta-fg);
-    transition: background-size 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s 0.25s;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hl.hl-armed { background-size: 100% 100%; color: var(--color-cta-fg); }
-    .hl.hl-armed.hl-on { transition: none; }
+    color: var(--color-cta);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--color-cta);
+    text-decoration-thickness: 0.07em;
+    text-underline-offset: 0.12em;
   }
 
   /* Строка-тикер фактов (вместо pill-чипов) */

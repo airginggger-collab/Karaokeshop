@@ -73,7 +73,7 @@ export default function Page() {
         <Breadcrumb items={[{ label: "О компании" }]} />
 
         {/* Герой */}
-        <section className="mt-4 rounded-xl bg-surface p-8 sm:p-10">
+        <section className="mt-4 rounded-xl border border-border bg-background p-8 sm:p-10">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">О компании</p>
           <h1 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">{oNasMeta.h1}</h1>
           <p className="mt-3 max-w-xl text-muted-foreground">
@@ -92,7 +92,7 @@ export default function Page() {
         {/* 4 числа */}
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((s) => (
-            <div key={s.label} className="rounded-xl bg-surface p-6 text-center">
+            <div key={s.label} className="rounded-xl border border-border bg-background p-6 text-center">
               <p className="font-display text-3xl font-bold text-primary">{s.value}</p>
               <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
             </div>
