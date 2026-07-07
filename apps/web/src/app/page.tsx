@@ -101,9 +101,9 @@ function SocialProof() {
 
 export default function HomePage() {
   return (
-    <Container className="py-6 sm:py-10">
+    <Container className="py-3 sm:py-5">
       {/* Hero — «Сцена»: тикер, h1 с подсветкой строки, квиз + сцена-плашка */}
-      <section className="animate-fade-up pt-2 lg:pt-6">
+      <section className="animate-fade-up pt-0 lg:pt-2">
         <p className="ticker max-w-md">официальный дилер AST · Studio Evolution · Алматы</p>
         <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
           Караоке-вечер <HighlightLine>у тебя дома</HighlightLine>
