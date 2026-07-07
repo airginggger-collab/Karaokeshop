@@ -139,52 +139,74 @@ next/font/google, subsets `latin` + `cyrillic`.
 
 ---
 
-## 6. Промпты для Google Stitch (тёмная тема)
+## 6. Промпты для Google Stitch (UI-кит, тёмная тема)
 
-Stitch забирает тему из текста промпта; после генерации основной цвет/шрифт/скругление доводятся в его панели. Один промпт = один экран.
+Stitch по промпту рисует **один экран**, поэтому «кит» задаётся как экран-витрина компонентов (style guide / UI kit sheet), а НЕ лендинг. Ключевые триггеры в промпте: «UI Kit / Style Guide screen (component sheet, NOT an app page)», перечень секций-витрин, «reusable component library sheet for handoff to Figma». Если Stitch обрежет длинный экран — попроси в чате «continue / add the remaining sections» или генери в два захода (секции 1–4, затем 5–7).
 
 ### 🇬🇧 English
 
 ```text
-Design a dark-theme UI for a karaoke-equipment online store ("night concert"
-vibe). Deep violet-black stage backgrounds, soft lavender text, one bold
-electric-purple action color. Flat surfaces separated by 1px hairline borders,
-no shadows except on floating elements, no gradients.
+Design a single "UI Kit / Style Guide" screen (a component sheet, NOT an app
+page) for a karaoke-equipment brand, dark theme, "night concert" vibe. One
+long scrollable screen organized into labeled sections that showcase the
+design system. Page background #0B0913, everything sits on cards #171226 with
+1px #2C2347 borders, no shadows, no gradients.
 
-Colors: page #0B0913, cards #171226, raised surface #221A38, borders #2C2347,
-text #F2EFFC, muted text #A89FD0, accent/links #9D8BF0, primary button #7250F8
-(white text), sale badge #FF5C8A, success #4ADE80, error #FF6B6B, product-photo
-backdrop #1F1832.
+Sections to lay out, in order:
 
-Fonts: headings "Unbounded" (bold, tight tracking), body & UI "Manrope".
-Corner radius 8–12px (never larger). 4px spacing scale. Centered content,
-max-width 1152px.
+1. COLORS — a grid of color swatches, each a rounded chip with its HEX label
+   below: page #0B0913, card #171226, surface #221A38, border #2C2347,
+   text #F2EFFC, muted #A89FD0, accent #9D8BF0, primary/CTA #7250F8,
+   sale #FF5C8A, success #4ADE80, error #FF6B6B, photo backdrop #1F1832,
+   brand #7C5CFF.
+2. TYPOGRAPHY — a type specimen: headings in "Unbounded" bold and body in
+   "Manrope", showing the scale 12/14/16/18/20/24/30/36/48/60 px with labels.
+3. BUTTONS — all variants and states in a row: primary solid #7250F8 (white
+   text), secondary ghost with #2C2347 border, WhatsApp green #25D366,
+   disabled. Show default + hover.
+4. BADGES / CHIPS — default chip #221A38, sale badge #FF5C8A, success and
+   error tags.
+5. FORM FIELDS — text input, textarea and select in dark style, with focus state.
+6. CARDS — a plain content card and a product card (product image sits on a
+   #1F1832 backdrop with padding, title, price, CTA button).
+7. RADIUS & SPACING — sample squares showing corner radius 6/8/10/12 px and a
+   4px spacing scale.
 
-Buttons: primary solid #7250F8; secondary ghost with #2C2347 border. Product
-photos sit on a #1F1832 backdrop with padding. Section headers use small
-numeric labels (01, 02), not icons.
+Fonts: headings "Unbounded", body/UI "Manrope". Corner radius 8–12px. Label
+every section with a small numeric eyebrow (01, 02…). This is a reusable
+component library sheet for handoff to Figma.
 ```
 
 ### 🇷🇺 Русский
 
 ```text
-Сделай тёмную тему для интернет-магазина караоке-оборудования, настроение
-«ночь концерта». Фиолетово-чёрный фон-сцена, лавандовый текст, один яркий
-фиолетовый акцент. Плоские поверхности, разделённые границей 1px, без теней
-(тень только у плавающих элементов), без градиентов.
+Сделай один экран «UI Kit / Гайд стилей» (витрина компонентов, НЕ страницу
+приложения) для бренда караоке-оборудования, тёмная тема, настроение «ночь
+концерта». Одна длинная прокручиваемая страница из подписанных секций,
+показывающих дизайн-систему. Фон #0B0913, всё на карточках #171226 с границей
+1px #2C2347, без теней и градиентов.
 
-Цвета: фон #0B0913, карточки #171226, подложка #221A38, границы #2C2347,
-текст #F2EFFC, приглушённый #A89FD0, акцент/ссылки #9D8BF0, кнопка #7250F8
-(белый текст), бейдж скидки #FF5C8A, успех #4ADE80, ошибка #FF6B6B,
-подложка фото товара #1F1832.
+Секции по порядку:
 
-Шрифты: заголовки «Unbounded» (жирный, плотный трекинг), текст и интерфейс
-«Manrope». Скругление 8–12px, не больше. Отступы кратны 4px. Контент по центру,
-макс. ширина 1152px.
+1. ЦВЕТА — сетка свотчей: каждый — скруглённый чип с подписью HEX снизу:
+   фон #0B0913, карточка #171226, подложка #221A38, граница #2C2347,
+   текст #F2EFFC, приглушённый #A89FD0, акцент #9D8BF0, кнопка #7250F8,
+   скидка #FF5C8A, успех #4ADE80, ошибка #FF6B6B, подложка фото #1F1832,
+   марка #7C5CFF.
+2. ТИПОГРАФИКА — образец шрифтов: заголовки «Unbounded» жирный, текст
+   «Manrope», со шкалой 12/14/16/18/20/24/30/36/48/60 px и подписями.
+3. КНОПКИ — все варианты и состояния в ряд: основная заливка #7250F8 (белый
+   текст), вторичная ghost с рамкой #2C2347, WhatsApp зелёная #25D366,
+   отключённая. Показать обычное + наведение.
+4. БЕЙДЖИ / ЧИПЫ — обычный чип #221A38, бейдж скидки #FF5C8A, теги успеха и ошибки.
+5. ПОЛЯ ФОРМ — текстовое поле, textarea и select в тёмном стиле, с состоянием фокуса.
+6. КАРТОЧКИ — обычная карточка и карточка товара (фото на подложке #1F1832 с
+   падингом, название, цена, кнопка CTA).
+7. РАДИУСЫ И ОТСТУПЫ — квадраты со скруглением 6/8/10/12 px и шкалой отступов 4px.
 
-Кнопки: основная — заливка #7250F8; вторичная — ghost с рамкой #2C2347. Фото
-товара на подложке #1F1832 с падингом. Заголовки секций — цифрами (01, 02),
-без иконок.
+Шрифты: заголовки «Unbounded», текст/интерфейс «Manrope». Скругление 8–12px.
+Каждую секцию подписать цифрой (01, 02…). Это переиспользуемая витрина
+компонентов для передачи в Figma.
 ```
 
 ### UI-панель Stitch (выставить руками после генерации)
