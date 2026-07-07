@@ -37,7 +37,7 @@ function SocialProof() {
       <ClientLogos />
 
       {/* Отзывы */}
-      <section className="mt-12">
+      <section className="mt-8">
         <div className="flex items-end justify-between">
           <h2 className="font-display text-2xl font-bold sm:text-3xl">Клиенты о нас</h2>
           <a
@@ -103,15 +103,15 @@ export default function HomePage() {
   return (
     <Container className="py-6 sm:py-10">
       {/* Hero — «Сцена»: тикер, h1 с подсветкой строки, квиз + сцена-плашка */}
-      <section className="animate-fade-up pt-4 lg:pt-10">
+      <section className="animate-fade-up pt-2 lg:pt-6">
         <p className="ticker max-w-md">официальный дилер AST · Studio Evolution · Алматы</p>
-        <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
+        <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
           Караоке-вечер <HighlightLine>у тебя дома</HighlightLine>
         </h1>
-        <p className="mt-5 max-w-xl text-lg text-muted-foreground">
+        <p className="mt-3 max-w-xl text-lg text-muted-foreground">
           Бесплатный подбор под площадь и бюджет — за минуту. Дальше смета, монтаж, настройка и гарантия под ключ.
         </p>
-        <div className="mt-10 grid gap-6 lg:grid-cols-12">
+        <div className="mt-6 grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <QuizWidget />
           </div>
@@ -129,7 +129,7 @@ export default function HomePage() {
       </section>
 
       {/* Доверие цифрами — CountUp при появлении в вьюпорте */}
-      <section className="mt-12 grid grid-cols-2 gap-6 border-y border-border py-6 sm:grid-cols-4">
+      <section className="mt-8 grid grid-cols-2 gap-6 border-y border-border py-5 sm:grid-cols-4">
         {[
           { value: "14+", label: "лет на рынке" },
           { value: "200+", label: "объектов" },
@@ -144,12 +144,12 @@ export default function HomePage() {
       </section>
 
       {/* 01 — Как мы работаем (услуга под ключ) */}
-      <section className="mt-16">
+      <section className="mt-10">
         <SectionTitle>
           Как мы <HighlightLine>работаем</HighlightLine>
         </SectionTitle>
         <p className="mt-2 text-sm text-muted-foreground">Пять шагов от заявки до живого звука.</p>
-        <div className="relative mt-6 grid gap-4 sm:grid-cols-5">
+        <div className="relative mt-4 grid gap-4 sm:grid-cols-5">
           {[
             { title: "Консультация", body: "Выясним задачу, площадь и бюджет — по WhatsApp или в шоуруме." },
             { title: "Проект", body: "Подготовим смету и акустический расчёт под ваше помещение." },
@@ -166,7 +166,7 @@ export default function HomePage() {
       </section>
 
       {/* Дом и бизнес — сценарные входы */}
-      <section className="mt-12 grid gap-4 sm:grid-cols-2">
+      <section className="mt-8 grid gap-4 sm:grid-cols-2">
         {[
           { href: "/dlya-doma", image: "/scenariy/dom.jpg", title: "Караоке для дома", sub: "Гостиная, баня, гостевой дом. Тёплые вечера с песнями.", cta: "Выбрать домой" },
           { href: "/dlya-biznesa", image: "/scenariy/biznes.jpg", title: "Караоке для бизнеса", sub: "Кафе, бар, ресторан, клуб. Проект звука и монтаж под ключ.", cta: "Оснастить заведение" },
@@ -187,7 +187,7 @@ export default function HomePage() {
       </section>
 
       {/* 02 — На чём собираем (доказательство) */}
-      <section className="mt-16">
+      <section className="mt-10">
         <div className="flex items-end justify-between">
           <SectionTitle>На чём собираем</SectionTitle>
           <Link href="/catalog" className="hidden items-center gap-1 text-sm font-medium text-primary sm:flex">
@@ -195,7 +195,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="mt-5 grid gap-4 sm:grid-cols-2">
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {featuredProducts.map((p) => (
             <Link
               key={p.slug}
@@ -254,9 +254,9 @@ export default function HomePage() {
       </section>
 
       {/* 03 — Доверие: почему karaokeshop + дилерская полоса */}
-      <section className="mt-16">
+      <section className="mt-10">
         <SectionTitle>Почему karaokeshop</SectionTitle>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { title: "Подбор без ошибки", body: "Выясним задачу, площадь и бюджет — предложим то, что реально подходит." },
             { title: "Два бренда в одном месте", body: "AST и Studio Evolution — сравниваем честно и помогаем выбрать." },
@@ -317,9 +317,9 @@ export default function HomePage() {
       </section>
 
       {/* 04 — Разделы: блоки перехода */}
-      <section className="mt-16">
+      <section className="mt-10">
         <SectionTitle>Разделы</SectionTitle>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {[
             { href: "/brand/studio-evolution", title: "Studio Evolution", sub: "Evobox, Plus, Premium, Club, Pro2 — линейка для дома и клубов.", cta: "Смотреть модели" },
             { href: "/brand/ast", title: "AST (Art System)", sub: "HOME, Mini, AST-50/250/350 — от дома до клуба на 100 м².", cta: "Смотреть модели" },
@@ -340,15 +340,15 @@ export default function HomePage() {
       </section>
 
       {/* Финальный CTA */}
-      <section className="mt-16 rounded-xl border border-border bg-background p-8 sm:p-10">
+      <section className="mt-10 rounded-xl border border-border bg-background p-8 sm:p-10">
         <h2 className="max-w-2xl font-display text-2xl font-bold sm:text-3xl">
           Подберём <HighlightLine>за минуту</HighlightLine> — бесплатно
         </h2>
         <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
           Пройдите квиз выше или напишите нам — ответим и предложим то, что реально подходит под вашу задачу и бюджет.
         </p>
-        <p className="ticker mt-6 max-w-2xl">14 лет на рынке · 200+ объектов · 60 000+ песен · гарантия 2 года</p>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <p className="ticker mt-5 max-w-2xl">14 лет на рынке · 200+ объектов · 60 000+ песен · гарантия 2 года</p>
+        <div className="mt-5 flex flex-wrap gap-3">
           <a
             href={`https://wa.me/${siteConfig.whatsapp}`}
             target="_blank"
