@@ -73,6 +73,8 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 
 ## Ловушки
 
+> **ПРАВИЛО (владелец, 2026-07-10): что и почему ломается — ОБЯЗАТЕЛЬНО записывать сюда, чтобы не повторять.** Поймал баг/регресс/упавший деплой или наткнулся на пре-existing дефект при правке → разберись в **корневой причине** (что именно и почему, а не симптом) и добавь пункт-ловушку с корнем + способом защиты, в том же коммите (см. «ЕДИНОЕ ПРАВИЛО»). Каждый пункт ниже — уже пойманная поломка; список только растёт.
+
 0. **`apps/web/public/_redirects` — ТОЛЬКО относительные URL, и всегда проверяй CI-деплой после пуша.** Cloudflare Workers Static Assets валидирует `_redirects` на шаге `wrangler deploy` (не при `next build`): абсолютный URL (с хостом) → `Only relative URLs are allowed` → **деплой падает, а прод молча застревает на прошлой версии**. Так и случилось 2026-07-02 (правило www-канонизации). Защита: `postbuild`-хук `scripts/check-redirects.mjs` роняет **локальную сборку** на абсолютных URL. Хост-канонизацию (www) делать через **Cloudflare Redirect Rules** (дашборд), не в `_redirects`. **Правило: после каждого push в `main` проверяй `gh run list` — деплой мог упасть, локальный build это не покажет.**
 1. **`next start` не работает с `output: export`.** Для локального просмотра — `npx serve apps/web/out`, не `next start`.
 2. **HEX-палитра PDF / токены.** Цвета — только через токены `@kk/tokens`; не хардкодь.
@@ -81,6 +83,7 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 5. **`_local-assets/` — gitignored локальная свалка** (скриншоты и т.п.). Не ре-трекай. `.gitignore` также блокирует stray-бинарники в корне (`/*.png`, `/*.jpg`, `/*.jpeg`, `/*.pdf`).
 6. **`packages/ui/storybook-static/` — gitignored** (`packages/ui/.gitignore`). В git не попадает; пересобирается `npm run build-storybook -w @kk/ui`.
 7. **Бренд-домен `karaokeshop.kz` ещё НЕ привязан — отдаёт старый Wix; `siteConfig.url` ведёт canonical/og на чужой сайт (SEO-риск).** Боевой прод — только `*.workers.dev`; `.kz` сейчас старый сайт на Wix (DNS не на Cloudflare). А `siteConfig.url = "https://www.karaokeshop.kz"` → `seo.ts` строит от него `canonical`, `og:url`, `og:image` → они указывают на Wix. Пока домен не привязан: **проверять прод только на `*.workers.dev`** (не на `.kz`), `siteConfig.url` по этому поводу **не менять** без отдельного решения — долг закроется в момент привязки домена. Чек-лист «Проверка после деплоя» — в [docs/deploy.md](docs/deploy.md).
+ 8. **Не вписывай бренд в `title` страницы руками — корневой layout уже добавляет его через `title.template` (`%s | karaokeshop`, `apps/web/src/app/layout.tsx`).** Ручной `| karaokeshop` в `metadata.title` страницы → **задвоение** `… | karaokeshop | karaokeshop` (было на `/dlya-biznesa`, жило на LIVE, устранено 2026-07-10). В `title` страницы пиши **только суть**, бренд подставится сам. Единственное место с брендом — `title.default` для корня в `layout.tsx`.
 
 ## UI-конвенции (обязательные)
 
