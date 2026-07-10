@@ -108,7 +108,9 @@ export default function HomePage() {
           <div className="lg:col-span-7">
             <p className="ticker max-w-md">официальный дилер AST · Studio Evolution · Алматы</p>
             <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
-              Караоке-вечер <HighlightLine>у тебя дома</HighlightLine>
+              Караоке-вечер
+              <br />
+              <HighlightLine className="whitespace-nowrap">у тебя дома</HighlightLine>
             </h1>
             <p className="mt-3 max-w-xl text-lg text-muted-foreground">
               Бесплатный подбор под площадь и бюджет — за минуту. Дальше смета, монтаж, настройка и гарантия под ключ.
