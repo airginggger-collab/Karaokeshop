@@ -120,7 +120,7 @@ export default function Page() {
         <div className="mt-10 rounded-xl border border-border bg-background p-6">
           <h2 className="font-medium">Не нашли подходящее?</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Расскажите про задачу — подберём индивидуально и пришлём смету.
+            Расскажите про задачу — подберём комплект и пришлём смету.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <a
