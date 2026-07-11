@@ -113,7 +113,7 @@ export default function HomePage() {
               <HighlightLine className="whitespace-nowrap">у тебя дома</HighlightLine>
             </h1>
             <p className="mt-3 max-w-xl text-lg text-muted-foreground">
-              Бесплатный подбор под площадь и бюджет — за минуту. Дальше смета, монтаж, настройка и гарантия под ключ.
+              Бесплатный подбор под площадь и бюджет за минуту. Дальше смета, монтаж, настройка и гарантия под ключ.
             </p>
             <div className="mt-6">
               <QuizWidget />
@@ -155,7 +155,7 @@ export default function HomePage() {
         <p className="mt-2 text-sm text-muted-foreground">Пять шагов от заявки до живого звука.</p>
         <div className="relative mt-4 grid gap-4 sm:grid-cols-5">
           {[
-            { title: "Консультация", body: "Выясним задачу, площадь и бюджет — по WhatsApp или в шоуруме." },
+            { title: "Консультация", body: "Выясним задачу, площадь и бюджет по WhatsApp или в шоуруме." },
             { title: "Проект", body: "Подготовим смету и акустический расчёт под ваше помещение." },
             { title: "Монтаж", body: "Приедем сами, установим и закрепим оборудование." },
             { title: "Настройка", body: "Откалибруем звук, загрузим базу и проверим всё вместе с вами." },
@@ -262,10 +262,10 @@ export default function HomePage() {
         <SectionTitle>Почему karaokeshop</SectionTitle>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { title: "Подбор без ошибки", body: "Выясним задачу, площадь и бюджет — предложим то, что реально подходит." },
-            { title: "Два бренда в одном месте", body: "AST и Studio Evolution — сравниваем честно и помогаем выбрать." },
-            { title: "Под ключ", body: "Проект звука, монтаж, настройка, обучение — один договор." },
-            { title: "Заказ через WhatsApp", body: "Напишите — ответим быстро, поможем выбрать и оформим заявку." },
+            { title: "Подбор без ошибки", body: "Выясним задачу, площадь и бюджет. Предложим то, что реально подходит." },
+            { title: "Два бренда в одном месте", body: "AST и Studio Evolution. Сравниваем честно и помогаем выбрать." },
+            { title: "Под ключ", body: "Проект звука, монтаж, настройка, обучение: один договор." },
+            { title: "Заказ через WhatsApp", body: "Напишите, ответим быстро, поможем выбрать и оформим заявку." },
           ].map((item) => (
             <div key={item.title} className="rounded-xl border border-border bg-background p-5">
               <p className="font-medium">{item.title}</p>
@@ -325,9 +325,9 @@ export default function HomePage() {
         <SectionTitle>Разделы</SectionTitle>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { href: "/brand/studio-evolution", title: "Studio Evolution", sub: "Evobox, Plus, Premium, Club, Pro2 — линейка для дома и клубов.", cta: "Смотреть модели" },
-            { href: "/brand/ast", title: "AST (Art System)", sub: "HOME, Mini, AST-50/250/350 — от дома до клуба на 100 м².", cta: "Смотреть модели" },
-            { href: "/gotovye-resheniya", title: "Готовые решения", sub: "Подобранные комплекты под сценарий — состав и цена сразу.", cta: "Выбрать" },
+            { href: "/brand/studio-evolution", title: "Studio Evolution", sub: "Evobox, Plus, Premium, Club, Pro2: линейка для дома и клубов.", cta: "Смотреть модели" },
+            { href: "/brand/ast", title: "AST (Art System)", sub: "HOME, Mini, AST-50/250/350: от дома до клуба на 100 м².", cta: "Смотреть модели" },
+            { href: "/gotovye-resheniya", title: "Готовые решения", sub: "Подобранные комплекты под сценарий: состав и цена сразу.", cta: "Выбрать" },
             { href: "/pod-klyuch", title: "Монтаж", sub: "Проект звука под помещение, монтаж, обучение персонала.", cta: "Подробнее" },
             { href: "/servis", title: "Сервис и гарантия", sub: "Настройка, ремонт, обновление репертуара.", cta: "Узнать" },
             { href: "/kontakty", title: "Контакты", sub: "Алматы, ул. Муканова 8 · WhatsApp, телефон, карта.", cta: "Написать" },
@@ -346,10 +346,10 @@ export default function HomePage() {
       {/* Финальный CTA */}
       <section className="mt-10 rounded-xl border border-border bg-background p-8 sm:p-10">
         <h2 className="max-w-2xl font-display text-2xl font-bold sm:text-3xl">
-          Подберём <HighlightLine>за минуту</HighlightLine> — бесплатно
+          Подберём <HighlightLine>за минуту</HighlightLine>, бесплатно
         </h2>
         <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
-          Пройдите квиз выше или напишите нам — ответим и предложим то, что реально подходит под вашу задачу и бюджет.
+          Пройдите квиз выше или напишите нам. Ответим и предложим то, что реально подходит под вашу задачу и бюджет.
         </p>
         <p className="ticker mt-5 max-w-2xl">14 лет на рынке · 200+ объектов · 60 000+ песен · гарантия 2 года</p>
         <div className="mt-5 flex flex-wrap gap-3">

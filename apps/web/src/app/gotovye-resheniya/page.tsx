@@ -91,7 +91,7 @@ export default function Page() {
           Готовые <HighlightLine>решения</HighlightLine>
         </h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          Подобранные комплекты под конкретный сценарий. Цена, состав, что входит — всё сразу. Уточним детали под ваш объект.
+          Подобранные комплекты под конкретный сценарий. Сразу видно цену, состав и что входит. Уточним детали под ваш объект.
         </p>
 
         {/* Для дома */}
@@ -120,7 +120,7 @@ export default function Page() {
         <div className="mt-10 rounded-xl border border-border bg-background p-6">
           <h2 className="font-medium">Не нашли подходящее?</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Расскажите про задачу — подберём комплект и пришлём смету.
+            Расскажите про задачу, подберём комплект и пришлём смету.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <a
