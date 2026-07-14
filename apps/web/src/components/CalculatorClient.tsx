@@ -97,7 +97,7 @@ export function CalculatorClient() {
       {/* Шаг 1 — Сценарий */}
       {step === 1 && (
         <div>
-          <h2 className="mb-4 font-display text-lg font-semibold">Шаг 1 — Выберите сценарий</h2>
+          <h2 className="mb-4 font-display text-lg font-semibold">Шаг 1. Выберите сценарий</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {SCENARIOS.map((s) => (
               <button
@@ -127,7 +127,7 @@ export function CalculatorClient() {
       {/* Шаг 2 — Площадь */}
       {step === 2 && (
         <div>
-          <h2 className="mb-4 font-display text-lg font-semibold">Шаг 2 — Площадь помещения</h2>
+          <h2 className="mb-4 font-display text-lg font-semibold">Шаг 2. Площадь помещения</h2>
           <div className="rounded-xl border border-border bg-background p-6">
             <p className="mb-2 text-sm font-medium">
               Площадь зала: <span className="text-primary font-semibold">{area} м²</span>
@@ -174,7 +174,7 @@ export function CalculatorClient() {
       {/* Шаг 3 — Бюджет */}
       {step === 3 && (
         <div>
-          <h2 className="mb-4 font-display text-lg font-semibold">Шаг 3 — Ориентир по бюджету</h2>
+          <h2 className="mb-4 font-display text-lg font-semibold">Шаг 3. Ориентир по бюджету</h2>
           <div className="grid gap-3">
             {BUDGET_OPTS.map((opt, i) => (
               <button
@@ -249,7 +249,7 @@ export function CalculatorClient() {
           )}
           {!fits && (
             <p className="mt-2 rounded-lg bg-primary-soft px-3 py-2 text-xs text-primary">
-              Минимальный комплект под {calc.area} м² выходит дороже бюджета «{BUDGET_OPTS[budgetIdx].label}» — показываем ориентир, точную смету подберём по проекту.
+              Минимальный комплект под {calc.area} м² выходит дороже бюджета «{BUDGET_OPTS[budgetIdx].label}». Показываем ориентир, точную смету подберём по проекту.
             </p>
           )}
 

@@ -30,8 +30,8 @@ export async function generateMetadata({
   if (!p) return {};
   const detail = p.areaMax ? `до ${p.areaMax} м²` : p.power ?? p.note ?? typeLabels[p.type];
   return {
-    title: `${p.model} — купить в ${siteConfig.city}, цена ${priceFmt(p.price)}`,
-    description: `${p.model} (${p.brand}) — ${detail}. Цена ${priceFmt(p.price)}, монтаж, настройка и гарантия.`,
+    title: `${p.model}: купить в ${siteConfig.city}, цена ${priceFmt(p.price)}`,
+    description: `${p.model} (${p.brand}): ${detail}. Цена ${priceFmt(p.price)}, монтаж, настройка и гарантия.`,
     alternates: { canonical: `/product/${p.slug}` },
   };
 }

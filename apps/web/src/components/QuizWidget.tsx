@@ -81,7 +81,7 @@ export function QuizWidget() {
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-accent-fg">
               <Check className="h-4 w-4" />
             </span>
-            <p className="font-display text-lg font-semibold">Готово — вот ориентир</p>
+            <p className="font-display text-lg font-semibold">Готово, вот ориентир</p>
           </div>
 
           <div className="rounded-xl border border-border p-4">
@@ -100,7 +100,7 @@ export function QuizWidget() {
             )}
             {!result.fits && (
               <p className="mt-2 text-xs text-muted-foreground">
-                Минимальный комплект под {result.calc.area} м² дороже выбранного бюджета — это ориентир, точную смету подберём по проекту.
+                Минимальный комплект под {result.calc.area} м² дороже выбранного бюджета. Это ориентир, точную смету подберём по проекту.
               </p>
             )}
           </div>

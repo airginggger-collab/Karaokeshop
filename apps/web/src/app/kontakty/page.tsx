@@ -56,7 +56,7 @@ export default function Page() {
               <p className="font-semibold">Выезд на объект</p>
               <p className="mt-0.5 text-sm text-muted-foreground">По любому району Алматы в течение 1 часа</p>
               <p className="mt-1.5 text-xs font-medium text-primary">
-                Замерим акустику, составим смету — бесплатно
+                Замерим акустику, составим смету бесплатно
               </p>
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function Page() {
           <div className="overflow-hidden rounded-xl border border-border">
             <iframe
               src={mapSrc}
-              title="Карта — karaokeshop, Алматы"
+              title="Карта karaokeshop, Алматы"
               loading="lazy"
               className="h-full min-h-[360px] w-full"
               style={{ border: 0 }}

@@ -95,13 +95,13 @@ const scenarios = [
   {
     title: "Дом, гостиная, баня",
     rec: "AST Mini или Evobox",
-    why: "Оба бренда предлагают готовые «всё включено» комплекты. Evobox выигрывает удобством планшетного интерфейса, AST Mini — ценой и простотой.",
+    why: "Оба бренда предлагают готовые «всё включено» комплекты. Evobox выигрывает удобством планшетного интерфейса, AST Mini выигрывает ценой и простотой.",
     href: "/dlya-doma",
   },
   {
     title: "Кафе, ресторан, VIP-зал",
     rec: "AST-250 или Evobox Plus",
-    why: "AST-250 — надёжный выбор для зала до 80 м², хорошо знаком нашим монтажникам. Evobox Plus подойдёт, если важен современный интерфейс и облако.",
+    why: "AST-250: надёжный выбор для зала до 80 м², хорошо знаком нашим монтажникам. Evobox Plus подойдёт, если важен современный интерфейс и облако.",
     href: "/dlya-biznesa",
   },
   {
@@ -143,7 +143,7 @@ export default function Page() {
           AST <HighlightLine>или</HighlightLine> Studio Evolution
         </h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          Оба бренда представлены у нас официально. Ниже — честное сравнение без давления на продажу.
+          Оба бренда представлены у нас официально. Ниже честное сравнение без давления на продажу.
         </p>
 
         {/* Сравнительная таблица */}
@@ -186,7 +186,7 @@ export default function Page() {
         {/* Сильные стороны */}
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl border border-border bg-background p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">AST — сильная сторона</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">AST: сильная сторона</p>
             <p className="mt-2 font-display text-lg font-semibold">Широкая линейка и сервис</p>
             <p className="mt-2 text-sm text-muted-foreground">
               От компактного Mini для дома до мощного AST-350 для клубов. Самая большая база KZ/RU/EN, модульное расширение на несколько зон. Хорошо изучен нашими монтажниками.
@@ -196,10 +196,10 @@ export default function Page() {
             </Link>
           </div>
           <div className="rounded-xl border border-border bg-background p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Studio Evolution — сильная сторона</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Studio Evolution: сильная сторона</p>
             <p className="mt-2 font-display text-lg font-semibold">Интерфейс и облако</p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Evobox — современный планшетный пульт, облачный контент и удобный UX. Хорошо смотрится в заведениях, где важна презентабельность системы.
+              Evobox: современный планшетный пульт, облачный контент и удобный UX. Хорошо смотрится в заведениях, где важна презентабельность системы.
             </p>
             <Link href="/brand/studio-evolution" className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
               Модели Studio Evolution <ArrowRight className="h-4 w-4" />
@@ -232,9 +232,9 @@ export default function Page() {
 
         {/* Итог */}
         <div className="mt-10 rounded-xl border border-border bg-background p-6">
-          <h2 className="font-medium">Не уверены — мы подберём</h2>
+          <h2 className="font-medium">Не уверены? Мы подберём</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Чаще всего выбор между брендами решает не «лучше / хуже», а площадь зала, бюджет и сценарий использования. Напишите — разберём вашу ситуацию.
+            Чаще всего выбор между брендами решает не «лучше / хуже», а площадь зала, бюджет и сценарий использования. Напишите, разберём вашу ситуацию.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <a

@@ -25,7 +25,7 @@ export function CheckoutClient() {
         </div>
         <h2 className="mt-3 text-lg font-medium">Заявка отправлена</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Откроется WhatsApp — отправьте сообщение, менеджер свяжется в течение часа.
+          Откроется WhatsApp, отправьте сообщение, менеджер свяжется в течение часа.
         </p>
         <Link href="/catalog" className="mt-4 inline-block text-sm text-primary hover:underline">
           Вернуться в каталог
