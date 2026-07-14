@@ -42,7 +42,7 @@ export default function Page() {
           <div>
             <h2 className="font-display text-xl font-bold">Истории установок</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Реальный опыт клиентов — от домашней гостиной до клуба на 200 человек
+              Реальный опыт клиентов: от домашней гостиной до клуба на 200 человек
             </p>
           </div>
           <span className="hidden text-xs text-muted-foreground sm:block">

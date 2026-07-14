@@ -30,7 +30,7 @@ export function AreaCalculator() {
     <div className="rounded-xl border border-border p-5">
       <h3 className="font-medium">Подберём комплект под площадь</h3>
       <p className="mt-1 text-sm text-muted-foreground">
-        Выберите площадь и тип заведения — покажем готовое решение.
+        Выберите площадь и тип заведения, покажем готовое решение.
       </p>
 
       <p className="mb-2 mt-4 text-xs text-muted-foreground">Площадь зала</p>

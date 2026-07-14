@@ -106,7 +106,7 @@ export function CatalogClient({ items }: { items: Product[] }) {
       ) : displayed.length ? (
         <ProductGrid items={displayed} />
       ) : (
-        <p className="py-10 text-center text-sm text-muted-foreground">Ничего не найдено — попробуйте другой запрос.</p>
+        <p className="py-10 text-center text-sm text-muted-foreground">Ничего не найдено. Попробуйте другой запрос.</p>
       )}
     </div>
   );

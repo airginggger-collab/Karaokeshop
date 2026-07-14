@@ -21,7 +21,7 @@ export default function Page() {
         <CalculatorClient />
       </div>
       <p className="mt-6 text-xs text-muted-foreground">
-        В сметах — проф-оборудование брендов: {supplierBrands.join(" · ")}. Итоговые цены подтверждаем по счёту.
+        В сметах используем проф-оборудование брендов: {supplierBrands.join(" · ")}. Итоговые цены подтверждаем по счёту.
       </p>
     </Container>
   );
