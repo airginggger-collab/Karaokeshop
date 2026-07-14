@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Star, ShieldCheck, Wrench, Music, Zap } from "lucide-react";
-import { Badge, Button } from "@kk/ui";
+import { Badge } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -13,6 +13,7 @@ import { ProductStickyBar } from "@/components/ProductStickyBar";
 import { WaButton } from "@/components/WaButton";
 import { products, priceFmt, discountPct, typeLabels, siteConfig } from "@/lib/site";
 import { productJsonLd } from "@/lib/seo";
+import { waHref } from "@/lib/wa";
 
 // Рейтинг/отзывы в data-массиве не верифицированы (нет реальных отзывов от заказчика) —
 // строка «4.9 · N отзывов» и aggregateRating в JSON-LD скрыты флагом, данные не удалять.
@@ -80,8 +81,9 @@ export default async function Page({
       <div className="mt-6 lg:grid lg:grid-cols-[1fr_420px] lg:gap-12">
 
         {/* Фото — слева */}
-        <div className="overflow-hidden rounded-xl bg-scene" style={{ minHeight: 360 }}>
-          <div className="aspect-square w-full lg:aspect-auto lg:h-[520px]">
+        {/* min-h только на десктопе: на мобильном высоту задаёт aspect-[4/3] */}
+        <div className="overflow-hidden rounded-xl bg-scene lg:min-h-[360px]">
+          <div className="aspect-[4/3] w-full lg:aspect-auto lg:h-[520px]">
             <ProductImage src={p.image} model={p.model} className="h-full w-full" priority />
           </div>
         </div>
@@ -124,7 +126,14 @@ export default async function Page({
               Узнать цену в WhatsApp
             </WaButton>
             <AddToCart item={{ id: p.slug, name: p.model, price: p.price, meta: label }} />
-            <Button variant="ghost">Нужна консультация</Button>
+            <a
+              href={waHref(`Здравствуйте! Нужна консультация по ${p.model}.`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-border bg-transparent px-4 text-sm font-medium text-foreground transition hover:border-primary hover:text-primary"
+            >
+              Нужна консультация
+            </a>
           </div>
 
           <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
@@ -192,7 +201,7 @@ export default async function Page({
       )}
 
       {/* Mobile sticky bottom bar */}
-      <ProductStickyBar model={p.model} price={p.price} />
+      <ProductStickyBar slug={p.slug} model={p.model} price={p.price} label={label} />
     </Container>
   );
 }

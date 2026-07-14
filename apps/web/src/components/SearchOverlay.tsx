@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search, X, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { products, blogPosts } from "@/lib/site";
+import { products, blogPosts, typeLabels } from "@/lib/site";
 
 const QUICK_LINKS = [
   { label: "Каталог", href: "/catalog" },
@@ -39,7 +39,9 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
     ? products.filter((p) =>
         p.model.toLowerCase().includes(q) ||
         p.brand.toLowerCase().includes(q) ||
-        (p.scenarioLabel ?? "").toLowerCase().includes(q)
+        (p.scenarioLabel ?? "").toLowerCase().includes(q) ||
+        typeLabels[p.type].toLowerCase().includes(q) ||
+        (p.note ?? "").toLowerCase().includes(q)
       ).slice(0, 5)
     : [];
 

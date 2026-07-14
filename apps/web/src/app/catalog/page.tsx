@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { CatalogClient } from "@/components/CatalogClient";
@@ -17,7 +18,9 @@ export default function Page() {
       <h1 className="font-display text-2xl font-bold">{catalogMeta.h1}</h1>
       <p className="mt-1 text-sm text-muted-foreground">{catalogMeta.description}</p>
       <div className="mt-6">
-        <CatalogClient items={products} />
+        <Suspense fallback={null}>
+          <CatalogClient items={products} />
+        </Suspense>
       </div>
     </Container>
   );

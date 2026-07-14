@@ -64,9 +64,9 @@ export function CheckoutClient() {
       .filter((l) => l !== undefined)
       .join("\n");
 
+    window.open(waHref(text), "_blank", "noopener,noreferrer");
     clear();
     setDone(true);
-    window.open(waHref(text), "_blank", "noopener,noreferrer");
   }
 
   return (

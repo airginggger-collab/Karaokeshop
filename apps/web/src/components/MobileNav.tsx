@@ -102,7 +102,9 @@ export function MobileNav() {
             Написать в WhatsApp
           </a>
           <div className="flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">{siteConfig.phone} · {siteConfig.hours}</p>
+            <p className="text-sm text-muted-foreground">
+              <a href={`tel:${siteConfig.phone.replace(/[^+\d]/g, "")}`} className="hover:text-primary">{siteConfig.phone}</a> · {siteConfig.hours}
+            </p>
             <ThemeToggle />
           </div>
         </div>

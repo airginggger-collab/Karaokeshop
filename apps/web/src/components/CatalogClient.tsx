@@ -1,11 +1,26 @@
 "use client";
 
 import * as React from "react";
+import { useSearchParams } from "next/navigation";
 import { Search, X } from "lucide-react";
 import { ProductGrid } from "./ProductGrid";
 import { typeLabels, type Product, type ProductType } from "@/lib/site";
 
 const typeOpts: [ProductType, string][] = Object.entries(typeLabels) as [ProductType, string][];
+
+/** Матч товара под запрос и выбранный тип. Поиск учитывает модель, бренд,
+ * название типа (typeLabels) и заметку — иначе «микрофон» не находит микрофоны. */
+function matches(p: Product, query: string, type: ProductType | "all"): boolean {
+  if (type !== "all" && p.type !== type) return false;
+  const needle = query.trim().toLowerCase();
+  if (!needle) return true;
+  return (
+    p.model.toLowerCase().includes(needle) ||
+    p.brand.toLowerCase().includes(needle) ||
+    typeLabels[p.type].toLowerCase().includes(needle) ||
+    (p.note ?? "").toLowerCase().includes(needle)
+  );
+}
 
 function Tab({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
@@ -15,8 +30,8 @@ function Tab({ active, onClick, children }: { active: boolean; onClick: () => vo
       aria-pressed={active}
       className={
         active
-          ? "hl shrink-0 px-3 py-1.5 text-sm font-medium"
-          : "shrink-0 px-3 py-1.5 text-sm text-muted-foreground transition hover:text-foreground"
+          ? "hl inline-flex min-h-10 shrink-0 items-center px-3.5 py-2 text-sm font-medium"
+          : "inline-flex min-h-10 shrink-0 items-center px-3.5 py-2 text-sm text-muted-foreground transition hover:text-foreground"
       }
     >
       {children}
@@ -38,20 +53,17 @@ function SkeletonCard() {
 }
 
 export function CatalogClient({ items }: { items: Product[] }) {
-  const [q, setQ] = React.useState("");
+  const searchParams = useSearchParams();
+  const initialQ = searchParams.get("q") ?? "";
+  const [q, setQ] = React.useState(initialQ);
   const [activeType, setActiveType] = React.useState<ProductType | "all">("all");
   const [isPending, startTransition] = React.useTransition();
 
-  const [displayed, setDisplayed] = React.useState(items);
+  const [displayed, setDisplayed] = React.useState(() => items.filter((p) => matches(p, initialQ, "all")));
 
   function applyFilters(query: string, type: ProductType | "all") {
     startTransition(() => {
-      const result = items.filter((p) => {
-        if (type !== "all" && p.type !== type) return false;
-        if (query.trim() && !p.model.toLowerCase().includes(query.trim().toLowerCase()) && !p.brand.toLowerCase().includes(query.trim().toLowerCase())) return false;
-        return true;
-      });
-      setDisplayed(result);
+      setDisplayed(items.filter((p) => matches(p, query, type)));
     });
   }
 
