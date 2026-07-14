@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { MapPin, Phone, MessageCircle, Mail, Clock, ArrowRight } from "lucide-react";
 import { Container } from "@/components/Container";
+import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { kontaktyMeta, siteConfig } from "@/lib/site";
 import { breadcrumbJsonLd } from "@/lib/seo";
@@ -21,14 +22,7 @@ const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("�
 export default function Page() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Контакты", path: "/kontakty" }])
-          ),
-        }}
-      />
+      <JsonLd data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Контакты", path: "/kontakty" }])} />
       <Container className="py-10">
         <Breadcrumb items={[{ label: "Контакты" }]} />
         <h1 className="mt-2 font-display text-2xl font-bold">{kontaktyMeta.h1}</h1>

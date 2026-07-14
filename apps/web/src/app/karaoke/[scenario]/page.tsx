@@ -4,8 +4,9 @@ import { scenarios } from "@/lib/site";
 import { LandingPage } from "@/components/LandingPage";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
+// dlya-doma живёт на /dlya-doma (301 в public/_redirects) — дубль не генерим.
 export function generateStaticParams() {
-  return scenarios.map((s) => ({ scenario: s.slug }));
+  return scenarios.filter((s) => s.slug !== "dlya-doma").map((s) => ({ scenario: s.slug }));
 }
 
 export async function generateMetadata({
@@ -19,7 +20,7 @@ export async function generateMetadata({
   return {
     title: s.title,
     description: s.description,
-    alternates: { canonical: s.slug === "dlya-doma" ? "/dlya-doma" : `/karaoke/${s.slug}` },
+    alternates: { canonical: `/karaoke/${s.slug}` },
   };
 }
 

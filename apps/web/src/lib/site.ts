@@ -159,7 +159,8 @@ export function allPaths(): string[] {
     "/dlya-doma",
     "/dlya-biznesa",
     "/gotovye-resheniya",
-    ...scenarios.map((s) => `/karaoke/${s.slug}`),
+    // dlya-doma — редирект на /dlya-doma (не страница), в sitemap не включаем
+    ...scenarios.filter((s) => s.slug !== "dlya-doma").map((s) => `/karaoke/${s.slug}`),
     ...bundles.map((b) => `/komplekty/${b.slug}`),
     ...brands.map((b) => `/brand/${b.slug}`),
     ...products.map((p) => `/product/${p.slug}`),

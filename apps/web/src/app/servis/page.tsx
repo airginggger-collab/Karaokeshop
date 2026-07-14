@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ShieldCheck, Wrench, RefreshCw, Phone, ArrowRight, CheckCircle2, XCircle, type LucideIcon } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { HighlightLine } from "@/components/HighlightLine";
@@ -65,7 +66,7 @@ const notCovered = [
 export default function Page() {
   return (
     <Container className="py-10">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Сервис и гарантия", path: "/servis" }])) }} />
+      <JsonLd data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Сервис и гарантия", path: "/servis" }])} />
       <Breadcrumb items={[{ label: "Сервис и гарантия" }]} />
       <h1 className="font-display text-2xl font-bold">
         <HighlightLine>Сервис</HighlightLine> и гарантия
@@ -124,7 +125,7 @@ export default function Page() {
 
       {/* FAQ аккордеон */}
       <section className="mt-12">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
+        <JsonLd data={faqJsonLd(faq)} />
         <h2 className="mb-4 font-display text-xl font-semibold">Частые вопросы</h2>
         <FaqAccordion items={faq} />
       </section>

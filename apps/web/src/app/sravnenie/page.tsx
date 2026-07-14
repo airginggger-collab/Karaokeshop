@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Check, X, Minus, ArrowRight, Star } from "lucide-react";
 import { Container } from "@/components/Container";
+import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { HighlightLine } from "@/components/HighlightLine";
 import { sravnenieMeta, products, priceFmt, siteConfig } from "@/lib/site";
@@ -125,16 +126,11 @@ function Cell({ val }: { val: CellValue }) {
 export default function Page() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            breadcrumbJsonLd([
-              { name: "Главная", path: "/" },
-              { name: "Сравнение", path: "/sravnenie" },
-            ])
-          ),
-        }}
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Главная", path: "/" },
+          { name: "Сравнение", path: "/sravnenie" },
+        ])}
       />
       <Container className="py-10">
         <Breadcrumb items={[{ label: "Сравнение брендов" }]} />

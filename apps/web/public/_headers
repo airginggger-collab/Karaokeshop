@@ -1,0 +1,12 @@
+# Security-заголовки для Cloudflare Workers Static Assets (читается из корня out/).
+# ⚠️ Как и _redirects, файл валидируется на шаге `wrangler deploy` — после пуша
+#    проверь CI (gh run list) и заголовки на проде (curl -I).
+# CSP: 'unsafe-inline' в script-src вынужден — статический экспорт без nonce
+#   (инлайн-скрипт темы + гидрация Next). Внешние скрипты при этом заблокированы,
+#   кроме Яндекс.Метрики (mc.yandex.ru — разрешена заранее, YM_ID пока заглушка).
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://mc.yandex.ru; font-src 'self'; connect-src 'self' https://mc.yandex.ru; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Star, ShieldCheck, Wrench, Music, Zap } from "lucide-react";
 import { Badge, Button } from "@kk/ui";
 import { Container } from "@/components/Container";
+import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { AddToCart } from "@/components/AddToCart";
 import { ProductImage } from "@/components/ProductImage";
@@ -75,8 +76,8 @@ export default async function Page({
   return (
     <Container className="pb-28 pt-6 lg:pb-10">
       <Breadcrumb items={[{ label: "Каталог", href: "/catalog" }, { label: p.model }]} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <JsonLd data={ld} />
+      <JsonLd data={breadcrumbLd} />
 
       {/* Desktop split */}
       <div className="mt-6 lg:grid lg:grid-cols-[1fr_420px] lg:gap-12">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Home, Building2, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/Container";
+import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { HighlightLine } from "@/components/HighlightLine";
 import { gotovyeResheniyaMeta, priceFmt, siteConfig } from "@/lib/site";
@@ -77,13 +78,8 @@ export default function Page() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Готовые решения", path: "/gotovye-resheniya" }])
-          ),
-        }}
+      <JsonLd
+        data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Готовые решения", path: "/gotovye-resheniya" }])}
       />
       <Container className="py-10">
         <Breadcrumb items={[{ label: "Готовые решения" }]} />

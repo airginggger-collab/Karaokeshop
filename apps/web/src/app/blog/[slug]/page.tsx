@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/Container";
+import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { blogPosts } from "@/lib/site";
 import { faqJsonLd } from "@/lib/seo";
@@ -36,10 +37,7 @@ export default async function Page({
   return (
     <Container className="py-10">
       {post.faq.length ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(post.faq)) }}
-        />
+        <JsonLd data={faqJsonLd(post.faq)} />
       ) : null}
 
       <article className="mx-auto max-w-2xl">

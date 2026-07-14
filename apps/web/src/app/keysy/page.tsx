@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPin, Quote, ArrowRight, Building2 } from "lucide-react";
 import { Container } from "@/components/Container";
+import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { keysyMeta, cases, siteConfig } from "@/lib/site";
@@ -30,15 +31,8 @@ const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("�
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Кейсы", path: "/keysy" }])
-          ),
-        }}
-      />
+      <JsonLd data={faqJsonLd(faq)} />
+      <JsonLd data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Кейсы", path: "/keysy" }])} />
       <Container className="py-10">
         <Breadcrumb items={[{ label: keysyMeta.h1 }]} />
         <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">{keysyMeta.h1}</h1>

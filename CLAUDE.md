@@ -6,7 +6,7 @@
 
 Karaokeshop.kz — ребилд интернет-магазина караоке-оборудования (Алматы; бренды AST + Studio Evolution). **Монорепо Turborepo + npm workspaces.** Сайт — Next.js 15 (App Router, `output: "export"` — чистая статика), захостен на Cloudflare как assets-only Worker. Контент пока захардкожен в `apps/web/src/lib/site.ts` (CMS не подключена). SEO — главный приоритет проекта.
 
-- Стек: Next.js ^15.1.2 · React ^19 · TypeScript ^5.6.3 strict · Turborepo ^2.3.3 · Tailwind ^3.4.17 на токенах · Style Dictionary ^4.3.0 · Storybook ^8.4.7 · Vitest ^2.1.8 · lucide-react. Шрифты Manrope + Onest (`next/font/google`; Onest — заголовки, заменил Unbounded 2026-07-07).
+- Стек: Next.js ^15.1.2 · React ^19 · TypeScript ^5.6.3 strict · Turborepo ^2.3.3 · Tailwind ^3.4.17 на токенах · Style Dictionary ^4.3.0 · Storybook ^8.4.7 · Vitest ^4.1.10 (vite прижат к ^6.4.3, см. ловушку 10) · lucide-react. Шрифты Manrope + Onest (`next/font/google`; Onest — заголовки, заменил Unbounded 2026-07-07).
 - Структура: `apps/web` (сайт), `packages/tokens` (`@kk/tokens`), `packages/ui` (`@kk/ui`), `docs/` (контекст-пак).
 
 ## ⚠️ Это ОТДЕЛЬНЫЙ проект
@@ -52,7 +52,7 @@ npm run test                 # turbo run test
 npm run tokens               # пересобрать @kk/tokens
 
 npm run build -w web         # сборка сайта → apps/web/out (статика)
-npm test -w web              # тесты web (Vitest): 19 (calculator 12 + seo 3 + quiz 4)
+npm test -w web              # тесты web (Vitest): 29 (calculator + seo + quiz + site + CountUp)
 npm test -w @kk/ui           # тесты UI-кита: 2
 npm run storybook -w @kk/ui  # Storybook на :6006
 ```
@@ -84,6 +84,8 @@ npm run storybook -w @kk/ui  # Storybook на :6006
 6. **`packages/ui/storybook-static/` — gitignored** (`packages/ui/.gitignore`). В git не попадает; пересобирается `npm run build-storybook -w @kk/ui`.
 7. **Бренд-домен `karaokeshop.kz` ещё НЕ привязан — отдаёт старый Wix; `siteConfig.url` ведёт canonical/og на чужой сайт (SEO-риск).** Боевой прод — только `*.workers.dev`; `.kz` сейчас старый сайт на Wix (DNS не на Cloudflare). А `siteConfig.url = "https://www.karaokeshop.kz"` → `seo.ts` строит от него `canonical`, `og:url`, `og:image` → они указывают на Wix. Пока домен не привязан: **проверять прод только на `*.workers.dev`** (не на `.kz`), `siteConfig.url` по этому поводу **не менять** без отдельного решения — долг закроется в момент привязки домена. Чек-лист «Проверка после деплоя» — в [docs/deploy.md](docs/deploy.md).
  8. **Не вписывай бренд в `title` страницы руками — корневой layout уже добавляет его через `title.template` (`%s | karaokeshop`, `apps/web/src/app/layout.tsx`).** Ручной `| karaokeshop` в `metadata.title` страницы → **задвоение** `… | karaokeshop | karaokeshop` (было на `/dlya-biznesa`, жило на LIVE, устранено 2026-07-10). В `title` страницы пиши **только суть**, бренд подставится сам. Единственное место с брендом — `title.default` для корня в `layout.tsx`.
+ 9. **`redirects()`/`headers()` в `next.config.mjs` при `output: "export"` ИГНОРИРУЮТСЯ Next'ом молча** — правило лежало в конфиге с виду рабочим, а прод отдавал 200-дубль вместо 301 (найдено security-ревью 2026-07-14: `/karaoke/dlya-doma`). Редиректы — только `public/_redirects`, заголовки — только `public/_headers` (оба валидируются на `wrangler deploy`, см. ловушку 0). Security-заголовки (CSP/nosniff/XFO/Referrer-Policy) живут в `public/_headers` — не удалять; после деплоя проверять `curl -I` прода. JSON-LD вставлять ТОЛЬКО через компонент `<JsonLd>` (`src/components/JsonLd.tsx` — экранирует `<`, защита от разрыва `</script>` строкой из контента), не сырым `dangerouslySetInnerHTML`.
+ 10. **vitest 4 / vite ≥7 не компилят JSX при `"jsx": "preserve"` в tsconfig (падает `import analysis` на `.tsx`), а свежий vitest тянет vite 8.** Next-tsconfig обязан держать `preserve` → защита двойная: в `apps/web/vitest.config.ts` стоит `esbuild: { jsx: "automatic" }`, а `vite` в devDeps обоих workspace прижат к `^6.4.3` (патченный esbuild-advisory; выше нельзя — Storybook 8 держит vite ≤6, `@vitejs/plugin-react` ≤5.2). Апгрейд vite/Storybook — только связкой. Остаточные moderate-advisories (postcss внутри next, uuid внутри Storybook, esbuild dev-server) — dev-only, лечатся только breaking-апгрейдами; принятый риск 2026-07-14.
 
 ## UI-конвенции (обязательные)
 

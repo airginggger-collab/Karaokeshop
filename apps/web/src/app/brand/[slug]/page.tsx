@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Container } from "@/components/Container";
+import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BrandProductFilter } from "@/components/BrandProductFilter";
 import { HighlightLine } from "@/components/HighlightLine";
@@ -75,17 +76,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            breadcrumbJsonLd([
-              { name: "Главная", path: "/" },
-              { name: "Каталог", path: "/catalog" },
-              { name: b.name, path: `/brand/${b.slug}` },
-            ])
-          ),
-        }}
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Главная", path: "/" },
+          { name: "Каталог", path: "/catalog" },
+          { name: b.name, path: `/brand/${b.slug}` },
+        ])}
       />
       <Container className="py-10">
         <Breadcrumb items={[{ label: "Каталог", href: "/catalog" }, { label: b.name }]} />

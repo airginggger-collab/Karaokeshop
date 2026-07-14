@@ -65,7 +65,7 @@ export function CheckoutClient() {
 
     clear();
     setDone(true);
-    window.open(`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   }
 
   return (

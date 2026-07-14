@@ -8,6 +8,10 @@
 #    Делается отдельно: Cloudflare → домен → Rules → Redirect Rules (или Bulk Redirects).
 #    Подробно — docs/strategy/domain-launch.md.
 
+# 1а) Внутренние 301. redirects() в next.config.mjs при output:export МЁРТВ
+#     (Next игнорирует его в статическом экспорте) — все редиректы только здесь.
+/karaoke/dlya-doma /dlya-doma 301
+
 # 2) Старые URL Wix → новые (относительные). ЗАПОЛНИТЬ после краула старого сайта
 #    (GSC → Pages / Screaming Frog: список проиндексированных URL).
 #    Каждый старый индексируемый URL обязан 301-иться на релевантный новый,

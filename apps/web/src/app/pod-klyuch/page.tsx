@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Ruler, Wrench, SlidersHorizontal, CheckCircle2, ArrowRight, ShieldCheck, Users, MapPin } from "lucide-react";
 import { Container } from "@/components/Container";
+import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { AreaCalculator } from "@/components/AreaCalculator";
@@ -73,14 +74,9 @@ const h1Prefix = podKlyuchMeta.h1.endsWith(H1_HIGHLIGHT)
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faq)) }} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Монтаж под ключ", path: "/pod-klyuch" }])
-          ),
-        }}
+      <JsonLd data={faqJsonLd(faq)} />
+      <JsonLd
+        data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Монтаж под ключ", path: "/pod-klyuch" }])}
       />
       <Container className="py-10">
         <Breadcrumb items={[{ label: "Монтаж под ключ" }]} />
