@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Home, Building2, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/Container";
-import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { CtaSection } from "@/components/CtaSection";
 import { HighlightLine } from "@/components/HighlightLine";
-import { gotovyeResheniyaMeta, priceFmt, siteConfig } from "@/lib/site";
-import { breadcrumbJsonLd } from "@/lib/seo";
+import { gotovyeResheniyaMeta, priceFmt } from "@/lib/site";
+import { waHref } from "@/lib/wa";
 
 export const metadata: Metadata = {
   title: gotovyeResheniyaMeta.title,
@@ -78,11 +77,8 @@ export default function Page() {
 
   return (
     <>
-      <JsonLd
-        data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Готовые решения", path: "/gotovye-resheniya" }])}
-      />
       <Container className="py-10">
-        <Breadcrumb items={[{ label: "Готовые решения" }]} />
+        <Breadcrumb items={[{ label: "Готовые решения" }]} withLd currentPath="/gotovye-resheniya" />
         <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">
           Готовые <HighlightLine>решения</HighlightLine>
         </h1>
@@ -113,29 +109,14 @@ export default function Page() {
         </section>
 
         {/* CTA */}
-        <div className="mt-10 rounded-xl border border-border bg-background p-6">
-          <h2 className="font-medium">Не нашли подходящее?</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Расскажите про задачу, подберём комплект и пришлём смету.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <a
-              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Хочу подобрать готовое решение.")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-            >
-              Написать в WhatsApp
-            </a>
-            <Link
-              href="/kalkulyator"
-              className="inline-flex items-center gap-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium hover:border-primary"
-            >
-              Калькулятор <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <p className="mt-3 text-xs text-muted-foreground">Ответим в течение часа · Без обязательств</p>
-        </div>
+        <CtaSection
+          className="mt-10"
+          title="Не нашли подходящее?"
+          text="Расскажите про задачу, подберём комплект и пришлём смету."
+          waText="Здравствуйте! Хочу подобрать готовое решение."
+          secondary={{ href: "/kalkulyator", label: "Калькулятор" }}
+          note="Ответим в течение часа · Без обязательств"
+        />
       </Container>
     </>
   );
@@ -143,7 +124,7 @@ export default function Page() {
 
 function SolutionCard({ solution }: { solution: Solution }) {
   const { label, scenario, price, system, includes } = solution;
-  const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(`Здравствуйте! Интересует готовое решение «${label}».`)}`;
+  const waUrl = waHref(`Здравствуйте! Интересует готовое решение «${label}».`);
 
   return (
     <div className="flex flex-col rounded-xl border border-border bg-background p-5">

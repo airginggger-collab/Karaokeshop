@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { MapPin, Phone, MessageCircle, Mail, Clock, ArrowRight } from "lucide-react";
 import { Container } from "@/components/Container";
-import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { WaButton } from "@/components/WaButton";
 import { kontaktyMeta, siteConfig } from "@/lib/site";
-import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: kontaktyMeta.title,
@@ -17,14 +16,11 @@ const mapSrc =
   encodeURIComponent("Алматы, улица Муканова 8") +
   "&z=15&output=embed";
 
-const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Вопрос по караоке-оборудованию.")}`;
-
 export default function Page() {
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Контакты", path: "/kontakty" }])} />
       <Container className="py-10">
-        <Breadcrumb items={[{ label: "Контакты" }]} />
+        <Breadcrumb items={[{ label: "Контакты" }]} withLd currentPath="/kontakty" />
         <h1 className="mt-2 font-display text-2xl font-bold">{kontaktyMeta.h1}</h1>
         <p className="mt-1 max-w-xl text-sm text-muted-foreground">{kontaktyMeta.description}</p>
 
@@ -86,15 +82,10 @@ export default function Page() {
             </div>
 
             {/* WhatsApp CTA */}
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-4 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-            >
+            <WaButton text="Здравствуйте! Вопрос по караоке-оборудованию." full size="lg">
               <MessageCircle className="h-5 w-5" />
               Написать в WhatsApp
-            </a>
+            </WaButton>
 
             {/* Быстрые ссылки */}
             <div className="rounded-xl border border-border bg-background p-5 text-sm">

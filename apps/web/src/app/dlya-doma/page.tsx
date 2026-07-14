@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Home, Music, ArrowRight, CheckCircle2, type LucideIcon } from "lucide-react";
 import { Container } from "@/components/Container";
 import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ProductCard } from "@/components/ProductCard";
-import { FaqAccordion } from "@/components/FaqAccordion";
+import { WaButton } from "@/components/WaButton";
+import { SectionHeader } from "@/components/SectionHeader";
+import { FaqBlock } from "@/components/FaqBlock";
+import { CtaSection } from "@/components/CtaSection";
 import { HighlightLine } from "@/components/HighlightLine";
 import { CountUp } from "@/components/CountUp";
-import { products, siteConfig } from "@/lib/site";
-import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { products } from "@/lib/site";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Купить домашнее караоке в Алматы: AST Mini и Evobox от 749 000 ₸",
@@ -34,7 +36,7 @@ const whatsIncluded = [
   "Обучение работе с системой",
 ];
 
-const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Хочу подобрать домашнее караоке.")}`;
+const waText = "Здравствуйте! Хочу подобрать домашнее караоке.";
 
 const faq = [
   { q: "Сколько стоит домашнее карао­ке?", a: "Базовый комплект (медиаплеер, 2 микрофона, акустика) стоит от 749 000 ₸. Точная сумма зависит от модели и площади комнаты. Пришлите размеры, рассчитаем." },
@@ -46,7 +48,6 @@ const faq = [
 export default function Page() {
   return (
     <>
-      <JsonLd data={faqJsonLd(faq)} />
       <JsonLd data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Для дома", path: "/dlya-doma" }])} />
       <Container className="py-10">
         <Breadcrumb items={[{ label: "Домашнее карао­ке" }]} />
@@ -64,14 +65,9 @@ export default function Page() {
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4">
             <span className="font-display text-2xl font-bold">от 749 000 ₸</span>
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-            >
+            <WaButton text={waText} size="lg">
               Подобрать в WhatsApp <ArrowRight className="h-4 w-4" />
-            </a>
+            </WaButton>
           </div>
           <p className="ticker mt-5">Гарантия 1 год · Монтаж включён · <CountUp value="60 000+ песен" /></p>
           </div>
@@ -121,12 +117,7 @@ export default function Page() {
         {/* Системы */}
         {homeSystems.length > 0 && (
           <section className="mt-12">
-            <div className="flex items-end justify-between">
-              <h2 className="font-display text-xl font-semibold">Системы для дома</h2>
-              <Link href="/catalog" className="hidden items-center gap-1 text-sm font-medium text-primary sm:flex">
-                Весь каталог <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+            <SectionHeader title="Системы для дома" action={{ href: "/catalog", label: "Весь каталог" }} />
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {homeSystems.map((p) => <ProductCard key={p.slug} p={p} />)}
             </div>
@@ -134,32 +125,17 @@ export default function Page() {
         )}
 
         {/* FAQ */}
-        <section className="mt-12">
-          <h2 className="mb-4 font-display text-xl font-semibold">Частые вопросы</h2>
-          <FaqAccordion items={faq} />
-        </section>
+        <FaqBlock faq={faq} />
 
         {/* CTA */}
-        <div className="mt-10 rounded-xl border border-border bg-background p-6">
-          <h2 className="font-medium">Не знаете, что выбрать?</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Напишите в WhatsApp. Расскажем, что подойдёт для вашей комнаты и бюджета.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-sm font-medium text-white"
-            >
-              Написать в WhatsApp
-            </a>
-            <Link href="/kalkulyator" className="inline-flex items-center gap-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium hover:border-primary">
-              Рассчитать смету <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <p className="mt-3 text-xs text-muted-foreground">Ответим в течение часа · Без обязательств</p>
-        </div>
+        <CtaSection
+          className="mt-10"
+          title="Не знаете, что выбрать?"
+          text="Напишите в WhatsApp. Расскажем, что подойдёт для вашей комнаты и бюджета."
+          waText={waText}
+          secondary={{ href: "/kalkulyator", label: "Рассчитать смету" }}
+          note="Ответим в течение часа · Без обязательств"
+        />
       </Container>
     </>
   );

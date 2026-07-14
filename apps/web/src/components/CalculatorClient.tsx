@@ -4,7 +4,9 @@ import * as React from "react";
 import { ArrowLeft, ArrowRight, Check, MessageCircle } from "lucide-react";
 import { Button } from "@kk/ui";
 import { configureWithinBudget, smetaText, type Calc } from "@/lib/calculator";
-import { priceFmt, siteConfig } from "@/lib/site";
+import { priceFmt } from "@/lib/site";
+import { WaButton } from "./WaButton";
+import { OptionButton } from "./OptionButton";
 
 const SCENARIOS = [
   { id: "dom", label: "Дом", sub: "гостиная, баня, гостевой дом" },
@@ -86,10 +88,6 @@ export function CalculatorClient() {
     setStep(4);
   }
 
-  const waUrl = calc
-    ? `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(smetaText(calc, scenario ?? "bar"))}`
-    : "#";
-
   return (
     <div className="mx-auto max-w-xl">
       {step < 4 && <StepIndicator step={step} total={3} />}
@@ -100,20 +98,10 @@ export function CalculatorClient() {
           <h2 className="mb-4 font-display text-lg font-semibold">Шаг 1. Выберите сценарий</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {SCENARIOS.map((s) => (
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => handleScenario(s.id)}
-                className={[
-                  "rounded-xl border p-4 text-left transition",
-                  scenario === s.id
-                    ? "border-primary bg-primary/5"
-                    : "border-border bg-background hover:border-primary",
-                ].join(" ")}
-              >
+              <OptionButton key={s.id} selected={scenario === s.id} onClick={() => handleScenario(s.id)}>
                 <p className="font-medium">{s.label}</p>
                 <p className="text-sm text-muted-foreground">{s.sub}</p>
-              </button>
+              </OptionButton>
             ))}
           </div>
           <div className="mt-5 flex justify-end">
@@ -177,19 +165,9 @@ export function CalculatorClient() {
           <h2 className="mb-4 font-display text-lg font-semibold">Шаг 3. Ориентир по бюджету</h2>
           <div className="grid gap-3">
             {BUDGET_OPTS.map((opt, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => setBudgetIdx(i)}
-                className={[
-                  "rounded-xl border p-4 text-left transition",
-                  budgetIdx === i
-                    ? "border-primary bg-primary/5"
-                    : "border-border bg-background hover:border-primary",
-                ].join(" ")}
-              >
+              <OptionButton key={i} selected={budgetIdx === i} onClick={() => setBudgetIdx(i)}>
                 <p className="font-medium">{opt.label}</p>
-              </button>
+              </OptionButton>
             ))}
           </div>
           <div className="mt-5 flex justify-between">
@@ -253,15 +231,10 @@ export function CalculatorClient() {
             </p>
           )}
 
-          <a
-            href={waUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-          >
+          <WaButton text={smetaText(calc, scenario ?? "bar")} full size="lg" className="mt-4">
             <MessageCircle className="h-4 w-4" />
             Отправить смету в WhatsApp
-          </a>
+          </WaButton>
         </div>
       )}
     </div>

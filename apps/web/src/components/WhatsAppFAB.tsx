@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { siteConfig } from "@/lib/site";
+import { waHref } from "@/lib/wa";
 
-const WA_TEXT = encodeURIComponent("Здравствуйте! Интересует каракоке-оборудование, подскажите.");
-const WA_URL = `https://wa.me/${siteConfig.whatsapp}?text=${WA_TEXT}`;
+const WA_URL = waHref("Здравствуйте! Интересует каракоке-оборудование, подскажите.");
 
 export function WhatsAppFAB() {
   const pathname = usePathname();

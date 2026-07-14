@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { MapPin, Quote, ArrowRight, Building2 } from "lucide-react";
+import { MapPin, Quote, Building2 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { FaqAccordion } from "@/components/FaqAccordion";
-import { keysyMeta, cases, siteConfig } from "@/lib/site";
-import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { FaqBlock } from "@/components/FaqBlock";
+import { CtaSection } from "@/components/CtaSection";
+import { keysyMeta, cases } from "@/lib/site";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: keysyMeta.title,
@@ -26,12 +26,9 @@ const faq = [
   { q: "Можно посмотреть реализованные объекты лично?", a: "Свяжитесь с нами, организуем показ одного из оснащённых заведений в Алматы." },
 ];
 
-const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Хочу узнать подробнее про ваши кейсы.")}`;
-
 export default function Page() {
   return (
     <>
-      <JsonLd data={faqJsonLd(faq)} />
       <JsonLd data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Кейсы", path: "/keysy" }])} />
       <Container className="py-10">
         <Breadcrumb items={[{ label: keysyMeta.h1 }]} />
@@ -79,35 +76,17 @@ export default function Page() {
         </div>
 
         {/* FAQ */}
-        <section className="mt-12">
-          <h2 className="mb-4 font-display text-xl font-semibold">Частые вопросы</h2>
-          <FaqAccordion items={faq} />
-        </section>
+        <FaqBlock faq={faq} />
 
         {/* CTA */}
-        <div className="mt-10 rounded-xl border border-border bg-background p-6">
-          <h2 className="font-medium">Хотите так же?</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Расскажите про ваш объект, подберём систему и пришлём смету.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-            >
-              Написать в WhatsApp
-            </a>
-            <Link
-              href="/kalkulyator"
-              className="inline-flex items-center gap-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium hover:border-primary"
-            >
-              Калькулятор <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <p className="mt-3 text-xs text-muted-foreground">Ответим в течение часа · Без обязательств</p>
-        </div>
+        <CtaSection
+          className="mt-10"
+          title="Хотите так же?"
+          text="Расскажите про ваш объект, подберём систему и пришлём смету."
+          waText="Здравствуйте! Хочу узнать подробнее про ваши кейсы."
+          secondary={{ href: "/kalkulyator", label: "Калькулятор" }}
+          note="Ответим в течение часа · Без обязательств"
+        />
       </Container>
     </>
   );

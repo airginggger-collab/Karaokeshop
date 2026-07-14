@@ -4,7 +4,47 @@ import { ProductImage } from "./ProductImage";
 import { DiscountBadge } from "./DiscountBadge";
 import { priceFmt, discountPct, typeLabels, type Product } from "@/lib/site";
 
-export function ProductCard({ p }: { p: Product }) {
+export function ProductCard({ p, size = "md" }: { p: Product; size?: "md" | "lg" }) {
+  if (size === "lg") {
+    // Крупная витринная карточка (главная): большая фото-зона со сценой,
+    // сценарий-бейдж поверх фото, характеристики-чипы, акцентный CTA.
+    return (
+      <Link
+        href={`/product/${p.slug}`}
+        className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background"
+      >
+        <div className="relative h-56 overflow-hidden bg-scene sm:h-64">
+          <ProductImage src={p.image} model={p.model} className="transition duration-500 group-hover:scale-[1.04]" />
+          <span className="absolute left-4 top-4 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-primary">
+            {p.scenarioLabel}
+          </span>
+        </div>
+        <div className="flex flex-1 flex-col p-5">
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">{p.brand}</p>
+          <h3 className="mt-1 font-display text-xl font-bold leading-tight">{p.model}</h3>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {p.areaMax && (
+              <span className="rounded-full bg-surface px-3 py-1 text-xs text-muted-foreground">
+                до {p.areaMax} м²
+              </span>
+            )}
+            {p.songsCount && (
+              <span className="rounded-full bg-surface px-3 py-1 text-xs text-muted-foreground">
+                {p.songsCount.toLocaleString("ru-RU")}+ песен
+              </span>
+            )}
+          </div>
+          <div className="mt-auto flex items-center justify-between pt-4">
+            <span className="font-display text-xl font-bold text-primary">{priceFmt(p.price)}</span>
+            <span className="inline-flex items-center gap-1.5 rounded-xl bg-cta px-4 py-2 text-sm font-medium text-cta-fg transition-all group-hover:gap-2.5">
+              Подробнее <ArrowRight className="h-3.5 w-3.5" />
+            </span>
+          </div>
+        </div>
+      </Link>
+    );
+  }
+
   const pct = discountPct(p.price, p.priceOld);
   const label = p.scenarioLabel ?? typeLabels[p.type];
   const sub = p.power ?? p.note;

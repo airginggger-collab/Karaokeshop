@@ -4,8 +4,9 @@ import { Check, X, Minus, ArrowRight, Star } from "lucide-react";
 import { Container } from "@/components/Container";
 import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { CtaSection } from "@/components/CtaSection";
 import { HighlightLine } from "@/components/HighlightLine";
-import { sravnenieMeta, products, priceFmt, siteConfig } from "@/lib/site";
+import { sravnenieMeta, products, priceFmt } from "@/lib/site";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -112,8 +113,6 @@ const scenarios = [
     href: "/pod-klyuch",
   },
 ];
-
-const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Помогите выбрать между AST и Studio Evolution.")}`;
 
 function Cell({ val }: { val: CellValue }) {
   if (val.type === "yes") return <Check className="mx-auto h-5 w-5 text-primary" />;
@@ -227,29 +226,14 @@ export default function Page() {
         </section>
 
         {/* Итог */}
-        <div className="mt-10 rounded-xl border border-border bg-background p-6">
-          <h2 className="font-medium">Не уверены? Мы подберём</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Чаще всего выбор между брендами решает не «лучше / хуже», а площадь зала, бюджет и сценарий использования. Напишите, разберём вашу ситуацию.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-            >
-              Написать в WhatsApp
-            </a>
-            <Link
-              href="/kalkulyator"
-              className="inline-flex items-center gap-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium hover:border-primary"
-            >
-              Рассчитать смету <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <p className="mt-3 text-xs text-muted-foreground">Ответим в течение часа · Без обязательств</p>
-        </div>
+        <CtaSection
+          className="mt-10"
+          title="Не уверены? Мы подберём"
+          text="Чаще всего выбор между брендами решает не «лучше / хуже», а площадь зала, бюджет и сценарий использования. Напишите, разберём вашу ситуацию."
+          waText="Здравствуйте! Помогите выбрать между AST и Studio Evolution."
+          secondary={{ href: "/kalkulyator", label: "Рассчитать смету" }}
+          note="Ответим в течение часа · Без обязательств"
+        />
       </Container>
     </>
   );

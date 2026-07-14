@@ -3,9 +3,10 @@
 import * as React from "react";
 import Link from "next/link";
 import { ChevronRight, MessageCircle, Check } from "lucide-react";
-import { siteConfig, priceFmt } from "@/lib/site";
+import { priceFmt } from "@/lib/site";
 import { configureWithinBudget } from "@/lib/calculator";
 import { quizToInput, quizBudget } from "@/lib/quiz";
+import { WaButton } from "./WaButton";
 
 type Step = { question: string; options: string[] };
 
@@ -61,7 +62,6 @@ export function QuizWidget() {
         "Уточните, пожалуйста, смету.",
       ].join("\n")
     : "";
-  const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(waText)}`;
 
   return (
     <div className="rounded-xl border border-border bg-background p-6 sm:p-8">
@@ -106,14 +106,9 @@ export function QuizWidget() {
           </div>
 
           <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-            >
+            <WaButton text={waText} className="flex-1 justify-center">
               <MessageCircle className="h-4 w-4" /> Заявка в WhatsApp
-            </a>
+            </WaButton>
             <Link
               href="/kalkulyator"
               className="inline-flex flex-1 items-center justify-center rounded-xl border border-border py-3 text-sm font-medium transition hover:border-primary hover:text-primary"

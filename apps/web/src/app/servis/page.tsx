@@ -3,12 +3,10 @@ import Link from "next/link";
 import { ShieldCheck, Wrench, RefreshCw, Phone, ArrowRight, CheckCircle2, XCircle, type LucideIcon } from "lucide-react";
 import { Button } from "@kk/ui";
 import { Container } from "@/components/Container";
-import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { FaqAccordion } from "@/components/FaqAccordion";
+import { FaqBlock } from "@/components/FaqBlock";
 import { HighlightLine } from "@/components/HighlightLine";
-import { siteConfig } from "@/lib/site";
-import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { waHref } from "@/lib/wa";
 
 export const metadata: Metadata = {
   title: "Сервис и гарантия: настройка и ремонт караоке",
@@ -39,7 +37,7 @@ const services: { icon?: LucideIcon; title: string; body: string }[] = [
   },
 ];
 
-const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Нужна помощь по сервису и гарантии.")}`;
+const waUrl = waHref("Здравствуйте! Нужна помощь по сервису и гарантии.");
 
 const faq = [
   { q: "Какая гарантия на оборудование?", a: "От 1 года на всё оборудование AST и Studio Evolution. При поломке делаем диагностику и ремонт в собственном сервис-центре в Алматы." },
@@ -66,8 +64,7 @@ const notCovered = [
 export default function Page() {
   return (
     <Container className="py-10">
-      <JsonLd data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Сервис и гарантия", path: "/servis" }])} />
-      <Breadcrumb items={[{ label: "Сервис и гарантия" }]} />
+      <Breadcrumb items={[{ label: "Сервис и гарантия" }]} withLd currentPath="/servis" />
       <h1 className="font-display text-2xl font-bold">
         <HighlightLine>Сервис</HighlightLine> и гарантия
       </h1>
@@ -124,11 +121,7 @@ export default function Page() {
       </section>
 
       {/* FAQ аккордеон */}
-      <section className="mt-12">
-        <JsonLd data={faqJsonLd(faq)} />
-        <h2 className="mb-4 font-display text-xl font-semibold">Частые вопросы</h2>
-        <FaqAccordion items={faq} />
-      </section>
+      <FaqBlock faq={faq} />
 
       <div className="mt-10 rounded-xl border border-border bg-background p-6">
         <h2 className="font-medium">Нужна помощь или консультация?</h2>

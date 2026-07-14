@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { MessageCircle } from "lucide-react";
-import { siteConfig } from "@/lib/site";
+import { WaButton } from "./WaButton";
 
 const areas = [
   { key: "30", label: "до 30 м²", kit: "AST Mini · комплект «Кафе»", price: "≈ 720 000 – 1 100 000 ₸ под ключ" },
@@ -24,7 +24,6 @@ export function AreaCalculator() {
   const a = areas.find((x) => x.key === area)!;
 
   const waText = `Здравствуйте! Хочу заявку на оснащение под ключ.\nТип: ${type}\nПлощадь: ${a.label}\nКомплект: ${a.kit}`;
-  const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(waText)}`;
 
   return (
     <div className="rounded-xl border border-border p-5">
@@ -58,14 +57,9 @@ export function AreaCalculator() {
         <p className="mt-0.5 font-medium text-primary">{a.kit}</p>
         <p className="text-sm text-primary">{a.price}</p>
         <div className="mt-3">
-          <a
-            href={waUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-          >
+          <WaButton text={waText}>
             <MessageCircle className="h-4 w-4" /> Оставить заявку в WhatsApp
-          </a>
+          </WaButton>
         </div>
       </div>
     </div>

@@ -5,7 +5,8 @@ import Link from "next/link";
 import { Truck, Speaker, Trash2, Check, MessageCircle } from "lucide-react";
 import { Button } from "@kk/ui";
 import { useCart } from "@/lib/cart";
-import { priceFmt, siteConfig } from "@/lib/site";
+import { priceFmt } from "@/lib/site";
+import { waHref } from "@/lib/wa";
 
 export function CheckoutClient() {
   const { items, total, remove, clear, ready } = useCart();
@@ -65,7 +66,7 @@ export function CheckoutClient() {
 
     clear();
     setDone(true);
-    window.open(`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+    window.open(waHref(text), "_blank", "noopener,noreferrer");
   }
 
   return (

@@ -7,12 +7,14 @@ export const metadata: Metadata = {
 };
 import { ArrowRight, MapPin } from "lucide-react";
 import { Container } from "@/components/Container";
-import { ProductImage } from "@/components/ProductImage";
+import { ProductCard } from "@/components/ProductCard";
 import { QuizWidget } from "@/components/QuizWidget";
 import { HighlightLine } from "@/components/HighlightLine";
+import { SectionHeader, MobileActionLink } from "@/components/SectionHeader";
+import { CtaSection } from "@/components/CtaSection";
 import { ClientLogos } from "@/components/ClientLogos";
 import { CountUp } from "@/components/CountUp";
-import { products, priceFmt, siteConfig } from "@/lib/site";
+import { products } from "@/lib/site";
 
 const SHOW_UNVERIFIED_SOCIAL_PROOF = false; // включить после реальных отзывов/лого от заказчика
 
@@ -192,69 +194,19 @@ export default function HomePage() {
 
       {/* 02 — На чём собираем (доказательство) */}
       <section className="mt-10">
-        <div className="flex items-end justify-between">
-          <SectionTitle>На чём собираем</SectionTitle>
-          <Link href="/catalog" className="hidden items-center gap-1 text-sm font-medium text-primary sm:flex">
-            Весь каталог <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
+        <SectionHeader
+          size="lg"
+          title="На чём собираем"
+          action={{ href: "/catalog", label: "Весь каталог" }}
+        />
 
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {featuredProducts.map((p) => (
-            <Link
-              key={p.slug}
-              href={`/product/${p.slug}`}
-              className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background"
-            >
-              {/* Фото-зона — сцена-подложка */}
-              <div className="relative h-56 overflow-hidden bg-scene sm:h-64">
-                <ProductImage src={p.image} model={p.model} className="transition duration-500 group-hover:scale-[1.04]" />
-                {/* Сценарий-бейдж */}
-                <span className="absolute left-4 top-4 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-primary">
-                  {p.scenarioLabel}
-                </span>
-              </div>
-
-              {/* Информационная полка */}
-              <div className="flex flex-1 flex-col p-5">
-                <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-                  {p.brand}
-                </p>
-                <h3 className="mt-1 font-display text-xl font-bold leading-tight">{p.model}</h3>
-
-                {/* Характеристики */}
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {p.areaMax && (
-                    <span className="rounded-full bg-surface px-3 py-1 text-xs text-muted-foreground">
-                      до {p.areaMax} м²
-                    </span>
-                  )}
-                  {p.songsCount && (
-                    <span className="rounded-full bg-surface px-3 py-1 text-xs text-muted-foreground">
-                      {p.songsCount.toLocaleString("ru-RU")}+ песен
-                    </span>
-                  )}
-                </div>
-
-                {/* Цена + CTA */}
-                <div className="mt-auto flex items-center justify-between pt-4">
-                  <span className="font-display text-xl font-bold text-primary">
-                    {priceFmt(p.price)}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-xl bg-cta px-4 py-2 text-sm font-medium text-cta-fg transition-all group-hover:gap-2.5">
-                    Подробнее <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </div>
-              </div>
-            </Link>
+            <ProductCard key={p.slug} p={p} size="lg" />
           ))}
         </div>
 
-        <div className="mt-3 flex sm:hidden">
-          <Link href="/catalog" className="flex items-center gap-1 text-sm font-medium text-primary">
-            Весь каталог <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
+        <MobileActionLink href="/catalog" label="Весь каталог" />
       </section>
 
       {/* 03 — Доверие: почему karaokeshop + дилерская полоса */}
@@ -344,31 +296,15 @@ export default function HomePage() {
       </section>
 
       {/* Финальный CTA */}
-      <section className="mt-10 rounded-xl border border-border bg-background p-8 sm:p-10">
-        <h2 className="max-w-2xl font-display text-2xl font-bold sm:text-3xl">
-          Подберём <HighlightLine>за минуту</HighlightLine>, бесплатно
-        </h2>
-        <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
-          Пройдите квиз выше или напишите нам. Ответим и предложим то, что реально подходит под вашу задачу и бюджет.
-        </p>
-        <p className="ticker mt-5 max-w-2xl">14 лет на рынке · 200+ объектов · 60 000+ песен · гарантия 2 года</p>
-        <div className="mt-5 flex flex-wrap gap-3">
-          <a
-            href={`https://wa.me/${siteConfig.whatsapp}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-          >
-            Написать в WhatsApp
-          </a>
-          <Link
-            href="/catalog"
-            className="inline-flex items-center rounded-xl border border-border px-5 py-3 text-sm font-medium transition hover:border-primary hover:text-primary"
-          >
-            Каталог
-          </Link>
-        </div>
-      </section>
+      <CtaSection
+        className="mt-10"
+        padded
+        title={<>Подберём <HighlightLine>за минуту</HighlightLine>, бесплатно</>}
+        text="Пройдите квиз выше или напишите нам. Ответим и предложим то, что реально подходит под вашу задачу и бюджет."
+        ticker="14 лет на рынке · 200+ объектов · 60 000+ песен · гарантия 2 года"
+        waText=""
+        secondary={{ href: "/catalog", label: "Каталог" }}
+      />
     </Container>
   );
 }

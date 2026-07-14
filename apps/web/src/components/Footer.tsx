@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "./Container";
 import { siteConfig } from "@/lib/site";
+import { waHref } from "@/lib/wa";
 
 const cols = [
   {
@@ -28,7 +29,7 @@ const cols = [
     links: [
       { href: "/kontakty", label: siteConfig.address },
       { href: `tel:${siteConfig.phone.replace(/\s|-/g, "")}`, label: siteConfig.phone },
-      { href: `https://wa.me/${siteConfig.whatsapp}`, label: "WhatsApp" },
+      { href: waHref(), label: "WhatsApp" },
       { href: `mailto:${siteConfig.email}`, label: siteConfig.email },
     ],
   },

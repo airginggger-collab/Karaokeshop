@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Building2, Users, Music, ArrowRight, CheckCircle2, type LucideIcon } from "lucide-react";
 import { Container } from "@/components/Container";
-import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ProductCard } from "@/components/ProductCard";
-import { FaqAccordion } from "@/components/FaqAccordion";
+import { WaButton } from "@/components/WaButton";
+import { SectionHeader } from "@/components/SectionHeader";
+import { FaqBlock } from "@/components/FaqBlock";
+import { CtaSection } from "@/components/CtaSection";
 import { HighlightLine } from "@/components/HighlightLine";
 import { CountUp } from "@/components/CountUp";
-import { products, siteConfig } from "@/lib/site";
-import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { products } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Оснастить бар, ресторан, клуб под ключ: Алматы и Казахстан",
@@ -56,7 +56,7 @@ const whatsIncluded = [
   "Выезд в любой город Казахстана",
 ];
 
-const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Хочу оснастить заведение под ключ. Расскажите подробнее.")}`;
+const waText = "Здравствуйте! Хочу оснастить заведение под ключ. Расскажите подробнее.";
 
 const faq = [
   { q: "Сколько стоит оснастить кафе или ресторан?", a: "Зал до 80 м²: от 1 400 000 ₸. Включает систему, монтаж, настройку и обучение персонала. Для точной сметы пришлите площадь и фото помещения." },
@@ -68,10 +68,8 @@ const faq = [
 export default function Page() {
   return (
     <>
-      <JsonLd data={faqJsonLd(faq)} />
-      <JsonLd data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Для бизнеса", path: "/dlya-biznesa" }])} />
       <Container className="py-10">
-        <Breadcrumb items={[{ label: "Для бизнеса" }]} />
+        <Breadcrumb items={[{ label: "Для бизнеса" }]} withLd currentPath="/dlya-biznesa" />
 
         {/* Герой */}
         <section className="mt-4 rounded-xl border border-border bg-background p-8 sm:p-10">
@@ -86,14 +84,9 @@ export default function Page() {
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4">
             <span className="font-display text-2xl font-bold">от 1 400 000 ₸</span>
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-            >
+            <WaButton text={waText} size="lg">
               Получить расчёт <ArrowRight className="h-4 w-4" />
-            </a>
+            </WaButton>
           </div>
           <p className="ticker mt-5">200+ проектов · Гарантия и сервис · Монтаж 1–2 дня</p>
           </div>
@@ -145,12 +138,7 @@ export default function Page() {
         {/* Системы */}
         {businessSystems.length > 0 && (
           <section className="mt-12">
-            <div className="flex items-end justify-between">
-              <h2 className="font-display text-xl font-semibold">Системы для заведений</h2>
-              <Link href="/catalog" className="hidden items-center gap-1 text-sm font-medium text-primary sm:flex">
-                Весь каталог <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+            <SectionHeader title="Системы для заведений" action={{ href: "/catalog", label: "Весь каталог" }} />
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {businessSystems.map((p) => <ProductCard key={p.slug} p={p} />)}
             </div>
@@ -158,35 +146,17 @@ export default function Page() {
         )}
 
         {/* FAQ */}
-        <section className="mt-12">
-          <h2 className="mb-4 font-display text-xl font-semibold">Частые вопросы</h2>
-          <FaqAccordion items={faq} />
-        </section>
+        <FaqBlock faq={faq} />
 
         {/* CTA */}
-        <div className="mt-10 rounded-xl border border-border bg-background p-6">
-          <h2 className="font-medium">Расскажите про ваш объект</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Напишите площадь зала и задачу. Подберём систему и пришлём ориентировочную смету за день.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3.5 text-sm font-medium text-white"
-            >
-              Написать в WhatsApp
-            </a>
-            <Link
-              href="/kalkulyator"
-              className="inline-flex items-center gap-1 rounded-xl border border-border px-4 py-2.5 text-sm font-medium hover:border-primary"
-            >
-              Калькулятор сметы <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <p className="mt-3 text-xs text-muted-foreground">Ответим в течение часа · Без обязательств</p>
-        </div>
+        <CtaSection
+          className="mt-10"
+          title="Расскажите про ваш объект"
+          text="Напишите площадь зала и задачу. Подберём систему и пришлём ориентировочную смету за день."
+          waText={waText}
+          secondary={{ href: "/kalkulyator", label: "Калькулятор сметы" }}
+          note="Ответим в течение часа · Без обязательств"
+        />
       </Container>
     </>
   );

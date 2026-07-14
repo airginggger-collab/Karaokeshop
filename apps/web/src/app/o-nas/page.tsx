@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Container } from "@/components/Container";
-import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { oNasMeta, siteConfig } from "@/lib/site";
-import { breadcrumbJsonLd } from "@/lib/seo";
+import { WaButton } from "@/components/WaButton";
+import { oNasMeta } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: oNasMeta.title,
@@ -57,14 +56,11 @@ const values = [
   "Гарантия и сервис после установки",
 ];
 
-const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Хочу узнать подробнее о вашей компании.")}`;
-
 export default function Page() {
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "О компании", path: "/o-nas" }])} />
       <Container className="py-10">
-        <Breadcrumb items={[{ label: "О компании" }]} />
+        <Breadcrumb items={[{ label: "О компании" }]} withLd currentPath="/o-nas" />
 
         {/* Герой */}
         <section className="mt-4 rounded-xl border border-border bg-background p-8 sm:p-10">
@@ -73,14 +69,9 @@ export default function Page() {
           <p className="mt-3 max-w-xl text-muted-foreground">
             Оснащаем заведения и дома под ключ с 2012 года. Официальные дилеры AST и Studio Evolution в Казахстане.
           </p>
-          <a
-            href={waUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-          >
+          <WaButton text="Здравствуйте! Хочу узнать подробнее о вашей компании." className="mt-5">
             Написать в WhatsApp <ArrowRight className="h-4 w-4" />
-          </a>
+          </WaButton>
         </section>
 
         {/* 4 числа */}

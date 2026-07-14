@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { mainNav, siteConfig } from "@/lib/site";
+import { waHref } from "@/lib/wa";
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false);
@@ -22,7 +23,7 @@ export function MobileNav() {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const waHref = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Здравствуйте! Хочу узнать подробнее о вашем оборудовании.")}`;
+  const waLink = waHref("Здравствуйте! Хочу узнать подробнее о вашем оборудовании.");
 
   return (
     <div className="md:hidden">
@@ -88,7 +89,7 @@ export function MobileNav() {
         {/* Футер drawer — контакты + WhatsApp */}
         <div className="border-t border-border px-4 py-6 space-y-3">
           <a
-            href={waHref}
+            href={waLink}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}

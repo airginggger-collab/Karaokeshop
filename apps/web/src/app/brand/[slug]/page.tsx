@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Container } from "@/components/Container";
-import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BrandProductFilter } from "@/components/BrandProductFilter";
 import { HighlightLine } from "@/components/HighlightLine";
-import { brands, products, siteConfig } from "@/lib/site";
-import { breadcrumbJsonLd } from "@/lib/seo";
+import { WaButton } from "@/components/WaButton";
+import { brands, products } from "@/lib/site";
 
 export function generateStaticParams() {
   return brands.map((b) => ({ slug: b.slug }));
@@ -67,7 +66,6 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   };
 
   const items = products.filter((p) => p.brand === b.name);
-  const waUrl = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(content.waText)}`;
 
   // h1 = "Караоке {b.name}[…]" — подсвечиваем название бренда там, где оно встречается в тексте.
   const nameIdx = b.h1.indexOf(b.name);
@@ -76,15 +74,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   return (
     <>
-      <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Главная", path: "/" },
-          { name: "Каталог", path: "/catalog" },
-          { name: b.name, path: `/brand/${b.slug}` },
-        ])}
-      />
       <Container className="py-10">
-        <Breadcrumb items={[{ label: "Каталог", href: "/catalog" }, { label: b.name }]} />
+        <Breadcrumb
+          withLd
+          currentPath={`/brand/${b.slug}`}
+          items={[{ label: "Каталог", href: "/catalog" }, { label: b.name }]}
+        />
 
         <section className="mt-4 rounded-xl border border-border bg-background p-8 sm:p-10">
           <p className="ticker">{b.name}</p>
@@ -112,14 +107,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             {content.priceFrom && (
               <span className="font-display text-2xl font-bold">{content.priceFrom}</span>
             )}
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
-            >
+            <WaButton text={content.waText}>
               Подобрать в WhatsApp <ArrowRight className="h-4 w-4" />
-            </a>
+            </WaButton>
           </div>
         </section>
 

@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/Container";
-import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { FaqBlock } from "@/components/FaqBlock";
 import { blogPosts } from "@/lib/site";
-import { faqJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return blogPosts.map((p) => ({ slug: p.slug }));
@@ -36,10 +35,6 @@ export default async function Page({
 
   return (
     <Container className="py-10">
-      {post.faq.length ? (
-        <JsonLd data={faqJsonLd(post.faq)} />
-      ) : null}
-
       <article className="mx-auto max-w-2xl">
         <Breadcrumb items={[{ label: "Блог", href: "/blog" }, { label: post.title }]} />
         <h1 className="mt-3 font-display text-3xl font-bold tracking-tight">{post.title}</h1>
@@ -49,19 +44,7 @@ export default async function Page({
           </p>
         ))}
 
-        {post.faq.length ? (
-          <section className="mt-10">
-            <h2 className="text-lg font-medium">Частые вопросы</h2>
-            <dl className="mt-3 divide-y divide-border overflow-hidden rounded-xl border border-border">
-              {post.faq.map((f) => (
-                <div key={f.q} className="px-4 py-3">
-                  <dt className="text-sm font-medium">{f.q}</dt>
-                  <dd className="mt-1 text-sm text-muted-foreground">{f.a}</dd>
-                </div>
-              ))}
-            </dl>
-          </section>
-        ) : null}
+        {post.faq.length ? <FaqBlock faq={post.faq} className="mt-10" /> : null}
       </article>
     </Container>
   );
