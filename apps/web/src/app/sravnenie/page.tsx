@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Check, X, Minus, ArrowRight, Star } from "lucide-react";
 import { Container } from "@/components/Container";
-import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { CtaSection } from "@/components/CtaSection";
 import { HighlightLine } from "@/components/HighlightLine";
 import { sravnenieMeta, products, priceFmt } from "@/lib/site";
-import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: sravnenieMeta.title,
@@ -125,14 +123,8 @@ function Cell({ val }: { val: CellValue }) {
 export default function Page() {
   return (
     <>
-      <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Главная", path: "/" },
-          { name: "Сравнение", path: "/sravnenie" },
-        ])}
-      />
       <Container className="py-10">
-        <Breadcrumb items={[{ label: "Сравнение брендов" }]} />
+        <Breadcrumb withLd currentPath="/sravnenie" items={[{ label: "Сравнение брендов" }]} />
 
         <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">
           AST <HighlightLine>или</HighlightLine> Studio Evolution

@@ -17,7 +17,7 @@ const total = new Intl.NumberFormat("ru-RU").format(songsTotal);
 export default function Page() {
   return (
     <Container className="py-10">
-      <Breadcrumb items={[{ label: "Песни" }]} />
+      <Breadcrumb withLd currentPath="/pesni" items={[{ label: "Песни" }]} />
       <h1 className="font-display text-2xl font-bold">{pesniMeta.h1}</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{pesniMeta.description}</p>
 

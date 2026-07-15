@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <Container className="py-10">
-      <Breadcrumb items={[{ label: "Калькулятор сметы" }]} />
+      <Breadcrumb withLd currentPath="/kalkulyator" items={[{ label: "Калькулятор сметы" }]} />
       <h1 className="font-display text-2xl font-bold">{kalkulyatorMeta.h1}</h1>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{kalkulyatorMeta.description}</p>
       <div className="mt-6">

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Home, Music, ArrowRight, CheckCircle2, type LucideIcon } from "lucide-react";
 import { Container } from "@/components/Container";
-import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ProductCard } from "@/components/ProductCard";
 import { WaButton } from "@/components/WaButton";
@@ -11,7 +10,6 @@ import { CtaSection } from "@/components/CtaSection";
 import { HighlightLine } from "@/components/HighlightLine";
 import { CountUp } from "@/components/CountUp";
 import { products } from "@/lib/site";
-import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Купить домашнее караоке в Алматы: AST Mini и Evobox от 749 000 ₸",
@@ -48,9 +46,8 @@ const faq = [
 export default function Page() {
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Для дома", path: "/dlya-doma" }])} />
       <Container className="py-10">
-        <Breadcrumb items={[{ label: "Домашнее карао­ке" }]} />
+        <Breadcrumb withLd currentPath="/dlya-doma" items={[{ label: "Домашнее карао­ке" }]} />
 
         {/* Герой */}
         <section className="mt-4 rounded-xl border border-border bg-background p-8 sm:p-10">

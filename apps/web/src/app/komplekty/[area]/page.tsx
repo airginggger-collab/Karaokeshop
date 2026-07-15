@@ -51,7 +51,7 @@ export default async function Page({
 
   return (
     <Container className="py-10">
-      <Breadcrumb items={[{ label: "Готовые комплекты", href: "/komplekty" }, { label: b.h1 }]} />
+      <Breadcrumb withLd currentPath={`/komplekty/${b.slug}`} items={[{ label: "Готовые комплекты", href: "/komplekty" }, { label: b.h1 }]} />
       <Badge tone="primary">B2B · под ключ</Badge>
       <h1 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
         {areaIdx >= 0 && m ? (

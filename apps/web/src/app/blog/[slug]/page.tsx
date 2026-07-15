@@ -39,7 +39,7 @@ export default async function Page({
     <Container className="py-10">
       <article className="mx-auto max-w-2xl">
         <JsonLd data={blogPostingJsonLd(post)} />
-        <Breadcrumb items={[{ label: "Блог", href: "/blog" }, { label: post.title }]} />
+        <Breadcrumb withLd currentPath={`/blog/${post.slug}`} items={[{ label: "Блог", href: "/blog" }, { label: post.title }]} />
         <h1 className="mt-3 font-display text-3xl font-bold tracking-tight">{post.title}</h1>
         {post.body.map((para, i) => (
           <p key={i} className="mt-4 text-[15px] leading-7">

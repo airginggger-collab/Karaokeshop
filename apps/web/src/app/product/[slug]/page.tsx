@@ -62,6 +62,8 @@ export default async function Page({
     brand: p.brand,
     inStock: p.inStock,
     image: p.image,
+    category: p.scenarioLabel ?? typeLabels[p.type],
+    description: [p.model, p.brand && `бренд ${p.brand}`, p.note].filter(Boolean).join(", "),
     ...(SHOW_UNVERIFIED_RATINGS ? { rating: p.rating, reviewsCount: p.reviewsCount } : {}),
   });
   const pct = discountPct(p.price, p.priceOld);

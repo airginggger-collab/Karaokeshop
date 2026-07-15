@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { MapPin, Quote, Building2 } from "lucide-react";
 import { Container } from "@/components/Container";
-import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { FaqBlock } from "@/components/FaqBlock";
 import { CtaSection } from "@/components/CtaSection";
 import { keysyMeta, cases } from "@/lib/site";
-import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: keysyMeta.title,
@@ -29,9 +27,8 @@ const faq = [
 export default function Page() {
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd([{ name: "Главная", path: "/" }, { name: "Кейсы", path: "/keysy" }])} />
       <Container className="py-10">
-        <Breadcrumb items={[{ label: keysyMeta.h1 }]} />
+        <Breadcrumb withLd currentPath="/keysy" items={[{ label: keysyMeta.h1 }]} />
         <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">{keysyMeta.h1}</h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">{keysyMeta.description}</p>
 

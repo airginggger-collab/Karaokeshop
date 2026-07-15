@@ -41,7 +41,7 @@ export default async function Page({
       h1={s.h1}
       description={s.description}
       highlight={highlight}
-      breadcrumb={<Breadcrumb items={[{ label: s.h1 }]} />}
+      breadcrumb={<Breadcrumb withLd currentPath={`/karaoke/${s.slug}`} items={[{ label: s.h1 }]} />}
     />
   );
 }

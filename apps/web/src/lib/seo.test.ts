@@ -11,9 +11,13 @@ describe("productJsonLd", () => {
   it("содержит Offer с ценой и валютой KZT", () => {
     const ld = productJsonLd({ name: "AST-250", price: 1500000, slug: "ast-250" });
     expect(ld["@type"]).toBe("Product");
+    expect(ld.sku).toBe("ast-250");
     expect(ld.offers.priceCurrency).toBe("KZT");
     expect(ld.offers.price).toBe(1500000);
     expect(ld.offers.availability).toContain("InStock");
+    expect(ld.offers.itemCondition).toContain("NewCondition");
+    expect(ld.offers.priceValidUntil).toMatch(/^\d{4}-12-31$/);
+    expect(ld.offers.seller["@id"]).toContain("#business");
     expect(ld.offers.url).toContain("/product/ast-250");
   });
 

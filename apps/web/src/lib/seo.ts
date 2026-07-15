@@ -7,17 +7,26 @@ export type ProductLd = {
   brand?: string;
   inStock?: boolean;
   image?: string;
+  description?: string;
+  category?: string;
   rating?: number;
   reviewsCount?: number;
 };
 
 export function productJsonLd(p: ProductLd) {
+  // priceValidUntil детерминирован по году сборки (конец текущего года), чтобы
+  // Offer не считался протухшим. seller связан по @id с бизнес-узлом (#business),
+  // а не безымянной Organization, чтобы не плодить дубль в графе.
+  const priceValidUntil = `${new Date().getFullYear()}-12-31`;
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: p.name,
+    sku: p.slug,
     ...(p.image ? { image: `${siteConfig.url}${p.image}` } : {}),
     ...(p.brand ? { brand: { "@type": "Brand", name: p.brand } } : {}),
+    ...(p.description ? { description: p.description } : {}),
+    ...(p.category ? { category: p.category } : {}),
     ...(p.rating && p.reviewsCount ? {
       aggregateRating: {
         "@type": "AggregateRating",
@@ -31,12 +40,14 @@ export function productJsonLd(p: ProductLd) {
       "@type": "Offer",
       priceCurrency: "KZT",
       price: p.price,
+      itemCondition: "https://schema.org/NewCondition",
+      priceValidUntil,
       availability:
         p.inStock === false
           ? "https://schema.org/OutOfStock"
           : "https://schema.org/InStock",
       url: `${siteConfig.url}/product/${p.slug}`,
-      seller: { "@type": "Organization", name: "karaokeshop" },
+      seller: { "@type": "Organization", "@id": `${siteConfig.url}/#business`, name: "karaokeshop" },
     },
   };
 }
