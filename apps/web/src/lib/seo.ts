@@ -27,6 +27,10 @@ export function productJsonLd(p: ProductLd) {
     ...(p.brand ? { brand: { "@type": "Brand", name: p.brand } } : {}),
     ...(p.description ? { description: p.description } : {}),
     ...(p.category ? { category: p.category } : {}),
+    // aggregateRating эмитить ТОЛЬКО вместе с реальными отзывами, видимыми на самой
+    // странице, иначе разметка отзывов, которых нет в контенте = нарушение Google
+    // (structured data must match visible content) и риск ручных санкций. Выдуманные
+    // rating/reviewsCount удалены из products.json (2026-07-15), ветка ждёт реальные.
     ...(p.rating && p.reviewsCount ? {
       aggregateRating: {
         "@type": "AggregateRating",

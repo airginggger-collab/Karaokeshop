@@ -56,7 +56,7 @@ export const metadata: Metadata = {
 
 const localBusinessLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "ElectronicsStore",
   "@id": `${siteConfig.url}/#business`,
   name: "karaokeshop",
   description: "Официальный дилер AST и Studio Evolution в Казахстане. Продажа, монтаж и настройка под ключ. Шоурум в Алматы, с 2012.",
@@ -86,6 +86,8 @@ const localBusinessLd = {
   ],
   priceRange: "₸₸₸",
   foundingDate: "2012",
+  areaServed: { "@type": "City", name: "Алматы" },
+  hasMap: "https://www.google.com/maps?q=43.2567,76.9286",
   sameAs: [
     "https://2gis.kz/almaty/search/karaokeshop",
   ],
