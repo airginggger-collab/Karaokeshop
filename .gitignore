@@ -27,3 +27,6 @@ _local-assets/
 
 # brainstorming visual companion
 .superpowers/
+
+# generated AI-visibility file (Фаза 3a, scripts/build-llms.mjs)
+apps/web/public/llms.txt
