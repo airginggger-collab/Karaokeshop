@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { FaqBlock } from "@/components/FaqBlock";
+import { JsonLd } from "@/components/JsonLd";
+import { blogPostingJsonLd } from "@/lib/seo";
 import { blogPosts } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -36,6 +38,7 @@ export default async function Page({
   return (
     <Container className="py-10">
       <article className="mx-auto max-w-2xl">
+        <JsonLd data={blogPostingJsonLd(post)} />
         <Breadcrumb items={[{ label: "Блог", href: "/blog" }, { label: post.title }]} />
         <h1 className="mt-3 font-display text-3xl font-bold tracking-tight">{post.title}</h1>
         {post.body.map((para, i) => (

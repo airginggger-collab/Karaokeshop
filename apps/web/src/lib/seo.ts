@@ -65,3 +65,59 @@ export function faqJsonLd(items: { q: string; a: string }[]) {
     })),
   };
 }
+
+// WebSite + SearchAction: заявка на sitelinks searchbox в выдаче Google.
+// Поиск сайта живёт на /catalog?q=… (CatalogClient читает ?q=). @id связывает
+// узел с бизнес-узлом LocalBusiness (#business) в общий entity-граф.
+export function websiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteConfig.url}/#website`,
+    url: siteConfig.url,
+    name: siteConfig.name,
+    inLanguage: "ru",
+    publisher: { "@id": `${siteConfig.url}/#business` },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${siteConfig.url}/catalog?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+// BlogPosting для статей блога. Автор и издатель ссылаются на бизнес-узел (#business).
+// Примечание: rich-результат Article у Google требует datePublished и изображения,
+// которых в content/blog.json пока нет; узел всё равно усиливает entity-граф.
+export function blogPostingJsonLd(post: { title: string; excerpt: string; slug: string }) {
+  const url = `${siteConfig.url}/blog/${post.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    inLanguage: "ru",
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    author: { "@id": `${siteConfig.url}/#business` },
+    publisher: { "@id": `${siteConfig.url}/#business` },
+  };
+}
+
+// ItemList для листингов (каталог, комплекты): заявка на carousel-rich у Google
+// и явная связь листинга с товарами. Принимает пути, префиксует siteConfig.url.
+export function itemListJsonLd(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      url: `${siteConfig.url}${it.path}`,
+    })),
+  };
+}

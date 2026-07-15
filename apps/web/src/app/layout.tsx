@@ -7,6 +7,7 @@ import { siteConfig } from "@/lib/site";
 import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
+import { websiteJsonLd } from "@/lib/seo";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFAB } from "@/components/WhatsAppFAB";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -99,6 +100,7 @@ export default function RootLayout({
       <body className="min-h-screen font-sans antialiased">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <JsonLd data={localBusinessLd} />
+        <JsonLd data={websiteJsonLd()} />
         <Providers>
           <Header />
           {children}
