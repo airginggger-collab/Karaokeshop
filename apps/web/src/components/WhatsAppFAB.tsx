@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { waHref } from "@/lib/wa";
 
-const WA_URL = waHref("Здравствуйте! Интересует каракоке-оборудование, подскажите.");
+const WA_URL = waHref("Здравствуйте! Интересует караоке-оборудование, подскажите.");
 
 export function WhatsAppFAB() {
   const pathname = usePathname();
