@@ -4,33 +4,16 @@ import * as React from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, MessageCircle } from "lucide-react";
 import { Button } from "@kk/ui";
-import { configureWithinBudget, smetaText, type Calc } from "@/lib/calculator";
+import { configureWithinBudget, smetaText, CALC_SCENARIOS, venueOf, type Calc } from "@/lib/calculator";
 import { priceFmt } from "@/lib/site";
 import { parseCalcQuery } from "@/lib/quiz";
 import { WaButton } from "./WaButton";
 import { OptionButton } from "./OptionButton";
 
-const SCENARIOS = [
-  { id: "dom", label: "Дом", sub: "гостиная, баня, гостевой дом" },
-  { id: "kafe", label: "Кафе", sub: "до 40 мест" },
-  { id: "bar", label: "Бар / паб", sub: "40–80 мест" },
-  { id: "restoran", label: "Ресторан", sub: "банкеты, мероприятия" },
-  { id: "klub", label: "Клуб / VIP", sub: "от 80 м²" },
-];
-
-// Подпись типа объекта в заявке WhatsApp (smetaText). На цену не влияет.
-// dom раньше слал «Кафе» — клиент выбирал «Дом», а менеджер получал «Тип: Кафе».
-const SCENARIO_VENUE: Record<string, string> = {
-  dom: "Дом",
-  kafe: "Кафе",
-  bar: "Бар / паб",
-  restoran: "Ресторан",
-  klub: "Караоке-клуб",
-};
-
-const AREA_DEFAULTS: Record<string, number> = {
-  dom: 25, kafe: 40, bar: 70, restoran: 80, klub: 120,
-};
+// Сценарии, подписи типа и дефолты площади — из единого источника
+// (lib/calculator.ts). Здесь их держать нельзя: тот же список нужен белому
+// списку parseCalcQuery и страницам /komplekty.
+const SCENARIOS = CALC_SCENARIOS;
 
 const BUDGET_OPTS = [
   { label: "до 1 000 000 ₸", value: 1000000 },
@@ -87,7 +70,7 @@ export function CalculatorClient() {
     prefilled.current = true;
 
     const idx = BUDGET_OPTS.findIndex((o) => o.value >= q.budget);
-    const venue = SCENARIO_VENUE[q.scenario] ?? "Бар / паб";
+    const venue = venueOf(q.scenario);
     const result = configureWithinBudget(
       { area: q.area, venueType: venue, mics: 4, light: true, sub: q.area >= 50 },
       q.budget,
@@ -104,11 +87,11 @@ export function CalculatorClient() {
 
   function handleScenario(id: string) {
     setScenario(id);
-    setArea(AREA_DEFAULTS[id] ?? 70);
+    setArea(CALC_SCENARIOS.find((s) => s.id === id)?.areaDefault ?? 70);
   }
 
   function buildSmeta() {
-    const venue = SCENARIO_VENUE[scenario ?? "bar"] ?? "Бар / паб";
+    const venue = venueOf(scenario);
     const budget = BUDGET_OPTS[budgetIdx].value;
     const result = configureWithinBudget(
       { area, venueType: venue, mics: 4, light: true, sub: area >= 50 },
@@ -264,7 +247,7 @@ export function CalculatorClient() {
           )}
 
           {/* Человеческая подпись, НЕ сырой id: сюда уходил «Тип: dom» в каждой заявке. */}
-          <WaButton text={smetaText(calc, SCENARIO_VENUE[scenario ?? "bar"] ?? "Заведение")} full size="lg" className="mt-4">
+          <WaButton text={smetaText(calc, venueOf(scenario))} full size="lg" className="mt-4">
             <MessageCircle className="h-4 w-4" />
             Отправить смету в WhatsApp
           </WaButton>

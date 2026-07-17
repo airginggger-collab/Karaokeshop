@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Home, Building2, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -107,6 +108,13 @@ export default function Page() {
             {business.map((s) => <SolutionCard key={s.id} solution={s} />)}
           </div>
         </section>
+
+        <p className="mt-8 text-sm text-muted-foreground">
+          Знаете площадь зала и хотите смету под неё?{" "}
+          <Link href="/komplekty" className="font-medium text-primary hover:underline">
+            Комплекты по площади: от 30 до 100+ м²
+          </Link>
+        </p>
 
         {/* CTA */}
         <CtaSection

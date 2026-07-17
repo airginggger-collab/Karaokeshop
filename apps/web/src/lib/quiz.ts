@@ -1,4 +1,4 @@
-import type { CalcInput } from "./calculator";
+import { isCalcScenario, type CalcInput } from "./calculator";
 
 const AREA_BY_ANSWER: Record<string, number> = {
   "до 30 м²": 25,
@@ -71,8 +71,9 @@ export function parseCalcQuery(get: (k: string) => string | null): CalcQuery | n
   const rawBudget = get("budget");
   const budget = rawBudget === null ? Infinity : Number(rawBudget);
 
-  const known = new Set(Object.values(SCENARIO_ID_BY_ANSWER));
-  if (!scenario || !known.has(scenario)) return null;
+  // Белый список — из CALC_SCENARIOS, а не из ответов квиза: иначе ссылки
+  // с ?scenario=klub / restoran (страницы /komplekty) молча теряли бы состояние.
+  if (!scenario || !isCalcScenario(scenario)) return null;
   if (!Number.isFinite(area) || area < 10 || area > 500) return null;
   if (rawBudget !== null && (!Number.isFinite(budget) || budget <= 0)) return null;
 

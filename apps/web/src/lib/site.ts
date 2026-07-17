@@ -23,7 +23,11 @@ export type Landing = { slug: string; h1: string; title: string; description: st
 export const scenarios: Landing[] = (scenariosData as { items: Landing[] }).items;
 
 // Комплекты по площади (кластер H)
-export const bundles: Landing[] = (bundlesData as { items: Landing[] }).items;
+/** Комплект по площади (/komplekty/[area]). `area` + `scenario` нужны, чтобы
+ * страница считала цену и состав через bundleFor() из lib/calculator, а не
+ * держала их своим текстом: цифры обязаны совпадать с калькулятором. */
+export type Bundle = Landing & { area: number; scenario: string };
+export const bundles: Bundle[] = (bundlesData as { items: Bundle[] }).items;
 
 export type Brand = { slug: string; name: string; h1: string; title: string; description: string };
 export const brands: Brand[] = (brandsData as { items: Brand[] }).items;

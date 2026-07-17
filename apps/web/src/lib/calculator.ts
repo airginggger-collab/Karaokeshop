@@ -8,6 +8,39 @@ export type CalcInput = {
   sub: boolean;
 };
 
+/** ЕДИНЫЙ источник сценариев подбора. Отсюда берут: UI калькулятора,
+ * белый список parseCalcQuery (lib/quiz.ts) и страницы /komplekty.
+ * Держать список в двух местах нельзя: белый список, собранный отдельно из
+ * ответов квиза, знал только dom/kafe/bar — ссылка с ?scenario=klub молча
+ * теряла бы состояние (ловушка 12: один источник на одну правду).
+ * `venue` — подпись типа в заявке WhatsApp; на цену НЕ влияет (см. configure). */
+export type CalcScenario = { id: string; label: string; sub: string; venue: string; areaDefault: number };
+
+export const CALC_SCENARIOS: CalcScenario[] = [
+  { id: "dom", label: "Дом", sub: "гостиная, баня, гостевой дом", venue: "Дом", areaDefault: 25 },
+  { id: "kafe", label: "Кафе", sub: "до 40 мест", venue: "Кафе", areaDefault: 40 },
+  { id: "bar", label: "Бар / паб", sub: "40–80 мест", venue: "Бар / паб", areaDefault: 70 },
+  { id: "restoran", label: "Ресторан", sub: "банкеты, мероприятия", venue: "Ресторан", areaDefault: 80 },
+  { id: "klub", label: "Клуб / VIP", sub: "от 80 м²", venue: "Караоке-клуб", areaDefault: 120 },
+];
+
+export const isCalcScenario = (id: string): boolean => CALC_SCENARIOS.some((s) => s.id === id);
+
+export const venueOf = (id: string | null | undefined): string =>
+  CALC_SCENARIOS.find((s) => s.id === id)?.venue ?? "Заведение";
+
+/** Комплект под площадь — та же сборка, что показывает калькулятор и квиз.
+ * Страницы /komplekty обязаны звать ИМЕННО её, иначе цифры разойдутся. */
+export function bundleFor(area: number, scenarioId: string): Calc {
+  return configure({
+    area,
+    venueType: venueOf(scenarioId),
+    mics: 4,
+    light: true,
+    sub: area >= 50,
+  });
+}
+
 export type Line = { name: string; qty: number; price: number; subtotal: number; hint?: string };
 export type Calc = { base: string; area: number; lines: Line[]; total: number };
 

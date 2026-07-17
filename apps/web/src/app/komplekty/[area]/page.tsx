@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check } from "lucide-react";
+import { Check, MessageCircle } from "lucide-react";
 import { Badge, Button } from "@kk/ui";
 import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BundleTiers } from "@/components/BundleTiers";
 import { HighlightLine } from "@/components/HighlightLine";
-import { bundles } from "@/lib/site";
+import { WaButton } from "@/components/WaButton";
+import { bundles, priceFmt } from "@/lib/site";
+import { bundleFor, smetaText, venueOf } from "@/lib/calculator";
 
 const serviceIncluded = [
   "Выезд и проект звука под зал",
@@ -48,6 +51,7 @@ export default async function Page({
   // («до 30 м²»). Если хвост не найден — h1 целиком без подсветки.
   const m = b.h1.match(/до .+$/);
   const areaIdx = m ? b.h1.lastIndexOf(m[0]) : -1;
+  const calc = bundleFor(b.area, b.scenario);
 
   return (
     <Container className="py-10">
@@ -65,9 +69,38 @@ export default async function Page({
       </h1>
       <p className="mt-2 max-w-2xl text-muted-foreground">{b.description}</p>
 
-      <div className="mt-6 flex flex-wrap gap-3">
-        <Button>Оставить заявку на расчёт</Button>
-        <Button variant="ghost">Смета в WhatsApp</Button>
+      {/* Ориентир и состав считает калькулятор (bundleFor) — своих цифр
+          страница не держит, иначе разойдётся с ним и с квизом (ловушка 12). */}
+      <div className="mt-6 rounded-xl border border-border bg-background p-5 sm:p-6">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            Ориентир под ключ · {b.area} м²
+          </p>
+          <p className="font-display text-3xl font-bold text-primary">{priceFmt(calc.total)}</p>
+        </div>
+        <ul className="mt-4 divide-y divide-border border-t border-border text-sm">
+          {calc.lines.map((l) => (
+            <li key={l.name} className="flex items-baseline justify-between gap-4 py-2.5">
+              <span>
+                {l.name}
+                {l.qty > 1 && <span className="ml-1 text-muted-foreground">× {l.qty}</span>}
+              </span>
+              <span className="shrink-0 text-muted-foreground">{priceFmt(l.subtotal)}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-xs text-muted-foreground">
+          Состав и сумма рассчитаны под {b.area} м². Точную смету подтверждаем по счёту: пришлите размеры зала.
+        </p>
+        {/* Иерархия по UI-правилу 8: зелёный WhatsApp → акцентный CTA. */}
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <WaButton text={smetaText(calc, venueOf(b.scenario))}>
+            <MessageCircle className="h-4 w-4" /> Отправить смету в WhatsApp
+          </WaButton>
+          <Link href={`/kalkulyator?scenario=${b.scenario}&area=${b.area}`}>
+            <Button variant="ghost">Уточнить смету в калькуляторе</Button>
+          </Link>
+        </div>
       </div>
 
       <h2 className="mt-10 mb-3 text-lg font-medium">Под ключ включено</h2>
@@ -81,6 +114,13 @@ export default async function Page({
 
       <h2 className="mt-10 mb-3 text-lg font-medium">Другие площади</h2>
       <BundleTiers current={b.slug} />
+
+      <p className="mt-6 text-sm text-muted-foreground">
+        Подбираете не по площади, а под задачу (гостиная, баня, банкетный зал)?{" "}
+        <Link href="/gotovye-resheniya" className="font-medium text-primary hover:underline">
+          Готовые решения по сценариям
+        </Link>
+      </p>
     </Container>
   );
 }
