@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
+import fs from "node:fs";
+import path from "node:path";
 import {
-  siteConfig, scenarios, bundles, brands, products, staticPages,
+  siteConfig, scenarios, bundles, brands, products, staticPages, priceFromBrand,
   songsSample, cases, blogPosts, storyPosts, songsTotal,
   oNasMeta, kontaktyMeta, sravnenieMeta, catalogMeta, podKlyuchMeta,
   komplektyIndexMeta, kalkulyatorMeta, pesniMeta, keysyMeta, blogMeta,
@@ -64,5 +66,53 @@ describe("контент-целостность site.ts (контракт для
       expect(p.title.length).toBeGreaterThan(0);
       expect(p.body.length).toBeGreaterThan(0);
     }
+  });
+});
+
+describe("цена «от N ₸» — единый источник (ловушка 12)", () => {
+  it("priceFromBrand = минимум по каталогу бренда, null у пустого", () => {
+    expect(priceFromBrand("AST")).toBe(720000);
+    expect(priceFromBrand("Studio Evolution")).toBe(749000);
+    expect(priceFromBrand("Бренда-нет")).toBeNull();
+    for (const b of brands) {
+      const min = priceFromBrand(b.name);
+      expect(min).not.toBeNull();
+      // «от» обязано совпадать с самым дешёвым живым товаром бренда
+      expect(min).toBe(Math.min(...products.filter((p) => p.brand === b.name).map((p) => p.price)));
+    }
+  });
+
+  it("страницы не хардкодят цену бренда строкой", () => {
+    // Пре-existing дефект (найден 2026-07-16): /brand/[slug] держал «от 950 000 ₸»
+    // строкой при живом Evobox за 749 000 — сборка и тесты молчали.
+    const root = path.join(__dirname, "..", "app");
+    const files: string[] = [];
+    const walk = (dir: string) => {
+      for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+        const full = path.join(dir, e.name);
+        if (e.isDirectory()) walk(full);
+        else if (/\.tsx?$/.test(e.name)) files.push(full);
+      }
+    };
+    walk(root);
+    expect(files.length).toBeGreaterThan(0);
+
+    // «от 950 000 ₸» / «от 749000 ₸» и т.п. в исходнике страницы — запрещено:
+    // цена берётся из priceFromBrand(). Пробел любой, включая неразрывный.
+    const hardcoded = /от\s*\d{3}[\s  ]?\d{3}\s*₸/;
+    // Единственное исключение, ждёт ответа владельца (вопрос №3 «актуальный прайс»,
+    // задан 2026-07-16). На /dlya-doma «от 749 000 ₸» — цена самого дешёвого
+    // ГОТОВОГО КОМПЛЕКТА (gotovye-resheniya), а не товара, поэтому пересчитать её
+    // из products нельзя. При этом она спорна: AST Mini за 720 000 продаётся уже
+    // комплектом (kit: пульт, 2 микрофона, акустика, кабели), то есть заголовок
+    // «AST Mini и Evobox от 749 000 ₸» противоречит сам себе. Придёт прайс — либо
+    // цифра подтвердится, либо строка уедет в данные, и исключение снимается.
+    const allowed = new Set(["dlya-doma/page.tsx"]);
+
+    const offenders = files
+      .filter((f) => hardcoded.test(fs.readFileSync(f, "utf8")))
+      .map((f) => path.relative(root, f))
+      .filter((rel) => !allowed.has(rel));
+    expect(offenders).toEqual([]);
   });
 });

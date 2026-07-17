@@ -81,6 +81,15 @@ export function discountPct(price: number, priceOld?: number): number | null {
   return Math.round((1 - price / priceOld) * 100);
 }
 
+/** Минимальная цена бренда — единый источник для всех «от N ₸».
+ * ⚠️ Не хардкодить эту цифру на страницах: разошлась (/brand говорил
+ * «от 950 000 ₸» при живом Evobox за 749 000, /sravnenie считал 749 000).
+ * null — если у бренда нет товаров: показывать «от» тогда нечего. */
+export function priceFromBrand(brand: string): number | null {
+  const prices = products.filter((p) => p.brand === brand).map((p) => p.price);
+  return prices.length ? Math.min(...prices) : null;
+}
+
 // Главная навигация (Header + мобильное меню)
 export const mainNav = [
   { href: "/catalog", label: "Каталог" },

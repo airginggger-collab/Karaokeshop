@@ -5,7 +5,7 @@ import { Container } from "@/components/Container";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { CtaSection } from "@/components/CtaSection";
 import { HighlightLine } from "@/components/HighlightLine";
-import { sravnenieMeta, products, priceFmt } from "@/lib/site";
+import { sravnenieMeta, priceFmt, priceFromBrand } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: sravnenieMeta.title,
@@ -13,8 +13,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/sravnenie" },
 };
 
-const priceFrom = (brand: string) =>
-  Math.min(...products.filter((p) => p.brand === brand).map((p) => p.price));
+const priceFromText = (brand: string) => {
+  const p = priceFromBrand(brand);
+  return p === null ? "по запросу" : priceFmt(p);
+};
 
 type CellValue = { type: "yes" } | { type: "no" } | { type: "neutral" } | { type: "text"; value: string } | { type: "highlight"; value: string };
 
@@ -86,8 +88,8 @@ const rows: { label: string; ast: CellValue; se: CellValue }[] = [
   },
   {
     label: "Цена от",
-    ast: { type: "text", value: priceFmt(priceFrom("AST")) },
-    se: { type: "text", value: priceFmt(priceFrom("Studio Evolution")) },
+    ast: { type: "text", value: priceFromText("AST") },
+    se: { type: "text", value: priceFromText("Studio Evolution") },
   },
 ];
 

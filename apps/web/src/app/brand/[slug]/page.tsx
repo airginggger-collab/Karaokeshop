@@ -6,7 +6,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { BrandProductFilter } from "@/components/BrandProductFilter";
 import { HighlightLine } from "@/components/HighlightLine";
 import { WaButton } from "@/components/WaButton";
-import { brands, products } from "@/lib/site";
+import { brands, products, priceFmt, priceFromBrand } from "@/lib/site";
 
 export function generateStaticParams() {
   return brands.map((b) => ({ slug: b.slug }));
@@ -27,13 +27,14 @@ export async function generateMetadata({
   };
 }
 
+// «Цена от» здесь намеренно НЕ хранится: она считается из каталога
+// (priceFromBrand), иначе цифра расходится с реальными товарами.
 const brandContent: Record<
   string,
-  { tagline: string; priceFrom: string; highlights: string[]; waText: string }
+  { tagline: string; highlights: string[]; waText: string }
 > = {
   ast: {
     tagline: "Широкая линейка: от домашнего Mini до клубного AST-350. Надёжный выбор для любого сценария.",
-    priceFrom: "от 749 000 ₸",
     highlights: [
       "Системы для дома, кафе и клуба в одной линейке",
       "База 60 000+ песен: KZ · RU · EN",
@@ -43,7 +44,6 @@ const brandContent: Record<
   },
   "studio-evolution": {
     tagline: "Evobox: современный медиаплеер с планшетным управлением и облачным контентом.",
-    priceFrom: "от 950 000 ₸",
     highlights: [
       "Планшетный пульт с удобным интерфейсом",
       "Облачный контент и регулярные обновления",
@@ -60,12 +60,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   const content = brandContent[slug] ?? {
     tagline: b.description,
-    priceFrom: "",
     highlights: [],
     waText: `Здравствуйте! Интересует ${b.name}.`,
   };
 
   const items = products.filter((p) => p.brand === b.name);
+  const priceFrom = priceFromBrand(b.name);
 
   // h1 = "Караоке {b.name}[…]" — подсвечиваем название бренда там, где оно встречается в тексте.
   const nameIdx = b.h1.indexOf(b.name);
@@ -104,8 +104,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             ))}
           </ul>
           <div className="mt-5 flex flex-wrap items-center gap-4">
-            {content.priceFrom && (
-              <span className="font-display text-2xl font-bold">{content.priceFrom}</span>
+            {priceFrom !== null && (
+              <span className="font-display text-2xl font-bold">от {priceFmt(priceFrom)}</span>
             )}
             <WaButton text={content.waText}>
               Подобрать в WhatsApp <ArrowRight className="h-4 w-4" />
