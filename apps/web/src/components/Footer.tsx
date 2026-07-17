@@ -10,6 +10,7 @@ const cols = [
       { href: "/o-nas", label: "О компании" },
       { href: "/keysy", label: "Кейсы" },
       { href: "/blog", label: "Блог" },
+      { href: "/pesni", label: "Каталог песен" },
       { href: "/servis", label: "Сервис и гарантия" },
       { href: "/sravnenie", label: "AST или Evolution" },
     ],
@@ -21,7 +22,9 @@ const cols = [
       { href: "/dlya-doma", label: "Для дома" },
       { href: "/dlya-biznesa", label: "Для бизнеса" },
       { href: "/gotovye-resheniya", label: "Готовые решения" },
+      { href: "/komplekty", label: "Комплекты по площади" },
       { href: "/pod-klyuch", label: "Монтаж под ключ" },
+      { href: "/kalkulyator", label: "Калькулятор сметы" },
     ],
   },
   {

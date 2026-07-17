@@ -26,7 +26,7 @@ export function MobileNav() {
   const waLink = waHref("Здравствуйте! Хочу узнать подробнее о вашем оборудовании.");
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         type="button"
         aria-label={open ? "Закрыть меню" : "Открыть меню"}

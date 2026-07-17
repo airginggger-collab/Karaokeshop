@@ -30,7 +30,10 @@ export function Header() {
           </span>
           karaokeshop
         </Link>
-        <nav className="hidden flex-1 items-center gap-5 text-sm md:flex">
+        {/* Порог lg, не md: с 6-м пунктом («Калькулятор», добавлен 2026-07-16)
+            строка меню на 768px не помещается между лого и иконками и рвётся
+            на две. На 768–1023 пункты отдаёт бургер — он рисует тот же mainNav. */}
+        <nav className="hidden flex-1 items-center gap-5 text-sm lg:flex">
           {mainNav.map((n) => {
             const active = pathname === n.href || (n.href !== "/" && pathname.startsWith(n.href));
             return (

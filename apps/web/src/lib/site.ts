@@ -90,11 +90,15 @@ export function priceFromBrand(brand: string): number | null {
   return prices.length ? Math.min(...prices) : null;
 }
 
-// Главная навигация (Header + мобильное меню)
+// Главная навигация (Header + мобильное меню).
+// «Калькулятор» стоит здесь намеренно: до 2026-07-16 входа в него не было ни в
+// шапке, ни в подвале, ни на главной — сильнейший инструмент подбора держался
+// только на CTA лендингов.
 export const mainNav = [
   { href: "/catalog", label: "Каталог" },
   { href: "/dlya-doma", label: "Для дома" },
   { href: "/dlya-biznesa", label: "Для бизнеса" },
+  { href: "/kalkulyator", label: "Калькулятор" },
   { href: "/pod-klyuch", label: "Монтаж" },
   { href: "/kontakty", label: "Контакты" },
 ];
