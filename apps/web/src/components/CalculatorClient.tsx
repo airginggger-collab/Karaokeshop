@@ -1,10 +1,12 @@
 "use client";
 
 import * as React from "react";
+import { useSearchParams } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, MessageCircle } from "lucide-react";
 import { Button } from "@kk/ui";
 import { configureWithinBudget, smetaText, type Calc } from "@/lib/calculator";
 import { priceFmt } from "@/lib/site";
+import { parseCalcQuery } from "@/lib/quiz";
 import { WaButton } from "./WaButton";
 import { OptionButton } from "./OptionButton";
 
@@ -16,11 +18,13 @@ const SCENARIOS = [
   { id: "klub", label: "Клуб / VIP", sub: "от 80 м²" },
 ];
 
+// Подпись типа объекта в заявке WhatsApp (smetaText). На цену не влияет.
+// dom раньше слал «Кафе» — клиент выбирал «Дом», а менеджер получал «Тип: Кафе».
 const SCENARIO_VENUE: Record<string, string> = {
-  dom: "Кафе",
+  dom: "Дом",
   kafe: "Кафе",
   bar: "Бар / паб",
-  restoran: "Кафе",
+  restoran: "Ресторан",
   klub: "Караоке-клуб",
 };
 
@@ -62,6 +66,7 @@ function StepIndicator({ step, total }: { step: number; total: number }) {
 }
 
 export function CalculatorClient() {
+  const searchParams = useSearchParams();
   const [step, setStep] = React.useState(1);
   const [scenario, setScenario] = React.useState<string | null>(null);
   const [area, setArea] = React.useState(70);
@@ -69,6 +74,33 @@ export function CalculatorClient() {
   const [calc, setCalc] = React.useState<Calc | null>(null);
   const [fits, setFits] = React.useState(true);
   const [trimmed, setTrimmed] = React.useState<string[]>([]);
+  const prefilled = React.useRef(false);
+
+  // Приход из квиза на главной: три ответа уже даны, второй раз их не спрашиваем
+  // (пункт 9 аудита 2026-07-16). Бюджет берём ТОЧНЫЙ из URL, а не из BUDGET_OPTS,
+  // иначе смета разойдётся с ориентиром, который клиент увидел в квизе.
+  // Ref-гард: префилл только один раз, иначе «Пересчитать» отбрасывало бы назад в смету.
+  React.useEffect(() => {
+    if (prefilled.current) return;
+    const q = parseCalcQuery((k) => searchParams.get(k));
+    if (!q) return;
+    prefilled.current = true;
+
+    const idx = BUDGET_OPTS.findIndex((o) => o.value >= q.budget);
+    const venue = SCENARIO_VENUE[q.scenario] ?? "Бар / паб";
+    const result = configureWithinBudget(
+      { area: q.area, venueType: venue, mics: 4, light: true, sub: q.area >= 50 },
+      q.budget,
+    );
+
+    setScenario(q.scenario);
+    setArea(q.area);
+    setBudgetIdx(idx === -1 ? BUDGET_OPTS.length - 1 : idx);
+    setCalc(result.calc);
+    setFits(result.fits);
+    setTrimmed(result.trimmed);
+    setStep(4);
+  }, [searchParams]);
 
   function handleScenario(id: string) {
     setScenario(id);
@@ -231,7 +263,8 @@ export function CalculatorClient() {
             </p>
           )}
 
-          <WaButton text={smetaText(calc, scenario ?? "bar")} full size="lg" className="mt-4">
+          {/* Человеческая подпись, НЕ сырой id: сюда уходил «Тип: dom» в каждой заявке. */}
+          <WaButton text={smetaText(calc, SCENARIO_VENUE[scenario ?? "bar"] ?? "Заведение")} full size="lg" className="mt-4">
             <MessageCircle className="h-4 w-4" />
             Отправить смету в WhatsApp
           </WaButton>

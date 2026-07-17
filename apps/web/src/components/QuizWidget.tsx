@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ChevronRight, MessageCircle, Check } from "lucide-react";
 import { priceFmt } from "@/lib/site";
 import { configureWithinBudget } from "@/lib/calculator";
-import { quizToInput, quizBudget } from "@/lib/quiz";
+import { quizToInput, quizBudget, quizToCalcQuery } from "@/lib/quiz";
 import { WaButton } from "./WaButton";
 
 type Step = { question: string; options: string[] };
@@ -110,7 +110,7 @@ export function QuizWidget() {
               <MessageCircle className="h-4 w-4" /> Заявка в WhatsApp
             </WaButton>
             <Link
-              href="/kalkulyator"
+              href={`/kalkulyator${quizToCalcQuery(answers)}`}
               className="inline-flex flex-1 items-center justify-center rounded-xl border border-border py-3 text-sm font-medium transition hover:border-primary hover:text-primary"
             >
               Открыть полную смету

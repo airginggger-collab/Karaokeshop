@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { configure, configureByBudget, configureWithinBudget, pickBase, pickAcoustic } from "./calculator";
+import { configure, configureByBudget, configureWithinBudget, pickBase, pickAcoustic, smetaText } from "./calculator";
 
 describe("pickBase", () => {
   it("выбирает систему по площади", () => {
@@ -88,5 +88,18 @@ describe("configureWithinBudget", () => {
     const r = configureWithinBudget(input, 50_000);
     expect(r.fits).toBe(false);
     expect(r.calc.total).toBeGreaterThan(0);
+  });
+});
+
+describe("smetaText — подпись типа объекта в заявке", () => {
+  // Пре-existing баг (найден 2026-07-16): CalculatorClient отдавал сюда сырой id
+  // сценария, и менеджер получал «Тип: dom» / «Тип: bar» в каждой смете.
+  it("пишет человеческий тип, а не id сценария", () => {
+    const calc = configure({ area: 25, venueType: "Дом", mics: 2, light: false, sub: false });
+    const text = smetaText(calc, "Дом");
+    expect(text).toContain("Тип: Дом, площадь: 25 м²");
+    for (const id of ["dom", "kafe", "bar", "restoran", "klub"]) {
+      expect(text).not.toContain(`Тип: ${id}`);
+    }
   });
 });
