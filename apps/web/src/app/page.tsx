@@ -108,8 +108,7 @@ export default function HomePage() {
       <section className="animate-fade-up pt-0 lg:pt-2">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-stretch">
           <div className="lg:col-span-7">
-            <p className="ticker max-w-md">официальный дилер AST · Studio Evolution · Алматы</p>
-            <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
+            <h1 className="max-w-3xl font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
               Караоке-вечер
               <br />
               <HighlightLine className="whitespace-nowrap">у тебя дома</HighlightLine>

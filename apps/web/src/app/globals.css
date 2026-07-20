@@ -17,25 +17,40 @@ html {
 }
 
 /* Фон страницы и текст — через токены (флипаются в theme.css: light/.dark).
-   Сплошной --color-page — фолбэк под градиент-слоем. */
+   Сплошной --color-page — база под градиент-слоем. */
 body {
   background: var(--color-page);
   color: var(--color-fg);
   min-height: 100vh;
+  position: relative;
 }
 
-/* Градиент-сцена --gradient-page (один источник, per-theme в theme.css) —
-   отдельный ФИКСИРОВАННЫЙ слой за всем контентом. Через position:fixed,
-   а НЕ background-attachment:fixed: последний при скролле рендерится чёрным
-   и полностью игнорируется iOS Safari (сайт мобильный). Один кадр сцены на
-   весь вьюпорт, контент «плавает» поверх — цельно на любой странице. */
+/* Градиент-сцена --gradient-page (цвет per-theme в theme.css) — отдельный слой
+   за контентом. Через position, а НЕ background-attachment:fixed (последний при
+   скролле рендерится чёрным и игнорируется iOS Safari; сайт мобильный).
+
+   СВЕТЛАЯ (по умолчанию): top-band — свечение привязано к ВЕРХУ документа
+   (position:absolute, высота = 1 экран), при скролле уезжает вверх → длинная
+   страница ниже остаётся на чистом --color-page (fixed-слой давал мутный wash
+   на всю высоту, из-за чего белые карточки «плыли»). */
 body::before {
   content: "";
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
   z-index: -1;
   background: var(--gradient-page);
   pointer-events: none;
+}
+
+/* ТЁМНАЯ: сцена якорится к вьюпорту (fixed, один кадр на всю высоту) — одобрено,
+   мути не даёт (тёмное свечение читается как глубина, а не грязь). */
+.dark body::before {
+  position: fixed;
+  inset: 0;
+  height: auto;
 }
 
 /* Шапка (sticky) красит фон сама и перекрыла бы сцену. Полупрозрачный

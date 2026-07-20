@@ -42,9 +42,7 @@ export function Footer() {
   return (
     <footer className="mt-16 border-t border-border dark:border-white/[0.06]">
       <Container className="py-10">
-        <p className="ticker mb-8">
-          официальный дилер AST · Studio Evolution · Алматы · монтаж под ключ · 2 года гарантии
-        </p>
+        <p className="ticker mb-8">монтаж под ключ · 2 года гарантии</p>
         <div className="grid gap-8 sm:grid-cols-3">
           {cols.map((col) => (
             <div key={col.title}>
