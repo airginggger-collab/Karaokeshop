@@ -40,7 +40,7 @@ const cols = [
 
 export function Footer() {
   return (
-    <footer className="mt-16 border-t border-border bg-surface dark:border-white/[0.06] dark:bg-page">
+    <footer className="mt-16 border-t border-border dark:border-white/[0.06]">
       <Container className="py-10">
         <p className="ticker mb-8">
           официальный дилер AST · Studio Evolution · Алматы · монтаж под ключ · 2 года гарантии

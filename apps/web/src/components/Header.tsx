@@ -80,7 +80,7 @@ export function Header() {
   return (
     <>
     <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
-    <header className="sticky top-0 z-30 border-b border-border bg-background dark:bg-page">
+    <header className="header-scene sticky top-0 z-30 border-b border-border">
       <Container className="flex h-14 items-center gap-4">
         <MobileNav />
         <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">

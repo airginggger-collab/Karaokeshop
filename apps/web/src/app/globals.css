@@ -17,10 +17,35 @@ html {
 }
 
 /* Фон страницы и текст — через токены (флипаются в theme.css: light/.dark).
-   Один источник: --color-page (#f4f2fa / #0b0913), --color-fg. */
+   Сплошной --color-page — фолбэк под градиент-слоем. */
 body {
   background: var(--color-page);
   color: var(--color-fg);
+  min-height: 100vh;
+}
+
+/* Градиент-сцена --gradient-page (один источник, per-theme в theme.css) —
+   отдельный ФИКСИРОВАННЫЙ слой за всем контентом. Через position:fixed,
+   а НЕ background-attachment:fixed: последний при скролле рендерится чёрным
+   и полностью игнорируется iOS Safari (сайт мобильный). Один кадр сцены на
+   весь вьюпорт, контент «плавает» поверх — цельно на любой странице. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--gradient-page);
+  pointer-events: none;
+}
+
+/* Шапка (sticky) красит фон сама и перекрыла бы сцену. Полупрозрачный
+   слой цвета страницы + blur → сцена просвечивает, а текст поверх
+   скроллящегося контента остаётся читаемым. Футер делаем прозрачным
+   (класс убран в JSX) — фиксированная сцена просвечивает без шва. */
+.header-scene {
+  background: color-mix(in srgb, var(--color-page) 72%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 /* «Сцена»: поверхности разделяются цветом + hairline (border-border),

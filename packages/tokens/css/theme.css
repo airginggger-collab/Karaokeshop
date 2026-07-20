@@ -15,6 +15,13 @@
 
   /* ─── Светлая тема: «чернильно-синяя сцена» ─── */
   --color-page:         #edf0f5;   /* холодная бумага */
+  /* Фон-сцена страницы: двухтон-диагональ (фиолет→голубой) поверх бумаги.
+     Применяется на body/шапке/футере с background-attachment:fixed
+     (globals.css) — один цельный кадр на всю высоту, без шва. */
+  --gradient-page:
+      linear-gradient(135deg, rgba(124,92,255,.20) 0%, rgba(124,92,255,0) 40%),
+      linear-gradient(300deg, rgba(56,132,255,.16) 0%, rgba(56,132,255,0) 45%),
+      linear-gradient(180deg, #eaf0f8, #e2e9f3);
   --color-bg:           #ffffff;   /* карточка */
   --color-surface:      #e4e9f0;   /* чипы, подложки */
   --color-fg:           #16203a;   /* 16.13:1 на bg ✓ AAA */
@@ -41,6 +48,11 @@
   color-scheme: dark;
 
   --color-page:         #0e131c;   /* холодная тёмная сцена */
+  /* Фон-сцена страницы: яркое неон-фиолет свечение из угла + жёлтый софит. */
+  --gradient-page:
+      radial-gradient(125% 90% at 4% -14%, rgba(124,92,255,.42), transparent 56%),
+      radial-gradient(85% 75% at 108% 6%, rgba(250,204,21,.16), transparent 55%),
+      linear-gradient(180deg, #161f30 0%, #0e131c 45%, #090d14 100%);
   --color-bg:           #172130;   /* карточка */
   --color-surface:      #22304a;   /* чипы, подложки */
   --color-fg:           #f0f4fc;   /* 14.69:1 на bg / 16.88:1 на page ✓ AAA */
