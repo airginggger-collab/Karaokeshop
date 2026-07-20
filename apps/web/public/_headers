@@ -4,9 +4,11 @@
 # CSP: 'unsafe-inline' в script-src вынужден — статический экспорт без nonce
 #   (инлайн-скрипт темы + гидрация Next). Внешние скрипты при этом заблокированы,
 #   кроме Яндекс.Метрики (mc.yandex.ru — разрешена заранее, YM_ID пока заглушка).
+# frame-src https://yandex.ru — виджет Яндекс.Карт на /kontakty (иначе iframe режется
+#   об default-src 'self'). Меняешь провайдера карты — правь и здесь.
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://mc.yandex.ru; font-src 'self'; connect-src 'self' https://mc.yandex.ru; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://mc.yandex.ru; font-src 'self'; connect-src 'self' https://mc.yandex.ru; frame-src https://yandex.ru; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'

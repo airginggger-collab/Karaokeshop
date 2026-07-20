@@ -24,6 +24,10 @@
 > 🚀 **Запуск домена (2026-07-02):** [`strategy/domain-launch.md`](strategy/domain-launch.md) — перенос `karaokeshop.kz` с Wix на Cloudflare без потери Google, GSC, аналитика, локальное SEO, SEO-селф-чек. 301-правила — в [`apps/web/public/_redirects`](../apps/web/public/_redirects) (заполнить старые URL перед cutover; роут домена в `wrangler.toml` добавлять ТОЛЬКО на момент привязки — иначе CI упадёт).
 > 🧪 **QA-прогон (2026-06-25):** [`qa-2026-06-25.md`](qa-2026-06-25.md) — функциональный прогон LIVE, 7 находок исправлено (бюджет-плацебо, og.jpg, крошки, Метрика, форма checkout, санитайз корзины).
 
+## Последняя сессия (2026-07-20) — /kontakty: починена карта (Google-эмбед → Яндекс-виджет)
+
+Карта на `/kontakty` показывала заглушку «Этот контент заблокирован»: легаси-эмбед Google (`maps.google.com/maps?...&output=embed`) без API-ключа теперь отдаёт эту страницу. Заменён на виджет Яндекс.Карт (`yandex.ru/map-widget/v1/?text=<адрес>&z=16`) — геокодит адрес по тексту, без ключа, узнаваем в KZ; ставит метку «улица Муканова, 8, Алматы». В CSP `apps/web/public/_headers` добавлен `frame-src https://yandex.ru` (без него iframe резался об `default-src 'self'`; ловушка №9 — security-заголовки живут в `_headers`, валидируются на `wrangler deploy`, после пуша проверить `curl -I` прода). Файлы: `apps/web/src/app/kontakty/page.tsx`, `apps/web/public/_headers`. Build + 50 тестов web зелёные, карта проверена локально в iframe. ⚠️ После деплоя проверить, что CSP-заголовок на проде реально пускает iframe (`_headers` применяется только на Cloudflare).
+
 ## Последняя сессия (2026-07-16) — аудит живого сайта: опечатка в WhatsApp-префилле; счётчик заблокирован
 
 Работа по [`~/Desktop/AUDIT-2026-07-16-karaokeshop.md`](#) (аудит из сессии портфолио, раздел «Порядок работ»).
