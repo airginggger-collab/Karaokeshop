@@ -98,12 +98,48 @@ export function priceFromBrand(brand: string): number | null {
 // «Калькулятор» стоит здесь намеренно: до 2026-07-16 входа в него не было ни в
 // шапке, ни в подвале, ни на главной — сильнейший инструмент подбора держался
 // только на CTA лендингов.
-export const mainNav = [
-  { href: "/catalog", label: "Каталог" },
-  { href: "/dlya-doma", label: "Для дома" },
-  { href: "/dlya-biznesa", label: "Для бизнеса" },
+// Верхнее меню. Пункт — либо прямая ссылка, либо группа с выпадающим списком
+// (поле `links`). Раньше в шапке жили только 6 прямых пунктов, а половина
+// страниц (кейсы, блог, песни, сервис, сравнение, готовые решения, комплекты)
+// была доступна ТОЛЬКО из футера. Сгруппировали, чтобы всё открывалось сверху.
+export type NavLink = { href: string; label: string };
+export type NavItem = NavLink | { label: string; href?: string; links: NavLink[] };
+
+export function isNavGroup(item: NavItem): item is { label: string; href?: string; links: NavLink[] } {
+  return "links" in item;
+}
+
+export const mainNav: NavItem[] = [
+  {
+    label: "Каталог",
+    href: "/catalog",
+    links: [
+      { href: "/catalog", label: "Всё оборудование" },
+      { href: "/dlya-doma", label: "Для дома" },
+      { href: "/dlya-biznesa", label: "Для бизнеса" },
+      { href: "/gotovye-resheniya", label: "Готовые решения" },
+      { href: "/komplekty", label: "Комплекты по площади" },
+    ],
+  },
+  {
+    label: "Услуги",
+    links: [
+      { href: "/pod-klyuch", label: "Монтаж под ключ" },
+      { href: "/servis", label: "Сервис и гарантия" },
+    ],
+  },
   { href: "/kalkulyator", label: "Калькулятор" },
-  { href: "/pod-klyuch", label: "Монтаж" },
+  {
+    label: "О нас",
+    href: "/o-nas",
+    links: [
+      { href: "/o-nas", label: "О компании" },
+      { href: "/keysy", label: "Кейсы" },
+      { href: "/blog", label: "Блог" },
+      { href: "/pesni", label: "Каталог песен" },
+      { href: "/sravnenie", label: "AST или Evolution" },
+    ],
+  },
   { href: "/kontakty", label: "Контакты" },
 ];
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
-import { mainNav, siteConfig } from "@/lib/site";
+import { mainNav, isNavGroup, siteConfig } from "@/lib/site";
 import { waHref } from "@/lib/wa";
 
 export function MobileNav() {
@@ -64,9 +64,40 @@ export function MobileNav() {
         <nav className="flex-1 overflow-y-auto px-4 py-6">
           <ul className="space-y-1">
             {mainNav.map((n) => {
+              // Группа — заголовок секции + все её ссылки списком (так спрятанные
+              // страницы попадают и в бургер, а не только в десктоп-выпадашку).
+              if (isNavGroup(n)) {
+                return (
+                  <li key={n.label} className="pt-3 first:pt-0">
+                    <p className="px-4 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      {n.label}
+                    </p>
+                    <ul>
+                      {n.links.map((l) => {
+                        const active = pathname === l.href || (l.href !== "/" && pathname.startsWith(l.href));
+                        return (
+                          <li key={l.href}>
+                            <Link
+                              href={l.href}
+                              onClick={() => setOpen(false)}
+                              aria-current={active ? "page" : undefined}
+                              className={[
+                                "flex items-center px-4 py-3 text-base transition",
+                                active ? "hl font-medium" : "rounded-xl text-foreground hover:bg-muted",
+                              ].join(" ")}
+                            >
+                              {l.label}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </li>
+                );
+              }
               const active = pathname === n.href || (n.href !== "/" && pathname.startsWith(n.href));
               return (
-                <li key={n.href}>
+                <li key={n.href} className="pt-3 first:pt-0">
                   <Link
                     href={n.href}
                     onClick={() => setOpen(false)}
