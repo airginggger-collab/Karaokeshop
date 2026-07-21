@@ -12,15 +12,51 @@
 #     (Next игнорирует его в статическом экспорте) — все редиректы только здесь.
 /karaoke/dlya-doma /dlya-doma 301
 
-# 2) Старые URL Wix → новые (относительные). ЗАПОЛНИТЬ после краула старого сайта
-#    (GSC → Pages / Screaming Frog: список проиндексированных URL).
-#    Каждый старый индексируемый URL обязан 301-иться на релевантный новый,
-#    иначе потеряем позиции и получим 404 в индексе.
-#    Примеры (заменить на реальные пути Wix):
-# /shop /catalog 301
-# /shop/ast-250 /product/ast-250 301
-# /o-kompanii /o-nas 301
-# /kontakty-1 /kontakty 301
-# /blog-1/* /blog/:splat 301
-#    Нет точного аналога → на ближайший раздел или главную:
-# /staraya-stranica / 301
+# 2) Старые URL Wix → новые. Источник: sitemap.xml старого Wix-сайта, 77 URL
+#    (снято 2026-07-21, до переключения DNS). Правила проверяются сверху вниз,
+#    первое совпадение побеждает: точные пары выше, сплаты-ловушки ниже.
+#    Кириллические пути Wix (/product-page/ast-zoom-2-караоке-система и т.п.)
+#    приходят percent-encoded — их добирает сплат /product-page/*.
+
+# 2а) Разделы и категории Wix
+/aksessuary /catalog 301
+/akustika /catalog 301
+/ast /brand/ast 301
+/studio-evolution /brand/studio-evolution 301
+/book-online /kontakty 301
+/delivery-policy /kontakty 301
+/return-policy /servis 301
+/privacy-policy / 301
+/karaoke-dlya-doma /dlya-doma 301
+/karaoke-dlya-zavedeniy /dlya-biznesa 301
+/karaoke-sistemy /catalog 301
+/katalog-1 /catalog 301
+/magazin-karaoke-oborudovaniya /catalog 301
+/mikrofony-dlya-karaoke /catalog 301
+/mikshery /catalog 301
+/novogodnyaya-akciya / 301
+/pakety-obnovleniy /pesni 301
+/sravnenie-karaoke-sistem /sravnenie 301
+/svet /catalog 301
+/zvuk /catalog 301
+
+# 2б) Товары Wix с точным или ближайшим аналогом
+/product-page/ast-250 /product/ast-250 301
+/product-page/ast-mini /product/ast-mini 301
+/product-page/evo-box /product/evobox 301
+/product-page/evo-box-home /product/evobox 301
+/product-page/ast-50 /brand/ast 301
+/product-page/ast-zoom /brand/ast 301
+/product-page/evolution-lite2-plus /brand/studio-evolution 301
+/product-page/evolution-pro-2 /brand/studio-evolution 301
+/product-page/shure-slx24-beta-58a /product/shure-blx24-sm58 301
+
+# 2в) Остальные товары Wix (снятые с продажи бренды, кириллические URL) → каталог
+/product-page/* /catalog 301
+
+# 2г) Wix-демо и мусор шаблона → ближайший живой раздел
+/items / 301
+/items/* / 301
+/news/* /blog 301
+/news-1/* /blog 301
+/news-2/* /blog 301
