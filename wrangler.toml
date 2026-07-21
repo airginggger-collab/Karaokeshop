@@ -7,3 +7,11 @@ compatibility_date = "2025-06-01"
 directory = "./apps/web/out"
 # Неизвестные пути → наш статический 404.html (SEO-friendly).
 not_found_handling = "404-page"
+
+# Кастомные домены (привязаны 2026-07-21, зона karaokeshop.kz активна в аккаунте).
+# custom_domain-роуты идемпотентны: wrangler deploy подтверждает привязку.
+# ⚠️ Не добавлять роуты чужой/несуществующей зоны — деплой упадёт (ловушка 0).
+routes = [
+  { pattern = "karaokeshop.kz", custom_domain = true },
+  { pattern = "www.karaokeshop.kz", custom_domain = true },
+]

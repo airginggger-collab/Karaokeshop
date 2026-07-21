@@ -1,8 +1,8 @@
 # Деплой — Cloudflare (₸0)
 
-> **🟢 Live (боевой прод):** https://karaokeshop.airg-inggger.workers.dev/ — авто-деплой на каждый push в `main`. Совпадает с HEAD `main`.
+> **🟢 Live (боевой прод):** https://www.karaokeshop.kz/ — авто-деплой на каждый push в `main`. Совпадает с HEAD `main`. Технический хост https://karaokeshop.airg-inggger.workers.dev/ отдаёт то же самое.
 >
-> ⚠️ **Бренд-домен `karaokeshop.kz` ещё НЕ привязан** — отдаёт старый сайт на Wix. Проверять прод надо на `*.workers.dev`, не на `.kz`. `siteConfig.url` указывает на `karaokeshop.kz` → canonical/og ведут на Wix (SEO-риск). Подробно — раздел «Бренд-домен» и «Проверка после деплоя» ниже.
+> ✅ **Бренд-домен привязан 2026-07-21:** зона `karaokeshop.kz` на Cloudflare (аккаунт `airg.inggger@gmail.com`, Free), оба хоста — custom domains воркера, apex 301-ит на www (Redirect Rule), «Always Use HTTPS» включён. canonical/og от `siteConfig.url` теперь указывают на сам сайт — SEO-долг закрыт. Детали переезда — раздел «Бренд-домен» ниже и `docs/strategy/domain-launch.md`.
 >
 > Вариант A — статический экспорт ([ADR-0002](adr/0002-hosting.md)). Сайт полностью SSG → `output: "export"` собирает чистую статику в `apps/web/out`. Cloudflare отдаёт её как **assets-only Worker** (`wrangler.toml`) — бесплатно, коммерция разрешена, безлимит-трафик, авто-деплой на каждый push в `main`. Чистые URL (без `.html`); неизвестные пути → `404.html` (`not_found_handling = "404-page"`).
 
@@ -44,20 +44,20 @@ npm run build -w web        # → apps/web/out (47 статических стр
 npx serve apps/web/out      # посмотреть локально
 ```
 
-## ⚠️ Бренд-домен `karaokeshop.kz` ещё НЕ привязан — отдаёт старый Wix (SEO-риск)
+## ✅ Бренд-домен `karaokeshop.kz` привязан (2026-07-21)
 
-> Подтверждено аудитом деплоя 2026-06-26.
+Как устроено (переезд с Wix выполнен по чек-листу `docs/strategy/domain-launch.md`):
 
-- **Боевой прод — только `*.workers.dev`:** https://karaokeshop.airg-inggger.workers.dev/ (= HEAD `main`, всё ок). **Проверять надо именно его, не `.kz`.**
-- **Бренд-домен `www.karaokeshop.kz` сейчас отдаёт СТАРЫЙ сайт на Wix** — DNS ещё не переведён на Cloudflare, домен к Worker не привязан.
-- **SEO-риск (до привязки домена):** в `apps/web/src/lib/site.ts` → `siteConfig.url = "https://www.karaokeshop.kz"`. От него строятся `canonical`, `og:url`, `og:image` (см. `apps/web/src/lib/seo.ts`). Значит **canonical и соц-превью нового сайта ведут на чужой Wix.** Пока домен не привязан, поисковики/соцсети получают ссылку на старый сайт — каноникал указывает не на тот хост, превью тянутся с Wix. Это известный долг, **`siteConfig.url` не трогаем по этому таску** (только доки); устранится автоматически в момент привязки домена.
-
-### Кастомный домен (когда привязываем)
-Cloudflare → Workers & Pages → проект `karaokeshop` → **Custom domains/Routes** → добавить `karaokeshop.kz` (+`www`) → перенести NS/DNS на Cloudflare (или CNAME). Бесплатный SSL автоматически. После привязки: открыть `https://www.karaokeshop.kz` и убедиться, что отдаётся новый сайт (не Wix), а `siteConfig.url` совпадает с реальным хостом — тогда canonical/og перестанут указывать на чужой ресурс.
+- **NS у регистратора ps.kz:** `logan.ns.cloudflare.com`, `veda.ns.cloudflare.com` (были `ns1/ns2.wix.com`). Зона `karaokeshop.kz` — в Cloudflare-аккаунте `airg.inggger@gmail.com`, тариф Free.
+- **Оба хоста — custom domains воркера `karaokeshop`** (Workers & Pages → karaokeshop → Domains), продублированы `routes` в `wrangler.toml`. Импортированные при создании зоны Wix-записи (3×A apex, CNAME `www`/`m`) удалены.
+- **Канон www:** Redirect Rule `apex-to-www-301` (зона → Rules → Redirect Rules): wildcard `https://karaokeshop.kz/*` → `https://www.karaokeshop.kz/${1}`, 301, query сохраняется. В `_redirects` этого правила НЕТ и быть не может (ловушка 0: только относительные URL).
+- **Always Use HTTPS** включён (SSL/TLS → Edge Certificates): `http://…` → 301 на `https://…`.
+- **robots.txt:** Cloudflare подмешивает сверху managed-блок (запрет AI-training ботам, тумблер «Block AI training in robots.txt» из онбординга зоны). Наши директивы и `Sitemap:` — в конце файла, поиск Google не затронут. Не пугаться «чужого» преамбула.
+- **Откат (на крайний случай):** вернуть у ps.kz NS `ns1/ns2.wix.com` — через час-два вернётся Wix (пока жива подписка Wix).
 
 ## Проверка после деплоя
 
-После каждого push в `main` (CI авто-деплоит) пройди чек-лист — **проверяй `*.workers.dev`, а НЕ `.kz`** (бренд-домен ещё на Wix):
+После каждого push в `main` (CI авто-деплоит) пройди чек-лист — прод проверяем на **https://www.karaokeshop.kz/**:
 
 ```bash
 # 1. Локальный HEAD == origin/main (то, что должно быть задеплоено)
@@ -68,16 +68,20 @@ git -C ~/Desktop/karaokeshop rev-parse origin/main   # должны совпас
 gh run list --repo airginggger-collab/Karaokeshop --branch main --limit 5
 # сверь headSha успешного run с HEAD выше
 
-# 3. Прод-ассеты на *.workers.dev совпадают с локальной сборкой
+# 3. Прод совпадает с локальной сборкой
 npm run build -w web                                  # → apps/web/out
-curl -s https://karaokeshop.airg-inggger.workers.dev/ | head
+curl -s https://www.karaokeshop.kz/ | head
 # спот-сверка с apps/web/out/index.html (структура/контент совпадают)
+
+# 4. Хост-канонизация жива (после правок в Cloudflare-дашборде)
+curl -sI https://karaokeshop.kz/ | grep -i location     # → https://www.karaokeshop.kz/
+curl -sI http://www.karaokeshop.kz/ | grep -i location  # → https://…
 ```
 
 - [ ] `git rev-parse HEAD` == `git rev-parse origin/main`
 - [ ] Последний деплой-CI-run — **success** и его SHA == HEAD (`gh run list`)
-- [ ] Прод на `*.workers.dev` совпадает с локальной сборкой `apps/web/out`
-- [ ] Проверял именно `*.workers.dev` (не `.kz` — там пока Wix)
+- [ ] Прод на `https://www.karaokeshop.kz/` совпадает с локальной сборкой `apps/web/out`
+- [ ] apex и http 301-ят на `https://www.…` (см. п.4)
 
 ## Когда переключаться на вариант B
 Как только добавим **CMS / SSR / ISR** (серверный рендеринг), статического экспорта не хватит. Тогда:

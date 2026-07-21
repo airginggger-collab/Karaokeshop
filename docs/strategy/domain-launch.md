@@ -19,22 +19,16 @@
 - [x] **Контент-паритет:** новый сайт покрывает все живые разделы старого (каталог/бренды/дом/бизнес/сравнение/блог); демо-мусор шаблона Wix (`/items`, `/news*`) паритета не требует → 301 на `/` и `/blog`.
 - [x] **Проверить сборку:** `_redirects` в `out/` ✓, `check-redirects` ✓, 50 тестов web ✓ (2026-07-21).
 
-### Переключение (cutover)
-- [ ] **Привязать домен к Worker'у** (один из вариантов):
-  - **Проще — дашборд:** Cloudflare → Workers & Pages → `karaokeshop` → Settings → Domains & Routes → **Add Custom Domain** → `karaokeshop.kz` и `www.karaokeshop.kz`. Cloudflare сам заведёт DNS + SSL.
-  - **Или wrangler** (добавить НА МОМЕНТ cutover, не раньше — иначе `wrangler deploy` упадёт, пока зоны нет в аккаунте):
-    ```toml
-    routes = [
-      { pattern = "karaokeshop.kz", custom_domain = true },
-      { pattern = "www.karaokeshop.kz", custom_domain = true },
-    ]
-    ```
-- [ ] **DNS:** если домен не на Cloudflare — сменить NS у регистратора на Cloudflare (или добавить зону и A/CNAME на Worker). Дождаться распространения.
-- [ ] **Не отключать Wix**, пока новый сайт не отвечает на домене и редиректы не проверены (страховка отката).
+### Переключение (cutover) — ✅ ВЫПОЛНЕНО 2026-07-21
+- [x] **Зона в Cloudflare:** `karaokeshop.kz` добавлена в аккаунт `airg.inggger@gmail.com` (Free). NS выданы: `logan.ns.cloudflare.com`, `veda.ns.cloudflare.com`.
+- [x] **NS у ps.kz:** владелец сменил `ns1/ns2.wix.com` → NS Cloudflare («Регистрация Name-серверов → Настроить»); реестр .kz переключился за ~минуты, зона активировалась.
+- [x] **Домен привязан к Worker'у:** оба хоста добавлены как Custom Domains (дашборд), Wix-записи зоны (3×A, CNAME `www`/`m`) предварительно удалены; `routes` продублированы в `wrangler.toml` (безопасно ПОСЛЕ активации зоны).
+- [x] **Канонизация:** Redirect Rule `apex-to-www-301` (`https://karaokeshop.kz/*` → `https://www.karaokeshop.kz/${1}`, 301, query сохраняется) + **Always Use HTTPS**.
+- [x] **Wix не отключён** — страховка отката (NS назад = вернётся Wix).
 
 ### После переключения
-- [ ] **Проверить:** `https://karaokeshop.kz` и `www` отдают новый сайт; без-www → www (301); несколько старых URL → новые (301); `https://www.karaokeshop.kz/sitemap.xml` и `robots.txt` живые; `og.jpg` отдаётся (200).
-- [ ] **Отписаться от Wix** после подтверждения.
+- [x] **Проверено 2026-07-21 (через эдж):** `www` отдаёт новый сайт (200, наши `_headers`); apex → www 301 с путём и query; http → https 301; старые URL → новые (`/product-page/evo-box` → `/product/evobox` 200); `sitemap.xml` 200; `robots.txt` жив (сверху managed-блок Cloudflare против AI-ботов — норма, наш `Sitemap:` на месте); `og.jpg` 200.
+- [ ] **Отписаться от Wix** — решает владелец; до отписки жив путь отката.
 
 ---
 

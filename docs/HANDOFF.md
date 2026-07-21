@@ -24,7 +24,18 @@
 > 🚀 **Запуск домена (2026-07-02):** [`strategy/domain-launch.md`](strategy/domain-launch.md) — перенос `karaokeshop.kz` с Wix на Cloudflare без потери Google, GSC, аналитика, локальное SEO, SEO-селф-чек. 301-правила — в [`apps/web/public/_redirects`](../apps/web/public/_redirects) (заполнить старые URL перед cutover; роут домена в `wrangler.toml` добавлять ТОЛЬКО на момент привязки — иначе CI упадёт).
 > 🧪 **QA-прогон (2026-06-25):** [`qa-2026-06-25.md`](qa-2026-06-25.md) — функциональный прогон LIVE, 7 находок исправлено (бюджет-плацебо, og.jpg, крошки, Метрика, форма checkout, санитайз корзины).
 
-## Последняя сессия (2026-07-21) — карта 301-редиректов Wix→новый сайт (подготовка cutover домена)
+## Последняя сессия (2026-07-21, часть 2) — 🚀 ДОМЕН ПРИВЯЗАН: karaokeshop.kz живёт на новом сайте
+
+Cutover выполнен целиком (агент вёл Cloudflare-дашборд через Chrome владельца, NS менял владелец в ps.kz):
+
+1. **Зона `karaokeshop.kz`** создана в Cloudflare (`airg.inggger@gmail.com`, Free), NS `logan/veda.ns.cloudflare.com`; владелец сменил NS у ps.kz с `ns1/ns2.wix.com`, реестр .kz переключился за минуты.
+2. **Оба хоста → custom domains воркера** (Wix-записи зоны удалены), Redirect Rule `apex-to-www-301` (wildcard → `https://www.karaokeshop.kz/${1}`, 301, query сохраняется), **Always Use HTTPS** включён.
+3. **Проверено через эдж:** www 200 (наши `_headers`), apex/http → 301, цепочка `http://karaokeshop.kz/product-page/evo-box` → `https://www.karaokeshop.kz/product/evobox` 200, sitemap/og.jpg 200, robots жив (сверху managed-блок Cloudflare против AI-краулеров — норма, `Sitemap:` наш). **canonical/og теперь указывают на сам сайт — главный SEO-блокер закрыт.**
+4. **Репо:** `routes` (custom_domain) добавлены в `wrangler.toml`; ловушка 7 и Live-блок CLAUDE.md переписаны (прод проверять на `https://www.karaokeshop.kz/`), deploy.md и domain-launch.md актуализированы.
+
+**Не сделано (следующие шаги):** GSC (ресурс «Домен» + sitemap + запрос индексации), Яндекс.Метрика ID в `layout.tsx`, Яндекс.Вебмастер, GBP/2ГИС; отписка от Wix — решение владельца (до неё жив откат: NS назад на wix). Wix-подписку не трогали.
+
+## Предыдущая сессия (2026-07-21, часть 1) — карта 301-редиректов Wix→новый сайт (подготовка cutover домена)
 
 Владелец начал привязку `karaokeshop.kz` (скрин консоли ps.kz: NS пока `ns1/ns2.wix.com`, DNSSEC выключен). Выполнен пункт «до переключения DNS» из [`strategy/domain-launch.md`](strategy/domain-launch.md):
 
