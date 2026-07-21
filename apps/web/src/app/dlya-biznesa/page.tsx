@@ -92,7 +92,7 @@ export default function Page() {
           </div>
           <div className="hidden aspect-[4/3] overflow-hidden rounded-xl md:block">
             <img
-              src="/scenariy/biznes.jpg"
+              src="/scenariy/biznes.webp"
               alt="Караоке для бизнеса"
               className="h-full w-full rounded-xl object-cover"
               loading="eager"

@@ -122,7 +122,7 @@ export default function HomePage() {
           </div>
           <div aria-hidden="true" className="relative hidden min-h-[280px] overflow-hidden rounded-xl border border-border lg:col-span-5 lg:block">
             <img
-              src="/scenariy/poyushchie.jpg"
+              src="/scenariy/poyushchie.webp"
               alt="Караоке-вечер"
               className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
               loading="eager"
@@ -173,8 +173,8 @@ export default function HomePage() {
       {/* Дом и бизнес — сценарные входы */}
       <section className="mt-8 grid gap-4 sm:grid-cols-2">
         {[
-          { href: "/dlya-doma", image: "/scenariy/dom.jpg", title: "Караоке для дома", sub: "Гостиная, баня, гостевой дом. Тёплые вечера с песнями.", cta: "Выбрать домой" },
-          { href: "/dlya-biznesa", image: "/scenariy/biznes.jpg", title: "Караоке для бизнеса", sub: "Кафе, бар, ресторан, клуб. Проект звука и монтаж под ключ.", cta: "Оснастить заведение" },
+          { href: "/dlya-doma", image: "/scenariy/dom.webp", title: "Караоке для дома", sub: "Гостиная, баня, гостевой дом. Тёплые вечера с песнями.", cta: "Выбрать домой" },
+          { href: "/dlya-biznesa", image: "/scenariy/biznes.webp", title: "Караоке для бизнеса", sub: "Кафе, бар, ресторан, клуб. Проект звука и монтаж под ключ.", cta: "Оснастить заведение" },
         ].map((c) => (
           <Link key={c.href} href={c.href} className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background">
             <div className="h-40 overflow-hidden sm:h-48">
