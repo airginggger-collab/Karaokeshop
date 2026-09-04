@@ -19,6 +19,10 @@ export function WhatsAppFAB() {
 
   if (pathname === "/checkout") return null;
 
+  // На /product/* мобильная ProductStickyBar уже несёт WhatsApp-CTA:
+  // FAB там дублировал бы кнопку и перекрывал её собой (z-50 над z-40).
+  const hasStickyBar = pathname.startsWith("/product/");
+
   return (
     <a
       href={WA_URL}
@@ -26,7 +30,8 @@ export function WhatsAppFAB() {
       rel="noopener noreferrer"
       aria-label="Написать в WhatsApp"
       className={[
-        "fixed bottom-6 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 md:bottom-8 md:right-8",
+        "fixed bottom-6 right-4 z-50 h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 md:bottom-8 md:right-8",
+        hasStickyBar ? "hidden lg:flex" : "flex",
         visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none",
       ].join(" ")}
     >

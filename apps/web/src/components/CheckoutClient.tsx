@@ -84,7 +84,7 @@ export function CheckoutClient() {
           placeholder="Напр., Айгерим"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="mb-3 h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+          className="mb-3 h-11 w-full rounded-xl border border-border bg-background px-4 text-base outline-none focus:ring-2 focus:ring-primary/30 md:text-sm"
         />
         <label htmlFor="co-phone" className="mb-1 block text-xs font-medium text-muted-foreground">
           Телефон <span className="font-normal">(необязательно)</span>
@@ -97,7 +97,7 @@ export function CheckoutClient() {
           placeholder="+7 (___) ___-__-__"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="mb-4 h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+          className="mb-4 h-11 w-full rounded-xl border border-border bg-background px-4 text-base outline-none focus:ring-2 focus:ring-primary/30 md:text-sm"
         />
 
         <h2 className="mb-3 text-sm font-medium">Доставка</h2>

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -10,7 +11,10 @@ import { waHref } from "@/lib/wa";
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
   const pathname = usePathname();
+
+  React.useEffect(() => setMounted(true), []);
 
   React.useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
@@ -25,26 +29,20 @@ export function MobileNav() {
 
   const waLink = waHref("Здравствуйте! Хочу узнать подробнее о вашем оборудовании.");
 
-  return (
-    <div className="lg:hidden">
-      <button
-        type="button"
-        aria-label={open ? "Закрыть меню" : "Открыть меню"}
-        aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
-        className="-ml-1 inline-flex h-11 w-11 items-center justify-center rounded-md text-foreground hover:bg-muted"
-      >
-        {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-      </button>
-
-      {/* Полноэкранный drawer */}
-      <div
-        aria-hidden={!open}
-        className={[
-          "fixed inset-0 z-50 flex flex-col bg-background transition-transform duration-300 ease-in-out",
-          open ? "translate-x-0" : "-translate-x-full",
-        ].join(" ")}
-      >
+  // Drawer рисуется ПОРТАЛОМ в <body>, а не внутри <header>: у шапки
+  // `.header-scene` стоит `backdrop-filter: blur(10px)`, а любой filter/
+  // backdrop-filter/transform на предке делает его containing block для
+  // `position: fixed` потомков. Из-за этого `fixed inset-0` схлопывался до
+  // коробки шапки (375×56) и меню на телефоне разваливалось поверх контента
+  // (ловушка 16). Портал уносит drawer из-под шапки — inset-0 снова вьюпорт.
+  const drawer = (
+    <div
+      aria-hidden={!open}
+      className={[
+        "fixed inset-0 z-50 flex flex-col bg-background transition-transform duration-300 ease-in-out lg:hidden",
+        open ? "translate-x-0" : "-translate-x-full",
+      ].join(" ")}
+    >
         {/* Шапка drawer */}
         <div className="flex h-14 items-center justify-between border-b border-border px-4">
           <Link href="/" onClick={() => setOpen(false)} className="font-semibold tracking-tight">
@@ -118,7 +116,7 @@ export function MobileNav() {
         </nav>
 
         {/* Футер drawer — контакты + WhatsApp */}
-        <div className="border-t border-border px-4 py-6 space-y-3">
+        <div className="border-t border-border px-4 pt-6 space-y-3 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
           <a
             href={waLink}
             target="_blank"
@@ -132,14 +130,29 @@ export function MobileNav() {
             </svg>
             Написать в WhatsApp
           </a>
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">
+          <div className="flex items-center justify-between gap-3">
+            <p className="min-w-0 text-sm text-muted-foreground">
               <a href={`tel:${siteConfig.phone.replace(/[^+\d]/g, "")}`} className="hover:text-primary">{siteConfig.phone}</a> · {siteConfig.hours}
             </p>
             <ThemeToggle />
           </div>
-        </div>
       </div>
+    </div>
+  );
+
+  return (
+    <div className="lg:hidden">
+      <button
+        type="button"
+        aria-label={open ? "Закрыть меню" : "Открыть меню"}
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className="-ml-1 inline-flex h-11 w-11 items-center justify-center rounded-md text-foreground hover:bg-muted"
+      >
+        {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+      </button>
+
+      {mounted ? createPortal(drawer, document.body) : null}
     </div>
   );
 }

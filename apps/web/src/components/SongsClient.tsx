@@ -25,7 +25,7 @@ export function SongsClient() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Найти песню или исполнителя"
-          className="h-11 w-full bg-transparent text-sm outline-none"
+          className="h-11 w-full bg-transparent text-base outline-none md:text-sm"
         />
       </div>
 

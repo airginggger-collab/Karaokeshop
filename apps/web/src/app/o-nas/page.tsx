@@ -42,7 +42,7 @@ const team = [
 
 const timeline = [
   { year: "2012", event: "Основание компании, первые установки в Алматы" },
-  { year: "2015", event: "Официальный дилер Studio Evolution" },
+  { year: "2015", event: "Добавили в линейку Studio Evolution" },
   { year: "2018", event: "Открытие собственного сервис-центра" },
   { year: "2022", event: "100+ оснащённых заведений по Казахстану" },
   { year: "2024", event: "Партнёрство с брендом AST" },
@@ -67,7 +67,7 @@ export default function Page() {
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">О компании</p>
           <h1 className="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl">{oNasMeta.h1}</h1>
           <p className="mt-3 max-w-xl text-muted-foreground">
-            Оснащаем заведения и дома под ключ с 2012 года. Официальные дилеры AST и Studio Evolution в Казахстане.
+            Оснащаем заведения и дома под ключ с 2012 года. Работаем с AST и Studio Evolution по всему Казахстану.
           </p>
           <WaButton text="Здравствуйте! Хочу узнать подробнее о вашей компании." className="mt-5">
             Написать в WhatsApp <ArrowRight className="h-4 w-4" />

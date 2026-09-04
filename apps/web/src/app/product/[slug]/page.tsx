@@ -71,7 +71,7 @@ export default async function Page({
   const songs = p.songsCount ? new Intl.NumberFormat("ru-RU").format(p.songsCount) : null;
 
   return (
-    <Container className="pb-28 pt-6 lg:pb-10">
+    <Container className="pb-10 pt-6">
       <Breadcrumb
         withLd
         currentPath={`/product/${p.slug}`}

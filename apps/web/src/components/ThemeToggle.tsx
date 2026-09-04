@@ -28,7 +28,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Переключить тему"
-      className="text-muted-foreground hover:text-foreground"
+      className="inline-flex h-11 w-11 items-center justify-center text-muted-foreground hover:text-foreground"
     >
       {mounted && dark ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
     </button>

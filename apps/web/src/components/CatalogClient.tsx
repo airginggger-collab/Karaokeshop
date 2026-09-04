@@ -86,7 +86,7 @@ export function CatalogClient({ items }: { items: Product[] }) {
           value={q}
           onChange={(e) => handleQ(e.target.value)}
           placeholder="Поиск по модели или бренду…"
-          className="h-11 w-full rounded-lg border border-border bg-background pl-9 pr-9 text-sm outline-none focus:border-primary"
+          className="h-11 w-full rounded-lg border border-border bg-background pl-9 pr-9 text-base outline-none focus:border-primary md:text-sm"
         />
         {q && (
           <button

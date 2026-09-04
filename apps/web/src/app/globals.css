@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Мобильная sticky-панель товара публикует свою высоту в --sticky-bar-h
+   (ProductStickyBar) — низ страницы отступает ровно на неё, а не на
+   захардкоженный pb-28, который расходился с реальной высотой панели. */
+body {
+  padding-bottom: var(--sticky-bar-h, 0px);
+}
+
 /* ═══════════════════════════════════════════════════
    Цветовые токены (light / dark / moods) — ЕДИНЫЙ источник:
    packages/tokens/css/theme.css (@kk/tokens/theme.css).

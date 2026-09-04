@@ -82,7 +82,7 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Поиск товаров, статей..."
-              className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+              className="flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground md:text-sm"
             />
             {query && (
               <button type="button" onClick={() => setQuery("")} className="text-muted-foreground hover:text-foreground">

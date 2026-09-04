@@ -59,7 +59,7 @@ const localBusinessLd = {
   "@type": "ElectronicsStore",
   "@id": `${siteConfig.url}/#business`,
   name: "karaokeshop",
-  description: "Официальный дилер AST и Studio Evolution в Казахстане. Продажа, монтаж и настройка под ключ. Шоурум в Алматы, с 2012.",
+  description: siteConfig.defaultDescription,
   url: siteConfig.url,
   image: `${siteConfig.url}/og.jpg`,
   telephone: siteConfig.phone,

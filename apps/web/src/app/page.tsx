@@ -208,7 +208,7 @@ export default function HomePage() {
         <MobileActionLink href="/catalog" label="Весь каталог" />
       </section>
 
-      {/* 03 — Доверие: почему karaokeshop + дилерская полоса */}
+      {/* 03 — Доверие: почему karaokeshop + полоса брендов */}
       <section className="mt-10">
         <SectionTitle>Почему karaokeshop</SectionTitle>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -225,10 +225,10 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* Дилерская полоса */}
+        {/* Полоса брендов */}
         <div className="mt-4 flex flex-wrap items-center justify-center gap-3 rounded-xl border border-border bg-background px-6 py-4">
           <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            Официальный дилер
+            Работаем с брендами
           </span>
           <div className="mx-2 hidden h-4 w-px bg-border sm:block" />
           <a

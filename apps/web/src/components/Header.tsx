@@ -117,12 +117,19 @@ export function Header() {
             )
           )}
         </nav>
-        <div className="ml-auto flex items-center gap-3">
-          <ThemeToggle />
+        <div className="-mr-1 ml-auto flex shrink-0 items-center gap-0.5">
+          {/* Тач-таргеты иконок подняты до 44px, и втроём они перестали
+              помещаться в шапку на 320px (iPhone SE, обложка Fold): бургер+лого
+              +3×44 = 318px при доступных 288. Переключатель темы на телефоне
+              живёт в бургер-меню (футер drawer), поэтому в шапке он не нужен —
+              скрываем до sm и освобождаем 44px. */}
+          <div className="hidden sm:block">
+            <ThemeToggle />
+          </div>
           <button
             aria-label="Поиск"
             onClick={() => setSearchOpen(true)}
-            className="text-muted-foreground hover:text-foreground"
+            className="inline-flex h-11 w-11 items-center justify-center text-muted-foreground hover:text-foreground"
           >
             <Search className="h-[18px] w-[18px]" />
           </button>

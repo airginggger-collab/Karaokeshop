@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { priceFmt } from "@/lib/site";
 import { WaButton } from "./WaButton";
 import { AddToCart } from "./AddToCart";
@@ -12,8 +13,31 @@ interface ProductStickyBarProps {
 }
 
 export function ProductStickyBar({ slug, model, price, label }: ProductStickyBarProps) {
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  // Панель `fixed bottom-0` физически перекрывала FAB WhatsApp, кнопку «Наверх»
+  // и хвост футера. Вместо ручных отступов в каждом плавающем элементе панель
+  // сама публикует свою высоту в `--sticky-bar-h` на <html>: `body` получает
+  // такой же padding-bottom (globals.css), а ScrollToTop поднимается над ней.
+  // На lg панель `display:none` → offsetHeight 0 → переменная гасится сама.
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const root = document.documentElement;
+    const apply = () => root.style.setProperty("--sticky-bar-h", `${el.offsetHeight}px`);
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+    window.addEventListener("resize", apply);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", apply);
+      root.style.removeProperty("--sticky-bar-h");
+    };
+  }, []);
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/95 px-4 py-3 backdrop-blur lg:hidden">
+    <div ref={ref} className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/95 px-4 py-3 backdrop-blur lg:hidden">
       <div className="flex items-center gap-3">
         <div className="flex-1 min-w-0">
           <p className="truncate text-xs text-muted-foreground">{model}</p>

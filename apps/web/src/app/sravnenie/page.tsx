@@ -132,7 +132,7 @@ export default function Page() {
           AST <HighlightLine>или</HighlightLine> Studio Evolution
         </h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          Оба бренда представлены у нас официально. Ниже честное сравнение без давления на продажу.
+          Оба бренда есть у нас в наличии. Ниже честное сравнение без давления на продажу.
         </p>
 
         {/* Сравнительная таблица */}
