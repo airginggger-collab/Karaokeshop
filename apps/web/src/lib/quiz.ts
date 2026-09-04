@@ -1,4 +1,4 @@
-import { isCalcScenario, type CalcInput } from "./calculator";
+import { areaDefaultOf, isCalcScenario, type CalcInput } from "./calculator";
 
 const AREA_BY_ANSWER: Record<string, number> = {
   "до 30 м²": 25,
@@ -67,14 +67,19 @@ export function quizToCalcQuery(answers: string[]): string {
  * они не проходят валидацию: URL правит кто угодно, доверять ему нельзя. */
 export function parseCalcQuery(get: (k: string) => string | null): CalcQuery | null {
   const scenario = get("scenario");
-  const area = Number(get("area"));
+  const rawArea = get("area");
+  const area = rawArea === null ? areaDefaultOf(scenario) : Number(rawArea);
   const rawBudget = get("budget");
   const budget = rawBudget === null ? Infinity : Number(rawBudget);
 
   // Белый список — из CALC_SCENARIOS, а не из ответов квиза: иначе ссылки
   // с ?scenario=klub / restoran (страницы /komplekty) молча теряли бы состояние.
   if (!scenario || !isCalcScenario(scenario)) return null;
-  if (!Number.isFinite(area) || area < 10 || area > 500) return null;
+  // Площадь необязательна: чипы сценариев в hero главной знают только «где»,
+  // и без этого послабления один параметр давал бы null, то есть пустой
+  // калькулятор вместо готовой сметы. Пришедшую площадь по-прежнему валидируем
+  // строго — URL правит кто угодно.
+  if (rawArea !== null && (!Number.isFinite(area) || area < 10 || area > 500)) return null;
   if (rawBudget !== null && (!Number.isFinite(budget) || budget <= 0)) return null;
 
   return { scenario, area, budget };

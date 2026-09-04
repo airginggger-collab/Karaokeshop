@@ -29,6 +29,12 @@ export const isCalcScenario = (id: string): boolean => CALC_SCENARIOS.some((s) =
 export const venueOf = (id: string | null | undefined): string =>
   CALC_SCENARIOS.find((s) => s.id === id)?.venue ?? "Заведение";
 
+/** Площадь по умолчанию для сценария. Нужна, когда сценарий уже выбран, а
+ * площадь ещё нет: чипы сценариев в hero главной ведут в калькулятор по
+ * одному параметру, и без дефолта смета не построилась бы вовсе. */
+export const areaDefaultOf = (id: string | null | undefined): number =>
+  CALC_SCENARIOS.find((s) => s.id === id)?.areaDefault ?? 55;
+
 /** Комплект под площадь — та же сборка, что показывает калькулятор и квиз.
  * Страницы /komplekty обязаны звать ИМЕННО её, иначе цифры разойдутся. */
 export function bundleFor(area: number, scenarioId: string): Calc {

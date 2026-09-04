@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { quizToInput, quizBudget, quizToCalcQuery, parseCalcQuery } from "./quiz";
-import { configureWithinBudget } from "./calculator";
+import { configureWithinBudget, CALC_SCENARIOS } from "./calculator";
 
 describe("quizToInput", () => {
   it("маппит площадь в представительное значение и включает саб от 50 м²", () => {
@@ -91,6 +91,27 @@ describe("сквозное состояние квиз → калькулято�
       expect(fromCalc.calc.total).toBe(fromQuiz.calc.total);
       expect(fromCalc.calc.lines.map((l) => l.name)).toEqual(fromQuiz.calc.lines.map((l) => l.name));
       expect(fromCalc.fits).toBe(fromQuiz.fits);
+    }
+  });
+
+  // Чипы сценариев в hero главной знают только «где»: площадь и бюджет клиент
+  // ещё не называл. Без послабления один параметр давал бы null, то есть
+  // пустой калькулятор вместо готовой сметы — ровно та потеря состояния,
+  // ради которой квиз и связывали с калькулятором.
+  it("сценарий без площади префилит калькулятор дефолтом сценария", () => {
+    for (const s of CALC_SCENARIOS) {
+      const p = new URLSearchParams({ scenario: s.id });
+      const q = parseCalcQuery((k) => p.get(k));
+      expect(q, s.id).not.toBeNull();
+      expect(q!.area).toBe(s.areaDefault);
+      expect(q!.budget).toBe(Infinity);
+    }
+  });
+
+  it("битая площадь по-прежнему отбрасывает весь запрос", () => {
+    for (const area of ["0", "5", "900", "abc", ""]) {
+      const p = new URLSearchParams({ scenario: "dom", area });
+      expect(parseCalcQuery((k) => p.get(k)), area).toBeNull();
     }
   });
 });

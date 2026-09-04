@@ -14,11 +14,21 @@ import { SectionHeader, MobileActionLink } from "@/components/SectionHeader";
 import { CtaSection } from "@/components/CtaSection";
 import { ClientLogos } from "@/components/ClientLogos";
 import { CountUp } from "@/components/CountUp";
-import { products } from "@/lib/site";
+import { ProductImage } from "@/components/ProductImage";
+import { bundlePriceFrom, priceFmt, products } from "@/lib/site";
+import { CALC_SCENARIOS } from "@/lib/calculator";
 
 const SHOW_UNVERIFIED_SOCIAL_PROOF = false; // включить после реальных отзывов/лого от заказчика
 
 const featuredProducts = products.filter((p) => p.type === "sistema").slice(0, 4);
+
+/** Герой первого экрана. Brand Board (стр. 13) требует экспозицию
+ * Studio Evolution ≈ 60% против AST ≈ 40%, поэтому в кадре флагман Evolution.
+ * Берём из каталога, а не хардкодим: пропадёт товар — упадёт сборка, а не
+ * молча отвалится картинка. */
+const heroProduct =
+  products.find((p) => p.slug === "evobox") ??
+  products.filter((p) => p.type === "sistema")[0];
 
 /* Единый паттерн заголовка секции (без нумерации 01-04) */
 function SectionTitle({ children }: { children: ReactNode }) {
@@ -104,33 +114,103 @@ function SocialProof() {
 export default function HomePage() {
   return (
     <Container className="py-3 sm:py-5">
-      {/* Hero — «Сцена»: тикер, h1 с подсветкой строки, квиз + сцена-плашка */}
+      {/* Hero — первый экран по Brand Board v2 (стр. 2, 11, 16):
+          0–0,5 с видно технику, 0,5–1,2 с читается категория и бренды,
+          1,2–2 с виден маршрут (цена «от» + одна главная кнопка).
+          Полный квиз уехал ниже, в hero остаётся выбор сценария одним кликом. */}
       <section className="animate-fade-up pt-0 lg:pt-2">
-        <div className="grid gap-6 lg:grid-cols-12 lg:items-stretch">
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
             <h1 className="max-w-3xl font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
-              Караоке-вечер
-              <br />
-              <HighlightLine className="whitespace-nowrap">у тебя дома</HighlightLine>
+              <HighlightLine>Караоке</HighlightLine> для дома
+              <br className="hidden sm:block" /> и для бизнеса
             </h1>
             <p className="mt-3 max-w-xl text-lg text-muted-foreground">
-              Бесплатный подбор под площадь и бюджет за минуту. Дальше смета, монтаж, настройка и гарантия под ключ.
+              <strong className="font-semibold text-foreground">Studio Evolution и AST.</strong>{" "}
+              Подберём систему под помещение, установим и настроим по Казахстану.
             </p>
+
+            {/* Ценовой якорь. Цифра считается из каталога комплектов (ловушка 12). */}
+            <p className="mt-4 text-base font-semibold">
+              Комплект под ключ от {priceFmt(bundlePriceFrom())}
+              <span className="ml-2 text-xs font-normal text-muted-foreground">
+                состав и точную смету считаем под ваше помещение
+              </span>
+            </p>
+
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link
+                href="/kalkulyator"
+                className="inline-flex items-center gap-2 rounded-xl bg-cta px-5 py-3 text-sm font-semibold text-cta-fg transition-all hover:gap-3"
+              >
+                Подобрать систему <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href={`/product/${heroProduct.slug}`}
+                className="inline-flex items-center gap-1 rounded-xl border border-border px-5 py-3 text-sm font-medium hover:border-primary"
+              >
+                Смотреть {heroProduct.model.replace(/^Evolution\s+/i, "")}
+              </Link>
+            </div>
+
+            {/* Мобильный image-band: до этого на 390 px в первом экране не было
+                вообще никакого визуального доказательства категории (P1 аудита). */}
+            <div className="mt-6 overflow-hidden rounded-xl border border-border lg:hidden">
+              <div className="aspect-[4/3]">
+                <ProductImage src={heroProduct.image} model={heroProduct.model} priority />
+              </div>
+            </div>
+
+            {/* Мини-подбор: один вопрос вместо трёх, дальше калькулятор. */}
             <div className="mt-6">
-              <QuizWidget />
+              <p className="text-sm text-muted-foreground">Где будет стоять система?</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {CALC_SCENARIOS.map((s) => (
+                  <Link
+                    key={s.id}
+                    href={`/kalkulyator?scenario=${s.id}`}
+                    className="rounded-xl border border-border bg-background px-4 py-2 text-sm transition hover:border-primary"
+                  >
+                    {s.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
-          <div aria-hidden="true" className="relative hidden min-h-[280px] overflow-hidden rounded-xl border border-border lg:col-span-5 lg:block">
-            <img
-              src="/scenariy/poyushchie.webp"
-              alt="Караоке-вечер"
-              className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-            />
+
+          {/* Продукт в кадре: категория считывается за полсекунды. */}
+          <div className="hidden lg:col-span-5 lg:block">
+            <div className="overflow-hidden rounded-xl border border-border">
+              <div className="aspect-[4/3]">
+                <ProductImage src={heroProduct.image} model={heroProduct.model} priority decorative />
+              </div>
+              <div className="border-t border-border bg-background px-4 py-3">
+                <p className="text-sm font-semibold">{heroProduct.model}</p>
+                {/* Число песен здесь намеренно НЕ показываем: в products.json у
+                    Evobox стоит 50 000, тогда как бриф заказчика и стикер на
+                    официальном фото говорят «2000+ / +100 за 90 дней» (50 000 —
+                    это уровень Plus). Пока расхождение не разобрано, самое
+                    заметное место сайта такую цифру не заявляет. */}
+                <p className="mt-0.5 text-xs text-muted-foreground">от {priceFmt(heroProduct.price)}</p>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
+
+      {/* Что входит в «под ключ»: объясняем цену через состав (Visual Brief, стр. 13).
+          Раньше сразу после hero шли абстрактные счётчики, категорию они не объясняли. */}
+      <section className="mt-8 border-t border-border pt-5">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          Караоке под ключ это система, а не коробка
+        </p>
+        <ul className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+          {["Караоке-система", "Микрофоны", "Акустика", "Сабвуфер", "Кабели и стойки", "Настройка"].map((x) => (
+            <li key={x} className="rounded-xl border border-border bg-background px-3 py-2.5 text-sm">
+              {x}
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* Доверие цифрами — CountUp при появлении в вьюпорте */}
@@ -231,7 +311,7 @@ export default function HomePage() {
             Работаем с брендами
           </span>
           <div className="mx-2 hidden h-4 w-px bg-border sm:block" />
-          <a
+          <Link
             href="/brand/ast"
             className="group flex items-center gap-2 rounded-xl border border-border px-4 py-2 transition hover:border-primary"
           >
@@ -240,8 +320,8 @@ export default function HomePage() {
             </span>
             <span className="text-sm font-semibold">AST</span>
             <span className="text-xs text-muted-foreground">Art System</span>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/brand/studio-evolution"
             className="group flex items-center gap-2 rounded-xl border border-border px-4 py-2 transition hover:border-primary"
           >
@@ -250,7 +330,7 @@ export default function HomePage() {
             </span>
             <span className="text-sm font-semibold">Studio Evolution</span>
             <span className="text-xs text-muted-foreground">Evobox</span>
-          </a>
+          </Link>
           <div className="mx-2 hidden h-4 w-px bg-border sm:block" />
           <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-primary" aria-hidden>
@@ -291,6 +371,21 @@ export default function HomePage() {
               </span>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* Полная версия квиза. В hero она занимала весь первый экран и по весу
+          спорила с заголовком; Brand Board (стр. 10) ставит её одиннадцатой
+          секцией, ближе к заявке, когда сомнения уже сняты. */}
+      <section className="mt-10">
+        <SectionTitle>
+          Подберём <HighlightLine>за минуту</HighlightLine>
+        </SectionTitle>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Три вопроса: место, площадь и бюджет. Покажем состав комплекта и ориентир по цене.
+        </p>
+        <div className="mt-4">
+          <QuizWidget />
         </div>
       </section>
 

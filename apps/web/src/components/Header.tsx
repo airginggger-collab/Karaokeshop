@@ -88,7 +88,7 @@ export function Header() {
             className="box-border flex h-7 w-7 items-center justify-center rounded-[8px]"
             style={{ background: "#17233f", border: "1px solid #2a3852" }}
           >
-            <Mic2 className="h-4 w-4" style={{ color: "#facc15" }} />
+            <Mic2 className="h-4 w-4" style={{ color: "#41A876" }} />
           </span>
           karaokeshop
         </Link>

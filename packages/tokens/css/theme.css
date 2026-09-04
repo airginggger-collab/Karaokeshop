@@ -2,7 +2,12 @@
    ЕДИНЫЙ ИСТОЧНИК ПРАВДЫ: цветовые токены (light / dark)
    Арт-директура «Сцена» (спек 2026-07-04), структура сохранена.
    Рецвет 2026-07-07 (решение владельца): тёмная — неон-жёлтый акцент,
-   светлая — чернильно-синий акцент. Лого-марка #7c5cff (Header/icon.svg)
+   светлая — чернильно-синий акцент.
+   Рецвет 2026-09-04 (Brand Board v2 + решение владельца): тёмная переехала с
+   жёлтого #facc15 на зелёный #41A876. Исходный Signal #84F23D из брифа владелец
+   забраковал как ядовитый (насыщенность 87%, оттенок 96° — это лайм); #41A876
+   держит оттенок 151° и насыщенность 44%. Светлая тема НЕ трогается —
+   Brand Board описывает только тёмную, решение владельца 2026-09-04. Лого-марка #7c5cff (Header/icon.svg)
    и WhatsApp #25D366/#1ebe5d в этот рецвет НЕ входят.
    Импортируется И приложением (apps/web), И Storybook (@kk/ui) —
    НЕ дублировать в globals.css. Контраст: AA минимум (4.5:1 текст).
@@ -53,7 +58,7 @@
   /* Фон-сцена страницы: яркое неон-фиолет свечение из угла + жёлтый софит. */
   --gradient-page:
       radial-gradient(125% 90% at 4% -14%, rgba(124,92,255,.42), transparent 56%),
-      radial-gradient(85% 75% at 108% 6%, rgba(250,204,21,.16), transparent 55%),
+      radial-gradient(85% 75% at 108% 6%, rgba(65,168,118,.18), transparent 55%),
       linear-gradient(180deg, #161f30 0%, #0e131c 45%, #090d14 100%);
   --color-bg:           #172130;   /* карточка */
   --color-surface:      #22304a;   /* чипы, подложки */
@@ -61,14 +66,14 @@
   --color-muted:        #141b28;   /* тонкий фон */
   --color-muted-fg:     #aac0d6;   /* 8.65:1 на bg / 9.94:1 на page ✓ AAA */
   --color-border:       #2a3852;   /* hairline */
-  --color-primary:      #facc15;   /* неон-жёлтый: 10.58:1 на bg ✓ AAA */
-  --color-primary-fg:   #2a2400;   /* тёмный текст на жёлтом: 10.15:1 ✓ AAA */
-  --color-primary-soft: #2a2408;
-  --color-accent:       #facc15;
-  --color-accent-fg:    #fef3c7;   /* 13.93:1 на accent-soft ✓ AAA */
-  --color-accent-soft:  #2a2408;
-  --color-cta:          #facc15;   /* кнопки: тёмный текст 10.15:1 ✓ AAA */
-  --color-cta-fg:       #2a2400;
+  --color-primary:      #41A876;   /* Signal-зелёный: 6.28:1 на page / 5.47:1 на bg ✓ AA */
+  --color-primary-fg:   #0e131c;   /* тёмный текст на зелёном: 6.28:1 ✓ AA */
+  --color-primary-soft: #10251b;
+  --color-accent:       #41A876;
+  --color-accent-fg:    #a8e8c6;   /* 11.53:1 на accent-soft ✓ AAA */
+  --color-accent-soft:  #10251b;
+  --color-cta:          #41A876;   /* кнопки: тёмный текст 6.28:1 ✓ AA */
+  --color-cta-fg:       #0e131c;
   --color-hot:          #ff5c8a;   /* 5.51:1 на bg ✓ AA+ */
   --color-hot-fg:       #2a0a14;   /* текст НА hot: 6.21:1 на #ff5c8a ✓ AA+ */
   --color-scene:        #1a2233;   /* сцена-подложка фото товара */

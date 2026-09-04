@@ -9,6 +9,7 @@ import blogData from "../../content/blog.json";
 import storiesData from "../../content/stories.json";
 import casesData from "../../content/cases.json";
 import songsData from "../../content/songs.json";
+import { bundleFor } from "./calculator";
 
 export type SiteConfig = {
   name: string; url: string; city: string; phone: string; whatsapp: string;
@@ -78,6 +79,15 @@ export const komplektyIndexMeta: Landing = pageMeta.komplektyIndex;
 
 export function priceFmt(n: number): string {
   return new Intl.NumberFormat("ru-RU").format(n) + " ₸";
+}
+
+/** Минимальная цена готового комплекта «под ключ» по каталогу комплектов.
+ * Ценовой якорь в hero главной обязан идти отсюда, а НЕ строкой из брифа:
+ * ловушка 12 — цифру, которую можно посчитать из контента, руками не пишем,
+ * иначе она молча разойдётся с /komplekty и калькулятором, когда владелец
+ * поправит цены через админку. */
+export function bundlePriceFrom(): number {
+  return Math.min(...bundles.map((b) => bundleFor(b.area, b.scenario).total));
 }
 
 export function discountPct(price: number, priceOld?: number): number | null {

@@ -4,7 +4,7 @@ import { bundleFor, configure, isCalcScenario, venueOf } from "./calculator";
 import { parseCalcQuery } from "./quiz";
 import path from "node:path";
 import {
-  siteConfig, scenarios, bundles, brands, products, staticPages, priceFromBrand,
+  siteConfig, scenarios, bundles, brands, products, staticPages, priceFromBrand, bundlePriceFrom,
   songsSample, cases, blogPosts, storyPosts, songsTotal,
   oNasMeta, kontaktyMeta, sravnenieMeta, catalogMeta, podKlyuchMeta,
   komplektyIndexMeta, kalkulyatorMeta, pesniMeta, keysyMeta, blogMeta,
@@ -195,5 +195,13 @@ describe("SEO-гигиена контента (аудит 2026-07-21)", () => {
     for (const m of metas) {
       expect(m.title.length, `${m.where}: «${m.title}» = ${m.title.length}`).toBeLessThanOrEqual(48);
     }
+  });
+
+  // Ловушка 12: цифру, которую можно посчитать из контента, на странице не
+  // пишут руками. Ценовой якорь hero обязан совпадать с тем, что считает
+  // /komplekty, иначе после правки цен через админку главная начнёт врать.
+  it("ценовой якорь главной совпадает с минимумом по комплектам", () => {
+    const byHand = Math.min(...bundles.map((b) => bundleFor(b.area, b.scenario).total));
+    expect(bundlePriceFrom()).toBe(byHand);
   });
 });
