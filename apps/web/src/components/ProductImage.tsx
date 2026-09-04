@@ -11,7 +11,6 @@ export function ProductImage({ src, model, className = "", priority = false, dec
   if (src) {
     return (
       <div className={`flex h-full w-full items-center justify-center bg-scene p-6 ${className}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={decorative ? "" : model}

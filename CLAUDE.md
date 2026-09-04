@@ -6,7 +6,7 @@
 
 Karaokeshop.kz — ребилд интернет-магазина караоке-оборудования (Алматы; бренды AST + Studio Evolution). **Монорепо Turborepo + npm workspaces.** Сайт — Next.js 15 (App Router, `output: "export"` — чистая статика), захостен на Cloudflare как assets-only Worker. Контент пока захардкожен в `apps/web/src/lib/site.ts` (CMS не подключена). SEO — главный приоритет проекта.
 
-- Стек: Next.js ^15.1.2 · React ^19 · TypeScript ^5.6.3 strict · Turborepo ^2.3.3 · Tailwind ^3.4.17 на токенах · Style Dictionary ^4.3.0 · Storybook ^8.4.7 · Vitest ^4.1.10 (vite прижат к ^6.4.3, см. ловушку 10) · lucide-react. Шрифты Manrope + Onest (`next/font/google`; Onest — заголовки, заменил Unbounded 2026-07-07).
+- Стек: Next.js ^15.1.2 · React ^19 · TypeScript ^5.6.3 strict · Turborepo ^2.3.3 · Tailwind ^3.4.17 на токенах · Style Dictionary ^4.3.0 · Storybook ^8.4.7 · Vitest ^4.1.10 (vite прижат к ^6.4.3, см. ловушку 10) · ESLint ^9 (flat config, см. ловушку 20) · lucide-react. Шрифты Manrope + Onest (`next/font/google`; Onest — заголовки, заменил Unbounded 2026-07-07).
 - Структура: `apps/web` (сайт), `packages/tokens` (`@kk/tokens`), `packages/ui` (`@kk/ui`), `docs/` (контекст-пак).
 
 ## ⚠️ Это ОТДЕЛЬНЫЙ проект
@@ -47,17 +47,17 @@ packages/ui/          — @kk/ui: Button, Badge + Storybook + Vitest
 npm install                  # установить монорепо
 npm run dev                  # turbo run dev
 npm run build                # turbo run build (web → apps/web/out)
-npm run lint                 # turbo run lint
+npm run lint                 # turbo run lint (ESLint 9 в обоих workspace)
 npm run test                 # turbo run test
 npm run tokens               # пересобрать @kk/tokens
 
 npm run build -w web         # сборка сайта → apps/web/out (статика)
-npm test -w web              # тесты web (Vitest): 29 (calculator + seo + quiz + site + CountUp)
+npm test -w web              # тесты web (Vitest): 59 (calculator + seo + quiz + site + wa + CountUp + mobile-layout)
 npm test -w @kk/ui           # тесты UI-кита: 2
 npm run storybook -w @kk/ui  # Storybook на :6006
 ```
 
-Проверка изменений: `npm run build -w web` + `npm test -w web`. После пуша — `curl` живого URL (превью-MCP привязан к medlog, не к этому проекту).
+Проверка изменений: `npm run build -w web` + `npm test -w web` + `npm run lint`. После пуша — `curl` живого URL (превью-MCP привязан к medlog, не к этому проекту).
 
 ## Git и деплой
 
@@ -96,6 +96,8 @@ npm run storybook -w @kk/ui  # Storybook на :6006
  17. **`transition-all` замораживает свойство, посчитанное через `calc()` с CSS-переменной: Chrome не перезапускает переход, когда меняется только кастомная переменная.** У `ScrollToTop` стоял `bottom: calc(1.5rem + var(--sticky-bar-h,0px))` вместе с `transition-all` → `bottom` навсегда оставался 24px (значение до того, как `ProductStickyBar` выставила переменную), и кнопка «Наверх» лежала поверх мобильной sticky-панели товара. Тот же класс на элементе без transition считается верно, поэтому баг выглядит как «CSS-переменная не работает» и уводит в сторону. Правило: **свойство, зависящее от `var()`, в список transition не включать** — перечисляй анимируемые свойства явно (`transition-[opacity,transform]`), а не `transition-all`. Сторож там же, в `mobile-layout.test.ts`.
  18. **`text-sm` (14px) в поле ввода = iOS Safari зумит страницу при фокусе и не возвращает масштаб** — после тапа в «Имя» на чекауте вёрстка уезжает вбок. Порог ровно 16px. Поля сайта (поиск, фильтр каталога, `/pesni`, чекаут) стоят на `text-base md:text-sm`. Глобальное правило `input { font-size: 16px }` в `globals.css` **не работает**: утилита `.text-sm` (0,1,0) сильнее селектора по тегу (0,0,1), порядок в файле тут не спасает — правь классы в компонентах.
  19. **Тач-таргет и «шапка впритык» — парная проблема: подняв иконку до 44px, проверь 320px.** Переключатель темы и поиск в шапке были 18×18 (палец не попадает). После подъёма до `h-11 w-11` шапка перестала помещаться на 320px (бургер 40 + лого 130 + 3×44 = 318 при доступных 288 → горизонтальный скролл всего документа). Решение: переключатель темы в шапке скрыт до `sm`, на телефоне он и так есть в футере бургер-меню. При правках шапки мерить overflow на **320/360/375/414** и порог бургера на **1023/1024** (порог парный, ловушка 13).
+
+ 20. **Линта в репо фактически НЕ БЫЛО: `npm run lint` уходил в интерактивный визард и падал.** `next lint` без конфига ESLint спрашивает «How would you like to configure ESLint?», в неинтерактивной сессии это выход 1 — то есть команда из README не работала, а в CI её нет, поэтому никто не замечал. Настроено 2026-09-04: ESLint 9 flat config (`apps/web/eslint.config.mjs`, `packages/ui/eslint.config.mjs`), скрипты `lint` = `eslint .`, правила Next подключены через `FlatCompat` (`eslint-config-next` пока в старом формате; `next lint` deprecated и удаляется в Next 16). Первый же прогон нашёл 7 ошибок, из них две реальные: `as any` в `NewsSection` (починено) и `<a href="/brand/…">` в полосе брендов главной, то есть полная перезагрузка вместо клиентского перехода (фикс есть в рабочем дереве, но `page.tsx` в тот момент переписывала параллельная сессия — см. HANDOFF). Осознанные исключения — в конфиге с причиной: `no-img-element` выключен (статический экспорт, next/image не оптимизирует), `no-html-link-for-pages` выключен для `/admin-guide` (`/admin/` это статика Decap CMS в `public/`, а не роут Next, и `<Link>` увёл бы в 404). **ESLint в CI не добавлен** — красный линт валил бы деплой; гонять локально перед коммитом.
 
 ## UI-конвенции (обязательные)
 
@@ -178,6 +180,7 @@ const items: { icon?: LucideIcon; title: string }[] = [{ icon: Wrench, title: "�
 
 - [ ] `npm run build -w web` — собирается чисто (статика в `apps/web/out`)
 - [ ] `npm test -w web` и `npm test -w @kk/ui` — зелёные
+- [ ] `npm run lint` — чисто (ESLint не в CI, поэтому гоняй локально)
 - [ ] **`docs/HANDOFF.md` обновлён** в этом же коммите
 - [ ] Если новый роут — добавлен по [url-map.md](docs/strategy/url-map.md) с `generateMetadata` (title/description), есть в sitemap, **есть `<Breadcrumb>`**
 - [ ] Если изменена модель данных — [docs/context/data-model.md](docs/context/data-model.md) обновлён

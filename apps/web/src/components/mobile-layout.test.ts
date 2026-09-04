@@ -72,11 +72,17 @@ describe("karaokeshop не называет себя официальным ди
     }
   });
 
-  it("контент-мета чисты (кроме blog.json — там общие советы про рынок)", () => {
+  it("весь контент чист, включая блог", () => {
+    // В блоге «официальный дилер» стоял как критерий выбора продавца
+    // («попросите дилерский сертификат»): формально не про нас, но после отказа
+    // от статуса эти абзацы работали против сайта. Переписаны на проверяемый
+    // критерий: чек, гарантийный талон, паспорт изделия, свой сервис-центр.
     const contentDir = join(src, "..", "content");
     for (const name of readdirSync(contentDir)) {
-      if (!name.endsWith(".json") || name === "blog.json") continue;
-      expect(claim.test(readFileSync(join(contentDir, name), "utf8")), name).toBe(false);
+      if (!name.endsWith(".json")) continue;
+      const text = readFileSync(join(contentDir, name), "utf8");
+      expect(claim.test(text), name).toBe(false);
+      expect(/дилер/.test(text), `${name}: слово «дилер»`).toBe(false);
     }
   });
 });

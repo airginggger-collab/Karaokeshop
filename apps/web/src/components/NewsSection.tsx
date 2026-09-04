@@ -33,16 +33,11 @@ export async function NewsSection() {
       <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((n, i) => {
           const ext = isExternal(n.url);
-          const Wrapper = ext ? "a" : Link;
-          const wrapperProps = ext
-            ? { href: n.url, target: "_blank", rel: "noopener noreferrer" }
-            : { href: n.url };
-          return (
-            <Wrapper
-              key={i}
-              {...(wrapperProps as any)}
-              className="group flex flex-col rounded-xl border border-border bg-background p-4 transition hover:border-primary"
-            >
+          // Раньше здесь был динамический `Wrapper = ext ? "a" : Link` с
+          // `{...props as any}`: типы <a> и <Link> не сходятся, и any их просто
+          // глушил. Разводим ветки явно — карточка одна, обёртка разная.
+          const card = (
+            <>
               <p className="flex-1 text-sm font-medium leading-snug group-hover:text-primary">
                 {n.title}
               </p>
@@ -53,7 +48,19 @@ export async function NewsSection() {
                   {ext && <ExternalLink className="h-3 w-3" />}
                 </div>
               </div>
-            </Wrapper>
+            </>
+          );
+          const cls =
+            "group flex flex-col rounded-xl border border-border bg-background p-4 transition hover:border-primary";
+
+          return ext ? (
+            <a key={i} href={n.url} target="_blank" rel="noopener noreferrer" className={cls}>
+              {card}
+            </a>
+          ) : (
+            <Link key={i} href={n.url} className={cls}>
+              {card}
+            </Link>
           );
         })}
       </div>
