@@ -11,6 +11,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { QuizWidget } from "@/components/QuizWidget";
 import { HighlightLine } from "@/components/HighlightLine";
 import { SectionHeader, MobileActionLink } from "@/components/SectionHeader";
+import { SectionHint } from "@/components/SectionHint";
 import { CtaSection } from "@/components/CtaSection";
 import { ClientLogos } from "@/components/ClientLogos";
 import { CountUp } from "@/components/CountUp";
@@ -39,11 +40,14 @@ const heroProduct =
   products.find((p) => p.slug === "evobox") ??
   products.filter((p) => p.type === "sistema")[0];
 
-/* Единый паттерн заголовка секции (без нумерации 01-04) */
-function SectionTitle({ children }: { children: ReactNode }) {
+/* Единый паттерн заголовка секции (без нумерации 01-04). Пояснение секции
+ * идёт не строкой под заголовком, а тултипом у иконки (решение владельца
+ * 2026-09-10). */
+function SectionTitle({ children, hint }: { children: ReactNode; hint?: string }) {
   return (
-    <div className="flex items-baseline gap-4">
+    <div className="relative flex items-center gap-1">
       <h2 className="font-display text-2xl font-bold sm:text-3xl">{children}</h2>
+      {hint && <SectionHint text={hint} />}
     </div>
   );
 }
@@ -211,11 +215,11 @@ export default function HomePage() {
           в первом экране остаётся один маршрут (кнопка), выбор сценария
           не спорит с ней за внимание. */}
       <section className="mt-6 rounded-xl border border-border bg-background p-5">
-        <p className="font-display text-xl font-bold">Где будет стоять система?</p>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Выберите место, калькулятор сразу покажет состав и смету.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="relative flex items-center gap-1">
+          <p className="font-display text-xl font-bold">Где будет стоять система?</p>
+          <SectionHint text="Выберите место, калькулятор сразу покажет состав и смету." />
+        </div>
+        <div className="mt-3 flex flex-wrap gap-2">
           {CALC_SCENARIOS.map((s) => (
             <Link
               key={s.id}
@@ -271,10 +275,9 @@ export default function HomePage() {
 
       {/* 01 — Как мы работаем (услуга под ключ) */}
       <section className="mt-10">
-        <SectionTitle>
+        <SectionTitle hint="Пять шагов от заявки до живого звука.">
           Как мы <HighlightLine>работаем</HighlightLine>
         </SectionTitle>
-        <p className="mt-2 text-sm text-muted-foreground">Пять шагов от заявки до живого звука.</p>
         <div className="relative mt-4 grid gap-4 sm:grid-cols-5">
           {[
             { title: "Консультация", body: "Выясним задачу, площадь и бюджет по WhatsApp или в шоуруме." },
@@ -419,12 +422,9 @@ export default function HomePage() {
           спорила с заголовком; Brand Board (стр. 10) ставит её одиннадцатой
           секцией, ближе к заявке, когда сомнения уже сняты. */}
       <section className="mt-10">
-        <SectionTitle>
+        <SectionTitle hint="Три вопроса: место, площадь и бюджет. Покажем состав комплекта и ориентир по цене.">
           Подберём <HighlightLine>за минуту</HighlightLine>
         </SectionTitle>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Три вопроса: место, площадь и бюджет. Покажем состав комплекта и ориентир по цене.
-        </p>
         <div className="mt-4">
           <QuizWidget />
         </div>
