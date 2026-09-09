@@ -130,13 +130,17 @@ export default function HomePage() {
               Подберём систему под помещение, установим и настроим по Казахстану.
             </p>
 
-            {/* Ценовой якорь. Цифра считается из каталога комплектов (ловушка 12). */}
-            <p className="mt-4 text-base font-semibold">
-              Комплект под ключ от {priceFmt(bundlePriceFrom())}
-              <span className="ml-2 text-xs font-normal text-muted-foreground">
-                состав и точную смету считаем под ваше помещение
-              </span>
-            </p>
+            {/* Ценовой якорь. Цифра считается из каталога комплектов (ловушка 12).
+                Заголовок и подзаголовок раздельно (решение владельца 2026-09-10):
+                в одну строку цифра терялась в примечании. */}
+            <div className="mt-4">
+              <p className="font-display text-xl font-bold sm:text-2xl">
+                Комплект под ключ от {priceFmt(bundlePriceFrom())}
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Состав и точную смету считаем под ваше помещение.
+              </p>
+            </div>
 
             <div className="mt-5 flex flex-wrap gap-3">
               <Link
