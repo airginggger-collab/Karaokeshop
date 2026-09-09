@@ -93,12 +93,13 @@ body::before {
     text-underline-offset: 0.12em;
   }
 
-  /* Строка-тикер фактов (вместо pill-чипов) */
+  /* Строка-тикер фактов (вместо pill-чипов). Линия сверху снята и кегль
+     поднят с 12 до 14px по решению владельца 2026-09-10: полоски-разделители
+     убраны, а проза сайта живёт на одном размере тела (шкала в page.tsx). */
   .ticker {
     letter-spacing: 0.12em;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     color: var(--color-muted-fg);
-    border-top: 1px solid var(--color-border);
     padding-top: 0.625rem;
   }
 }

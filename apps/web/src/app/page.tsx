@@ -17,6 +17,16 @@ import { CountUp } from "@/components/CountUp";
 import { bundlePriceFrom, kitParts, priceFmt, products } from "@/lib/site";
 import { CALC_SCENARIOS } from "@/lib/calculator";
 
+/* Шрифтовая шкала главной (упрощена по решению владельца 2026-09-10: было
+ * восемь кеглей от 12 до 60px, иерархия читалась как шум). Пять ступеней с
+ * заметным шагом, новых размеров тут не вводить:
+ *   h1                36 / 48 / 60px  text-4xl sm:text-5xl lg:text-6xl
+ *   заголовок секции  24 / 30px       font-display text-2xl font-bold sm:text-3xl (и CountUp)
+ *   подзаголовок      20px            font-display text-xl font-bold (цена, h3) + лид hero
+ *   заголовок карточки 16px           text-base font-semibold (шаги, «почему»)
+ *   тело, подписи, капс 14px          text-sm (капс + uppercase tracking-widest)
+ * 12px (text-xs) в прозе главной больше нет: подпись и тело это один кегль,
+ * разницу несут цвет, вес и капс, а не третий размер. */
 const SHOW_UNVERIFIED_SOCIAL_PROOF = false; // включить после реальных отзывов/лого от заказчика
 
 const featuredProducts = products.filter((p) => p.type === "sistema").slice(0, 4);
@@ -90,7 +100,7 @@ function SocialProof() {
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">«{r.text}»</p>
               <div className="mt-4 border-t border-border pt-3">
                 <p className="text-sm font-medium">{r.name}</p>
-                <p className="text-xs text-muted-foreground">{r.context}</p>
+                <p className="text-sm text-muted-foreground">{r.context}</p>
               </div>
             </div>
           ))}
@@ -125,7 +135,7 @@ export default function HomePage() {
               <HighlightLine>Караоке</HighlightLine> для дома
               <br className="hidden sm:block" /> и для бизнеса
             </h1>
-            <p className="mt-3 max-w-xl text-lg text-muted-foreground">
+            <p className="mt-3 max-w-xl text-xl text-muted-foreground">
               <strong className="font-semibold text-foreground">Studio Evolution и AST.</strong>{" "}
               Подберём систему под помещение, установим и настроим по Казахстану.
             </p>
@@ -134,7 +144,7 @@ export default function HomePage() {
                 Заголовок и подзаголовок раздельно (решение владельца 2026-09-10):
                 в одну строку цифра терялась в примечании. */}
             <div className="mt-4">
-              <p className="font-display text-xl font-bold sm:text-2xl">
+              <p className="font-display text-xl font-bold">
                 Комплект под ключ от {priceFmt(bundlePriceFrom())}
               </p>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -201,7 +211,7 @@ export default function HomePage() {
           в первом экране остаётся один маршрут (кнопка), выбор сценария
           не спорит с ней за внимание. */}
       <section className="mt-6 rounded-xl border border-border bg-background p-5">
-        <p className="font-display text-lg font-bold">Где будет стоять система?</p>
+        <p className="font-display text-xl font-bold">Где будет стоять система?</p>
         <p className="mt-1 text-sm text-muted-foreground">
           Выберите место, калькулятор сразу покажет состав и смету.
         </p>
@@ -274,7 +284,7 @@ export default function HomePage() {
             { title: "Поддержка", body: "Гарантия, сервис-центр и обновление репертуара по договору." },
           ].map((s) => (
             <div key={s.title} className="flex flex-col rounded-xl border border-border bg-background p-5">
-              <p className="font-medium">{s.title}</p>
+              <p className="text-base font-semibold">{s.title}</p>
               <p className="mt-1 text-sm text-muted-foreground">{s.body}</p>
             </div>
           ))}
@@ -330,7 +340,7 @@ export default function HomePage() {
             { title: "Заказ через WhatsApp", body: "Напишите, ответим быстро, поможем выбрать и оформим заявку." },
           ].map((item) => (
             <div key={item.title} className="rounded-xl border border-border bg-background p-5">
-              <p className="font-medium">{item.title}</p>
+              <p className="text-base font-semibold">{item.title}</p>
               <p className="mt-1 text-sm text-muted-foreground">{item.body}</p>
             </div>
           ))}
@@ -338,7 +348,7 @@ export default function HomePage() {
 
         {/* Полоса брендов */}
         <div className="mt-4 flex flex-wrap items-center justify-center gap-3 rounded-xl border border-border bg-background px-6 py-4">
-          <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          <span className="text-sm font-semibold uppercase tracking-widest text-foreground">
             Работаем с брендами
           </span>
           <div className="mx-2 hidden h-4 w-px bg-border sm:block" />
@@ -350,7 +360,7 @@ export default function HomePage() {
               A
             </span>
             <span className="text-sm font-semibold">AST</span>
-            <span className="text-xs text-muted-foreground">Art System</span>
+            <span className="text-sm text-muted-foreground">Art System</span>
           </Link>
           <Link
             href="/brand/studio-evolution"
@@ -360,10 +370,10 @@ export default function HomePage() {
               SE
             </span>
             <span className="text-sm font-semibold">Studio Evolution</span>
-            <span className="text-xs text-muted-foreground">Evobox</span>
+            <span className="text-sm text-muted-foreground">Evobox</span>
           </Link>
           <div className="mx-2 hidden h-4 w-px bg-border sm:block" />
-          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-primary" aria-hidden>
               <path d="M8 0l1.6 4.9H15l-4.4 3.2 1.7 5L8 10l-4.3 3.1 1.7-5L1 4.9h5.4z"/>
             </svg>
@@ -372,7 +382,7 @@ export default function HomePage() {
           <div className="mx-2 hidden h-4 w-px bg-border sm:block" />
           <Link
             href="/kontakty"
-            className="flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-medium text-primary transition hover:bg-primary/10"
+            className="flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-sm font-medium text-primary transition hover:bg-primary/10"
           >
             <MapPin className="h-3 w-3" />
             Шоурум · Выезд по Алматы за 1 час

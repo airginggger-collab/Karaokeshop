@@ -15,21 +15,21 @@ export function ProductCard({ p, size = "md" }: { p: Product; size?: "md" | "lg"
       >
         <div className="relative h-56 overflow-hidden bg-scene sm:h-64">
           <ProductImage src={p.image} model={p.model} className="transition duration-500 group-hover:scale-[1.04]" />
-          <span className="absolute left-4 top-4 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-primary">
+          <span className="absolute left-4 top-4 rounded-full border border-border bg-background px-3 py-1 text-sm font-medium text-primary">
             {p.scenarioLabel}
           </span>
         </div>
         <div className="flex flex-1 flex-col p-5">
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">{p.brand}</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">{p.brand}</p>
           <h3 className="mt-1 font-display text-xl font-bold leading-tight">{p.model}</h3>
           <div className="mt-3 flex flex-wrap gap-2">
             {p.areaMax && (
-              <span className="rounded-full bg-surface px-3 py-1 text-xs text-muted-foreground">
+              <span className="rounded-full bg-surface px-3 py-1 text-sm text-muted-foreground">
                 до {p.areaMax} м²
               </span>
             )}
             {p.songsCount && (
-              <span className="rounded-full bg-surface px-3 py-1 text-xs text-muted-foreground">
+              <span className="rounded-full bg-surface px-3 py-1 text-sm text-muted-foreground">
                 {p.songsCount.toLocaleString("ru-RU")}+ песен
               </span>
             )}
@@ -59,16 +59,16 @@ export function ProductCard({ p, size = "md" }: { p: Product; size?: "md" | "lg"
         {pct ? <DiscountBadge pct={pct} className="absolute left-2 top-2 text-[11px]" /> : null}
       </div>
       <div className="flex flex-1 flex-col p-3.5">
-        <span className="text-xs text-muted-foreground">{label}</span>
+        <span className="text-sm text-muted-foreground">{label}</span>
         <h3 className="mt-2 font-medium leading-snug transition group-hover:text-primary">{p.model}</h3>
-        {sub ? <p className="text-xs text-muted-foreground">{sub}</p> : null}
+        {sub ? <p className="text-sm text-muted-foreground">{sub}</p> : null}
         <div className="mt-auto pt-3">
           {pct ? (
-            <p className="text-xs text-muted-foreground line-through">{priceFmt(p.priceOld!)}</p>
+            <p className="text-sm text-muted-foreground line-through">{priceFmt(p.priceOld!)}</p>
           ) : null}
           <div className="flex items-center justify-between">
-            <p className="text-[15px] font-semibold text-primary">{priceFmt(p.price)}</p>
-            <span className="flex items-center gap-0.5 text-xs font-medium text-primary transition group-hover:gap-1">
+            <p className="text-base font-semibold text-primary">{priceFmt(p.price)}</p>
+            <span className="flex items-center gap-0.5 text-sm font-medium text-primary transition group-hover:gap-1">
               Подробнее <ArrowRight className="h-3.5 w-3.5" />
             </span>
           </div>

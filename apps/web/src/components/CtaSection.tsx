@@ -41,7 +41,8 @@ export function CtaSection({
       <h2 className={padded ? "font-display text-2xl font-bold sm:text-3xl" : "font-medium"}>
         {title}
       </h2>
-      <p className={padded ? "mt-3 text-sm text-muted-foreground sm:text-base" : "mt-1 text-sm text-muted-foreground"}>
+      {/* Один размер тела вместо sm/base-вилки: шкала главной (см. page.tsx). */}
+      <p className={padded ? "mt-3 text-sm text-muted-foreground" : "mt-1 text-sm text-muted-foreground"}>
         {text}
       </p>
       {ticker && <p className="ticker mt-5">{ticker}</p>}
@@ -58,7 +59,7 @@ export function CtaSection({
           </Link>
         )}
       </div>
-      {note && <p className="mt-3 text-xs text-muted-foreground">{note}</p>}
+      {note && <p className="mt-3 text-sm text-muted-foreground">{note}</p>}
     </div>
   );
 }

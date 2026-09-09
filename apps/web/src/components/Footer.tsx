@@ -60,7 +60,7 @@ export function Footer() {
           ))}
         </div>
         <div className="mt-8 border-t border-border pt-6">
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} karaokeshop · {siteConfig.city}</p>
+          <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} karaokeshop · {siteConfig.city}</p>
         </div>
       </Container>
     </footer>

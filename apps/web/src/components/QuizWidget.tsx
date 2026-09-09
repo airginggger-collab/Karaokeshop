@@ -85,7 +85,7 @@ export function QuizWidget() {
           </div>
 
           <div className="rounded-xl border border-border p-4">
-            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
               Рекомендуемая база
             </p>
             <p className="mt-1 font-medium">{result.calc.lines[0].name}</p>
@@ -94,12 +94,12 @@ export function QuizWidget() {
               <span className="font-display text-2xl font-bold text-primary">{priceFmt(result.calc.total)}</span>
             </div>
             {result.trimmed.length > 0 && result.fits && (
-              <p className="mt-2 text-xs text-muted-foreground">
+              <p className="mt-2 text-sm text-muted-foreground">
                 Под ваш бюджет: без {result.trimmed.join(", ")}.
               </p>
             )}
             {!result.fits && (
-              <p className="mt-2 text-xs text-muted-foreground">
+              <p className="mt-2 text-sm text-muted-foreground">
                 Минимальный комплект под {result.calc.area} м² дороже выбранного бюджета. Это ориентир, точную смету подберём по проекту.
               </p>
             )}
@@ -128,7 +128,7 @@ export function QuizWidget() {
         </div>
       ) : (
         <>
-          <p className="mb-1 text-xs font-medium text-muted-foreground">
+          <p className="mb-1 text-sm font-medium text-muted-foreground">
             Вопрос {step + 1} из {steps.length}
           </p>
           <h3 className="font-display text-lg font-semibold sm:text-xl">{current.question}</h3>
