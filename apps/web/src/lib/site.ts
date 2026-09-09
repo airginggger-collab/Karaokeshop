@@ -13,7 +13,10 @@ import { bundleFor } from "./calculator";
 
 export type SiteConfig = {
   name: string; url: string; city: string; phone: string; whatsapp: string;
-  address: string; hours: string; email: string;
+  /** Адрес для показа человеку; `street` + `postalCode` — раздельные части
+   * под JSON-LD (PostalAddress). Три поля, а не одно разобранное регуляркой:
+   * адрес правит владелец через /admin, парсер бы ломался на его формате. */
+  address: string; street: string; postalCode: string; hours: string; email: string;
   defaultTitle: string; defaultDescription: string; songsTotal: number;
 };
 export const siteConfig: SiteConfig = siteConfigData;

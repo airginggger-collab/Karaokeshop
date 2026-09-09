@@ -66,16 +66,16 @@ const localBusinessLd = {
   email: siteConfig.email,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "ул. Муканова, офис 8",
-    addressLocality: "Алматы",
-    addressRegion: "Алматы",
+    streetAddress: siteConfig.street,
+    postalCode: siteConfig.postalCode,
+    addressLocality: siteConfig.city,
+    addressRegion: siteConfig.city,
     addressCountry: "KZ",
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 43.2567,
-    longitude: 76.9286,
-  },
+  /* geo убран при переезде шоурума на Шевченко 154 (2026-09-10): прежние
+     координаты указывали на Муканова, а неверная точка в LocalBusiness хуже
+     отсутствующей — Google сводит её с картой и адресом. Вернуть, когда
+     владелец даст точку с карты. */
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",

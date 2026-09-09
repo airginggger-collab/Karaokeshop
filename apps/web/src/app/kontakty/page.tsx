@@ -14,9 +14,11 @@ export const metadata: Metadata = {
 // Яндекс.Карты-виджет: геокодит адрес по тексту, без API-ключа, надёжно грузится
 // в iframe (легаси-эмбед Google `output=embed` теперь отдаёт «контент заблокирован»).
 // Домен разрешён в CSP frame-src — apps/web/public/_headers.
+// Адрес берём из site-config, а не строкой: иначе после переезда шоурума
+// карта молча показывает прежнюю точку (так и было с Муканова).
 const mapSrc =
   "https://yandex.ru/map-widget/v1/?text=" +
-  encodeURIComponent("Алматы, улица Муканова 8") +
+  encodeURIComponent(siteConfig.address) +
   "&z=16";
 
 export default function Page() {

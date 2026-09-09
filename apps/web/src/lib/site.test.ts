@@ -234,3 +234,39 @@ describe("состав «под ключ» на главной — живые с
     }
   });
 });
+
+// Адрес шоурума меняется (переезд на Шевченко 154, 2026-09-10) и правится
+// владельцем через /admin. Пока он лежал строкой в page.tsx, kontakty и
+// JSON-LD, любой переезд оставлял на сайте три разных адреса — ровно та же
+// ловушка 12, что с ценой бренда: хардкод не ломает ни сборку, ни тесты.
+describe("адрес шоурума — единый источник (ловушка 12)", () => {
+  it("site-config держит адрес, улицу и индекс", () => {
+    for (const k of ["address", "street", "postalCode"] as const) {
+      expect(typeof siteConfig[k], k).toBe("string");
+      expect((siteConfig[k] as string).length, k).toBeGreaterThan(0);
+    }
+    expect(siteConfig.address).toContain(siteConfig.city);
+  });
+
+  it("ни одна страница не хардкодит улицу или индекс", () => {
+    const streetWord = siteConfig.street.replace(/^улица\s+/i, "").split(",")[0].trim();
+    const srcDir = path.join(process.cwd(), "src");
+    const walk = (dir: string): string[] =>
+      fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+        const full = path.join(dir, e.name);
+        if (e.isDirectory()) return walk(full);
+        return /\.tsx?$/.test(e.name) && !e.name.endsWith(".test.ts") ? [full] : [];
+      });
+    for (const file of walk(srcDir)) {
+      const text = fs.readFileSync(file, "utf8");
+      // код-комментарии не в счёт: правило про то, что видит посетитель
+      const code = text.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+      for (const needle of [streetWord, siteConfig.postalCode]) {
+        expect(
+          code.includes(needle),
+          `${path.relative(srcDir, file)}: «${needle}» вписан руками, адрес берут из siteConfig`,
+        ).toBe(false);
+      }
+    }
+  });
+});

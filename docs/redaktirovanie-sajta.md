@@ -180,7 +180,9 @@ mic: { id: "mic", name: "Радиомикрофон Shure BLX24/SM58", price: 60
 ```json
 "phone": "+7 707 579-99-95",
 "whatsapp": "77075799995",
-"address": "Алматы, ул. Муканова, офис 8",
+"address": "улица Шевченко 154, Алматы 050008",
+  "street": "улица Шевченко, 154",
+  "postalCode": "050008",
 "hours": "Пн–Сб · 10:00–19:00",
 "email": "karaokeshop2015@gmail.com",
 ```

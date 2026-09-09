@@ -15,7 +15,7 @@ import { SectionHint } from "@/components/SectionHint";
 import { CtaSection } from "@/components/CtaSection";
 import { ClientLogos } from "@/components/ClientLogos";
 import { CountUp } from "@/components/CountUp";
-import { bundlePriceFrom, kitParts, priceFmt, products } from "@/lib/site";
+import { bundlePriceFrom, kitParts, priceFmt, products, siteConfig } from "@/lib/site";
 import { CALC_SCENARIOS } from "@/lib/calculator";
 
 /* Шрифтовая шкала главной (упрощена по решению владельца 2026-09-10: было
@@ -405,7 +405,7 @@ export default function HomePage() {
             { href: "/gotovye-resheniya", title: "Готовые решения", sub: "Подобранные комплекты под сценарий: состав и цена сразу.", cta: "Выбрать" },
             { href: "/pod-klyuch", title: "Монтаж", sub: "Проект звука под помещение, монтаж, обучение персонала.", cta: "Подробнее" },
             { href: "/servis", title: "Сервис и гарантия", sub: "Настройка, ремонт, обновление репертуара.", cta: "Узнать" },
-            { href: "/kontakty", title: "Контакты", sub: "Алматы, ул. Муканова 8 · WhatsApp, телефон, карта.", cta: "Написать" },
+            { href: "/kontakty", title: "Контакты", sub: `${siteConfig.address} · WhatsApp, телефон, карта.`, cta: "Написать" },
           ].map((item) => (
             <Link key={item.href} href={item.href} className="group flex flex-col rounded-xl border border-border bg-background p-5 transition hover:border-primary">
               <p className="font-medium group-hover:text-primary">{item.title}</p>
