@@ -30,3 +30,7 @@ _local-assets/
 
 # generated AI-visibility file (Фаза 3a, scripts/build-llms.mjs)
 apps/web/public/llms.txt
+
+# Презентации заказчика: тяжёлые бинарники (13 МБ), в репо лежит PDF-версия
+# того же документа. Запрет владельца 2026-09-10 — не коммитить.
+*.pptx
