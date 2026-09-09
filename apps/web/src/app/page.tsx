@@ -220,8 +220,11 @@ export default function HomePage() {
 
       {/* Что входит в «под ключ»: объясняем цену через состав (Visual Brief, стр. 13).
           Раньше сразу после hero шли абстрактные счётчики, категорию они не объясняли. */}
-      <section className="mt-8 border-t border-border pt-5">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+      <section className="mt-8">
+        {/* Полоски-разделители сняты по решению владельца 2026-09-10, подпись
+            переведена с muted-fg на foreground: mелкий 12px капс на градиенте
+            читался тускло, хотя формально держал AA. */}
+        <p className="text-sm font-semibold uppercase tracking-widest text-foreground">
           Караоке под ключ это система, а не коробка
         </p>
         {/* Слоты кликабельные: каждый ведёт в свой раздел (решение владельца
@@ -242,7 +245,7 @@ export default function HomePage() {
       </section>
 
       {/* Доверие цифрами — CountUp при появлении в вьюпорте */}
-      <section className="mt-8 grid grid-cols-2 gap-6 border-y border-border py-5 sm:grid-cols-4">
+      <section className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
         {[
           { value: "14+", label: "лет на рынке" },
           { value: "200+", label: "объектов" },
@@ -251,7 +254,7 @@ export default function HomePage() {
         ].map((s) => (
           <div key={s.label} className="flex flex-col">
             <CountUp value={s.value} className="font-display text-2xl font-bold text-primary sm:text-3xl" />
-            <span className="mt-1 text-xs text-muted-foreground sm:text-sm">{s.label}</span>
+            <span className="mt-1 text-sm text-foreground">{s.label}</span>
           </div>
         ))}
       </section>
