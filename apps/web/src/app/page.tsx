@@ -14,18 +14,17 @@ import { SectionHeader, MobileActionLink } from "@/components/SectionHeader";
 import { CtaSection } from "@/components/CtaSection";
 import { ClientLogos } from "@/components/ClientLogos";
 import { CountUp } from "@/components/CountUp";
-import { ProductImage } from "@/components/ProductImage";
-import { bundlePriceFrom, priceFmt, products } from "@/lib/site";
+import { bundlePriceFrom, kitParts, priceFmt, products } from "@/lib/site";
 import { CALC_SCENARIOS } from "@/lib/calculator";
 
 const SHOW_UNVERIFIED_SOCIAL_PROOF = false; // включить после реальных отзывов/лого от заказчика
 
 const featuredProducts = products.filter((p) => p.type === "sistema").slice(0, 4);
 
-/** Герой первого экрана. Brand Board (стр. 13) требует экспозицию
- * Studio Evolution ≈ 60% против AST ≈ 40%, поэтому в кадре флагман Evolution.
- * Берём из каталога, а не хардкодим: пропадёт товар — упадёт сборка, а не
- * молча отвалится картинка. */
+/** Модель для второй кнопки hero. Brand Board (стр. 13) требует экспозицию
+ * Studio Evolution ≈ 60% против AST ≈ 40%, поэтому это флагман Evolution.
+ * Берём из каталога, а не хардкодим: пропадёт товар, упадёт сборка, а не
+ * молча сломается ссылка. */
 const heroProduct =
   products.find((p) => p.slug === "evobox") ??
   products.filter((p) => p.type === "sistema")[0];
@@ -115,11 +114,12 @@ export default function HomePage() {
   return (
     <Container className="py-3 sm:py-5">
       {/* Hero — первый экран по Brand Board v2 (стр. 2, 11, 16):
-          0–0,5 с видно технику, 0,5–1,2 с читается категория и бренды,
+          0–0,5 с видно сцену с микрофоном, 0,5–1,2 с читается категория и бренды,
           1,2–2 с виден маршрут (цена «от» + одна главная кнопка).
-          Полный квиз уехал ниже, в hero остаётся выбор сценария одним кликом. */}
+          Полный квиз уехал ниже, в hero остаётся выбор сценария одним кликом.
+          Фото людей вместо фото техники: решение владельца 2026-09-10. */}
       <section className="animate-fade-up pt-0 lg:pt-2">
-        <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-stretch">
           <div className="lg:col-span-7">
             <h1 className="max-w-3xl font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl">
               <HighlightLine>Караоке</HighlightLine> для дома
@@ -154,47 +154,61 @@ export default function HomePage() {
             </div>
 
             {/* Мобильный image-band: до этого на 390 px в первом экране не было
-                вообще никакого визуального доказательства категории (P1 аудита). */}
-            <div className="mt-6 overflow-hidden rounded-xl border border-border lg:hidden">
+                вообще никакого визуального доказательства категории (P1 аудита).
+                В кадре люди за микрофоном, а не коробка: решение владельца
+                2026-09-10 (техника показана ниже, в карточках каталога). */}
+            <div aria-hidden="true" className="mt-6 overflow-hidden rounded-xl border border-border lg:hidden">
               <div className="aspect-[4/3]">
-                <ProductImage src={heroProduct.image} model={heroProduct.model} priority />
-              </div>
-            </div>
-
-            {/* Мини-подбор: один вопрос вместо трёх, дальше калькулятор. */}
-            <div className="mt-6">
-              <p className="text-sm text-muted-foreground">Где будет стоять система?</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {CALC_SCENARIOS.map((s) => (
-                  <Link
-                    key={s.id}
-                    href={`/kalkulyator?scenario=${s.id}`}
-                    className="rounded-xl border border-border bg-background px-4 py-2 text-sm transition hover:border-primary"
-                  >
-                    {s.label}
-                  </Link>
-                ))}
+                <img
+                  src="/scenariy/poyushchie.webp"
+                  alt=""
+                  className="h-full w-full object-cover object-[center_25%]"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                />
               </div>
             </div>
           </div>
 
-          {/* Продукт в кадре: категория считывается за полсекунды. */}
-          <div className="hidden lg:col-span-5 lg:block">
-            <div className="overflow-hidden rounded-xl border border-border">
-              <div className="aspect-[4/3]">
-                <ProductImage src={heroProduct.image} model={heroProduct.model} priority decorative />
-              </div>
-              <div className="border-t border-border bg-background px-4 py-3">
-                <p className="text-sm font-semibold">{heroProduct.model}</p>
-                {/* Число песен здесь намеренно НЕ показываем: в products.json у
-                    Evobox стоит 50 000, тогда как бриф заказчика и стикер на
-                    официальном фото говорят «2000+ / +100 за 90 дней» (50 000 —
-                    это уровень Plus). Пока расхождение не разобрано, самое
-                    заметное место сайта такую цифру не заявляет. */}
-                <p className="mt-0.5 text-xs text-muted-foreground">от {priceFmt(heroProduct.price)}</p>
-              </div>
-            </div>
+          {/* Сцена в кадре: эмоция вместо коробки (решение владельца 2026-09-10).
+              Фото декоративное, поэтому aria-hidden + пустой alt: смысл несут
+              заголовок и цена слева, дубль в скринридере лишний. */}
+          <div
+            aria-hidden="true"
+            className="relative hidden min-h-[320px] overflow-hidden rounded-xl border border-border lg:col-span-5 lg:block"
+          >
+            <img
+              src="/scenariy/poyushchie.webp"
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
           </div>
+        </div>
+      </section>
+
+      {/* Мини-подбор: один вопрос вместо трёх, дальше калькулятор.
+          Вынесен из hero отдельным блоком (решение владельца 2026-09-10):
+          в первом экране остаётся один маршрут (кнопка), выбор сценария
+          не спорит с ней за внимание. */}
+      <section className="mt-6 rounded-xl border border-border bg-background p-5">
+        <p className="font-display text-lg font-bold">Где будет стоять система?</p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Выберите место, калькулятор сразу покажет состав и смету.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {CALC_SCENARIOS.map((s) => (
+            <Link
+              key={s.id}
+              href={`/kalkulyator?scenario=${s.id}`}
+              className="inline-flex min-h-11 items-center rounded-xl border border-border px-4 py-2 text-sm transition hover:border-primary"
+            >
+              {s.label}
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -204,10 +218,18 @@ export default function HomePage() {
         <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           Караоке под ключ это система, а не коробка
         </p>
+        {/* Слоты кликабельные: каждый ведёт в свой раздел (решение владельца
+            2026-09-10). Раньше это была мёртвая витрина: человек читал состав
+            и не мог ткнуть в интересную позицию. */}
         <ul className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
-          {["Караоке-система", "Микрофоны", "Акустика", "Сабвуфер", "Кабели и стойки", "Настройка"].map((x) => (
-            <li key={x} className="rounded-xl border border-border bg-background px-3 py-2.5 text-sm">
-              {x}
+          {kitParts.map((x) => (
+            <li key={x.label}>
+              <Link
+                href={x.href}
+                className="flex min-h-11 items-center rounded-xl border border-border bg-background px-3 py-2.5 text-sm transition hover:border-primary"
+              >
+                {x.label}
+              </Link>
             </li>
           ))}
         </ul>

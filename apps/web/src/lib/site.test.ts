@@ -5,7 +5,7 @@ import { parseCalcQuery } from "./quiz";
 import path from "node:path";
 import {
   siteConfig, scenarios, bundles, brands, products, staticPages, priceFromBrand, bundlePriceFrom,
-  songsSample, cases, blogPosts, storyPosts, songsTotal,
+  songsSample, cases, blogPosts, storyPosts, songsTotal, kitParts, typeLabels,
   oNasMeta, kontaktyMeta, sravnenieMeta, catalogMeta, podKlyuchMeta,
   komplektyIndexMeta, kalkulyatorMeta, pesniMeta, keysyMeta, blogMeta,
   dlyaDomaMetaV2, dlyaBiznesaMeta, gotovyeResheniyaMeta,
@@ -203,5 +203,34 @@ describe("SEO-гигиена контента (аудит 2026-07-21)", () => {
   it("ценовой якорь главной совпадает с минимумом по комплектам", () => {
     const byHand = Math.min(...bundles.map((b) => bundleFor(b.area, b.scenario).total));
     expect(bundlePriceFrom()).toBe(byHand);
+  });
+});
+
+// Слоты «под ключ» на главной кликабельные (2026-09-10). Ссылка в каталог с
+// фильтром, под которым нет товаров, это тупик того же сорта, что мёртвые CTA
+// из ловушки 15: сборка и типы зелёные, а человек попадает в пустой список.
+describe("состав «под ключ» на главной — живые ссылки", () => {
+  it("каждый ?type= существует и в каталоге есть товар этого типа", () => {
+    const filters = kitParts.filter((x) => x.href.startsWith("/catalog?type="));
+    expect(filters.length).toBeGreaterThan(0);
+    for (const part of filters) {
+      const type = part.href.split("type=")[1];
+      expect(Object.keys(typeLabels), `${part.label}: тип «${type}» не существует`).toContain(type);
+      expect(
+        products.filter((p) => p.type === type).length,
+        `${part.label}: под фильтром «${type}» нет товаров, ссылка ведёт в пустоту`,
+      ).toBeGreaterThan(0);
+    }
+  });
+
+  it("остальные слоты ведут на существующие страницы сайта", () => {
+    const appDir = path.join(process.cwd(), "src/app");
+    for (const part of kitParts.filter((x) => !x.href.startsWith("/catalog"))) {
+      const route = part.href.split("?")[0].replace(/^\//, "");
+      expect(
+        fs.existsSync(path.join(appDir, route, "page.tsx")),
+        `${part.label}: роут /${route} не найден`,
+      ).toBe(true);
+    }
   });
 });

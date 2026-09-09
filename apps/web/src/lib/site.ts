@@ -43,6 +43,23 @@ export const typeLabels: Record<ProductType, string> = {
   miksher: "Микшер",
 };
 
+/** Состав «под ключ» для первого экрана главной. Каждый слот кликабельный
+ * (решение владельца 2026-09-10), поэтому ссылка живёт рядом с типом товара:
+ * четыре слота фильтруют каталог, кабели и настройка ведут туда, где они
+ * реально считаются (смета и услуги) — товаров такого типа в каталоге нет,
+ * а ссылка на пустой фильтр это тупик (ловушка 15). Тест в site.test.ts
+ * стережёт, что каждый `?type=` существует и в каталоге есть хотя бы один
+ * товар этого типа. */
+export type KitPart = { label: string; href: string };
+export const kitParts: KitPart[] = [
+  { label: "Караоке-система", href: "/catalog?type=sistema" },
+  { label: "Микрофоны", href: "/catalog?type=mikrofon" },
+  { label: "Акустика", href: "/catalog?type=akustika" },
+  { label: "Сабвуфер", href: "/catalog?type=sub" },
+  { label: "Кабели и стойки", href: "/kalkulyator" },
+  { label: "Настройка", href: "/servis" },
+];
+
 export type Product = {
   slug: string;
   type: ProductType;

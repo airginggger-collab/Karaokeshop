@@ -52,14 +52,21 @@ function SkeletonCard() {
   );
 }
 
+/** `?type=` правит кто угодно (та же дисциплина, что у parseCalcQuery):
+ * неизвестное значение молча схлопывается в «все», а не даёт пустой каталог. */
+function parseType(raw: string | null): ProductType | "all" {
+  return raw && raw in typeLabels ? (raw as ProductType) : "all";
+}
+
 export function CatalogClient({ items }: { items: Product[] }) {
   const searchParams = useSearchParams();
   const initialQ = searchParams.get("q") ?? "";
+  const initialType = parseType(searchParams.get("type"));
   const [q, setQ] = React.useState(initialQ);
-  const [activeType, setActiveType] = React.useState<ProductType | "all">("all");
+  const [activeType, setActiveType] = React.useState<ProductType | "all">(initialType);
   const [isPending, startTransition] = React.useTransition();
 
-  const [displayed, setDisplayed] = React.useState(() => items.filter((p) => matches(p, initialQ, "all")));
+  const [displayed, setDisplayed] = React.useState(() => items.filter((p) => matches(p, initialQ, initialType)));
 
   function applyFilters(query: string, type: ProductType | "all") {
     startTransition(() => {
