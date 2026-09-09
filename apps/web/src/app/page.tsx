@@ -153,12 +153,14 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Мобильный image-band: до этого на 390 px в первом экране не было
-                вообще никакого визуального доказательства категории (P1 аудита).
-                В кадре люди за микрофоном, а не коробка: решение владельца
-                2026-09-10 (техника показана ниже, в карточках каталога). */}
-            <div aria-hidden="true" className="mt-6 overflow-hidden rounded-xl border border-border lg:hidden">
-              <div className="aspect-[4/3]">
+            {/* Image-band для планшета (768–1023 px): на десктопе фото уезжает
+                в правую колонку, а на телефоне его нет вовсе — решение владельца
+                2026-09-10: в узком первом экране кадр отжимал заголовок, цену и
+                кнопку ниже сгиба. В кадре люди за микрофоном, а не коробка. */}
+            <div aria-hidden="true" className="mt-6 hidden overflow-hidden rounded-xl border border-border md:block lg:hidden">
+              {/* Широкий кадр, а не 4:3: на 768 px квадратное фото давало 576 px
+                  высоты и выпихивало блок сценария за сгиб. */}
+              <div className="aspect-[21/9]">
                 <img
                   src="/scenariy/poyushchie.webp"
                   alt=""
