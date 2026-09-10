@@ -5,7 +5,7 @@ import { parseCalcQuery } from "./quiz";
 import path from "node:path";
 import {
   siteConfig, scenarios, bundles, brands, products, staticPages, priceFromBrand, bundlePriceFrom,
-  songsSample, cases, blogPosts, storyPosts, songsTotal, kitParts, typeLabels,
+  songsSample, cases, blogPosts, storyPosts, songsTotal, kitParts, typeLabels, priceFmt,
   oNasMeta, kontaktyMeta, sravnenieMeta, catalogMeta, podKlyuchMeta,
   komplektyIndexMeta, kalkulyatorMeta, pesniMeta, keysyMeta, blogMeta,
   dlyaDomaMetaV2, dlyaBiznesaMeta, gotovyeResheniyaMeta,
@@ -268,5 +268,14 @@ describe("адрес шоурума — единый источник (лову�
         ).toBe(false);
       }
     }
+  });
+});
+
+// Ловушка 21: символ валюты не должен отрываться от суммы при переносе.
+describe("формат цены — валюта не отрывается от числа", () => {
+  it("priceFmt ставит неразрывный пробел перед «₸»", () => {
+    const s = priceFmt(798000);
+    expect(s.endsWith("\u00A0₸"), `«${s}» — перед ₸ обычный пробел`).toBe(true);
+    expect(/\s₸/.test(s.replace(/\u00A0/g, "")), "лишний обычный пробел перед ₸").toBe(false);
   });
 });

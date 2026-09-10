@@ -98,7 +98,11 @@ export const podKlyuchMeta: Landing = pageMeta.podKlyuch;
 export const komplektyIndexMeta: Landing = pageMeta.komplektyIndex;
 
 export function priceFmt(n: number): string {
-  return new Intl.NumberFormat("ru-RU").format(n) + " ₸";
+  // Пробел перед «₸» — неразрывный (U+00A0), как и разряды внутри числа у
+  // Intl. С обычным пробелом символ валюты отрывался от суммы и на узком
+  // экране (или при зуме страницы) уезжал на следующую строку: «798 000» /
+  // «₸». Ловушка 21.
+  return new Intl.NumberFormat("ru-RU").format(n) + "\u00A0₸";
 }
 
 /** Минимальная цена готового комплекта «под ключ» по каталогу комплектов.
