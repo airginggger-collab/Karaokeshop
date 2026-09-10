@@ -52,3 +52,13 @@ describe("_headers: CSP кабинета /admin/", () => {
     expect(csp(r.get("/*"))).not.toContain("unpkg.com");
   });
 });
+
+// Бикон Cloudflare Web Analytics вставляет сам Cloudflare на краю, в репо его тега нет,
+// поэтому потерю хоста в CSP не видно ни в коде, ни в сборке: статистика просто перестаёт
+// писаться (так и было 2026-07-14…09-10). Разрешён хост целиком: реальный URL бикона
+// `beacon.min.js/v31…`, точный путь `beacon.min.js` из доков CF с ним не совпадает.
+describe("_headers: CSP сайта пускает Cloudflare Web Analytics", () => {
+  it("script-src общей CSP содержит хост бикона", () => {
+    expect(directive(csp(rules().get("/*")), "script-src")).toContain("https://static.cloudflareinsights.com");
+  });
+});

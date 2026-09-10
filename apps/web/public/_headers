@@ -3,7 +3,12 @@
 #    проверь CI (gh run list) и заголовки на проде (curl -I).
 # CSP: 'unsafe-inline' в script-src вынужден — статический экспорт без nonce
 #   (инлайн-скрипт темы + гидрация Next). Внешние скрипты при этом заблокированы,
-#   кроме Яндекс.Метрики (mc.yandex.ru — разрешена заранее, YM_ID пока заглушка).
+#   кроме Яндекс.Метрики (mc.yandex.ru — разрешена заранее, YM_ID пока заглушка)
+#   и бикона Cloudflare Web Analytics (static.cloudflareinsights.com — его вставляет
+#   сам Cloudflare на краю, в репо тега нет). Разрешён ХОСТ, не путь: реальный URL
+#   `beacon.min.js/v31…` с версией, точный путь из доков CF с ним не совпадёт.
+#   Данные бикон шлёт на свой же домен (/cdn-cgi/rum), это покрывает connect-src 'self'.
+#   В CSP /admin/ бикона нет намеренно: визиты владельца в кабинет не нужны в статистике.
 # frame-src https://yandex.ru — виджет Яндекс.Карт на /kontakty (иначе iframe режется
 #   об default-src 'self'). Меняешь провайдера карты — правь и здесь.
 /*
@@ -11,7 +16,7 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://mc.yandex.ru; font-src 'self'; connect-src 'self' https://mc.yandex.ru; frame-src https://yandex.ru; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://mc.yandex.ru; font-src 'self'; connect-src 'self' https://mc.yandex.ru; frame-src https://yandex.ru; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
 
 # /admin/ — кабинет владельца (Sveltia CMS). Общая CSP выше режет его скрипт с unpkg
 #   и запросы к api.github.com → белый экран, войти нельзя (так и было 2026-07-14…09-10).
